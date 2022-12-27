@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2022/12/27 17:52:12 by elias            ###   ########.fr        #
+#    Updated: 2022/12/27 18:39:41 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 		${DIR}ft_isascii.c ${DIR}ft_isprint.c ${DIR}ft_strlen.c \
 		${DIR}ft_memset.c ${DIR}ft_bzero.c ${DIR}ft_memcpy.c \
-		${DIR}ft_memmove.c ${DIR}ft_strlcpy.c ${DIR}ft_strlcat.c \
+		${DIR}ft_memmove.c ${DIR}ft_strcmp.c ${DIR}ft_strlcpy.c \
 		${DIR}ft_toupper.c ${DIR}ft_tolower.c ${DIR}ft_strchr.c \
 		${DIR}ft_strrchr.c ${DIR}ft_strncmp.c ${DIR}ft_memchr.c \
 		${DIR}ft_memcmp.c ${DIR}ft_strnstr.c ${DIR}ft_atoi.c \
@@ -25,7 +25,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 		${DIR}ft_putnbr_fd.c ${DIR}ft_lstnew.c ${DIR}ft_lstadd_front.c \
 		${DIR}ft_lstsize.c ${DIR}ft_lstlast.c ${DIR}ft_lstadd_back.c \
 		${DIR}ft_lstdelone.c ${DIR}ft_lstclear.c ${DIR}ft_lstiter.c \
-		${DIR}ft_lstmap.c
+		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c
 
 S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_error.c \

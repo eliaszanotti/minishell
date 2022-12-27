@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2022/12/27 17:51:38 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/27 18:17:55 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	ft_struct_init(t_args *args)
 {
-	args->command = "Test de prompt >";
+	args->prompt = "Minishell prompt > ";
+	args->exit_code = 0;
 	return (0);
 }

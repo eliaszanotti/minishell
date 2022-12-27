@@ -6,21 +6,25 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2022/12/27 17:52:59 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/27 18:44:35 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-
-//# include <readline/readline.h>
-//# include <readline/history.h>
+# include "libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_args
 {
-	char *command;
+	char	**command_list;
+	char	*command;
+	char	*prompt;
+	int		exit_code;
 }	t_args;
 
 // ft_error.c
