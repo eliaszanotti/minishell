@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2022/12/27 14:11:33 by elias            ###   ########.fr        #
+#    Updated: 2022/12/27 14:24:23 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 		${DIR}ft_lstdelone.c ${DIR}ft_lstclear.c ${DIR}ft_lstiter.c \
 		${DIR}ft_lstmap.c
 
-S_MNSH	= ${DIR_SRC}main.c
+S_MNSH	= ${DIR_SRC}main.c 
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
 
