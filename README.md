@@ -2,6 +2,10 @@
 
 ## Error code
 
+```diff - [ERROR:99]
+```
+
+
 - <span style="color:red">[ERROR:99]</span> Malloc cannot be created
 
 ## Bonnes pratiques
