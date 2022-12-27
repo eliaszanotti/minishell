@@ -6,9 +6,11 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2022/12/27 17:15:46 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/27 17:18:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 int	ft_error(int error_code)
 {
