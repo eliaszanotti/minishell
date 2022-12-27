@@ -12,4 +12,10 @@ Bien penser a creer une branche pour chaque features creee
 
 Trier les protypes de fonctions par ordre alphabetique
 
-
+```diff
+- text in red
++ text in green
+! text in orange
+# text in gray
+@@ text in purple (and bold)@@
+```
