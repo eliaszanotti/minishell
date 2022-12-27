@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2022/12/27 17:19:34 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/27 17:38:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int	ft_prompt_loop(void)
+int	ft_prompt_loop(void) // test
 {
 	char *command;
 	int i = 0;
@@ -36,9 +36,7 @@ int	main(int argc, char **argv)
 {
 	ft_prompt_loop();
 
-	
-
 	(void)argc;
 	(void)argv;
-	return (ft_error(99));
+	return (ft_error(99)); // test
 }
