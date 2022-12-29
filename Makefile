@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2022/12/27 18:39:41 by elias            ###   ########.fr        #
+#    Updated: 2022/12/29 16:20:01 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 
 S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_error.c \
+		${DIR_SRC}ft_get_path.c \
 		${DIR_SRC}ft_struct_init.c \
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
@@ -38,7 +39,7 @@ NAME	= minishell
 DIR		= libft/
 DIR_SRC = srcs/
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 # COMPILATION

@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2022/12/27 18:44:35 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/29 15:57:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 
 typedef struct s_args
 {
+	char	**envp;
 	char	**command_list;
-	char	*command;
+	char	**instructions;
 	char	*prompt;
 	int		exit_code;
 }	t_args;
@@ -31,5 +32,12 @@ typedef struct s_args
 int	ft_error(int error_code);
 // ft_struct_init.c
 int	ft_struct_init(t_args *args);
+//ft_get_path.c
+char	*ft_get_path(char **envp, char *cmd);
 
 #endif
+
+
+
+
+
