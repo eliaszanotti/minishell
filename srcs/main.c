@@ -6,25 +6,21 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2022/12/29 16:10:07 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/30 14:58:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_is_delimiter(char *str)
+#include <sys/wait.h>
+
+int	ft_is_delimiter(char *str)
 {
-	if (ft_strcmp(str, "|"))
-		return (str);
-	if (ft_strcmp(str, "<"))
-		return (str);
-	if (ft_strcmp(str, ">"))
-		return (str);
-	if (ft_strcmp(str, "<<"))
-		return (str);
-	if (ft_strcmp(str, ">>"))
-		return (str);
-	return (NULL);
+	if (!ft_strcmp(str, "|") || !ft_strcmp(str, "<") || !ft_strcmp(str, ">"))
+		return (1);
+	if (!ft_strcmp(str, "<<") || !ft_strcmp(str, ">>"))
+		return (1);
+	return (0);
 }
 
 int	ft_get_instructions(t_args *args)
@@ -54,23 +50,92 @@ int	ft_get_instructions(t_args *args)
 
 int	ft_execute_command(t_args *args)
 {
-	int i;
+	char	**current_command;
+	int		i;
+	int		size;
+	int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
 
-	i = 0;
 	ft_get_instructions(args);
+	
+	if (pipe(fd) == 1)
+		return (1);
 
-	while (args->instructions[i])
+	pid_t pid;
+	//pid_t pid2;
+
+	char	***big = malloc(sizeof(char **) * 3);
+	big[2] = NULL;
+
+	int count = 0;
+
+
+	while (*args->instructions && access(*args->instructions, F_OK) == 0)
 	{
+		i = 0;
+		if (access(args->instructions[i], F_OK) == 0)
+			while (args->instructions[i] \
+					&& !ft_is_delimiter(args->instructions[i]))
+				i++;
+		current_command = malloc(sizeof(char *) * (i + 1));
+		if (!current_command)
+			return (99);
+		size = i;
+		current_command[i] = NULL;
+		while (--i >= 0 && args->instructions[i])
+			current_command[i] = ft_strdup(args->instructions[i]);
+		
+		args->instructions += size;
+		if (*args->instructions)
+			args->instructions++;
+
+
+		big[count] = current_command;
 	
-		printf("%s\n", args->instructions[i]);
-		free(args->instructions[i++]);
+		pid = fork();
+		if (pid == 0)
+		{
+			close(fd[2 - count - 1]);
+			dup2(fd[count], count);
+			execve(big[count][0], big[count], NULL);
+				
+
+
+		}
+	
+
+
+
+		count++;
 	}
-	free(args->instructions);
 
-	
+	/*pid = fork();
+	if (pid == 0)
+	{
+		close(fd[1]);
+		dup2(fd[0], 0);
+		execve(big[1][0], big[1], NULL);
+	}
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		close(fd[0]);
+		dup2(fd[1], 1);
+		execve(big[0][0], big[0], NULL);
+	}*/
 
-	//while (args->command_list[i])
-	//	printf("%s\n", args->command_list[i++]);
+
+	/*count = 0;
+	while (big[count])
+		printf("%s\n", big[count++][0]);*/
+
+	/*int count = 0;
+	while (current_command[count])
+	{
+		printf("%s\n", current_command[count]);
+		free(current_command[count]);
+		count++;
+	}*/
+
 	(void)args;
 	//TODO
 	return (0);
@@ -83,6 +148,7 @@ int	ft_prompt_loop(t_args *args)
 
 	while (!args->exit_code)
 	{
+		usleep(100000);
 		command = readline(args->prompt);
 		args->command_list = ft_split(command, ' ');
 		error_code = ft_execute_command(args);
@@ -97,17 +163,14 @@ int	ft_prompt_loop(t_args *args)
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_args	*args;
+	t_args	args;
 	int		error_code;
 
-	args = malloc(sizeof(t_args));
-	if (!args)
-		return (ft_error(99));
-	error_code = ft_struct_init(args);
+	error_code = ft_struct_init(&args);
 	if (error_code)
 		return (ft_error(error_code));
-	args->envp = envp;
-	error_code = ft_prompt_loop(args);
+	args.envp = envp;
+	error_code = ft_prompt_loop(&args);
 	if (error_code)
 		return (ft_error(error_code));
 	(void)argc;
