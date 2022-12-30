@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:42:28 by elias             #+#    #+#             */
-/*   Updated: 2022/12/29 15:42:55 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/30 16:41:47 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ char	*ft_pathjoin(char *s1, char *s2)
 	char	*str;
 	int		i;
 
+	if (!s1 || !s2)
+		return (NULL);
 	i = 0;
 	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
-	if (!s1 || !s2 || !str)
+	if (!str)
 		return (NULL);
 	str[0] = '\0';
 	while (*s1)

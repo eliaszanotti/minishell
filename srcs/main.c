@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2022/12/30 14:58:21 by elias            ###   ########.fr       */
+/*   Updated: 2022/12/30 16:59:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,39 @@ int	ft_get_instructions(t_args *args)
 	return (0);
 }
 
+int	ft_get_stack_size(t_args *args) //TODO a mettre dans un fichier init stack
+{
+	int count;
+	int	j;
+
+	count = 0;
+	j = 0;
+	while (args->command_list[j])
+	{
+		if (ft_get_path(args->envp, args->command_list[j]))
+		{
+			while (args->command_list[j] \
+					&& !ft_is_delimiter(args->command_list[j])) 
+				j++;
+			count++;
+		}
+		if (args->command_list[j])
+			j++;
+	}
+	return (count);
+}
+
+/*while (*args->instructions && !access(*args->instructions, F_OK))
+{ 
+	printf("%d\n", !ft_is_delimiter(args->instructions[i]));
+	while (args->instructions[i] \
+			&& !ft_is_delimiter(args->instructions[i]))
+		i++;
+	*args->instructions += i;
+	if (*args->instructions)
+		args->instructions += 1;
+}*/
+
 int	ft_execute_command(t_args *args)
 {
 	char	**current_command;
@@ -55,7 +88,8 @@ int	ft_execute_command(t_args *args)
 	int		size;
 	int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
 
-	ft_get_instructions(args);
+	//ft_get_instructions(args);
+	printf("%d\n", ft_get_stack_size(args));
 	
 	if (pipe(fd) == 1)
 		return (1);
@@ -149,7 +183,8 @@ int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		usleep(100000);
-		command = readline(args->prompt);
+		//command = readline(args->prompt);
+		command = "ls ls lsl lsl lsl lsl > ls lslslslslsllslslls l lls ls | ls";
 		args->command_list = ft_split(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)
