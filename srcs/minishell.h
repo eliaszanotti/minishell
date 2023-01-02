@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2022/12/29 15:57:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/02 17:06:07 by event02          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 typedef struct s_args
 {
+	char	***stack;
 	char	**envp;
 	char	**command_list;
 	char	**instructions;
@@ -29,15 +30,17 @@ typedef struct s_args
 }	t_args;
 
 // ft_error.c
-int	ft_error(int error_code);
-// ft_struct_init.c
-int	ft_struct_init(t_args *args);
-//ft_get_path.c
+int		ft_error(int error_code);
+// ft_get_path.c
 char	*ft_get_path(char **envp, char *cmd);
+// ft_parsing.c
+int		ft_get_stack_size(t_args *args);
+// ft_struct_init.c
+int		ft_struct_init(t_args *args);
+char	**ft_copy_stack(t_args *args, int i, int j);
+int		ft_get_stack(t_args *args);
+
+
+int	ft_is_delimiter(char *str); //temp
 
 #endif
-
-
-
-
-

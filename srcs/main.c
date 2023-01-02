@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2022/12/30 16:59:27 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/02 17:19:07 by event02          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,6 @@ int	ft_get_instructions(t_args *args)
 	return (0);
 }
 
-int	ft_get_stack_size(t_args *args) //TODO a mettre dans un fichier init stack
-{
-	int count;
-	int	j;
-
-	count = 0;
-	j = 0;
-	while (args->command_list[j])
-	{
-		if (ft_get_path(args->envp, args->command_list[j]))
-		{
-			while (args->command_list[j] \
-					&& !ft_is_delimiter(args->command_list[j])) 
-				j++;
-			count++;
-		}
-		if (args->command_list[j])
-			j++;
-	}
-	return (count);
-}
-
 /*while (*args->instructions && !access(*args->instructions, F_OK))
 { 
 	printf("%d\n", !ft_is_delimiter(args->instructions[i]));
@@ -81,8 +59,26 @@ int	ft_get_stack_size(t_args *args) //TODO a mettre dans un fichier init stack
 		args->instructions += 1;
 }*/
 
+void	ft_log(char ***stack)
+{
+	int i = 0;
+	int j = 0;
+	while (stack[i])
+	{
+		j = 0;
+		while (stack[i][j])
+		{
+			printf("[%s]", stack[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 int	ft_execute_command(t_args *args)
 {
+	int		error_code;
 	char	**current_command;
 	int		i;
 	int		size;
@@ -90,6 +86,10 @@ int	ft_execute_command(t_args *args)
 
 	//ft_get_instructions(args);
 	printf("%d\n", ft_get_stack_size(args));
+	error_code = ft_get_stack(args);
+	if (error_code)
+		return (error_code);
+	ft_log(args->stack);
 	
 	if (pipe(fd) == 1)
 		return (1);
@@ -131,14 +131,7 @@ int	ft_execute_command(t_args *args)
 			close(fd[2 - count - 1]);
 			dup2(fd[count], count);
 			execve(big[count][0], big[count], NULL);
-				
-
-
 		}
-	
-
-
-
 		count++;
 	}
 
@@ -184,7 +177,7 @@ int	ft_prompt_loop(t_args *args)
 	{
 		usleep(100000);
 		//command = readline(args->prompt);
-		command = "ls ls lsl lsl lsl lsl > ls lslslslslsllslslls l lls ls | ls";
+		command = "ls arg1 | rg2 ls || kill  > whoami";
 		args->command_list = ft_split(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)

@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2022/12/29 16:20:01 by elias            ###   ########.fr        #
+#    Updated: 2023/01/02 16:52:22 by event02          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_error.c \
 		${DIR_SRC}ft_get_path.c \
+		${DIR_SRC}ft_parsing.c \
 		${DIR_SRC}ft_struct_init.c \
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
