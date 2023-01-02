@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/02 16:52:22 by event02          ###   ########lyon.fr    #
+#    Updated: 2023/01/02 18:39:09 by event02          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 		${DIR}ft_putnbr_fd.c ${DIR}ft_lstnew.c ${DIR}ft_lstadd_front.c \
 		${DIR}ft_lstsize.c ${DIR}ft_lstlast.c ${DIR}ft_lstadd_back.c \
 		${DIR}ft_lstdelone.c ${DIR}ft_lstclear.c ${DIR}ft_lstiter.c \
-		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c
+		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c ${DIR}ft_split_quote.c
 
 S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_error.c \

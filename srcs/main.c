@@ -3,10 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/02 18:11:54 by event02           #+#    #+#             */
+/*   Updated: 2023/01/02 19:10:05 by event02          ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/02 17:50:46 by event02          ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 18:11:31 by event02          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +63,42 @@ void	ft_log(char ***stack)
 	}
 }
 
+int	ft_parse_command_list(t_args *args)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (args->command_list[i])
+	{
+		if (!ft_strcmp(args->command_list[i], "\""))
+		{
+			j = i + 1;
+			while (args->command_list[j] && ft_strcmp(args->command_list[j], "\""))
+				j++;
+			if (!args->command_list[j])
+				return (100); // replace by parse error (100 is temp value)
+			printf("i = %d, j = %d\n", i, j);
+			i = j;
+		}
+		i++;
+
+
+
+		
+
+	}
+
+	return (0);
+}
+
+
 int	ft_execute_command(t_args *args)
 {
 	int		error_code;
 
+	ft_parse_command_list(args);
 	error_code = ft_get_stack(args);
 	if (error_code)
 		return (error_code);
@@ -126,8 +170,8 @@ int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		command = readline(args->prompt);
-		//command = "ls | rg2 ls || kill  > whoami";
-		args->command_list = ft_split(command, ' ');
+		//command = "ls | rg2 ls \" || kill  > ls  \" |  whoami";
+		args->command_list = ft_split_quote(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)
 			return (error_code);
