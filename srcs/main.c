@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/02 17:19:07 by event02          ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 17:50:46 by event02          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,6 @@ int	ft_is_delimiter(char *str)
 		return (1);
 	if (!ft_strcmp(str, "<<") || !ft_strcmp(str, ">>"))
 		return (1);
-	return (0);
-}
-
-int	ft_get_instructions(t_args *args)
-{
-	char	*good_path;
-	int i; 
-
-	i = 0;
-	while (args->command_list[i])
-		i++;
-	args->instructions = malloc(sizeof(char *) * (i + 1));
-	if (!args->instructions)
-		return (99);
-	i = 0;
-	while (args->command_list[i])
-	{
-		good_path = ft_get_path(args->envp, args->command_list[i]);
-		if (good_path)
-			args->instructions[i] = good_path;
-		else
-			args->instructions[i] = args->command_list[i];
-		i++;
-	}
-	args->instructions[i] = NULL;
 	return (0);
 }
 
@@ -79,30 +54,18 @@ void	ft_log(char ***stack)
 int	ft_execute_command(t_args *args)
 {
 	int		error_code;
-	char	**current_command;
-	int		i;
-	int		size;
-	int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
 
-	//ft_get_instructions(args);
-	printf("%d\n", ft_get_stack_size(args));
 	error_code = ft_get_stack(args);
 	if (error_code)
 		return (error_code);
 	ft_log(args->stack);
+
+
 	
-	if (pipe(fd) == 1)
+	
+	//int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
+	/*if (pipe(fd) == 1)
 		return (1);
-
-	pid_t pid;
-	//pid_t pid2;
-
-	char	***big = malloc(sizeof(char **) * 3);
-	big[2] = NULL;
-
-	int count = 0;
-
-
 	while (*args->instructions && access(*args->instructions, F_OK) == 0)
 	{
 		i = 0;
@@ -133,7 +96,7 @@ int	ft_execute_command(t_args *args)
 			execve(big[count][0], big[count], NULL);
 		}
 		count++;
-	}
+	}*/
 
 	/*pid = fork();
 	if (pid == 0)
@@ -149,22 +112,7 @@ int	ft_execute_command(t_args *args)
 		dup2(fd[1], 1);
 		execve(big[0][0], big[0], NULL);
 	}*/
-
-
-	/*count = 0;
-	while (big[count])
-		printf("%s\n", big[count++][0]);*/
-
-	/*int count = 0;
-	while (current_command[count])
-	{
-		printf("%s\n", current_command[count]);
-		free(current_command[count]);
-		count++;
-	}*/
-
 	(void)args;
-	//TODO
 	return (0);
 }
 
@@ -173,18 +121,21 @@ int	ft_prompt_loop(t_args *args)
 	char	*command;
 	int		error_code;
 
+	pid_t pid;
+
 	while (!args->exit_code)
 	{
-		usleep(100000);
-		//command = readline(args->prompt);
-		command = "ls arg1 | rg2 ls || kill  > whoami";
+		command = readline(args->prompt);
+		//command = "ls | rg2 ls || kill  > whoami";
 		args->command_list = ft_split(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)
 			return (error_code);
-		if (args->command_list[0] && \
-				!ft_strcmp(args->command_list[0], "exit"))
-			args->exit_code = 1;
+		pid = fork();
+		if (pid == 0)
+			execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
+		waitpid(pid, NULL, 0);
+		//return (0); //Temp for testing
 	}
 	return (0);
 }
