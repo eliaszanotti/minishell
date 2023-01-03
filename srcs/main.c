@@ -3,22 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 18:11:54 by event02           #+#    #+#             */
-/*   Updated: 2023/01/02 19:10:05 by event02          ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/02 18:11:31 by event02          ###   ########lyon.fr   */
+/*   Updated: 2023/01/03 12:34:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,8 +157,8 @@ int	ft_prompt_loop(t_args *args)
 
 	while (!args->exit_code)
 	{
-		command = readline(args->prompt);
-		//command = "ls | rg2 ls \" || kill  > ls  \" |  whoami";
+		//command = readline(args->prompt);
+		command = "ls \" || kill  > ls  \" |  whoami ' ls  jhehfebfe gfey '";
 		args->command_list = ft_split_quote(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)
@@ -179,7 +167,7 @@ int	ft_prompt_loop(t_args *args)
 		if (pid == 0)
 			execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
 		waitpid(pid, NULL, 0);
-		//return (0); //Temp for testing
+		return (0); //Temp for testing
 	}
 	return (0);
 }
