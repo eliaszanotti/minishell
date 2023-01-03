@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 12:34:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 16:32:28 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,12 @@ int	ft_prompt_loop(t_args *args)
 
 	while (!args->exit_code)
 	{
-		//command = readline(args->prompt);
-		command = "ls \" || kill  > ls  \" |  whoami ' ls  jhehfebfe gfey '";
+		signal(3, SIG_IGN);
+		signal(2, SIG_IGN);//TODO
+		command = readline("➜ minishell ✗ ");
+		if (!command)
+			break;
+		//command = "ls \" || kill  > ls  \" |  whoami ' ls  jhehfebfe gfey '";
 		args->command_list = ft_split_quote(command, ' ');
 		error_code = ft_execute_command(args);
 		if (error_code)
@@ -166,8 +170,10 @@ int	ft_prompt_loop(t_args *args)
 		pid = fork();
 		if (pid == 0)
 			execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
+		add_history(command);
 		waitpid(pid, NULL, 0);
-		return (0); //Temp for testing
+		free(command);
+		// return (0); //Temp for testing
 	}
 	return (0);
 }

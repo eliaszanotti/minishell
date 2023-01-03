@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
+#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/02 18:39:09 by event02          ###   ########lyon.fr    #
+#    Updated: 2023/01/03 16:25:20 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_get_path.c \
 		${DIR_SRC}ft_parsing.c \
 		${DIR_SRC}ft_struct_init.c \
+		${DIR_SRC}utils.c \
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/02 17:06:07 by event02          ###   ########lyon.fr   */
+/*   Updated: 2023/01/03 16:27:00 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
 
 typedef struct s_args
 {
@@ -40,6 +41,7 @@ int		ft_struct_init(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
 int		ft_get_stack(t_args *args);
 
+void	*ft_exit(void);
 
 int	ft_is_delimiter(char *str); //temp
 
