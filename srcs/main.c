@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 12:34:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 15:33:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,51 +42,16 @@ void	ft_log(char ***stack)
 	{
 		j = 0;
 		while (stack[i][j])
-		{
-			printf("[%s]", stack[i][j]);
-			j++;
-		}
+			printf("[%s]", stack[i][j++]);
 		printf("\n");
 		i++;
 	}
 }
 
-int	ft_parse_command_list(t_args *args)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (args->command_list[i])
-	{
-		if (!ft_strcmp(args->command_list[i], "\""))
-		{
-			j = i + 1;
-			while (args->command_list[j] && ft_strcmp(args->command_list[j], "\""))
-				j++;
-			if (!args->command_list[j])
-				return (100); // replace by parse error (100 is temp value)
-			printf("i = %d, j = %d\n", i, j);
-			i = j;
-		}
-		i++;
-
-
-
-		
-
-	}
-
-	return (0);
-}
-
-
 int	ft_execute_command(t_args *args)
 {
 	int		error_code;
 
-	ft_parse_command_list(args);
 	error_code = ft_get_stack(args);
 	if (error_code)
 		return (error_code);
@@ -157,17 +122,22 @@ int	ft_prompt_loop(t_args *args)
 
 	while (!args->exit_code)
 	{
-		//command = readline(args->prompt);
-		command = "ls \" || kill  > ls  \" |  whoami ' ls  jhehfebfe gfey '";
-		args->command_list = ft_split_quote(command, ' ');
-		error_code = ft_execute_command(args);
-		if (error_code)
-			return (error_code);
-		pid = fork();
-		if (pid == 0)
-			execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
-		waitpid(pid, NULL, 0);
-		return (0); //Temp for testing
+		command = readline(args->prompt);
+		//command = "echo \" || kill '  > ls \"";
+		error_code = ft_split_quote(args, command, ' ');
+		if (!error_code)
+		{
+			error_code = ft_execute_command(args);
+			if (error_code)
+				return (error_code);
+			pid = fork();
+			if (pid == 0)
+				execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
+			waitpid(pid, NULL, 0);
+		}
+		else
+			ft_error(error_code);
+		//return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }
