@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 16:55:44 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 17:28:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ int	ft_prompt_loop(t_args *args)
 
 	while (!args->exit_code)
 	{
+		signal(3, SIG_IGN);
+		//signal(2, SIG_IGN);//TODO
 		command = readline(args->prompt);
+		add_history(command);
 		//command = "echo \" || kill '  > ls \"";
 		error_code = ft_split_quote(args, command, ' ');
 		if (!error_code)
@@ -97,6 +100,7 @@ int	ft_prompt_loop(t_args *args)
 				if (pid == 0)
 					execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
 				waitpid(pid, NULL, 0);
+				free(command);
 			}
 		}
 		ft_error(error_code);
