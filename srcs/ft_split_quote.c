@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/03 15:32:55 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 16:52:41 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static size_t	ft_mallocsize(char const *s, char c)
 	return (count);
 }
 
-int ft_get_i(char const *s, char c)
+int	ft_get_i(char const *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -54,14 +54,14 @@ int ft_get_i(char const *s, char c)
 			while (s[i] && s[i] != '"')
 				i++;
 			i++;
-			break;
+			break ;
 		}
 		else if (s[i - 1] == '\'')
 		{
 			while (s[i] && s[i] != '\'')
 				i++;
 			i++;
-			break;
+			break ;
 		}
 	}
 	return (i);
@@ -77,7 +77,8 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 	while (i_tab < mallocsize)
 	{
 		i = ft_get_i(s, c);
-		if ((s[0] == '"' && s[i - 1] == '"') || (s[0] == '\'' && s[i - 1] == '\''))
+		if ((s[0] == '"' && s[i - 1] == '"') \
+				|| (s[0] == '\'' && s[i - 1] == '\''))
 			tab[i_tab] = ft_substr(s, 1, i - 2);
 		else
 			tab[i_tab] = ft_substr(s, 0, i);
@@ -89,27 +90,26 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 		i_tab++;
 		i = 0;
 	}
-	printf("\n\n\n");
 	return (tab);
 }
 
 int	ft_check_quotes(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
 		if (s[i++] == '"')
 		{
-			while (s[i] && s[i] != '"') 
+			while (s[i] && s[i] != '"')
 				i++;
 			if (!s[i++])
 				return (1);
 		}
 		else if (s[i - 1] == '\'')
 		{
-			while (s[i] && s[i] != '\'') 
+			while (s[i] && s[i] != '\'')
 				i++;
 			if (!s[i++])
 				return (1);

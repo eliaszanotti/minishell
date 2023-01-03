@@ -6,7 +6,7 @@
 #    By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/03 14:39:35 by elias            ###   ########.fr        #
+#    Updated: 2023/01/03 15:45:56 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_parsing.c \
 		${DIR_SRC}ft_split_quote.c \
 		${DIR_SRC}ft_struct_init.c \
+		${DIR_SRC}ft_utils.c \
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
 

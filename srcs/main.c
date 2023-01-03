@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 15:33:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 16:55:44 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,13 @@
 
 #include <sys/wait.h>
 
-int	ft_is_delimiter(char *str)
-{
-	if (!ft_strcmp(str, "|") || !ft_strcmp(str, "<") || !ft_strcmp(str, ">"))
-		return (1);
-	if (!ft_strcmp(str, "<<") || !ft_strcmp(str, ">>"))
-		return (1);
-	return (0);
-}
-
-/*while (*args->instructions && !access(*args->instructions, F_OK))
-{ 
-	printf("%d\n", !ft_is_delimiter(args->instructions[i]));
-	while (args->instructions[i] \
-			&& !ft_is_delimiter(args->instructions[i]))
-		i++;
-	*args->instructions += i;
-	if (*args->instructions)
-		args->instructions += 1;
-}*/
-
 void	ft_log(char ***stack)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	while (stack[i])
 	{
 		j = 0;
@@ -56,9 +39,6 @@ int	ft_execute_command(t_args *args)
 	if (error_code)
 		return (error_code);
 	ft_log(args->stack);
-
-
-	
 	
 	//int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
 	/*if (pipe(fd) == 1)
@@ -94,22 +74,6 @@ int	ft_execute_command(t_args *args)
 		}
 		count++;
 	}*/
-
-	/*pid = fork();
-	if (pid == 0)
-	{
-		close(fd[1]);
-		dup2(fd[0], 0);
-		execve(big[1][0], big[1], NULL);
-	}
-	pid2 = fork();
-	if (pid2 == 0)
-	{
-		close(fd[0]);
-		dup2(fd[1], 1);
-		execve(big[0][0], big[0], NULL);
-	}*/
-	(void)args;
 	return (0);
 }
 
@@ -117,8 +81,7 @@ int	ft_prompt_loop(t_args *args)
 {
 	char	*command;
 	int		error_code;
-
-	pid_t pid;
+	pid_t	pid;
 
 	while (!args->exit_code)
 	{
@@ -128,15 +91,15 @@ int	ft_prompt_loop(t_args *args)
 		if (!error_code)
 		{
 			error_code = ft_execute_command(args);
-			if (error_code)
-				return (error_code);
-			pid = fork();
-			if (pid == 0)
-				execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
-			waitpid(pid, NULL, 0);
+			if (!error_code)
+			{
+				pid = fork();
+				if (pid == 0)
+					execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
+				waitpid(pid, NULL, 0);
+			}
 		}
-		else
-			ft_error(error_code);
+		ft_error(error_code);
 		//return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);

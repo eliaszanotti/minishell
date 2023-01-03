@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 14:37:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/03 16:53:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_args
 	char	**instructions;
 	char	*prompt;
 	int		exit_code;
+	int		i;
+	int		j;
 }	t_args;
 
 // ft_error.c
@@ -41,11 +43,9 @@ int		ft_get_stack_size(t_args *args);
 int		ft_struct_init(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
 int		ft_get_stack(t_args *args);
+// ft_utils.c
+int		ft_is_delimiter(char *str); //temp
 
-
-int	ft_split_quote(t_args *args, char *s, char c);
-
-
-int	ft_is_delimiter(char *str); //temp
+int		ft_split_quote(t_args *args, char *s, char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/02 17:19:59 by event02          ###   ########lyon.fr   */
+/*   Updated: 2023/01/03 16:46:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int	ft_get_stack(t_args *args)
 				return (99);
 			i = j;
 		}
+		else
+			return (2);
 		if (args->command_list[j])
 			i = ++j;
 	}

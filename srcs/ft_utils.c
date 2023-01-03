@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_init.c                                   :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/03 16:35:53 by elias            ###   ########.fr       */
+/*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
+/*   Updated: 2023/01/03 15:43:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_struct_init(t_args *args)
+int	ft_is_delimiter(char *str)
 {
-	args->prompt = "\e[36;1mminishell\e[32m ➜\e[0m ";
-	args->exit_code = 0;
-	args->i = 0;
-	args->j = 0;
+	if (!ft_strcmp(str, "|") || !ft_strcmp(str, "<") || !ft_strcmp(str, ">"))
+		return (1);
+	if (!ft_strcmp(str, "<<") || !ft_strcmp(str, ">>"))
+		return (1);
 	return (0);
 }
