@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/03 17:23:17 by elias            ###   ########.fr        #
+#    Updated: 2023/01/04 14:40:32 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,16 +51,16 @@ RM		= rm -rf
 all :		${NAME}
 
 %.o: %.c	${DIR}libft.h ${DIR_SRC}minishell.h
-			${CC} ${CFLAGS} -I ${DIR} -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
+			@${CC} ${CFLAGS} -I ${DIR} -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
 
 ${NAME}:	${OBJS}
-			${CC} ${OBJS} -o ${NAME} -lreadline
+			@${CC} ${OBJS} -o ${NAME} -lreadline
 
 clean :
-			${RM} ${OBJS}
+			@${RM} ${OBJS}
 
 fclean :	clean
-			${RM} ${NAME} 
+			@${RM} ${NAME} 
 
 re :		fclean all
 
