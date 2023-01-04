@@ -6,11 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/01/04 19:07:02 by elias            ###   ########.fr       */
-=======
-/*   Updated: 2023/01/04 16:40:36 by tgiraudo         ###   ########.fr       */
->>>>>>> origin/clean
+/*   Updated: 2023/01/04 19:12:01 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +84,7 @@ int	ft_prompt_loop(t_args *args)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
 	t_args	args;
 	int		error_code;
@@ -100,7 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	error_code = ft_prompt_loop(&args);
 	if (error_code)
 		return (ft_error(error_code));
-	(void)argc;
-	(void)argv;
+	if (argc == 2)
+		printf("%s", replace_env(argv[1]));
 	return (0);
 }
