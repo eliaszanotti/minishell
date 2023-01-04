@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 15:46:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 16:40:36 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,41 +39,6 @@ int	ft_execute_command(t_args *args)
 	if (error_code)
 		return (error_code);
 	ft_log(args->stack);
-	
-	//int	fd[2]; //TODO : fd[size of number of pipes] (ex: fd[5] for 4 pipes)
-	/*if (pipe(fd) == 1)
-		return (1);
-	while (*args->instructions && access(*args->instructions, F_OK) == 0)
-	{
-		i = 0;
-		if (access(args->instructions[i], F_OK) == 0)
-			while (args->instructions[i] \
-					&& !ft_is_delimiter(args->instructions[i]))
-				i++;
-		current_command = malloc(sizeof(char *) * (i + 1));
-		if (!current_command)
-			return (99);
-		size = i;
-		current_command[i] = NULL;
-		while (--i >= 0 && args->instructions[i])
-			current_command[i] = ft_strdup(args->instructions[i]);
-		
-		args->instructions += size;
-		if (*args->instructions)
-			args->instructions++;
-
-
-		big[count] = current_command;
-	
-		pid = fork();
-		if (pid == 0)
-		{
-			close(fd[2 - count - 1]);
-			dup2(fd[count], count);
-			execve(big[count][0], big[count], NULL);
-		}
-		count++;
-	}*/
 	return (0);
 }
 
