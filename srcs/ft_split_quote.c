@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/04 12:52:46 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 15:44:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,7 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 	while (i_tab < mallocsize)
 	{
 		i = ft_get_i(s, c);
-		if ((s[0] == '"' && s[i - 1] == '"') \
-				|| (s[0] == '\'' && s[i - 1] == '\''))
-			tab[i_tab] = ft_substr(s, 1, i - 2);
-		else
-			tab[i_tab] = ft_substr(s, 0, i);
+		tab[i_tab] = ft_substr(s, 0, i);
 		if (!tab[i_tab])
 			return (ft_freeall(tab));
 		s += i;

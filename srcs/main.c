@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 13:16:54 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/04 15:46:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int	ft_prompt_loop(t_args *args)
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN);//TODO
 		command = readline(args->prompt);
+		//command = "ls | |";
 		add_history(command);
 		ft_get_delimiter(command, args);
-		//command = "echo \" || kill '  > ls \"";
 		error_code = ft_split_quote(args, command, ' ');
 		if (!error_code)
 		{
