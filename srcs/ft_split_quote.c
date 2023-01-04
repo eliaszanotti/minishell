@@ -6,32 +6,28 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/03 17:23:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 12:52:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#include <stdio.h>
-
 static size_t	ft_mallocsize(char const *s, char c)
 {
 	size_t	count;
+	char	quote;
 
 	count = 0;
 	while (*s)
 	{
 		if (*s != c)
 		{
-			if (*s == '"')
+			if (*s == '"' || *s == '\'')
 			{
-				s++;
-				while (*s && *s != '"')
+				quote = *s++;
+				while (*s && *s != quote)
 					s++;
 			}
-			else if (*s++ == '\'')
-				while (*s && *s != '\'')
-					s++;
 			while (*s && *s != c)
 				s++;
 			count++;
@@ -44,25 +40,19 @@ static size_t	ft_mallocsize(char const *s, char c)
 
 int	ft_get_i(char const *s, char c)
 {
-	int	i;
+	char	quote;
+	int		i;
 
 	i = 0;
 	while (s[i] && s[i] != c)
 	{
-		if (s[i++] == '"')
+		if (s[i] == '"' || s[i] == '\'')
 		{
-			while (s[i] && s[i] != '"')
+			quote = s[i++];
+			while (s[i] && s[i] != quote)
 				i++;
-			i++;
-			break ;
 		}
-		else if (s[i - 1] == '\'')
-		{
-			while (s[i] && s[i] != '\'')
-				i++;
-			i++;
-			break ;
-		}
+		i++;
 	}
 	return (i);
 }
@@ -95,25 +85,21 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 
 int	ft_check_quotes(char *s)
 {
-	int	i;
+	char	quote;
+	int		i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i++] == '"')
+		if (s[i] == '"' || s[i] == '\'')
 		{
-			while (s[i] && s[i] != '"')
+			quote = s[i++];
+			while (s[i] && s[i] != quote)
 				i++;
 			if (!s[i++])
 				return (1);
 		}
-		else if (s[i - 1] == '\'')
-		{
-			while (s[i] && s[i] != '\'')
-				i++;
-			if (!s[i++])
-				return (1);
-		}
+		i++;
 	}
 	return (0);
 }
