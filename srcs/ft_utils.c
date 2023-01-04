@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 14:09:09 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:28:44 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ void	ft_count_delimiter(char *cmd, t_args *args)
 		if (cmd[i] == '>' || cmd[i] == '<')
 		{
 			if (cmd[i + 1] == cmd[i])
-			{
 				i++;
-			}
 			count++;
 		}
 		i++;
