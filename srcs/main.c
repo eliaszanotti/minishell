@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 15:46:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 18:11:35 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	ft_log(char ***stack)
 		printf("\n");
 		i++;
 	}
+}
+
+void ft_log_list(t_args *args)
+{
+	int i = 0;
+
+	while (args->command_list[i])
+		printf("%s\n", args->command_list[i++]);
 }
 
 int	ft_execute_command(t_args *args)
@@ -62,7 +70,6 @@ int	ft_execute_command(t_args *args)
 		if (*args->instructions)
 			args->instructions++;
 
-
 		big[count] = current_command;
 	
 		pid = fork();
@@ -87,11 +94,12 @@ int	ft_prompt_loop(t_args *args)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN);//TODO
-		command = readline(args->prompt);
-		//command = "ls | |";
+		//command = readline(args->prompt);
+		command = "ls -a | ls";
 		add_history(command);
-		ft_get_delimiter(command, args);
+		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
+		ft_log_list(args);
 		if (!error_code)
 		{
 			error_code = ft_execute_command(args);
@@ -101,11 +109,11 @@ int	ft_prompt_loop(t_args *args)
 				if (pid == 0)
 					execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
 				waitpid(pid, NULL, 0);
-				free(command);
+				//free(command); //comment for testing
 			}
 		}
 		ft_error(error_code);
-		//return (0); //Temp for testing (uncommented while testing)
+		return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }

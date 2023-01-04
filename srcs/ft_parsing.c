@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/03 16:46:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 18:25:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	ft_get_stack_size(t_args *args)
 			count++;
 		}
 		if (args->command_list[i])
+		{
 			i++;
+			count++;
+		}	
 	}
 	return (count);
 }
@@ -63,9 +66,9 @@ int	ft_init_stack(t_args *args)
 
 int	ft_get_stack(t_args *args)
 {
-	int		i;
-	int		j;
-	int		i_stack;
+	int	i;
+	int	j;
+	int	i_stack;
 
 	i = 0;
 	j = 0;
@@ -79,15 +82,18 @@ int	ft_get_stack(t_args *args)
 			while (args->command_list[j] \
 					&& !ft_is_delimiter(args->command_list[j]))
 				j++;
-			args->stack[i_stack] = ft_copy_stack(args, i, j);
-			if (!args->stack[i_stack++])
+			args->stack[i_stack++] = ft_copy_stack(args, i, j);
+			i = j++;
+			if (args->command_list[j - 1])
+				args->stack[i_stack++] = ft_copy_stack(args, i, j);
+			else
+				return (0);
+			if (!args->stack[i_stack - 1] || !args->stack[i_stack])
 				return (99);
 			i = j;
 		}
 		else
 			return (2);
-		if (args->command_list[j])
-			i = ++j;
 	}
 	return (0);
 }
