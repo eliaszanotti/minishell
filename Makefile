@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/04 14:40:32 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/04 15:03:41 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,13 +55,21 @@ all :		${NAME}
 
 ${NAME}:	${OBJS}
 			@${CC} ${OBJS} -o ${NAME} -lreadline
+			@echo "$(GREEN)[$(NAME) created]$(DEFAULT)"
 
 clean :
 			@${RM} ${OBJS}
+			@echo "$(YELLOW)[object files deleted]$(DEFAULT)"
 
 fclean :	clean
 			@${RM} ${NAME} 
+			@echo "$(RED)[${NAME} deleted]$(DEFAULT)"
 
 re :		fclean all
 
 .PHONY : all re clean fclean
+
+RED = \033[1;31m
+GREEN = \033[1;32m
+YELLOW = \033[1;33m
+DEFAULT = \033[0m
