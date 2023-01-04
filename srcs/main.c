@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 15:46:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/04 17:27:00 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,19 @@ int	ft_prompt_loop(t_args *args)
 	return (0);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
-	t_args	args;
-	int		error_code;
+	// t_args	args;
+	// int		error_code;
 
-	error_code = ft_struct_init(&args);
-	if (error_code)
-		return (ft_error(error_code));
-	args.envp = envp;
-	error_code = ft_prompt_loop(&args);
-	if (error_code)
-		return (ft_error(error_code));
-	(void)argc;
-	(void)argv;
+	// error_code = ft_struct_init(&args);
+	// if (error_code)
+	// 	return (ft_error(error_code));
+	// args.envp = envp;
+	// error_code = ft_prompt_loop(&args);
+	// if (error_code)
+	// 	return (ft_error(error_code));
+	if (argc == 2)
+		printf("%s", replace_env(argv[1]));
 	return (0);
 }
