@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 14:28:44 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/04 14:34:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ int	ft_is_delimiter(char *str)
 void	ft_count_delimiter(char *cmd, t_args *args)
 {
 	int i;
-	int j;
 	int count;
 
 	i = 0;
-	j = 0;
 	count = 0;
 	while (cmd[i])
 	{
