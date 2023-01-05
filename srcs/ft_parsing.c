@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/05 11:01:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:24:23 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	ft_get_stack(t_args *args)
 				args->stack[i_stack++] = ft_copy_stack(args, i, j);
 			else
 				return (0);
-			ft_ll(args->stack[i_stack - 1]);
 			if (!args->stack[i_stack - 1])
 				return (99);
 			i = j;

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 14:59:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:20:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_get_delimiter(char *cmd, t_args *args)
 		{
 			args->delimiter[index] = malloc(sizeof(char) * (j + 1));
 			args->delimiter[index++] = ft_substr(cmd, 0, j);
-			printf("(%s)\n", args->delimiter[index - 1]);
+			//printf("(%s)\n", args->delimiter[index - 1]);
 		}
 		if (j == 2)
 			cmd++;

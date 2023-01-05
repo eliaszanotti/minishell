@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 11:01:49 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:25:55 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,6 @@ void	ft_log(char ***stack)
 	}
 }
 
-void ft_log_list(t_args *args)
-{
-	int i = 0;
-
-	while (args->command_list[i])
-		printf("%s\n", args->command_list[i++]);
-}
-
 int	ft_execute_command(t_args *args)
 {
 	int		error_code;
@@ -60,12 +52,11 @@ int	ft_prompt_loop(t_args *args)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN);//TODO
-		//command = readline(args->prompt);
-		command = "ls dejjfefjef | lk"; //TODO ERROR Malloc alors que non
+		command = readline(args->prompt);
+		//command = "ls dejjfefjef | ls"; //TODO ERROR Malloc alors que non
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
-		ft_log_list(args);
 		if (!error_code)
 		{
 			error_code = ft_execute_command(args);
@@ -79,7 +70,7 @@ int	ft_prompt_loop(t_args *args)
 			}
 		}
 		ft_error(error_code);
-		return (0); //Temp for testing (uncommented while testing)
+		//return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }
