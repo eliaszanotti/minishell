@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 11:25:55 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:54:42 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_prompt_loop(t_args *args)
 			{
 				pid = fork();
 				if (pid == 0)
-					execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], args->envp);
+					execve(ft_get_path(args->stack[0][0]), args->stack[0], args->envp);
 				waitpid(pid, NULL, 0);
 				//free(command); //comment for testing
 			}
