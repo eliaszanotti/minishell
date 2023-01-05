@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/04 17:15:21 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/05 11:34:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ typedef struct s_args
 	char	**envp;
 	char	**command_list;
 	char	**instructions;
-	char	**delimiter;
 	char	*prompt;
 	int		exit_code;
 	int		i;
@@ -50,7 +49,6 @@ int		ft_is_delimiter(char *str); //temp
 int		ft_split_quote(t_args *args, char *s, char c);
 void	*ft_exit(void);
 
-void	ft_get_delimiter(char *cmd, t_args *args);
 char	*replace_env(char *str);
 
 #endif
