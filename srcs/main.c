@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 14:32:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 14:34:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_file_to_stdin(t_args *args, int *fd)
 	if (dup2(fd[1], STDOUT_FILENO) == -1)
 		ft_error(34);
 	close(fd[0]);
-	if (execve(ft_get_path(args->envp, args->stack[0][0]), args->stack[0], NULL) == -1)
+	if (execve(ft_get_path(args->stack[0][0]), args->stack[0], NULL) == -1)
 		ft_error(1);
 }
 
@@ -46,7 +46,7 @@ void	ft_stdout_to_file(t_args *args, int *fd)
 	if (dup2(fd[0], STDIN_FILENO) == -1)
 		ft_error(35);
 	close(fd[1]);
-	if (execve(ft_get_path(args->envp, args->stack[2][0]), args->stack[2], NULL) == -1)
+	if (execve(ft_get_path(args->stack[2][0]), args->stack[2], NULL) == -1)
 		ft_error(11);
 }
 

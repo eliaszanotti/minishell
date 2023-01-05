@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/05 11:45:15 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:56:57 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_get_stack_size(t_args *args)
 	i = 0;
 	while (args->command_list[i])
 	{
-		if (ft_get_path(args->envp, args->command_list[i]))
+		if (ft_get_path(args->command_list[i]))
 		{
 			while (args->command_list[i] \
 					&& !ft_is_delimiter(args->command_list[i]))
@@ -77,7 +77,7 @@ int	ft_get_stack(t_args *args)
 		return (i_stack);
 	while (args->command_list[j])
 	{
-		if (ft_get_path(args->envp, args->command_list[j]))
+		if (ft_get_path(args->command_list[j]))
 		{
 			while (args->command_list[j] \
 					&& !ft_is_delimiter(args->command_list[j]))
