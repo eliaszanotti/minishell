@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/05 11:24:23 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/05 11:45:15 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,6 @@ int	ft_init_stack(t_args *args)
 		return (99);
 	args->stack[size] = NULL;
 	return (0);
-}
-
-void ft_ll(char **s)
-{
-	int i = 0;
-
-	while (s[i])
-		printf("[%s]", s[i++]);
-	printf("\n");
 }
 
 int	ft_get_stack(t_args *args)
