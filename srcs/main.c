@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 14:34:59 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/06 15:49:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,39 @@ void	ft_stdout_to_file(t_args *args, int *fd)
 		ft_error(11);
 }
 
+void	ft_fd(int fd)
+{
+	char buffer[1000];
+	read(fd, buffer, 10);
+	printf("%s\n", buffer);
+}
+
 int	ft_execute_command(t_args *args)
 {
-	int	fd[2];
+	int fd[2];
 	int	pid_child;
-	int	pid_parent;
 
-	if (pipe(fd) == 1)
-		return (1);
+	pipe(fd);
 	pid_child = fork();
-	if (pid_child < 0)
-		return (1);
 	if (pid_child == 0)
-		ft_file_to_stdin(args, fd);
+	{
+		dup2(fd[1], 1);
+		close(fd[0]);
+		execve(ft_get_path(args->stack[0][0]), args->stack[0], args->envp);
+	}
+	printf("%d, %d\n", fd[1], fd[0]);
+	//ft_fd(1);
+	int	pid_parent;
 	pid_parent = fork();
-	if (pid_parent < 0)
-		return (1);
 	if (pid_parent == 0)
-		ft_stdout_to_file(args, fd);
-	printf("END\n");
-	waitpid(pid_child, NULL, 1);
+	{
+		dup2(fd[0], 0);
+		close(fd[1]);
+		execve(ft_get_path(args->stack[2][0]), args->stack[2], args->envp);
+	}
 	waitpid(pid_parent, NULL, 1);
-	(void)args;
+
+	waitpid(pid_child, NULL, 0);
 	return (0);
 }
 
@@ -97,10 +108,9 @@ int	ft_prompt_loop(t_args *args)
 				return (error_code);
 			ft_log(args->stack);
 			ft_execute_command(args);
-		}
+	}
 		//ft_error(error_code);
 		//return (0); //Temp for testing (uncommented while testing)
-		return (0);
 	}
 	return (0);
 }
@@ -121,3 +131,44 @@ int	main(int argc, char **argv, char **envp)
 		printf("%s", replace_env(argv[1]));
 	return (0);
 }
+
+
+
+/*int	ft_execute_command(t_args *args)
+{
+	int	fd[2];
+	int	pid_child;
+	int	pid_parent;
+
+	if (pipe(fd) == 1)
+		return (1);
+	pid_child = fork();
+	if (pid_child < 0)
+		return (1);
+	if (pid_child == 0)
+	{
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
+			ft_error(34);
+		close(fd[0]);
+		if (execve(ft_get_path(args->stack[0][0]), args->stack[0], NULL) == -1)
+			ft_error(1);
+	}
+	//	ft_file_to_stdin(args, fd);
+	pid_parent = fork();
+	if (pid_parent < 0)
+		return (1);
+	if (pid_parent == 0)
+	{
+		if (dup2(fd[0], STDIN_FILENO) == -1)
+			ft_error(35);
+		close(fd[1]);
+		if (execve(ft_get_path(args->stack[2][0]), args->stack[2], NULL) == -1)
+			ft_error(11);
+	}
+	//	ft_stdout_to_file(args, fd);
+	printf("END\n");
+	waitpid(pid_child, NULL, 1);
+	waitpid(pid_parent, NULL, 1);
+	(void)args;
+	return (0);
+}*/
