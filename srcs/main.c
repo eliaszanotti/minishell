@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/06 15:49:37 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/07 15:43:51 by event04          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		signal(3, SIG_IGN);
-		//signal(2, SIG_IGN);//TODO
-		command = readline(args->prompt);
-		//command = "ls dejjfefjef | ls";
+		//signal(2, SIG_IGN); //TODO
+		//command = readline(args->prompt);
+		command = "ls | echo \"12345 $EDITOR 123\""; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
@@ -107,10 +107,11 @@ int	ft_prompt_loop(t_args *args)
 			if (error_code)
 				return (error_code);
 			ft_log(args->stack);
+			ft_remove_quotes(args);
 			ft_execute_command(args);
 	}
 		//ft_error(error_code);
-		//return (0); //Temp for testing (uncommented while testing)
+		return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/05 11:56:57 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/07 15:54:51 by event04          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,23 +77,18 @@ int	ft_get_stack(t_args *args)
 		return (i_stack);
 	while (args->command_list[j])
 	{
-		if (ft_get_path(args->command_list[j]))
-		{
-			while (args->command_list[j] \
-					&& !ft_is_delimiter(args->command_list[j]))
-				j++;
+		while (args->command_list[j] \
+				&& !ft_is_delimiter(args->command_list[j]))
+			j++;
+		args->stack[i_stack++] = ft_copy_stack(args, i, j);
+		i = j++;
+		if (args->command_list[j - 1])
 			args->stack[i_stack++] = ft_copy_stack(args, i, j);
-			i = j++;
-			if (args->command_list[j - 1])
-				args->stack[i_stack++] = ft_copy_stack(args, i, j);
-			else
-				return (0);
-			if (!args->stack[i_stack - 1])
-				return (99);
-			i = j;
-		}
 		else
-			return (2);
+			return (0);
+		if (!args->stack[i_stack - 1])
+			return (99);
+		i = j;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/05 11:31:06 by elias            ###   ########.fr        #
+#    Updated: 2023/01/07 15:54:12 by event04          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ S_MNSH	= ${DIR_SRC}main.c \
 		${DIR_SRC}ft_env.c \
 		${DIR_SRC}ft_free.c \
 		${DIR_SRC}ft_get_path.c \
+		${DIR_SRC}ft_parse_quotes.c \
 		${DIR_SRC}ft_parsing.c \
 		${DIR_SRC}ft_split_quote.c \
 		${DIR_SRC}ft_struct_init.c \

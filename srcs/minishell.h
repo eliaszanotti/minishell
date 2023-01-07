@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 11:53:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/07 15:53:43 by event04          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ int		ft_error(int error_code);
 char	**ft_freeall(char **tab);
 // ft_get_path.c
 char	*ft_get_path(char *cmd);
+//	ft_parse_quotes.c
+char	*ft_replace_env(char *str);
+int		ft_remove_quotes(t_args *args);
 // ft_parsing.c
 int		ft_get_stack_size(t_args *args);
+char	**ft_copy_stack(t_args *args, int i, int j);
+int		ft_init_stack(t_args *args);
+int		ft_get_stack(t_args *args);
+int		ft_remove_quotes(t_args *args);
 // ft_struct_init.c
 int		ft_struct_init(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
-int		ft_get_stack(t_args *args);
 // ft_utils.c
 int		ft_is_delimiter(char *str); //temp
 
