@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/05 11:31:06 by elias            ###   ########.fr        #
+#    Updated: 2023/01/07 11:41:26 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c \
 		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c 
 
 S_MNSH	= ${DIR_SRC}main.c \
+		${DIR_SRC}ft_check_cmd.c \
 		${DIR_SRC}ft_error.c \
 		${DIR_SRC}ft_env.c \
 		${DIR_SRC}ft_free.c \

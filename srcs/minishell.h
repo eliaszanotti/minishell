@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 11:53:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/09 14:42:16 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 
 typedef struct s_args
 {
@@ -45,10 +46,16 @@ char	**ft_copy_stack(t_args *args, int i, int j);
 int		ft_get_stack(t_args *args);
 // ft_utils.c
 int		ft_is_delimiter(char *str); //temp
+char	*ft_remove_quotes(char *str);
+void	ft_exit(t_args *args);
+void	ft_free_args(t_args *args);
 
 int		ft_split_quote(t_args *args, char *s, char c);
-void	*ft_exit(void);
 
 char	*replace_env(char *str);
+
+int	ft_check_cmd(t_args *args);
+void	ft_open_dir(char **cmd);
+void	ft_echo(char **cmd);
 
 #endif
