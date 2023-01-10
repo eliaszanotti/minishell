@@ -52,6 +52,7 @@ char	*ft_replace_env(char *str)
 	new_str = malloc(sizeof(char) * (size + 1));
 	if (!new_str)
 		return (NULL);
+	new_str[0] = '\0';
 	size = 0;
 	i = 0;
 	while (*++str)

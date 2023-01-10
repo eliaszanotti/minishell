@@ -97,7 +97,7 @@ int	ft_prompt_loop(t_args *args)
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
 		//command = readline(args->prompt);
-		command = "ls | echo \"12345 $EDITOR 123\""; //TODO "ls" dont work but ls is ok
+		command = "ls | echo '$PWD $EDITOR 123'"; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
