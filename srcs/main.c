@@ -50,13 +50,6 @@ void	ft_stdout_to_file(t_args *args, int *fd)
 		ft_error(11);
 }
 
-void	ft_fd(int fd)
-{
-	char buffer[1000];
-	read(fd, buffer, 10);
-	printf("%s\n", buffer);
-}
-
 int	ft_execute_command(t_args *args)
 {
 	int fd[2];
@@ -96,8 +89,8 @@ int	ft_prompt_loop(t_args *args)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
-		//command = readline(args->prompt);
-		command = "ls | echo '$PWD $EDITOR 123'"; //TODO "ls" dont work but ls is ok
+		command = readline(args->prompt);
+		//command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
@@ -108,8 +101,9 @@ int	ft_prompt_loop(t_args *args)
 				return (error_code);
 			ft_log(args->stack);
 			ft_remove_quotes(args);
+			ft_log(args->stack);
 			ft_execute_command(args);
-	}
+		}
 		//ft_error(error_code);
 		return (0); //Temp for testing (uncommented while testing)
 	}

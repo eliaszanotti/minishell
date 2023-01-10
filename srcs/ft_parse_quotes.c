@@ -66,13 +66,12 @@ char	*ft_replace_env(char *str)
 			if (!variable)
 				return (0); //TODO change to strerror
 			strcat(new_str, getenv(variable)); //TODO changer en ft_strcat (qui nexite pas pour le moment lol)
-			size += ft_strlen(getenv(variable)) - 1;
+			size += ft_strlen(getenv(variable));
 			free(variable);
 			str += i - 2;
 		}
 		else if (*str != '"')
-			new_str[size] = *str;
-		size++;
+			new_str[size++] = *str;
 	}
 	//free(str); //TODO sert a rien vu que str est vide a ce moment la (str++ fait qu'il devient vide)
 	new_str[size] = '\0';
