@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/09 14:42:16 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/10 17:53:54 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
+# include <limits.h>
 
 typedef struct s_args
 {
@@ -54,8 +55,9 @@ int		ft_split_quote(t_args *args, char *s, char c);
 
 char	*replace_env(char *str);
 
-int	ft_check_cmd(t_args *args);
+int		ft_check_cmd(t_args *args);
 void	ft_open_dir(char **cmd);
 void	ft_echo(char **cmd);
+char	*ft_get_dir_name(char *cwd);
 
 #endif

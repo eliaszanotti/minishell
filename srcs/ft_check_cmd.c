@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/10 14:14:27 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/10 18:21:50 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	ft_check_cmd(t_args *args)
 	}
 	else if (!ft_strcmp(args->stack[0][0], "cd"))
 	{
-		chdir(args->stack[0][1]);
+		if (!ft_strcmp(args->stack[0][1], "~"))
+			chdir(getenv("HOME"));
+		else
+			chdir(args->stack[0][1]);
 		return (1);
 	}
 	else if (!ft_strcmp(args->stack[0][0], "pwd"))

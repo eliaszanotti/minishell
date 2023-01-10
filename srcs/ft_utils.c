@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/10 14:08:25 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:02:29 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ char	*ft_remove_quotes(char *str)
 void	ft_exit(t_args *args)
 {
 	ft_free_args(args);
-	printf("ON EST");
 	exit(0);
-	printf("LA\n");
 }
 
 void	ft_free_args(t_args *args)
