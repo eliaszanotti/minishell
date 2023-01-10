@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/09 14:46:20 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:08:25 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_is_delimiter(char *str)
 char	*ft_remove_quotes(char *str)
 {
 	char	*tmp;
-	
+
 	if (str[0] == '"' || str[0] == '\'')
 	{
 		tmp = ft_substr(str, 1, ft_strlen(str) - 2);
@@ -36,13 +36,15 @@ char	*ft_remove_quotes(char *str)
 void	ft_exit(t_args *args)
 {
 	ft_free_args(args);
+	printf("ON EST");
 	exit(0);
+	printf("LA\n");
 }
 
 void	ft_free_args(t_args *args)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (args->stack[++i])
@@ -54,7 +56,7 @@ void	ft_free_args(t_args *args)
 	}
 	free(args->stack);
 	i = -1;
-	while (args->command_list[++i])
-		free(args->stack[i]);
-	free(args->command_list);
+	// while (args->command_list[++i])
+	// 	free(args->stack[i]);
+	// free(args->command_list);
 }

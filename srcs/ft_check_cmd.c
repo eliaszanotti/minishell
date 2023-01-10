@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/09 14:48:10 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/10 14:14:27 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_check_cmd(t_args *args)
 	}
 	else if (!ft_strcmp(args->stack[0][0], "cd"))
 	{
-       ft_open_dir(args->stack[0]);
-	   return (1);
+		chdir(args->stack[0][1]);
+		return (1);
 	}
 	else if (!ft_strcmp(args->stack[0][0], "pwd"))
 	{
@@ -40,25 +40,20 @@ int	ft_check_cmd(t_args *args)
 	}
 	else if (!ft_strcmp(args->stack[0][0], "exit"))
 	{
-		printf("OK");
 		ft_exit(args);
+		return (1);
 	}
 	return (0);
 }
 
-void	ft_open_dir(char **cmd)
-{
-	chdir(cmd[1]);
-}
-
 void	ft_echo(char **cmd)
 {
-	int i;
-	
+	int	i;
+
 	i = 1;
 	if (!ft_strcmp(cmd[1], "-n"))
 	{
-		while(cmd[++i])
+		while (cmd[++i])
 		{
 			cmd[i] = ft_remove_quotes(cmd[i]);
 			printf("%s ", cmd[i]);
@@ -67,7 +62,7 @@ void	ft_echo(char **cmd)
 	}
 	else
 	{
-		while(cmd[i])
+		while (cmd[i])
 		{
 			cmd[i] = ft_remove_quotes(cmd[i]);
 			printf("%s ", cmd[i++]);
