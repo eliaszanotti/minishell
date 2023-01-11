@@ -6,7 +6,7 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/07 15:54:39 by event04          ###   ########lyon.fr   */
+/*   Updated: 2023/01/11 13:05:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ft_replace_env(char *str)
 	return (new_str);
 }
 
-int	ft_remove_quotes(t_args *args)
+int	ft_parse_quotes(t_args *args)
 {
 	char	*current;
 	int		i;
