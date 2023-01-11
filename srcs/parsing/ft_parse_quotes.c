@@ -39,7 +39,7 @@ static int	ft_get_size(char *str)
 	return (size - 2);
 }
 
-#include <string.h> // TEMP
+#include <string.h> // TODO remove after creating ft_strcat
 
 char	*ft_replace_env(char *str)
 {
