@@ -6,7 +6,7 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/07 15:54:39 by event04          ###   ########lyon.fr   */
+/*   Updated: 2023/01/11 12:54:52 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_get_size(char *str)
 	return (size - 2);
 }
 
-#include <string.h> // TEMP
+#include <string.h> // TODO remove after creating ft_strcat
 
 char	*ft_replace_env(char *str)
 {

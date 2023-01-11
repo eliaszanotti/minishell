@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 12:44:39 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 12:56:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	ft_prompt_loop(t_args *args)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
-		//command = readline(args->prompt);
-		command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
+		command = readline(args->prompt);
+		//command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
