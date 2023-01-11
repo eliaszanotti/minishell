@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/10 18:21:50 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:03:33 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,15 @@
 
 int	ft_check_cmd(t_args *args)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (!ft_strcmp(args->stack[0][0], "echo"))
-	{
-		ft_echo(args->stack[0]);
-		return (1);
-	}
+		return (ft_echo(args->stack[0]));
 	else if (!ft_strcmp(args->stack[0][0], "cd"))
-	{
-		if (!ft_strcmp(args->stack[0][1], "~"))
-			chdir(getenv("HOME"));
-		else
-			chdir(args->stack[0][1]);
-		return (1);
-	}
+		return (ft_open_dir(args->stack[0]));
 	else if (!ft_strcmp(args->stack[0][0], "pwd"))
-	{
-		printf("%s\n", getenv("PWD"));
-		return (1);
-	}
+		return (printf("%s\n", getenv("PWD")));
 	else if (!ft_strcmp(args->stack[0][0], "env"))
 	{
 		while (args->envp[++i])
@@ -42,14 +30,26 @@ int	ft_check_cmd(t_args *args)
 		return (1);
 	}
 	else if (!ft_strcmp(args->stack[0][0], "exit"))
-	{
 		ft_exit(args);
-		return (1);
-	}
 	return (0);
 }
 
-void	ft_echo(char **cmd)
+int	ft_open_dir(char **cmd)
+{
+	if (!ft_strcmp(cmd[1], "~"))
+	{
+		if (chdir(getenv("HOME")) == -1)
+			printf("cd: permission denied: %s\n", cmd[1]);
+	}
+	else
+	{
+		if (chdir(cmd[1]))
+			printf("cd: permission denied: %s\n", cmd[1]);
+	}
+	return (1);
+}
+
+int	ft_echo(char **cmd)
 {
 	int	i;
 
@@ -71,5 +71,5 @@ void	ft_echo(char **cmd)
 			printf("%s ", cmd[i++]);
 		}
 	}
-	printf("\n");
+	return (printf("\n"));
 }
