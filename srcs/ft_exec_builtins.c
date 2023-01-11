@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_cmd.c                                     :+:      :+:    :+:   */
+/*   ft_exec_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/11 13:01:02 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 13:42:28 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_check_cmd(t_args *args)
+int	ft_exec_builtins(t_args *args)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ int	ft_echo(char **cmd)
 	int	i;
 
 	i = 1;
-	if (!ft_strcmp(cmd[1], "-n"))
+	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
 	{
 		while (cmd[++i])
 			printf("%s ", cmd[i]);

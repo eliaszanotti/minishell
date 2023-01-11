@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/11 09:58:01 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:29:23 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_dir_name(char *cwd)
+char	*ft_get_prompt(char *cwd)
 {
 	int		i;
 	char	*tmp;
