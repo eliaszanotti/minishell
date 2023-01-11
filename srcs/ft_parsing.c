@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event02 <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/07 15:54:51 by event04          ###   ########lyon.fr   */
+/*   Updated: 2023/01/11 11:49:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ int	ft_get_stack(t_args *args)
 		return (i_stack);
 	while (args->command_list[j])
 	{
-		while (args->command_list[j] \
-				&& !ft_is_delimiter(args->command_list[j]))
-			j++;
-		args->stack[i_stack++] = ft_copy_stack(args, i, j);
-		i = j++;
-		if (args->command_list[j - 1])
+		if (ft_get_path(args->command_list[j]) \
+				|| !ft_strcmp(args->command_list[j], "exit"))
+		{
+			while (args->command_list[j] \
+					&& !ft_is_delimiter(args->command_list[j]))
+				j++;
 			args->stack[i_stack++] = ft_copy_stack(args, i, j);
+		}
 		else
 			return (0);
 		if (!args->stack[i_stack - 1])
