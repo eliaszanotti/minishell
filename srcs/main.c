@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 13:38:07 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:09:13 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	ft_execute_command(t_args *args)
 		close(fd[1]);
 		execve(ft_get_path(args->stack[2][0]), args->stack[2], args->envp);
 	}
+	close(fd[0]);
+	close(fd[1]);
 	waitpid(pid_parent, NULL, 1);
 	waitpid(pid_child, NULL, 0);
 	return (0);
