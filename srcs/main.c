@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 12:44:39 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 13:07:03 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,18 @@ int	ft_execute_command(t_args *args)
 
 int	ft_prompt_loop(t_args *args)
 {
+	char	cwd[1024];
 	char	*command;
 	int		error_code;
-	//pid_t	pid;
+	pid_t	pid;
 
 	while (!args->exit_code)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
-		//command = readline(args->prompt);
-		command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
+		args->prompt = ft_get_dir_name(getcwd(cwd, sizeof(cwd)));
+		command = readline(args->prompt);
+		//command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
 		error_code = ft_split_quote(args, command, ' ');
@@ -102,10 +104,22 @@ int	ft_prompt_loop(t_args *args)
 			ft_log(args->stack);
 			ft_remove_quotes(args);
 			ft_log(args->stack);
-			ft_execute_command(args);
+			if (args->stack[0] != NULL)
+			{
+				if (args->stack[1] != NULL && !ft_strcmp(args->stack[1][0], "|"))
+					ft_execute_command(args);
+				else if (!ft_check_cmd(args))
+				{
+					pid = fork();
+					if (pid == 0)
+						if (execve(ft_get_path(args->stack[0][0]), args->stack[0], NULL))
+							return (11);
+					waitpid(pid, NULL, 0);
+				}
+			}
 		}
 		//ft_error(error_code);
-		return (0); //Temp for testing (uncommented while testing)
+		//return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }
