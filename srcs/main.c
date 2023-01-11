@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 13:05:48 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 13:20:11 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,12 @@ int	ft_prompt_loop(t_args *args)
 		command = "ls | grep \"READ\""; //TODO "ls" dont work but ls is ok
 		add_history(command);
 		//ft_get_delimiter(command, args);
-		error_code = ft_split_quote(args, command, ' ');
+		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
-			error_code = ft_get_stack(args);
-			if (error_code)
-				return (error_code);
-			ft_log(args->stack);
-			ft_parse_quotes(args);
 			ft_log(args->stack);
 			ft_execute_command(args);
 		}
-		//ft_error(error_code);
 		return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
@@ -126,8 +120,6 @@ int	main(int argc, char **argv, char **envp)
 		printf("%s", replace_env(argv[1]));
 	return (0);
 }
-
-
 
 /*int	ft_execute_command(t_args *args)
 {

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 13:06:49 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 13:19:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int		ft_get_stack_size(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
 int		ft_init_stack(t_args *args);
 int		ft_get_stack(t_args *args);
+int		ft_parse_args(t_args *args, char *command);
 // ft_struct_init.c
 int		ft_struct_init(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);

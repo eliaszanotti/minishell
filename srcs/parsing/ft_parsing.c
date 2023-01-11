@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/11 12:48:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 13:18:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,21 @@ int	ft_get_stack(t_args *args)
 		else
 			return (2);
 	}
+	return (0);
+}
+
+int	ft_parse_args(t_args *args, char *command)
+{
+	int	error_code;
+
+	error_code = ft_split_quote(args, command, ' ');
+	if (error_code)
+		return (error_code);
+	error_code = ft_get_stack(args);
+	if (error_code)
+		return (error_code);
+	error_code = ft_parse_quotes(args);
+	if (error_code)
+		return (error_code);
 	return (0);
 }
