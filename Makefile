@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/11 11:54:14 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/11 13:31:26 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,18 +27,18 @@ S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c 			\
 		${DIR}ft_lstdelone.c ${DIR}ft_lstclear.c ${DIR}ft_lstiter.c 		\
 		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c 
 
-S_MNSH	= ${DIR_SRC}main.c			\
-		${DIR_SRC}ft_check_cmd.c	\
-		${DIR_SRC}ft_error.c 		\
-		${DIR_SRC}ft_env.c 			\
-		${DIR_SRC}ft_free.c 		\
-		${DIR_SRC}ft_get_dir_name.c \
-		${DIR_SRC}ft_get_path.c 	\
-		${DIR_SRC}ft_parse_quotes.c \
-		${DIR_SRC}ft_parsing.c 		\
-		${DIR_SRC}ft_split_quote.c 	\
-		${DIR_SRC}ft_struct_init.c 	\
-		${DIR_SRC}ft_utils.c 		\
+S_MNSH	= ${DIR_SRC}main.c				\
+		${DIR_SRC}ft_error.c 			\
+		${DIR_SRC}ft_env.c 				\
+		${DIR_SRC}ft_exec_builtins.c	\
+		${DIR_SRC}ft_free.c 			\
+		${DIR_SRC}ft_get_prompt.c		\
+		${DIR_SRC}ft_get_path.c 		\
+		${DIR_SRC}ft_parse_quotes.c 	\
+		${DIR_SRC}ft_parsing.c 			\
+		${DIR_SRC}ft_split_quote.c	 	\
+		${DIR_SRC}ft_struct_init.c 		\
+		${DIR_SRC}ft_utils.c 			\
 
 OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
 

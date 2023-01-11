@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 11:52:21 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:30:22 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int		ft_split_quote(t_args *args, char *s, char c);
 
 char	*replace_env(char *str);
 
-int		ft_check_cmd(t_args *args);
+int		ft_exec_builtins(t_args *args);
 int		ft_open_dir(char **cmd);
 int		ft_echo(char **cmd);
-char	*ft_get_dir_name(char *cwd);
+char	*ft_get_prompt(char *cwd);
 
 #endif
