@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/11 10:03:33 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:52:36 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	ft_echo(char **cmd)
 	{
 		while (cmd[++i])
 		{
-			cmd[i] = ft_remove_quotes(cmd[i]);
+			// cmd[i] = ft_remove_quotes(cmd[i]);
 			printf("%s ", cmd[i]);
 		}
 		printf("%%");
@@ -67,7 +67,7 @@ int	ft_echo(char **cmd)
 	{
 		while (cmd[i])
 		{
-			cmd[i] = ft_remove_quotes(cmd[i]);
+			// cmd[i] = ft_remove_quotes(cmd[i]);
 			printf("%s ", cmd[i++]);
 		}
 	}

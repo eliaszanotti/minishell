@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 11:50:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/11 11:52:21 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		ft_struct_init(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
 // ft_utils.c
 int		ft_is_delimiter(char *str); //temp
-char	*ft_remove_quotes(char *str);
+// char	*ft_remove_quotes(char *str); TODO
 void	*ft_exit(t_args *args);
 void	ft_free_args(t_args *args);
 

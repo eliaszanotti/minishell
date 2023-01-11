@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/10 18:47:06 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/11 11:52:57 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	ft_is_delimiter(char *str)
 	return (0);
 }
 
-char	*ft_remove_quotes(char *str)
-{
-	char	*tmp;
+// char	*ft_remove_quotes(char *str)
+// {
+// 	char	*tmp;
 
-	if (str[0] == '"' || str[0] == '\'')
-	{
-		tmp = ft_substr(str, 1, ft_strlen(str) - 2);
-		return (free(str), tmp);
-	}
-	return (str);
-}
+// 	if (str[0] == '"' || str[0] == '\'')
+// 	{
+// 		tmp = ft_substr(str, 1, ft_strlen(str) - 2);
+// 		return (free(str), tmp);
+// 	}
+// 	return (str);
+// }
 
 void	*ft_exit(t_args *args)
 {
