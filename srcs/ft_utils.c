@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/11 11:52:57 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:34:49 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,4 @@ void	ft_free_args(t_args *args)
 	}
 	free(args->stack);
 	i = -1;
-	// while (args->command_list[++i])
-	// 	free(args->stack[i]);
-	// free(args->command_list);
 }
