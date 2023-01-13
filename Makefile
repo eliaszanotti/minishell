@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/11 14:36:55 by elias            ###   ########.fr        #
+#    Updated: 2023/01/12 12:39:56 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,3 +79,6 @@ RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
 DEFAULT = \033[0m
+
+
+#TODO add makefile in libft (voir sujet regles communes para 8) 
