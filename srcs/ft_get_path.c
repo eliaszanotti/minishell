@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:42:28 by elias             #+#    #+#             */
-/*   Updated: 2023/01/05 11:50:45 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/13 17:37:00 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ char	*ft_get_path(char *cmd)
 	char	**paths;
 	char	*good_path;
 	int		i;
-
+	
+	if (access(cmd, F_OK) == 0)
+		return (cmd);
 	paths = ft_split(getenv("PATH"), ':');
 	if (!paths)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/12 12:38:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/13 18:38:42 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 typedef struct s_args
 {
 	char	***stack;
+	char	***instructions;
 	char	**envp;
 	char	**command_list;
-	char	**instructions;
 	char	*prompt;
 	int		exit_code;
 	int		i;
@@ -48,6 +48,7 @@ int		ft_get_stack_size(t_args *args);
 char	**ft_copy_stack(t_args *args, int i, int j);
 int		ft_init_stack(t_args *args);
 int		ft_get_stack(t_args *args);
+int		ft_get_instructions(t_args *args);
 int		ft_parse_args(t_args *args, char *command);
 // ft_struct_init.c
 int		ft_struct_init(t_args *args);

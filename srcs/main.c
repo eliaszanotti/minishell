@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/13 17:17:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/13 18:44:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_execute_child(char **command, t_args *args)
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		if (execve(ft_get_path(command[0]), command, args->envp) == -1)
-			printf("ERROR;\n");
+			printf("ERROR;\n"); //TODO 
 	}
 	else
 	{
@@ -59,19 +59,18 @@ int	ft_execute_command(t_args *args)
 {
 	pid_t	pid;
 	int		i;
+	int		size;
 
 	i = 0;
-	while (args->stack[i])
-	{
-		if (args->stack[i][0] && ft_get_path(args->stack[i][0]))
-		{
-			ft_execute_child(args->stack[i], args);
-			i += 2;
-		}
-	}
+	size = 0;
+	while (args->instructions[size])
+		size++;
+	if (size >= 2)
+		while (args->instructions[i] && i < size - 1)
+			ft_execute_child(args->instructions[i++], args);
 	pid = fork();
 	if (pid == 0)
-		execve(ft_get_path(args->stack[4][0]), args->stack[4], args->envp);
+		execve(ft_get_path(args->instructions[i][0]), args->instructions[i], args->envp);
 	waitpid(pid, NULL, 0);
 	return (0);
 }
