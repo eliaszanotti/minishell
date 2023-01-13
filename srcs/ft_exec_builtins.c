@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/11 13:42:28 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:50:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ int	ft_echo(char **cmd)
 
 	i = 1;
 	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
-	{
 		while (cmd[++i])
 			printf("%s ", cmd[i]);
-		printf("%%");
-	}
 	else
+	{
 		while (cmd[i])
 			printf("%s ", cmd[i++]);
-	return (printf("\n"));
+		printf("\n");
+	}
+	return (0);
 }
