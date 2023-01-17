@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/13 15:50:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:19:14 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	ft_exec_builtins(t_args *args)
 	}
 	else if (!ft_strcmp(args->stack[0][0], "exit"))
 		ft_exit(args);
+	else if (!ft_strcmp(args->stack[0][0], "clear"))
+	{
+		printf("\e[1;1H\e[2J");
+		return (1);
+	}
 	return (0);
 }
 
