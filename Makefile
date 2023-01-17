@@ -6,27 +6,11 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/17 16:33:07 by elias            ###   ########.fr        #
+#    Updated: 2023/01/17 12:52:52 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # SOURCES
-S_LIB	= ${DIR}ft_isalpha.c ${DIR}ft_isdigit.c ${DIR}ft_isalnum.c 			\
-		${DIR}ft_isascii.c ${DIR}ft_isprint.c ${DIR}ft_strlen.c				\
-		${DIR}ft_memset.c ${DIR}ft_bzero.c ${DIR}ft_memcpy.c 				\
-		${DIR}ft_memmove.c ${DIR}ft_strcmp.c ${DIR}ft_strlcpy.c 			\
-		${DIR}ft_toupper.c ${DIR}ft_tolower.c ${DIR}ft_strchr.c 			\
-		${DIR}ft_strrchr.c ${DIR}ft_strncmp.c ${DIR}ft_memchr.c 			\
-		${DIR}ft_memcmp.c ${DIR}ft_strnstr.c ${DIR}ft_atoi.c 				\
-		${DIR}ft_calloc.c ${DIR}ft_strdup.c ${DIR}ft_substr.c 				\
-		${DIR}ft_strjoin.c ${DIR}ft_strtrim.c ${DIR}ft_split.c 				\
-		${DIR}ft_itoa.c ${DIR}ft_strmapi.c ${DIR}ft_striteri.c 				\
-		${DIR}ft_putchar_fd.c ${DIR}ft_putstr_fd.c ${DIR}ft_putendl_fd.c 	\
-		${DIR}ft_putnbr_fd.c ${DIR}ft_lstnew.c ${DIR}ft_lstadd_front.c 		\
-		${DIR}ft_lstsize.c ${DIR}ft_lstlast.c ${DIR}ft_lstadd_back.c 		\
-		${DIR}ft_lstdelone.c ${DIR}ft_lstclear.c ${DIR}ft_lstiter.c 		\
-		${DIR}ft_lstmap.c ${DIR}ft_strlcat.c 
-
 S_MNSH	= ${DIR_SRC}main.c				\
 		${DIR_SRC}ft_error.c 			\
 		${DIR_SRC}ft_env.c 				\
@@ -39,16 +23,17 @@ S_MNSH	= ${DIR_SRC}main.c				\
 		${D_PARSE}ft_split_quote.c	 	\
 		${D_PARSE}ft_get_stack.c	 	\
 		${D_PARSE}ft_get_instructions.c	\
-		${D_PARSE}ft_add_to_stack.c		\
 		${DIR_SRC}ft_struct_init.c 		\
 		${DIR_SRC}ft_utils.c 			\
 
-OBJS	= ${S_LIB:.c=.o} ${S_MNSH:.c=.o}
+OBJS	= ${S_MNSH:.c=.o}
 
 # DIRECTORIES
-DIR		= libft/
 DIR_SRC = srcs/
 D_PARSE	= ${DIR_SRC}parsing/
+
+# LIB
+LIBFT 		= -L ./libft -lft 
 
 # VARIABLES
 NAME	= minishell
@@ -57,22 +42,38 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 # COMPILATION
-all :		${NAME}
+all :		 ascii ${NAME}
 
-%.o: %.c	${DIR}libft.h ${DIR_SRC}minishell.h
-			@${CC} ${CFLAGS} -I ${DIR} -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
+%.o: %.c	${DIR_SRC}minishell.h Makefile
+			@printf "${YELLOW}\033[2KCreating minishell's objects : $@\r"
+			@${CC} ${CFLAGS} -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
 
-${NAME}:	${OBJS}
-			@${CC} ${OBJS} -o ${NAME} -lreadline
-			@echo "$(GREEN)[$(NAME) created]$(DEFAULT)"
+${NAME}:	lib ${OBJS}
+			@printf "${GREEN}\033[2KCreating minishell's objects : DONE\r"
+			@printf "\n${YELLOW}Compiling ${NAME}...${DEFAULT}"
+			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@printf "\r${GREEN}Compiling ${NAME} : DONE ${DEFAULT}\n"
+
+lib :
+			@make -C ./libft
+
+ascii :
+			@echo "\n███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗"     
+			@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
+			@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
+			@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
+			@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
+			@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n"
 
 clean :
+			@echo "${RED}Deleting objects..."
 			@${RM} ${OBJS}
-			@echo "$(YELLOW)[object files deleted]$(DEFAULT)"
 
 fclean :	clean
+			@echo "${RED}Cleaning libft..."
+			@${MAKE} fclean -C ./libft
+			@echo "${RED}Deleting executable...${DEFAULT}"
 			@${RM} ${NAME} 
-			@echo "$(RED)[${NAME} deleted]$(DEFAULT)"
 
 re :		fclean all
 
@@ -81,6 +82,7 @@ re :		fclean all
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
+BLUE = \033[1;34m
 DEFAULT = \033[0m
 
 
