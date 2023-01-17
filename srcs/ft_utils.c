@@ -60,7 +60,4 @@ void	ft_free_args(t_args *args)
 	}
 	free(args->stack);
 	i = -1;
-	// while (args->command_list[++i])
-	// 	free(args->stack[i]);
-	// free(args->command_list);
 }

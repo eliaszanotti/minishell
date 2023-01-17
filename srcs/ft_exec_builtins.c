@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/17 13:19:14 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:31:45 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,18 @@ int	ft_exec_builtins(t_args *args)
 
 int	ft_open_dir(char **cmd)
 {
-	if (!ft_strcmp(cmd[1], "~"))
+	if (cmd[1])
 	{
-		if (chdir(getenv("HOME")) == -1)
+		if (!ft_strcmp(cmd[1], "~"))
+		{
+			if (chdir(getenv("HOME")) == -1)
+				printf("cd: permission denied: %s\n", cmd[1]);
+		}
+		else if (chdir(cmd[1]))
 			printf("cd: permission denied: %s\n", cmd[1]);
 	}
-	else
-	{
-		if (chdir(cmd[1]))
-			printf("cd: permission denied: %s\n", cmd[1]);
-	}
+	else if (chdir(getenv("HOME")) == -1)
+		printf("cd: permission denied: %s\n", cmd[1]);
 	return (1);
 }
 
