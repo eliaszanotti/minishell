@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/01/16 12:44:00 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/17 12:52:21 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,12 @@ all :		${NAME}
 %.o: %.c	libft.h Makefile
 			@printf "${YELLOW}\033[2KCreating libft's objects : $@\r"
 			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 
-			@printf "${GREEN}\033[2KCreating libft's objects : DONE\r"
 
 ${NAME}:	${OBJS}
-			@printf "\n\n${YELLOW}Compiling libft... ${DEFAULT}"
+			@printf "${GREEN}\033[2KCreating libft's objects : DONE\r"
+			@printf "\n${YELLOW}Compiling libft... ${DEFAULT}"
 			@ar rc ${NAME} ${OBJS}
-			@echo "\r${GREEN}Compiling libft : DONE ${DEFAULT}\n"
+			@echo "\r${GREEN}Compiling libft : DONE ${DEFAULT}"
 
 clean :
 			@${RM} ${OBJS}

@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/17 12:29:54 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/17 12:52:52 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,29 +42,37 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 # COMPILATION
-all :		${NAME}
+all :		 ascii ${NAME}
 
 %.o: %.c	${DIR_SRC}minishell.h Makefile
 			@printf "${YELLOW}\033[2KCreating minishell's objects : $@\r"
 			@${CC} ${CFLAGS} -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
-			@printf "${GREEN}\033[2KCreating minishell's objects : DONE\r"
 
 ${NAME}:	lib ${OBJS}
-			@printf "\n\n${YELLOW}Compiling ${NAME}...${DEFAULT}"
+			@printf "${GREEN}\033[2KCreating minishell's objects : DONE\r"
+			@printf "\n${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@printf "\r${GREEN}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
 lib :
 			@make -C ./libft
 
+ascii :
+			@echo "\n███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗"     
+			@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
+			@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
+			@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
+			@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
+			@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n"
+
 clean :
-			@echo "${RED}Deleting objects...\n"
+			@echo "${RED}Deleting objects..."
 			@${RM} ${OBJS}
 
 fclean :	clean
-			@echo "${RED}Cleaning libft...\n"
+			@echo "${RED}Cleaning libft..."
 			@${MAKE} fclean -C ./libft
-			@echo "${RED}Deleting executable...\n${DEFAULT}"
+			@echo "${RED}Deleting executable...${DEFAULT}"
 			@${RM} ${NAME} 
 
 re :		fclean all
@@ -74,6 +82,7 @@ re :		fclean all
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
+BLUE = \033[1;34m
 DEFAULT = \033[0m
 
 
