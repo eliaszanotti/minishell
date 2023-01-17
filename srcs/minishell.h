@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 13:32:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/17 16:30:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_get_path(char *cmd);
 char	*ft_replace_env(char *str);
 int		ft_parse_quotes(t_args *args);
 // ft_parsing.c
-int		ft_get_stack_size(t_args *args);
+int		ft_get_stack_size(char **comand_list, int i, int j);
 char	**ft_copy_stack(char **command_list, int j);
 int		ft_init_stack(t_args *args);
 int		ft_get_stack(t_args *args);
@@ -65,5 +65,10 @@ int		ft_exec_builtins(t_args *args);
 int		ft_open_dir(char **cmd);
 int		ft_echo(char **cmd);
 char	*ft_get_prompt(char *cwd);
+// ft_add_to_stack.c
+int		ft_add_redirects(t_args *args, char **command_list, int i_stack, \
+		int max);
+int		ft_add_command(t_args *args, char **command_list, int i_stack, \
+		int max);
 
 #endif
