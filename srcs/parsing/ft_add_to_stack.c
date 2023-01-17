@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 17:25:09 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/17 19:30:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,21 @@ int	ft_add_redirects(t_args *args, char **command_list, int i_stack, int max)
 char	**ft_init_instruction(char **command_list, int max)
 {
 	char	**instruction;
+	int		count;
 	int		i;
 
-	i = -1;
-	while (++i < max - 1 && command_list[i])
-		if (ft_is_delimiter(command_list[i]) && command_list[i + 1])
+	count = 0;
+	i = 0;
+	while (count < max - 1 && *command_list)
+	{
+		if (ft_is_delimiter(*command_list) && command_list[1])
+			command_list++;
+		else
 			i++;
+		count++;
+		command_list++;
+	}
+	printf("size = %d\n", i);
 	instruction = malloc(sizeof(char *) * (i + 1));
 	if (!instruction)
 		return (NULL);
