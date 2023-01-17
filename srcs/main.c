@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/13 18:44:59 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/17 13:17:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 
 void	ft_log(char ***stack)
 {
-	int	i = 0;
+	int	i = -1;
 	int	j = 0;
 
-	while (stack[i])
+	while (stack[++i])
 	{
 		j = 0;
 		while (stack[i][j])
 			printf("[%s]", stack[i][j++]);
 		printf("\n");
-		i++;
 	}
 }
 
@@ -37,7 +36,7 @@ int	ft_execute_child(char **command, t_args *args)
 
 	pipe(fd);
 	pid = fork();
-	if (!pid)
+	if (pid == 0)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
@@ -47,11 +46,11 @@ int	ft_execute_child(char **command, t_args *args)
 	else
 	{
 		close(fd[1]);
-		dup2(fd[0], 0);
+		dup2(fd[0], STDIN_FILENO);
 		waitpid(pid, NULL, 0);
 	}
-	close(fd[0]);
-	close(fd[1]);
+	//close(fd[0]);
+	//close(fd[1]);
 	return (0);
 }
 
@@ -70,7 +69,8 @@ int	ft_execute_command(t_args *args)
 			ft_execute_child(args->instructions[i++], args);
 	pid = fork();
 	if (pid == 0)
-		execve(ft_get_path(args->instructions[i][0]), args->instructions[i], args->envp);
+		execve(ft_get_path(args->instructions[i][0]), args->instructions[i], \
+			args->envp);
 	waitpid(pid, NULL, 0);
 	return (0);
 }
@@ -80,34 +80,24 @@ int	ft_prompt_loop(t_args *args)
 	char	cwd[1024];
 	char	*command;
 	int		error_code;
-	pid_t	pid;
 
 	while (!args->exit_code)
 	{
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
-		command = readline(args->prompt);
-		//command = "ls -l | grep m | cat";
+		//command = readline(args->prompt);
+		command = "ls > out | grep < in RE";
 		add_history(command);
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
-			ft_log(args->stack);
-			if (args->stack[0] != NULL)
-			{
-				if (args->stack[1] != NULL && !ft_strcmp(args->stack[1][0], "|"))
-					ft_execute_command(args);
-				else if (!ft_exec_builtins(args))
-				{
-					pid = fork();
-					if (pid == 0)
-						if (execve(ft_get_path(args->stack[0][0]), args->stack[0], NULL))
-							return (11);
-					waitpid(pid, NULL, 0);
-				}
-			}
+			//ft_log(args->stack);
+			if (args->stack[0])
+				ft_execute_command(args);
 		}
+		//free(command);
+		//usleep(500000);
 		return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
