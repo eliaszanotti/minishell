@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 16:33:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/17 17:28:10 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,21 @@ char	**ft_copy_stack(char **command_list, int j)
 	instruction[i_tab] = NULL;
 	return (instruction);
 }
+
+/*void ll(char ***stack)
+{
+	int i = 0;
+	int j = 0;
+	while (stack[i])
+	{
+		j = 0;
+		while (stack[i][j])
+			printf("[%s]", stack[i][j++]);
+		printf("\n");
+		i++;
+	}
+	// > out | ls
+}*/
 
 int	ft_get_stack(t_args *args)
 {
