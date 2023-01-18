@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/18 13:39:38 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/18 17:44:01 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,54 @@ int	ft_execute_child(char **command, t_args *args)
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
+		waitpid(pid, NULL, 1);
 	}
-	//close(fd[0]);
-	//close(fd[1]);
+	close(fd[0]);
+	close(fd[1]);
 	return (0);
 }
 
 int	ft_execute_command(t_args *args)
+{
+	pid_t	pid;
+	int		max;
+	int		count;
+	int		i;
+
+	max = 0;
+	count = 0;
+	i = 0;
+	while (args->stack[i])
+		if (ft_get_path(args->stack[i++][0]))
+			max++;
+	i = 0;
+	printf("max : %d\n", max);
+	while (args->stack[i])
+	{
+		if (count < max - 1 && ft_get_path(args->stack[i][0]))
+		{
+			ft_execute_child(args->stack[i], args);
+			count++;
+			printf("count : %d\n", count);
+		}
+
+
+		i++;
+	}
+
+
+	pid = fork();
+	if (pid == 0)
+		execve(ft_get_path(args->stack[i - 1][0]), args->stack[i - 1], \
+			args->envp);
+	waitpid(pid, NULL, 0);
+
+
+
+	return (0);
+}
+
+/*int	ft_execute_command(t_args *args)
 {
 	pid_t	pid;
 	int		i;
@@ -73,7 +113,7 @@ int	ft_execute_command(t_args *args)
 			args->envp);
 	waitpid(pid, NULL, 0);
 	return (0);
-}
+}*/
 
 int	ft_prompt_loop(t_args *args)
 {
@@ -86,8 +126,8 @@ int	ft_prompt_loop(t_args *args)
 		signal(3, SIG_IGN);
 		//signal(2, SIG_IGN); //TODO
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
-		command = readline(args->prompt);
-		//command = "< srcs ls | grep main | wc";
+		//command = readline(args->prompt);
+		command = "ls | grep RE";
 		add_history(command);
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
