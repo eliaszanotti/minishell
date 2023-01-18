@@ -29,6 +29,46 @@ void	ft_log(char ***stack)
 	}
 }
 
+/*int	ft_execute_command(t_args *args)
+{
+	pid_t	pid;
+	int		max;
+	int		count;
+	int		i;
+
+	max = 0;
+	count = 0;
+	i = 0;
+	while (args->stack[i])
+		if (ft_get_path(args->stack[i++][0]))
+			max++;
+	i = 0;
+	printf("max : %d\n", max);
+	while (args->stack[i])
+	{
+		if (count < max - 1 && ft_get_path(args->stack[i][0]))
+		{
+			ft_execute_child(args->stack[i], args);
+			count++;
+			printf("count : %d\n", count);
+		}
+
+
+		i++;
+	}
+
+
+	pid = fork();
+	if (pid == 0)
+		execve(ft_get_path(args->stack[i - 1][0]), args->stack[i - 1], \
+			args->envp);
+	waitpid(pid, NULL, 0);
+
+
+
+	return (0);
+}*/
+
  /*int	ft_execute_child(char **command, t_args *args)
  {
  	pid_t	pid;
