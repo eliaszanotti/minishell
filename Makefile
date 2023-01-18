@@ -6,9 +6,11 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/17 17:38:49 by elias            ###   ########.fr        #
+#    Updated: 2023/01/18 12:27:30 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+
 
 # SOURCES
 S_MNSH	= ${DIR_SRC}main.c				\
@@ -47,24 +49,19 @@ all :		 ascii ${NAME}
 
 %.o: %.c	${DIR_SRC}minishell.h Makefile
 			@printf "${YELLOW}\033[2KCreating minishell's objects : $@\r"
-			@${CC} ${CFLAGS} -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
+			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
 
 ${NAME}:	lib ${OBJS}
 			@printf "${GREEN}\033[2KCreating minishell's objects : DONE\r"
 			@printf "\n${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@printf "\r${GREEN}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
 lib :
 			@make -C ./libft
 
 ascii :
-			@echo "\n███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗"     
-			@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
-			@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
-			@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
-			@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
-			@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n"
+			@echo "\n$$ASCII\n"
 
 clean :
 			@echo "${RED}Deleting objects..."
@@ -88,3 +85,12 @@ DEFAULT = \033[0m
 
 
 #TODO add makefile in libft (voir sujet regles communes para 8) 
+define ASCII
+███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗
+████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
+██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
+██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     
+██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+endef
+export ASCII

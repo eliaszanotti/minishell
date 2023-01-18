@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 17:27:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/18 14:09:48 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,25 @@ int	ft_execute_command(t_args *args)
 	return (0);
 }
 
+void	ft_sig_ignore(int sig)
+{
+	(void)sig;
+	rl_on_new_line();
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
 int	ft_prompt_loop(t_args *args)
 {
 	char	cwd[1024];
 	char	*command;
 	int		error_code;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
-		signal(3, SIG_IGN);
-		//signal(2, SIG_IGN); //TODO
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
 		//command = "< out | ls";
@@ -97,7 +106,7 @@ int	ft_prompt_loop(t_args *args)
 				ft_execute_command(args);
 		}
 		//free(command);
-		return (0); //Temp for testing (uncommented while testing)
+		//return (0); //Temp for testing (uncommented while testing)
 	}
 	return (0);
 }
