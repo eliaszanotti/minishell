@@ -153,16 +153,25 @@ int	ft_execute_command(t_args *args)
 	return (0);
 }
 
+void	ft_sig_ignore(int sig)
+{
+	(void)sig;
+	rl_on_new_line();
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
 int	ft_prompt_loop(t_args *args)
 {
 	char	cwd[PATH_MAX];
 	char	*command;
 	int		error_code;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
-		signal(3, SIG_IGN);
-		//signal(2, SIG_IGN); //TODO
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
 		//command = "ls | grep RE | wc";

@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+
+
 # SOURCES
 S_MNSH	= ${DIR_SRC}main.c				\
 		${DIR_SRC}ft_error.c 			\
@@ -47,12 +49,12 @@ all :		${NAME}
 
 %.o: %.c	${DIR_SRC}minishell.h Makefile
 			@echo -ne "${YELLOW}${SUPPR}Creating minishell's objects : $@"
-			@${CC} ${CFLAGS} -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
+			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
 
 ${NAME}:	ascii lib ${OBJS}
 			@echo -ne "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
 			@echo -ne "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@echo -e "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
 lib :
