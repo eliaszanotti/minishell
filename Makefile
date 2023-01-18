@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/17 17:38:49 by elias            ###   ########.fr        #
+#    Updated: 2023/01/18 12:33:29 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DIR_SRC = srcs/
 D_PARSE	= ${DIR_SRC}parsing/
 
 # LIB
-LIBFT 		= -L ./libft -lft 
+LIBFT 	= -L ./libft -lft 
 
 # VARIABLES
 NAME	= minishell
@@ -43,48 +43,54 @@ CFLAGS	= -Wall -Wextra -Werror -g3
 RM		= rm -rf
 
 # COMPILATION
-all :		 ascii ${NAME}
+all :		${NAME}
 
 %.o: %.c	${DIR_SRC}minishell.h Makefile
-			@printf "${YELLOW}\033[2KCreating minishell's objects : $@\r"
+			@echo -ne "${YELLOW}${SUPPR}Creating minishell's objects : $@"
 			@${CC} ${CFLAGS} -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
 
-${NAME}:	lib ${OBJS}
-			@printf "${GREEN}\033[2KCreating minishell's objects : DONE\r"
-			@printf "\n${YELLOW}Compiling ${NAME}...${DEFAULT}"
+${NAME}:	ascii lib ${OBJS}
+			@echo -ne "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
+			@echo -ne "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
-			@printf "\r${GREEN}Compiling ${NAME} : DONE ${DEFAULT}\n"
+			@echo -e "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
 lib :
 			@make -C ./libft
 
 ascii :
-			@echo "\n███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗"     
-			@echo "████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     "
-			@echo "██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     "
-			@echo "██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     "
-			@echo "██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗"
-			@echo "╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n"
+			@echo -e "$$ASCII"
 
-clean :
-			@echo "${RED}Deleting objects..."
+clean :		ascii
+			@echo -e "${RED}Deleting objects : DONE"
 			@${RM} ${OBJS}
 
-fclean :	clean
-			@echo "${RED}Cleaning libft..."
+fclean :	clean 
+			@echo -e "${RED}Cleaning libft : DONE"
 			@${MAKE} fclean -C ./libft
-			@echo "${RED}Deleting executable...${DEFAULT}"
+			@echo -e "${RED}Deleting executable : DONE${DEFAULT}\n"
 			@${RM} ${NAME} 
 
 re :		fclean all
-
-.PHONY : all re clean fclean
 
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
 BLUE = \033[1;34m
 DEFAULT = \033[0m
+SUPPR = \r\033[2K
+MAKEFLAGS += --no-print-directory
 
+define ASCII
 
-#TODO add makefile in libft (voir sujet regles communes para 8) 
+███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗
+████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
+██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
+██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     
+██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
+╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
+
+endef
+export ASCII
+
+.PHONY : all re clean fclean lib ascii

@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/01/17 12:52:21 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/18 12:34:46 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,14 @@ RM		= rm -rf
 all :		${NAME}
 
 %.o: %.c	libft.h Makefile
-			@printf "${YELLOW}\033[2KCreating libft's objects : $@\r"
+			@echo -ne "${YELLOW}${SUPPR}Creating libft's objects : $@"
 			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 
 
 ${NAME}:	${OBJS}
-			@printf "${GREEN}\033[2KCreating libft's objects : DONE\r"
-			@printf "\n${YELLOW}Compiling libft... ${DEFAULT}"
+			@echo -ne "${GREEN}${SUPPR}Creating libft's objects : DONE\n"
+			@echo -ne "${YELLOW}Compiling libft... ${DEFAULT}"
 			@ar rc ${NAME} ${OBJS}
-			@echo "\r${GREEN}Compiling libft : DONE ${DEFAULT}"
+			@echo -ne "${GREEN}${SUPPR}Compiling libft : DONE ${DEFAULT}\n"
 
 clean :
 			@${RM} ${OBJS}
@@ -56,9 +56,11 @@ fclean :	clean
 
 re :		fclean all
 
-.PHONY : all re clean fclean
-
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
 DEFAULT = \033[0m
+SUPPR = \r\033[2K
+MAKEFLAGS += --no-print-directory
+
+.PHONY : all re clean fclean
