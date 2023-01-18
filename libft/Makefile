@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/01/18 12:34:46 by elias            ###   ########.fr        #
+#    Updated: 2023/01/18 13:42:00 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ OBJS	= ${S_LIB:.c=.o}
 # VARIABLES
 NAME	= libft.a
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g3
+CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
 
 # COMPILATION

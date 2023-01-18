@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/18 12:33:29 by elias            ###   ########.fr        #
+#    Updated: 2023/01/18 13:42:20 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ LIBFT 	= -L ./libft -lft
 # VARIABLES
 NAME	= minishell
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g3
+CFLAGS	= -Wall -Wextra -Werror -g3 #TODO remove g3
 RM		= rm -rf
 
 # COMPILATION

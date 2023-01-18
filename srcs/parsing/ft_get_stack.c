@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 19:44:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/18 13:38:09 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	ft_get_stack_size(char **command_list, int i, int j) // TODO voir photo sur 
 	while (*command_list)
 	{
 		if (ft_is_delimiter(*command_list) == '|')
+		{
 			command_list++;
+			count++;
+		}
 		while (*command_list && ft_is_delimiter(*command_list) != '|')
 		{
 			i++;
