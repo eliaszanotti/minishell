@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/13 18:20:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 17:15:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static size_t	ft_mallocsize(char const *s, char c)
 	return (count);
 }
 
-int	ft_get_i(char const *s, char c)
+static int	ft_get_i(char const *s, char c)
 {
 	char	quote;
 	int		i;
@@ -79,7 +79,7 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 	return (tab);
 }
 
-int	ft_check_quotes(char *s)
+static int	ft_check_quotes(char *s)
 {
 	char	quote;
 	int		i;

@@ -6,13 +6,13 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:37:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/17 16:35:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 17:22:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_size(t_args *args)
+static int	ft_get_size(t_args *args)
 {
 	int	size;
 	int	i;
