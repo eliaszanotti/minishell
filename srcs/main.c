@@ -6,14 +6,12 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 16:24:29 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:53:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#include <sys/wait.h>
-#include <fcntl.h>
 
 void	ft_log(char ***stack)
 {
@@ -91,7 +89,7 @@ void	ft_log(char ***stack)
  	return (0);
 }*/
 
-int ft_execute_child(t_args *args, char **command, int last, int fdd)
+/*int ft_execute_child(t_args *args, char **command, int last, int fdd)
 {
 	int fd[2];
 	pid_t pid;
@@ -118,9 +116,9 @@ int ft_execute_child(t_args *args, char **command, int last, int fdd)
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	return (fd[0]);
-}
+}*/
 
-int	ft_redirect(char **str, t_args *args)
+/*int	ft_redirect(char **str, t_args *args)
 {
 	if (ft_is_delimiter(str[0]) == '<')
 		args->infile = open(str[1], O_RDONLY); // TODO en cas d'erreur 
@@ -177,7 +175,7 @@ int	ft_start_execution(t_args *args)
 			size++;
 	//if (size >= 2)
 	return (ft_execute_command(args, size));
-	/*else
+	else
 	{
 		if (!ft_exec_builtins(args))
 		{
@@ -196,8 +194,8 @@ int	ft_start_execution(t_args *args)
 			args->infile = 0;
 			args->outfile = 1;	
 		}
-	}*/
-}
+	}
+}*/
 
 void	ft_sig_ignore(int sig)
 {

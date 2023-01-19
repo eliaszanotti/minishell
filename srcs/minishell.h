@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 13:32:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:54:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <dirent.h>
 # include <limits.h>
 # include <signal.h>
-# include <termios.h>
+# include <sys/wait.h>
+# include <fcntl.h>
 
 typedef struct s_args
 {
@@ -33,12 +34,24 @@ typedef struct s_args
 	int		exit_code;
 	int		infile;
 	int		outfile;
-	int		i; // TODO
-	int		j; // TODO
 }	t_args;
+
+/*	EXEX	*/
+//	ft_exec.c
+int		ft_execute_child(t_args *args, char **command, int last, int fdd);
+int		ft_execute_command(t_args *args, int size);
+int		ft_start_execution(t_args *args);
+//	ft_redirect.c
+int		ft_redirect(char **str, t_args *args);
+/*	PARSING	*/
+
 
 // ft_error.c
 int		ft_error(int error_code);
+
+
+
+
 // ft_free.c
 char	**ft_freeall(char **tab);
 // ft_get_path.c

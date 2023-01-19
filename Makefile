@@ -6,11 +6,9 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/18 13:42:20 by elias            ###   ########.fr        #
+#    Updated: 2023/01/19 16:52:42 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 # SOURCES
 S_MNSH	= ${DIR_SRC}main.c				\
@@ -28,12 +26,15 @@ S_MNSH	= ${DIR_SRC}main.c				\
 		${D_PARSE}ft_add_to_stack.c		\
 		${DIR_SRC}ft_struct_init.c 		\
 		${DIR_SRC}ft_utils.c 			\
+		${D_EXEC}ft_exec.c				\
+		${D_EXEC}ft_redirect.c			\
 
 OBJS	= ${S_MNSH:.c=.o}
 
 # DIRECTORIES
 DIR_SRC = srcs/
 D_PARSE	= ${DIR_SRC}parsing/
+D_EXEC	= ${DIR_SRC}exec/
 
 # LIB
 LIBFT 	= -L ./libft -lft 
@@ -43,6 +44,15 @@ NAME	= minishell
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -g3 #TODO remove g3
 RM		= rm -rf
+MAKEFLAGS += --no-print-directory
+
+# COLORS
+RED		= \033[1;31m
+GREEN	= \033[1;32m
+YELLOW	= \033[1;33m
+BLUE	= \033[1;34m
+DEFAULT	= \033[0m
+SUPPR	= \r\033[2K
 
 # COMPILATION
 all :		${NAME}
@@ -74,14 +84,6 @@ fclean :	clean
 			@${RM} ${NAME} 
 
 re :		fclean all
-
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-BLUE = \033[1;34m
-DEFAULT = \033[0m
-SUPPR = \r\033[2K
-MAKEFLAGS += --no-print-directory
 
 define ASCII
 

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 11:01:14 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:58:05 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	ft_struct_init(t_args *args)
 {
-	args->prompt = "\e[36;1mminishell\e[32m ➜\e[0m ";
+	args->prompt = "\e[36;1mminishell\e[32m ➜\e[0m "; // TODO inutile vu ft_get_prompt
 	args->exit_code = 0;
 	args->infile = 0;
 	args->outfile = 1;
-	args->i = 0;
-	args->j = 0;
 	return (0);
 }
