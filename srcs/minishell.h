@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 09:56:02 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:32:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_args
 	int		exit_code;
 	int		infile;
 	int		outfile;
-	int		i;
-	int		j;
+	int		i; // TODO
+	int		j; // TODO
 }	t_args;
 
 // ft_error.c

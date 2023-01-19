@@ -6,13 +6,13 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/18 13:38:09 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:11:52 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_stack_size(char **command_list, int i, int j) // TODO voir photo sur mon tel  malloc 4 au lieu de malloc 6
+int	ft_get_stack_size(char **command_list, int i, int j)
 {
 	int	count;
 
@@ -44,9 +44,8 @@ int	ft_get_stack_size(char **command_list, int i, int j) // TODO voir photo sur 
 int	ft_init_stack(t_args *args)
 {
 	int	size;
-	
+
 	size = ft_get_stack_size(args->command_list, 0, 0);
-	printf("size gros malloc : %d\n", size);
 	args->stack = malloc(sizeof(char **) * (size + 1));
 	if (!args->stack)
 		return (99);
@@ -71,21 +70,6 @@ char	**ft_copy_stack(char **command_list, int j)
 	return (instruction);
 }
 
-void ll(char ***stack)
-{
-	int i = 0;
-	int j = 0;
-	while (stack[i])
-	{
-		j = 0;
-		while (stack[i][j])
-			printf("[%s]", stack[i][j++]);
-		printf("\n");
-		i++;
-	}
-	// > out | ls
-}
-
 int	ft_get_stack(t_args *args)
 {
 	int	j;
@@ -106,7 +90,5 @@ int	ft_get_stack(t_args *args)
 		i_stack = ft_add_command(args, args->command_list, i_stack, j + 1);
 		args->command_list += j;
 	}
-	//args->stack[i_stack] = NULL;
-	//ll(args->stack);
 	return (0);
 }

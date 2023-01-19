@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 11:21:16 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/19 16:08:12 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,13 @@ void	ft_log(char ***stack)
 			count++;
 			printf("count : %d\n", count);
 		}
-
-
 		i++;
 	}
-
-
 	pid = fork();
 	if (pid == 0)
 		execve(ft_get_path(args->stack[i - 1][0]), args->stack[i - 1], \
 			args->envp);
 	waitpid(pid, NULL, 0);
-
-
-
 	return (0);
 }*/
 
@@ -109,8 +102,6 @@ int ft_test(t_args *args, char **command, int last, int fdd)
 		return (-1);
 	else if (pid == 0) 
 	{
-		printf("infile : %d\n", args->infile);
-		printf("outfile : %d\n", args->outfile);
 		if (args->infile)
 			dup2(args->infile, STDIN_FILENO);
 		else
@@ -124,72 +115,85 @@ int ft_test(t_args *args, char **command, int last, int fdd)
 	}
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
-	args->infile = 0;
-	args->outfile = 1;
+	args->infile = STDIN_FILENO;
+	args->outfile = STDOUT_FILENO;
 	return (fd[0]);
 }
 
-void	redir(char **str, t_args *args)
+void	ft_redirect(char **str, t_args *args)
 {
-	if (!ft_strcmp(str[0], "<"))
-		args->infile = open(str[1], O_RDONLY);
-	else if (!ft_strcmp(str[0], ">"))
+	if (ft_is_delimiter(str[0]) == '<')
+		args->infile = open(str[1], O_RDONLY); // TODO en cas d'erreur 
+	else if (ft_is_delimiter(str[0]) == '>')
 		args->outfile = open(str[1], O_RDWR | O_TRUNC | O_CREAT, 0644);
+	else if (ft_is_delimiter(str[0]) == 'r')
+		args->outfile = open(str[1], O_RDWR | O_APPEND | O_CREAT, 0644);
 }
 
-int	ft_execute_child(t_args *args, char ***cmd, int size)
+int	ft_execute_child(t_args *args, int size)
 {
+	int	count;
 	int i;
 	int fdd;
 
+	count = 0;
 	i = 0;
 	fdd = 0;
-	printf("args->stack[i][0] : %s\n", args->stack[i][0]);
-	while (cmd[i] && i < size - 1)
+	while (args->stack[i] && count < size - 1)
 	{
-		redir(args->stack[i], args);
-		fdd = ft_test(args, cmd[i++], 0, fdd);
+		if (!ft_get_path(args->stack[i][0]) && \
+			ft_is_delimiter(args->stack[i][0]) != '|')
+			ft_redirect(args->stack[i++], args);
+		else if (ft_get_path(args->stack[i][0]))
+		{
+			fdd = ft_test(args, args->stack[i++], 0, fdd);
+			count++;
+		}
+		else
+			i++;
 	}
-	if (args->stack[i + 1])
-		redir(args->stack[i + 1], args);
-	fdd = ft_test(args, cmd[i], 1, fdd);
+	if (ft_is_delimiter(args->stack[i][0]) == '|')
+		i++;
+	while (!ft_get_path(args->stack[i][0]) && \
+		ft_is_delimiter(args->stack[i][0]) != '|')
+		ft_redirect(args->stack[i++], args);
+	fdd = ft_test(args, args->stack[i], 1, fdd);
 	return (0);
 }
 
 int	ft_execute_command(t_args *args)
 {
-	pid_t	pid;
-	int		size;
-	int		i;
+	//pid_t	pid;
+	int	size;
+	int	i;
 
 	size = 0;
 	i = 0;
-	while (args->instructions[size])
-		size++;
-	if (size >= 2)
-		ft_execute_child(args, args->instructions, size);
-	else
+	while (args->stack[i])
+		if (ft_get_path(args->stack[i++][0]))	
+			size++;
+	//if (size >= 2)
+	return (ft_execute_child(args, size));
+	/*else
 	{
 		if (!ft_exec_builtins(args))
 		{
-			redir(args->stack[i], args);
+			ft_redirect(args->stack[i], args);
 			if (args->stack[i + 1])
-				redir(args->stack[i + 1], args);
+				ft_redirect(args->stack[i + 1], args);
 			pid = fork();
 			if (pid == 0)
 			{
 					dup2(args->infile, STDIN_FILENO);
 					dup2(args->outfile, STDOUT_FILENO);
 				printf("outfile : %d\n", args->outfile);
-				execve(ft_get_path(args->instructions[0][0]), args->instructions[0], args->envp);
+				execve(ft_get_path(args->instructions[0][0]), args->instructions[0], args->envp); // TODO create exec function
 			}
 			waitpid(pid, NULL, 0);
 			args->infile = 0;
 			args->outfile = 1;	
-			printf("outfile2 : %d\n", args->outfile);
 		}
-	}
-	return (0);
+	}*/
 }
 
 void	ft_sig_ignore(int sig)
@@ -213,7 +217,7 @@ int	ft_prompt_loop(t_args *args)
 	{
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
-		//command = "ls | grep RE | wc";
+		//command = "rm out";
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
@@ -224,6 +228,9 @@ int	ft_prompt_loop(t_args *args)
 				ft_execute_command(args);
 			}
 		}
+		else 
+			ft_error(error_code);
+		//return (0);
 	}
 	return (0);
 }
