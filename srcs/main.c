@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 16:08:12 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 16:24:29 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,7 @@ void	ft_log(char ***stack)
  	return (0);
 }*/
 
-
-int ft_test(t_args *args, char **command, int last, int fdd)
+int ft_execute_child(t_args *args, char **command, int last, int fdd)
 {
 	int fd[2];
 	pid_t pid;
@@ -111,7 +110,8 @@ int ft_test(t_args *args, char **command, int last, int fdd)
 		if (args->outfile)
 			dup2(args->outfile, STDOUT_FILENO);
 		close(fd[0]);
-		execve(ft_get_path(command[0]), command, args->envp);
+		if (execve(ft_get_path(command[0]), command, args->envp) == -1)
+			return (1); // TODO change error code
 	}
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
@@ -120,7 +120,7 @@ int ft_test(t_args *args, char **command, int last, int fdd)
 	return (fd[0]);
 }
 
-void	ft_redirect(char **str, t_args *args)
+int	ft_redirect(char **str, t_args *args)
 {
 	if (ft_is_delimiter(str[0]) == '<')
 		args->infile = open(str[1], O_RDONLY); // TODO en cas d'erreur 
@@ -128,9 +128,12 @@ void	ft_redirect(char **str, t_args *args)
 		args->outfile = open(str[1], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	else if (ft_is_delimiter(str[0]) == 'r')
 		args->outfile = open(str[1], O_RDWR | O_APPEND | O_CREAT, 0644);
+	if (args->infile == -1 || args->outfile == -1)
+		return (1); // TODO change error code 
+	return (0);
 }
 
-int	ft_execute_child(t_args *args, int size)
+int	ft_execute_command(t_args *args, int size)
 {
 	int	count;
 	int i;
@@ -146,7 +149,7 @@ int	ft_execute_child(t_args *args, int size)
 			ft_redirect(args->stack[i++], args);
 		else if (ft_get_path(args->stack[i][0]))
 		{
-			fdd = ft_test(args, args->stack[i++], 0, fdd);
+			fdd = ft_execute_child(args, args->stack[i++], 0, fdd);
 			count++;
 		}
 		else
@@ -157,11 +160,11 @@ int	ft_execute_child(t_args *args, int size)
 	while (!ft_get_path(args->stack[i][0]) && \
 		ft_is_delimiter(args->stack[i][0]) != '|')
 		ft_redirect(args->stack[i++], args);
-	fdd = ft_test(args, args->stack[i], 1, fdd);
+	fdd = ft_execute_child(args, args->stack[i], 1, fdd);
 	return (0);
 }
 
-int	ft_execute_command(t_args *args)
+int	ft_start_execution(t_args *args)
 {
 	//pid_t	pid;
 	int	size;
@@ -173,7 +176,7 @@ int	ft_execute_command(t_args *args)
 		if (ft_get_path(args->stack[i++][0]))	
 			size++;
 	//if (size >= 2)
-	return (ft_execute_child(args, size));
+	return (ft_execute_command(args, size));
 	/*else
 	{
 		if (!ft_exec_builtins(args))
@@ -225,7 +228,7 @@ int	ft_prompt_loop(t_args *args)
 			if (args->stack[0])
 			{
 				add_history(command);
-				ft_execute_command(args);
+				ft_start_execution(args);
 			}
 		}
 		else 
