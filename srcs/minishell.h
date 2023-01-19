@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/18 14:03:20 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/19 09:56:02 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_args
 	char	**command_list;
 	char	*prompt;
 	int		exit_code;
+	int		infile;
+	int		outfile;
 	int		i;
 	int		j;
 }	t_args;

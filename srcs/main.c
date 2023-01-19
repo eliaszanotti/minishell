@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/18 18:47:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/19 11:21:16 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,33 @@ int ft_test(t_args *args, char **command, int last, int fdd)
 		return (-1);
 	else if (pid == 0) 
 	{
-		dup2(fdd, STDIN_FILENO);
+		printf("infile : %d\n", args->infile);
+		printf("outfile : %d\n", args->outfile);
+		if (args->infile)
+			dup2(args->infile, STDIN_FILENO);
+		else
+			dup2(fdd, STDIN_FILENO);
 		if (!last)
 			dup2(fd[1], STDOUT_FILENO);
+		if (args->outfile)
+			dup2(args->outfile, STDOUT_FILENO);
 		close(fd[0]);
 		execve(ft_get_path(command[0]), command, args->envp);
 	}
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
+	args->infile = 0;
+	args->outfile = 1;
 	return (fd[0]);
-}	
+}
+
+void	redir(char **str, t_args *args)
+{
+	if (!ft_strcmp(str[0], "<"))
+		args->infile = open(str[1], O_RDONLY);
+	else if (!ft_strcmp(str[0], ">"))
+		args->outfile = open(str[1], O_RDWR | O_TRUNC | O_CREAT, 0644);
+}
 
 int	ft_execute_child(t_args *args, char ***cmd, int size)
 {
@@ -127,8 +144,14 @@ int	ft_execute_child(t_args *args, char ***cmd, int size)
 
 	i = 0;
 	fdd = 0;
+	printf("args->stack[i][0] : %s\n", args->stack[i][0]);
 	while (cmd[i] && i < size - 1)
+	{
+		redir(args->stack[i], args);
 		fdd = ft_test(args, cmd[i++], 0, fdd);
+	}
+	if (args->stack[i + 1])
+		redir(args->stack[i + 1], args);
 	fdd = ft_test(args, cmd[i], 1, fdd);
 	return (0);
 }
@@ -137,18 +160,34 @@ int	ft_execute_command(t_args *args)
 {
 	pid_t	pid;
 	int		size;
+	int		i;
 
 	size = 0;
+	i = 0;
 	while (args->instructions[size])
 		size++;
 	if (size >= 2)
 		ft_execute_child(args, args->instructions, size);
 	else
 	{
-		pid = fork();
-		if (pid == 0)
-			execve(ft_get_path(args->instructions[0][0]), args->instructions[0], args->envp);	
-		waitpid(pid, NULL, 0);
+		if (!ft_exec_builtins(args))
+		{
+			redir(args->stack[i], args);
+			if (args->stack[i + 1])
+				redir(args->stack[i + 1], args);
+			pid = fork();
+			if (pid == 0)
+			{
+					dup2(args->infile, STDIN_FILENO);
+					dup2(args->outfile, STDOUT_FILENO);
+				printf("outfile : %d\n", args->outfile);
+				execve(ft_get_path(args->instructions[0][0]), args->instructions[0], args->envp);
+			}
+			waitpid(pid, NULL, 0);
+			args->infile = 0;
+			args->outfile = 1;	
+			printf("outfile2 : %d\n", args->outfile);
+		}
 	}
 	return (0);
 }
