@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 17:23:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/21 13:28:41 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+
+# include <errno.h>
 
 typedef struct s_args
 {
