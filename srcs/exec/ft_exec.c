@@ -6,52 +6,52 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/21 14:38:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 13:36:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_execute_child(t_args *args, char **command, int last, int fdd)
+int ft_execute_child(t_args *args, char **command, int last)
 {
 	int fd[2];
 	pid_t pid;
-	
+
 	if (pipe(fd))
-		return (-7);
+		return (ft_error(4));
 	pid = fork();
 	if (pid == -1) 
-		return (-4);
+		return (ft_error(4));
 	else if (pid == 0) 
 	{
 		if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
-			return (-6);
-		else if (dup2(fdd, STDIN_FILENO) == -1)
-			return (-6);
+			return (ft_error(6));
+		else if (dup2(args->fdd, STDIN_FILENO) == -1)
+			return (ft_error(6));
 		if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
-			return (-6);
+			return (ft_error(6));
 		if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
-			return (-6);
+			return (ft_error(6));
 		close(fd[0]);
 		if (execve(ft_get_path(command[0]), command, args->envp) == -1)
-			return (-5);
+			return (ft_error(5));
 	}
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
-	return (fd[0]);
+	args->fdd = fd[0];
+	return (0);
 }
 
 int	ft_execute_command(t_args *args, int size)
 {
 	int	count;
 	int i;
-	int fdd;
+	args->fdd = 0;
 
 	count = 0;
 	i = -1;
-	fdd = 0;
 	while (args->stack[++i] && count < size - 1)
 	{
 		if (!ft_get_path(args->stack[i][0]) && \
@@ -60,9 +60,8 @@ int	ft_execute_command(t_args *args, int size)
 			return (1);
 		else if (ft_get_path(args->stack[i][0]))
 		{
-			fdd = ft_execute_child(args, args->stack[i], 0, fdd);
-			if (fdd < 0)
-				return (ft_error(-fdd));
+			if (ft_execute_child(args, args->stack[i], 0))
+				return (1);
 			count++;
 		}
 	}
@@ -72,9 +71,8 @@ int	ft_execute_command(t_args *args, int size)
 		ft_is_delimiter(args->stack[i][0]) != '|')
 		if (ft_redirect(args->stack[i++], args))
 			return (1);
-	fdd = ft_execute_child(args, args->stack[i], 1, fdd);
-	if (fdd < 0)	
-		return (ft_error(-fdd));
+	if (ft_execute_child(args, args->stack[i], 1))
+		return (1);
 	return (0);
 }
 

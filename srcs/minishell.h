@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/21 13:28:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 13:34:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ typedef struct s_args
 	int		exit_code;
 	int		infile;
 	int		outfile;
+	int		fdd;
 }	t_args;
 
 /*	EXEX	*/
 //	ft_exec.c
-int		ft_execute_child(t_args *args, char **command, int last, int fdd);
+int		ft_execute_child(t_args *args, char **command, int last);
 int		ft_execute_command(t_args *args, int size);
 int		ft_start_execution(t_args *args);
 //	ft_redirect.c
