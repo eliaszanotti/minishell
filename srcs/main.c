@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 13:43:09 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 15:05:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	ft_prompt_loop(t_args *args)
 	{
 		ft_reset_struct(args);
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
-		command = readline(args->prompt);
-		//command = "rm out";
+		//command = readline(args->prompt);
+		command = "lk";
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{

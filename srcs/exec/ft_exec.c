@@ -6,11 +6,27 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 13:39:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 15:04:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
+{
+	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
+		return (ft_error(6));
+	else if (dup2(args->fdd, STDIN_FILENO) == -1)
+		return (ft_error(6));
+	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
+		return (ft_error(6));
+	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
+		return (ft_error(6));
+	close(fd[0]);
+	if (execve(ft_get_path(command[0]), command, args->envp) == -1)
+		return (ft_error(5));
+	return (0);
+}
 
 int ft_execute_child(t_args *args, char **command, int last)
 {
@@ -22,20 +38,8 @@ int ft_execute_child(t_args *args, char **command, int last)
 	pid = fork();
 	if (pid == -1) 
 		return (ft_error(4));
-	else if (pid == 0) 
-	{
-		if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
-			return (ft_error(6));
-		else if (dup2(args->fdd, STDIN_FILENO) == -1)
-			return (ft_error(6));
-		if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
-			return (ft_error(6));
-		if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
-			return (ft_error(6));
-		close(fd[0]);
-		if (execve(ft_get_path(command[0]), command, args->envp) == -1)
-			return (ft_error(5));
-	}
+	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
+		return (1);
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
 	args->infile = STDIN_FILENO;
@@ -78,7 +82,6 @@ int	ft_execute_command(t_args *args, int size)
 
 int	ft_start_execution(t_args *args)
 {
-	//pid_t	pid;
 	int	size;
 	int	i;
 
@@ -87,7 +90,6 @@ int	ft_start_execution(t_args *args)
 	while (args->stack[i])
 		if (ft_get_path(args->stack[i++][0]))
 			size++;
-	//if (size >= 2)
 	return (ft_execute_command(args, size));
 	/*else
 	{
