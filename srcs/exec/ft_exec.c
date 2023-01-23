@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 13:36:38 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 13:39:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int ft_execute_child(t_args *args, char **command, int last)
 	pid_t pid;
 
 	if (pipe(fd))
-		return (ft_error(4));
+		return (ft_error(7));
 	pid = fork();
 	if (pid == -1) 
 		return (ft_error(4));
