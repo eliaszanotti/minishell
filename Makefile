@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/19 16:52:42 by elias            ###   ########.fr        #
+#    Updated: 2023/01/23 15:13:56 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ S_MNSH	= ${DIR_SRC}main.c				\
 		${D_PARSE}ft_parsing.c 			\
 		${D_PARSE}ft_split_quote.c	 	\
 		${D_PARSE}ft_get_stack.c	 	\
-		${D_PARSE}ft_get_instructions.c	\
 		${D_PARSE}ft_add_to_stack.c		\
 		${DIR_SRC}ft_struct_init.c 		\
 		${DIR_SRC}ft_utils.c 			\

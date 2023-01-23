@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 13:34:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 15:49:50 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int		ft_redirect(char **str, t_args *args);
 int		ft_add_redirects(t_args *args, char **cmd, int i_stack, int max);
 char	**ft_init_instruction(char **cmd, int max);
 int		ft_add_command(t_args *args, char **cmd, int i_stack, int max);
-//	ft_get_instructions.c
-int		ft_get_instructions(t_args *args);
 //	ft_get_stack.c
 int		ft_get_stack_size(char **command_list, int i, int j);
 int		ft_init_stack(t_args *args);
@@ -85,6 +83,7 @@ char	*ft_get_path(char *cmd);
 char	*ft_get_prompt(char *cwd);
 //	ft_struct_init.c
 int		ft_struct_init(t_args *args);
+int		ft_reset_struct(t_args *args);
 //	ft_utils.c
 char	ft_is_delimiter(char *str);
 void	ft_sig_ignore(int sig);

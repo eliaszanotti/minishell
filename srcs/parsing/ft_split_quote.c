@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/19 17:15:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 15:20:22 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ft_split_quote(t_args *args, char *s, char c)
 	{
 		args->command_list = malloc(sizeof(char *));
 		if (!args->command_list)
-			return (0);
+			return (ft_error(99));
 		args->command_list[0] = 0;
 		return (0);
 	}
@@ -121,7 +121,7 @@ int	ft_split_quote(t_args *args, char *s, char c)
 	mallocsize = ft_mallocsize(s, c);
 	args->command_list = malloc(sizeof(char *) * (mallocsize + 1));
 	if (!args->command_list)
-		return (0);
+		return (ft_error(99));
 	args->command_list = ft_splitstr(s, c, args->command_list, mallocsize);
 	args->command_list[mallocsize] = NULL;
 	return (0);

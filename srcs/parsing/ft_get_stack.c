@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 16:11:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 15:33:09 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_init_stack(t_args *args)
 	size = ft_get_stack_size(args->command_list, 0, 0);
 	args->stack = malloc(sizeof(char **) * (size + 1));
 	if (!args->stack)
-		return (99);
+		return (ft_error(99));
 	args->stack[size] = NULL;
 	return (0);
 }
@@ -75,14 +75,18 @@ int	ft_get_stack(t_args *args)
 	int	j;
 	int	i_stack;
 
-	i_stack = ft_init_stack(args);
-	if (i_stack)
-		return (i_stack);
+	if (ft_init_stack(args))
+		return (1);
+	i_stack = 0;
 	while (*args->command_list)
 	{
 		j = 0;
 		if (ft_is_delimiter(*args->command_list) == '|')
-			args->stack[i_stack++] = ft_copy_stack(args->command_list++, 1);
+		{
+			args->stack[i_stack] = ft_copy_stack(args->command_list++, 1);
+			if (!args->stack[i_stack++])
+				return (ft_error(99));
+		}
 		while (args->command_list[j] && \
 			ft_is_delimiter(args->command_list[j]) != '|')
 			j++;
