@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 15:33:09 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 19:41:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int	ft_get_stack(t_args *args)
 		i_stack = ft_add_command(args, args->command_list, i_stack, j + 1);
 		args->command_list += j;
 	}
+	args->stack[i_stack] = NULL;
 	return (0);
 }

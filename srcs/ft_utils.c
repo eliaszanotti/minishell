@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 17:03:44 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 20:22:35 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,13 @@ char	ft_is_delimiter(char *str)
 		return ('l');
 	if (!ft_strcmp(str, ">>"))
 		return ('r');
+	return (0);
+}
+
+char ft_is_redirect(char *str)
+{
+	if (ft_is_delimiter(str) && ft_is_delimiter(str) != '|')
+		return (ft_is_delimiter(str));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 13:41:35 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 20:18:35 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int	ft_error(int error_code)
 		printf("Failed to pipe fd\n");
 	if (error_code == 8)
 		printf("Can't create file\n");
+	if (error_code == 9)
+		printf("Parse error on pipe\n");
+	if (error_code == 10)
+		printf("Syntax error on redirect\n");
+	if (error_code == 11)
+		printf("Parse error\n");
 	if (error_code == 99)
 		printf("Malloc cannot be created\n");
 	return (error_code);
