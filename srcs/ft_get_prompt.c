@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/19 12:01:10 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/23 18:33:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ char	*ft_get_prompt(char *cwd)
 		while (cwd[i] != '/')
 			i--;
 		if (!ft_strcmp(cwd, getenv("HOME")))
-			cwd = ft_strjoin(" \001\e[34m\002⚡\001\e[46;97m\002 ", "~");
+			cwd = ft_strjoin(" ⚡\e[46;90m\ue0b0 ", "~"); // TODO wtf qu'est-ce que t'as fais Tibo 
 		else
-			cwd = ft_strjoin(" \001\e[34m\002⚡\001\e[46;97m\002 ", cwd + i + 1);
+			cwd = ft_strjoin(" ⚡\e[46;90m\ue0b0 ", cwd + i + 1);
  		tmp = getenv("LOGNAME");
- 		tmp2 = ft_strjoin("\001\e[44m ", tmp);
+ 		tmp2 = ft_strjoin("\001\e[100;36m ", tmp);
  		tmp = ft_strjoin(tmp2, cwd);
  		free(tmp2);
  		free(cwd);
- 		cwd = ft_strjoin(tmp, "\001\e[96m\002 ➜ \ue0b0\001\e[0m\002 ");
+ 		cwd = ft_strjoin(tmp, " \001\e[36;49m\002\ue0b0\001\e[0m\002 ");
  		free(tmp);
  		return (cwd);
  	}
