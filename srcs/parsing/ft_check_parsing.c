@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/01/24 12:28:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:36:39 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int	ft_check_parsing(t_args *args)
 	if (!*args->command_list)
 		return (1);
 	if (ft_is_delimiter(*args->command_list) == '|')
-		return (ft_error(9));
+		return (ft_error(4));
 	while (args->command_list[++i])
 	{
 		if (ft_is_delimiter(args->command_list[i]) && \
 			!args->command_list[i + 1])
-			return (ft_error(11));
+			return (ft_error(6));
 		if (ft_is_delimiter(args->command_list[i]) == '|' && \
 			args->command_list[i + 1])
 			if (ft_is_delimiter(args->command_list[i + 1]) == '|')
-				return (ft_error(9));
+				return (ft_error(4));
 		if (ft_is_redirect(args->command_list[i]) && \
 			args->command_list[i + 1])
 			if (ft_is_delimiter(args->command_list[i + 1]))
-				return (ft_error(10));
+				return (ft_error(5));
 	}
 	return (0);
 }

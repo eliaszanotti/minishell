@@ -6,7 +6,7 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/24 12:17:32 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:37:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,6 @@ int	ft_parse_quotes(t_args *args)
 			if (current[0] == '"' && current[len] == '"')
 				current = ft_replace_env(current);
 			current = ft_remove_quote(current);
-			//else if (current[0] == '\'' && current[len] == '\'')
-			//	current = ft_substr(current, 1, len - 1);
 			args->stack[i][j] = current;
 			if (!args->stack[i][j])
 				return (99);

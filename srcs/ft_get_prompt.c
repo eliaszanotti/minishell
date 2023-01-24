@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/23 18:33:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:24:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_prompt(char *cwd)
+char	*ft_get_prompt(char *cwd) // TODO segfault with env -i
 {
 	int		i;
 	char	*tmp;

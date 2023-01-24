@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 15:04:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:38:42 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 {
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
-		return (ft_error(6));
+		return (ft_error(13));
 	else if (dup2(args->fdd, STDIN_FILENO) == -1)
-		return (ft_error(6));
+		return (ft_error(13));
 	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
-		return (ft_error(6));
+		return (ft_error(13));
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
-		return (ft_error(6));
+		return (ft_error(13));
 	close(fd[0]);
 	if (execve(ft_get_path(command[0]), command, args->envp) == -1)
-		return (ft_error(5));
+		return (ft_error(12));
 	return (0);
 }
 
@@ -34,10 +34,10 @@ int ft_execute_child(t_args *args, char **command, int last)
 	pid_t pid;
 
 	if (pipe(fd))
-		return (ft_error(7));
+		return (ft_error(11));
 	pid = fork();
 	if (pid == -1) 
-		return (ft_error(4));
+		return (ft_error(10));
 	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
 	close(fd[1]);
@@ -91,25 +91,4 @@ int	ft_start_execution(t_args *args)
 		if (ft_get_path(args->stack[i++][0]))
 			size++;
 	return (ft_execute_command(args, size));
-	/*else
-	{
-		if (!ft_exec_builtins(args))
-		{
-			ft_redirect(args->stack[i], args);
-			if (args->stack[i + 1])
-				ft_redirect(args->stack[i + 1], args);
-			pid = fork();
-			if (pid == 0)
-			{
-					dup2(args->infile, STDIN_FILENO);
-					dup2(args->outfile, STDOUT_FILENO);
-				printf("outfile : %d\n", args->outfile);
-				execve(ft_get_path(args->instructions[0][0]), args->instructions[0], args->envp); // TODO create exec function
-			}
-			waitpid(pid, NULL, 0);
-			args->infile = 0;
-			args->outfile = 1;
-		}
-	}*/
 }
-
