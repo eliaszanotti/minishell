@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/24 15:08:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:59:34 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
-		//command = "ls 'srcs'";
+		//command = "ls \"$EDITOR\"";
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
@@ -47,7 +47,7 @@ int	ft_prompt_loop(t_args *args)
 			add_history(command);
 			ft_start_execution(args);
 		}
-		//return (0);
+	  	//return (0);
 	}
 	return (0);
 }

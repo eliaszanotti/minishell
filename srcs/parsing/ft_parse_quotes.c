@@ -6,7 +6,7 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/24 15:14:27 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 16:21:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,28 +63,18 @@ static int	ft_get_size(char *str)
 		str++;
 		size++;
 	}
-	printf("size = %d\n", size);
 	return (size);
 }
 
 #include <string.h> // TODO remove after creating ft_strcat
 
-char	*ft_replace_env(char *str)
+char	*ft_replace_variable(char *new_str, char *str, int size)
 {
-	char	*new_str;
 	char	*variable;
-	int		size;
 	int		i;
 
-	size = ft_get_size(str);
-	if (size < 0)
-		return (NULL);
-	new_str = malloc(sizeof(char) * (size + 1));
-	if (!new_str)
-		return (NULL);
-	new_str[0] = '\0';
-	size = 0;
-	i = 0;
+	printf(">>> %s\n", str);
+
 	while (*str)
 	{
 		if (*str == '$')
@@ -108,6 +98,24 @@ char	*ft_replace_env(char *str)
 	return (new_str);
 }
 
+char	*ft_replace_env(char *str)
+{
+	char	*new_str;
+	int		size;
+
+	size = ft_get_size(str);
+	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
+		size -= 2;
+	if (size < 0)
+		return (NULL);
+	new_str = malloc(sizeof(char) * (size + 1));
+	if (!new_str)
+		return (NULL);
+	new_str[0] = '\0';
+	new_str = ft_replace_variable(new_str, str, 0);
+	return (new_str);
+}
+
 int	ft_parse_quotes(t_args *args)
 {
 	char	*current;
@@ -121,7 +129,6 @@ int	ft_parse_quotes(t_args *args)
 		while (args->stack[i][++j])
 		{
 			current = args->stack[i][j];
-			printf("%s\n", args->stack[i][j]);
 			if (current[0] != '\'' && \
 				current[ft_strlen(current)] != '\'')
 				current = ft_replace_env(current);
