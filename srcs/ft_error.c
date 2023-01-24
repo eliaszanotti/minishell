@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 20:18:35 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:36:58 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_error(int error_code)
 {
 	if (error_code)
-		printf("\e[1;31m[ERROR:%d]\e[0m ", error_code);
+		printf("\e[41;30m[ERROR:%d]\e[49;31m\ue0b0\e[0m ", error_code);
 	if (error_code == 1) // TODO  a enlever car reservee pour dire que le message est deja print
 		printf("Parse error (quote not closed)\n");
 	if (error_code == 2)

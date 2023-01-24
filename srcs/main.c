@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 20:05:45 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:29:04 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,13 @@ int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
-		//command = "ls | grep < RE < ";
+		//command = "  ";
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
 			ft_log(args->stack);
-			if (args->stack[0])
-			{
-				add_history(command);
-				ft_start_execution(args);
-			}
+			add_history(command);
+			ft_start_execution(args);
 		}
 		//return (0);
 	}

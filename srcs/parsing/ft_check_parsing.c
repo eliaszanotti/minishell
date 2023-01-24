@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 20:25:11 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:28:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_check_parsing(t_args *args)
 	int	i;
 
 	i = -1;
+	if (!*args->command_list)
+		return (1);
 	if (ft_is_delimiter(*args->command_list) == '|')
 		return (ft_error(9));
 	while (args->command_list[++i])
