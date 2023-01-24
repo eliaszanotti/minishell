@@ -6,12 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/12 12:31:45 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/24 16:05:25 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//TODO error
 int	ft_exec_builtins(t_args *args)
 {
 	int	i;
@@ -23,6 +24,18 @@ int	ft_exec_builtins(t_args *args)
 		return (ft_open_dir(args->stack[0]));
 	else if (!ft_strcmp(args->stack[0][0], "pwd"))
 		return (printf("%s\n", getenv("PWD")));
+	else if (!ft_strcmp(args->stack[0][0], "export"))
+	{
+		if(ft_export(args->stack[0], args))//TODO error malloc
+			return (ft_error(99));
+		return (1);	
+	}
+	else if (!ft_strcmp(args->stack[0][0], "unset"))
+	{
+		if(ft_unset(args->stack[0], args))//TODO error malloc
+			return (ft_error(99));
+		return (1);	
+	}
 	else if (!ft_strcmp(args->stack[0][0], "env"))
 	{
 		while (args->envp[++i])
@@ -31,44 +44,5 @@ int	ft_exec_builtins(t_args *args)
 	}
 	else if (!ft_strcmp(args->stack[0][0], "exit"))
 		ft_exit(args);
-	else if (!ft_strcmp(args->stack[0][0], "clear"))
-	{
-		printf("\e[1;1H\e[2J");
-		return (1);
-	}
-	return (0);
-}
-
-int	ft_open_dir(char **cmd)
-{
-	if (cmd[1])
-	{
-		if (!ft_strcmp(cmd[1], "~"))
-		{
-			if (chdir(getenv("HOME")) == -1)
-				printf("cd: permission denied: %s\n", cmd[1]);
-		}
-		else if (chdir(cmd[1]))
-			printf("cd: permission denied: %s\n", cmd[1]);
-	}
-	else if (chdir(getenv("HOME")) == -1)
-		printf("cd: permission denied: %s\n", cmd[1]);
-	return (1);
-}
-
-int	ft_echo(char **cmd)
-{
-	int	i;
-
-	i = 1;
-	if (cmd[1] && !ft_strcmp(cmd[1], "-n"))
-		while (cmd[++i])
-			printf("%s ", cmd[i]);
-	else
-	{
-		while (cmd[i])
-			printf("%s ", cmd[i++]);
-		printf("\n");
-	}
 	return (0);
 }

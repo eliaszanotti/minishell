@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 20:29:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 15:04:30 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ char	ft_is_redirect(char *str);
 void	ft_sig_ignore(int sig);
 void	*ft_exit(t_args *args);
 void	ft_free_args(t_args *args);
-
+int		ft_export(char **cmd, t_args *args);
+int		ft_unset(char **cmd, t_args *args);
 #endif
