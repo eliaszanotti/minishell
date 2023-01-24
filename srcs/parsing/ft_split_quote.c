@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/24 12:12:34 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:47:55 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ static int	ft_check_quotes(char *s)
 int	ft_split_quote(t_args *args, char *s, char c)
 {
 	size_t	mallocsize;
-	int		error_code;
 
 	if (!s || !*s)
 	{
@@ -113,9 +112,8 @@ int	ft_split_quote(t_args *args, char *s, char c)
 		args->command_list[0] = 0;
 		return (0);
 	}
-	error_code = ft_check_quotes(s);
-	if (error_code)
-		return (error_code);
+	if (ft_check_quotes(s))
+		return (ft_error(1));
 	while (*s == c)
 		s++;
 	mallocsize = ft_mallocsize(s, c);
