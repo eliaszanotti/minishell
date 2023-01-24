@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/23 15:20:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:12:34 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	ft_check_quotes(char *s)
 			quote = s[i++];
 			while (s[i] && s[i] != quote)
 				i++;
-			if (!s[i++])
+			if (!s[i])
 				return (1);
 		}
 		i++;

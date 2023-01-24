@@ -6,11 +6,36 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/17 16:13:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:17:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*ft_remove_quote(char *str)
+{
+    char	*new_str;
+    int		i;
+    int		size;
+
+	i = -1;
+	size = 0;
+	while (str[++i])
+		if (str[i] == '\'' || str[i] == '"')
+			size++;
+	if (size == 0)
+		return (str);
+	new_str = malloc(sizeof(char) * (ft_strlen(str) - size + 1));
+	i = 0;
+	while (*str)
+	{
+		if (*str != '\'' && *str != '"')
+			new_str[i++] = *str;
+		str++;
+	}
+	new_str[i] = '\0';
+    return (new_str);
+}
 
 static int	ft_get_size(char *str)
 {
@@ -95,8 +120,9 @@ int	ft_parse_quotes(t_args *args)
 			len = ft_strlen(current) - 1;
 			if (current[0] == '"' && current[len] == '"')
 				current = ft_replace_env(current);
-			else if (current[0] == '\'' && current[len] == '\'')
-				current = ft_substr(current, 1, len - 1);
+			current = ft_remove_quote(current);
+			//else if (current[0] == '\'' && current[len] == '\'')
+			//	current = ft_substr(current, 1, len - 1);
 			args->stack[i][j] = current;
 			if (!args->stack[i][j])
 				return (99);
