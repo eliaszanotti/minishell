@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 22:22:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 23:09:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,45 +23,14 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
 	close(fd[0]);
-	if (execve(ft_get_path(command[0]), command, args->envp) == -1)
+	if (ft_is_builtins(command[0]))
+	{
+		return (-1);
+		//ft_exec_builtins(args, command);
+		//exit(0);
+	}
+	else if (execve(ft_get_path(command[0]), command, args->envp) == -1)
 		return (ft_error(12));
-	return (0);
-}
-
-/*int ft_dup(t_args *args, char **command, int last, int fd[2])
-{
-	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
-		return (ft_error(13));
-	else if (dup2(args->fdd, STDIN_FILENO) == -1)
-		return (ft_error(13));
-	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
-		return (ft_error(13));
-	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
-		return (ft_error(13));
-	close(fd[0]);
-	ft_exec_builtins(args, command);
-	return (0);
-}*/
-
-int	ft_wait_execution(t_args *args)
-{
-	int	i;
-
-	i = 0;
-	while (i < args->size)
-		waitpid(args->pid_tab[i++], NULL, 0);
-	return (0);
-}
-
-int ft_add_pid(t_args *args, pid_t pid)
-{
-	int	i; 
-
-	i = 0;
-	while (args->pid_tab[i] != 0 && i < args->size)
-		i++;
-	if (i < args->size)
-		args->pid_tab[i] = pid;
 	return (0);
 }
 
@@ -72,26 +41,34 @@ static int ft_execute_child(t_args *args, char **command, int last)
 
 	if (pipe(fd))
 		return (ft_error(11));
-	pid = fork();
-	if (pid == -1) 
-		return (ft_error(4));
-	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
-		return (1);
+	// TODO fix (seule diff)
+	//if (ft_is_builtins(command[0]))
+	//	ft_dup_and_exec(args, command, last, fd);	
+	//else
+	//{
+		pid = fork();
+		if (pid == -1) 
+			return (ft_error(4));
+		else if (pid == 0)
+			if (ft_dup_and_exec(args, command, last, fd))
+				return (1);
+		ft_add_pid(args, pid);
+	//}
 	close(fd[1]);
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	args->fdd = fd[0];
-	ft_add_pid(args, pid);
 	return (0);
 }
 
-static int	ft_execute_command(t_args *args, int count, int i)
+static int	ft_execute_command(t_args *args, int count)
 {
+	int	i;
+
+	i = -1;
 	while (args->stack[++i] && count < args->size - 1)
 	{	
-		// TODO change to is redirect
-		if (!ft_get_path(args->stack[i][0]) && \
-			ft_is_delimiter(args->stack[i][0]) != '|' && \
+		if (ft_is_redirect(args->stack[i][0]) && \
 			ft_redirect(args->stack[i], args))
 			return (1);
 		else if (ft_get_path(args->stack[i][0]) || \
@@ -118,9 +95,10 @@ int	ft_start_execution(t_args *args)
 	int	i;
 
 	args->size = 0;
-	i = 0;
-	while (args->stack[i])
-		if (ft_get_path(args->stack[i++][0]))
+	i = -1;
+	while (args->stack[++i])
+		if (ft_is_builtins(args->stack[i][0]) || \
+			ft_get_path(args->stack[i][0]))
 			args->size++;
 	printf("size of pipe : %d\n", args->size);
 	i = 0;
@@ -130,5 +108,5 @@ int	ft_start_execution(t_args *args)
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;
-	return (ft_execute_command(args, 0, -1));
+	return (ft_execute_command(args, 0));
 }
