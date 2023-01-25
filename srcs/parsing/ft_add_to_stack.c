@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_to_stack.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/01/19 17:10:42 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:03:20 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_add_redirects(t_args *args, char **cmd, int i_stack, int max)
 	return (i_stack);
 }
 
-char	**ft_init_instruction(char **cmd, int max)
+static char	**ft_init_instruction(char **cmd, int max)
 {
 	char	**instruction;
 	int		count;

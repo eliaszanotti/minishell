@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 14:57:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:08:28 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
+static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 {
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
 		return (ft_error(13));
@@ -28,7 +28,7 @@ int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
-int ft_execute_child(t_args *args, char **command, int last)
+static int ft_execute_child(t_args *args, char **command, int last)
 {
 	int fd[2];
 	pid_t pid;
@@ -51,7 +51,7 @@ int ft_execute_child(t_args *args, char **command, int last)
 	return (0);
 }
 
-int	ft_execute_command(t_args *args, int size)
+static int	ft_execute_command(t_args *args, int size)
 {
 	int	count;
 	int i;
