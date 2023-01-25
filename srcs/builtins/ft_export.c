@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/25 17:34:31 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:13:06 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,6 @@ int	ft_rm_env(char *cmd, t_args *args)
 	return (0);
 }
 
-char	*ft_new_env(char *env)
-{
-	int		i;
-	char	*new_env;
-
-	new_env = malloc(sizeof(char) * (ft_strlen(env) + 1));
-	i = 0;
-	while (*env && *env != '+')
-		new_env[i++] = *env++;
-	if (*env)
-	{
-		env++;
-		while (*env)
-			new_env[i++] = *env++;
-	}
-	new_env[i] = '\0';
-	return (new_env);
-}
-
 int	ft_add_var(char **cmd, t_args *args)
 {
 	char	**envp_tmp;
@@ -96,16 +77,6 @@ int	ft_add_var(char **cmd, t_args *args)
 	args->envp = NULL;
 	args->envp = envp_tmp;
 	return (0);
-}
-
-char	*ft_get_value(char **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[1][i] && cmd[1][i] != '=')
-		i++;
-	return (cmd[1] + i + 1);
 }
 
 int	ft_already_exist(char **cmd, t_args *args)
@@ -135,13 +106,11 @@ int	ft_already_exist(char **cmd, t_args *args)
 	return (0);
 }
 
-int	ft_export(char **cmd, t_args *args)
+int	ft_export(char **cmd, t_args *args, int i)
 {
 	char	*tmp;
 	char	*tmp2;
-	int		i;
 
-	i = 0;
 	while (cmd[1][i] != '\0' && cmd[1][i] != '=')
 		i++;
 	if (cmd[1][i - 1] == '+')
@@ -151,12 +120,12 @@ int	ft_export(char **cmd, t_args *args)
 		{
 			tmp = ft_get_var_name(args->envp[i]);
 			tmp2 = ft_get_var_name(cmd[1]);
-			if (!tmp)
+			if (!tmp || !tmp2)
 				return (1);
 			if (!ft_strcmp(tmp, tmp2))
 			{
 				args->envp[i] = ft_strjoin(args->envp[i], ft_get_value(cmd));
-				return (0);
+				return (free(tmp), free(tmp2), 0);
 			}
 			free(tmp);
 		}
