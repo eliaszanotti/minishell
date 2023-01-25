@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/01/25 14:28:39 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/25 18:31:02 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ S_LIB	= ft_isalpha.c ft_isdigit.c ft_isalnum.c 			\
 		ft_lstdelone.c ft_lstclear.c ft_lstiter.c 		\
 		ft_lstmap.c ft_strlcat.c 
 
-OBJS	= ${S_LIB:.c=.o}
+DIR_OBJS = .objs/
+OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(S_LIB))
 
 # VARIABLES
 NAME	= libft.a
@@ -47,9 +48,10 @@ RM		= rm -rf
 # COMPILATION
 all :		${NAME}
 
-%.o: %.c	libft.h Makefile
-			@${PRINT} "${YELLOW}${SUPPR}Creating libft's objects : $@"
-			@${CC} ${CFLAGS} -c $< -o ${<:.c=.o} 
+${DIR_OBJS}%.o :  %.c	libft.h Makefile
+				@mkdir -p $(shell dirname $@)
+				@${PRINT} "${YELLOW}${SUPPR}Creating libft's objects : $@"
+				@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating libft's objects : DONE\n"
@@ -58,7 +60,7 @@ ${NAME}:	${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Compiling libft : DONE ${DEFAULT}\n"
 
 clean :
-			@${RM} ${OBJS}
+			@${RM} ${DIR_OBJS}
 
 fclean :	clean
 			@${RM} ${NAME} 
