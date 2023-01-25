@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 22:11:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 22:18:09 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	ft_prompt_loop(t_args *args)
 			add_history(command);
 			ft_start_execution(args);
 		}
-	  	//return (0);
+		//return (0);
 	}
 	return (0);
 }

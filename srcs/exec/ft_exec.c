@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 22:11:20 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 22:22:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int ft_add_pid(t_args *args, pid_t pid)
 	int	i; 
 
 	i = 0;
-	while (args->pid_tab && i < args->size)
+	while (args->pid_tab[i] != 0 && i < args->size)
 		i++;
 	if (i < args->size)
 		args->pid_tab[i] = pid;
@@ -85,15 +85,17 @@ static int ft_execute_child(t_args *args, char **command, int last)
 	return (0);
 }
 
-static int	ft_execute_command(t_args *args, int size, int count, int i)
+static int	ft_execute_command(t_args *args, int count, int i)
 {
-	while (args->stack[++i] && count < size - 1)
-	{
+	while (args->stack[++i] && count < args->size - 1)
+	{	
+		// TODO change to is redirect
 		if (!ft_get_path(args->stack[i][0]) && \
 			ft_is_delimiter(args->stack[i][0]) != '|' && \
 			ft_redirect(args->stack[i], args))
 			return (1);
-		else if (ft_get_path(args->stack[i][0]) || ft_is_builtins(args->stack[i][0]))
+		else if (ft_get_path(args->stack[i][0]) || \
+			ft_is_builtins(args->stack[i][0]))
 		{
 			if (ft_execute_child(args, args->stack[i], 0))
 				return (1);
@@ -122,11 +124,11 @@ int	ft_start_execution(t_args *args)
 			args->size++;
 	printf("size of pipe : %d\n", args->size);
 	i = 0;
-	args->pid_tab = malloc(sizeof(pid_t) * (args->size + 1));
+	args->pid_tab = malloc(sizeof(pid_t) * args->size);
 	if (!args->pid_tab)
 		return (ft_error(99)); // TODO a verifier
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;
-	return (ft_execute_command(args, args->size, 0, -1));
+	return (ft_execute_command(args, 0, -1));
 }
