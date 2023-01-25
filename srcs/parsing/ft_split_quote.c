@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/24 12:47:55 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:34:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ft_split_quote(t_args *args, char *s, char c)
 		return (0);
 	}
 	if (ft_check_quotes(s))
-		return (ft_error(1));
+		return (ft_error(3));
 	while (*s == c)
 		s++;
 	mallocsize = ft_mallocsize(s, c);
