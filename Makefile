@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/25 15:08:41 by elias            ###   ########.fr        #
+#    Updated: 2023/01/25 18:04:46 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ S_MNSH_LIST	= main.c						\
 			${D_BUILTINS}ft_exec_builtins.c	\
 			${D_BUILTINS}ft_echo.c			\
 			${D_BUILTINS}ft_export.c		\
+			${D_BUILTINS}ft_export_utils.c	\
 			${D_BUILTINS}ft_open_dir.c		\
 			${D_BUILTINS}ft_unset.c			\
 			${D_UTILS}ft_free.c 			\

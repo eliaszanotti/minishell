@@ -6,25 +6,25 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/24 16:18:20 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:25:41 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_get_var_name(char	*var)
+char	*ft_get_var_name(char	*var)
 {
 	char	*new_var;
 	int		i;
 
 	i = 0;
-	while (var[i] && var[i] != '=')
+	while (var[i] && var[i] != '=' && var[i] != '+')
 		i++;
 	new_var = malloc(sizeof(char) * (i + 1));
 	if (!new_var)
 		return (NULL);
 	i = 0;
-	while (var[i] && var[i] != '=')
+	while (var[i] && var[i] != '=' && var[i] != '+')
 	{
 		new_var[i] = var[i];
 		i++;
