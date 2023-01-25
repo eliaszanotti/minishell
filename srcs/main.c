@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/24 12:48:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:00:36 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_log(char ***stack)
+static void	ft_log(char ***stack)
 {
 	int	i = -1;
 	int	j = 0;
@@ -26,7 +26,7 @@ void	ft_log(char ***stack)
 	}
 }
 
-int	ft_prompt_loop(t_args *args)
+static int	ft_prompt_loop(t_args *args)
 {
 	char	cwd[PATH_MAX];
 	char	*command;

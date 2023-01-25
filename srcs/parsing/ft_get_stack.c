@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 19:41:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:06:44 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_stack_size(char **command_list, int i, int j)
+static int	ft_get_stack_size(char **command_list, int i, int j)
 {
 	int	count;
 

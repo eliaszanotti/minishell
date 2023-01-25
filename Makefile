@@ -6,40 +6,52 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/24 16:04:40 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/25 14:35:31 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+OS				= $(shell uname -s)
+
+ifeq ($(OS), Linux)
+	PRINT = @echo -ne
+endif
+ifeq ($(OS), Darwin)
+	PRINT = @printf
+endif
+
 # SOURCES TODO a trier
-S_MNSH	= ${DIR_SRC}main.c				\
-		${DIR_SRC}ft_error.c 			\
-		${DIR_SRC}ft_env.c 				\
-		${D_BUILTINS}ft_exec_builtins.c	\
-		${D_BUILTINS}ft_echo.c			\
-		${D_BUILTINS}ft_export.c		\
-		${D_BUILTINS}ft_open_dir.c		\
-		${D_BUILTINS}ft_unset.c			\
-		${DIR_SRC}ft_free.c 			\
-		${DIR_SRC}ft_get_prompt.c		\
-		${DIR_SRC}ft_get_path.c 		\
-		${D_PARSE}ft_parse_quotes.c 	\
-		${D_PARSE}ft_parsing.c 			\
-		${D_PARSE}ft_split_quote.c	 	\
-		${D_PARSE}ft_get_stack.c	 	\
-		${D_PARSE}ft_add_to_stack.c		\
-		${D_PARSE}ft_check_parsing.c	\
-		${DIR_SRC}ft_struct_init.c 		\
-		${DIR_SRC}ft_utils.c 			\
-		${D_EXEC}ft_exec.c				\
-		${D_EXEC}ft_redirect.c			\
+S_MNSH_LIST	= main.c						\
+			${D_UTILS}ft_error.c 			\
+			${D_UTILS}ft_env.c 				\
+			${D_BUILTINS}ft_exec_builtins.c	\
+			${D_BUILTINS}ft_echo.c			\
+			${D_BUILTINS}ft_export.c		\
+			${D_BUILTINS}ft_open_dir.c		\
+			${D_BUILTINS}ft_unset.c			\
+			${D_UTILS}ft_free.c 			\
+			${D_UTILS}ft_get_prompt.c		\
+			${D_UTILS}ft_get_path.c 		\
+			${D_PARSE}ft_parse_quotes.c 	\
+			${D_PARSE}ft_parsing.c 			\
+			${D_PARSE}ft_split_quote.c	 	\
+			${D_PARSE}ft_get_stack.c	 	\
+			${D_PARSE}ft_add_to_stack.c		\
+			${D_PARSE}ft_check_parsing.c	\
+			${D_UTILS}ft_struct_init.c 		\
+			${D_UTILS}ft_utils.c 			\
+			${D_EXEC}ft_exec.c				\
+			${D_EXEC}ft_redirect.c			\
 
 OBJS	= ${S_MNSH:.c=.o}
+S_MNSH	= ${addprefix ${DIR_SRC}, ${S_MNSH_LIST}}
 
 # DIRECTORIES
+DIR_INCLUDE = includes/
 DIR_SRC = srcs/
-D_PARSE	= ${DIR_SRC}parsing/
-D_EXEC	= ${DIR_SRC}exec/
-D_BUILTINS	= ${DIR_SRC}builtins/
+D_PARSE	= parsing/
+D_EXEC	= exec/
+D_BUILTINS	= builtins/
+D_UTILS	= utils/
 
 # LIB
 LIBFT 	= -L ./libft -lft 
@@ -63,13 +75,13 @@ SUPPR	= \r\033[2K
 # COMPILATION
 all :		${NAME}
 
-%.o: %.c	${DIR_SRC}minishell.h Makefile
-			@echo -ne "${YELLOW}${SUPPR}Creating minishell's objects : $@"
-			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_SRC} -c $< -o ${<:.c=.o} 
+%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
+			@${PRINT} "${YELLOW}${SUPPR}Creating minishell's objects : $@"
+			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_INCLUDE} -c $< -o ${<:.c=.o} 
 
 ${NAME}:	ascii lib ${OBJS}
-			@echo -ne "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
-			@echo -ne "${YELLOW}Compiling ${NAME}...${DEFAULT}"
+			@${PRINT} "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
+			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@echo -e "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
@@ -77,16 +89,16 @@ lib :
 			@make -C ./libft
 
 ascii :
-			@echo -e "$$ASCII"
+			@${PRINT} "$$ASCII"
 
 clean :		ascii
-			@echo -e "${RED}Deleting objects : DONE"
+			@${PRINT} "${RED}Deleting objects : DONE"
 			@${RM} ${OBJS}
 
 fclean :	clean 
-			@echo -e "${RED}Cleaning libft : DONE"
+			@${PRINT} "${RED}Cleaning libft : DONE"
 			@${MAKE} fclean -C ./libft
-			@echo -e "${RED}Deleting executable : DONE${DEFAULT}\n"
+			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n"
 			@${RM} ${NAME} 
 
 re :		fclean all
