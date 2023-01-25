@@ -6,43 +6,44 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/24 16:05:25 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/25 17:07:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO error
-int	ft_exec_builtins(t_args *args)
+int	ft_exec_builtins(t_args *args, char **command)
 {
 	int	i;
 
 	i = -1;
-	if (!ft_strcmp(args->stack[0][0], "echo"))
-		return (ft_echo(args->stack[0]));
-	else if (!ft_strcmp(args->stack[0][0], "cd"))
-		return (ft_open_dir(args->stack[0]));
-	else if (!ft_strcmp(args->stack[0][0], "pwd"))
+	if (!ft_strcmp(command[0], "echo"))
+		if (ft_echo(command))
+			return (1);
+	else if (!ft_strcmp(command[0], "cd"))
+		if (ft_open_dir(command))
+			return (1);
+	else if (!ft_strcmp(command[0], "pwd"))
 		return (printf("%s\n", getenv("PWD")));
-	else if (!ft_strcmp(args->stack[0][0], "export"))
+	else if (!ft_strcmp(command[0], "export"))
 	{
-		if(ft_export(args->stack[0], args))//TODO error malloc
+		if(ft_export(command, args))//TODO error malloc
 			return (ft_error(99));
 		return (1);	
 	}
-	else if (!ft_strcmp(args->stack[0][0], "unset"))
+	else if (!ft_strcmp(command[0], "unset"))
 	{
-		if(ft_unset(args->stack[0], args))//TODO error malloc
+		if(ft_unset(command, args))//TODO error malloc
 			return (ft_error(99));
 		return (1);	
 	}
-	else if (!ft_strcmp(args->stack[0][0], "env"))
+	else if (!ft_strcmp(command[0], "env"))
 	{
 		while (args->envp[++i])
 			printf("%s\n", args->envp[i]);
 		return (1);
 	}
-	else if (!ft_strcmp(args->stack[0][0], "exit"))
+	else if (!ft_strcmp(command[0], "exit"))
 		ft_exit(args);
 	return (0);
 }
