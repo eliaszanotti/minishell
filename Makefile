@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/25 14:35:31 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/25 14:46:25 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ ${NAME}:	ascii lib ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
-			@echo -e "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
+			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
 
 lib :
 			@make -C ./libft
@@ -92,13 +92,13 @@ ascii :
 			@${PRINT} "$$ASCII"
 
 clean :		ascii
-			@${PRINT} "${RED}Deleting objects : DONE"
+			@${PRINT} "${RED}Deleting objects : DONE\n"
 			@${RM} ${OBJS}
 
 fclean :	clean 
-			@${PRINT} "${RED}Cleaning libft : DONE"
+			@${PRINT} "${RED}Cleaning libft : DONE\n"
 			@${MAKE} fclean -C ./libft
-			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n"
+			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n\n"
 			@${RM} ${NAME} 
 
 re :		fclean all
@@ -112,6 +112,7 @@ ${CYAN}
 ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
 ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
 ${DEFAULT}
+
 endef
 export ASCII
 
