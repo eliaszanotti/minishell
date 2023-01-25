@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/23 20:27:02 by elias            ###   ########.fr        #
+#    Updated: 2023/01/24 16:04:40 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@
 S_MNSH	= ${DIR_SRC}main.c				\
 		${DIR_SRC}ft_error.c 			\
 		${DIR_SRC}ft_env.c 				\
-		${DIR_SRC}ft_exec_builtins.c	\
+		${D_BUILTINS}ft_exec_builtins.c	\
+		${D_BUILTINS}ft_echo.c			\
+		${D_BUILTINS}ft_export.c		\
+		${D_BUILTINS}ft_open_dir.c		\
+		${D_BUILTINS}ft_unset.c			\
 		${DIR_SRC}ft_free.c 			\
 		${DIR_SRC}ft_get_prompt.c		\
 		${DIR_SRC}ft_get_path.c 		\
@@ -35,6 +39,7 @@ OBJS	= ${S_MNSH:.c=.o}
 DIR_SRC = srcs/
 D_PARSE	= ${DIR_SRC}parsing/
 D_EXEC	= ${DIR_SRC}exec/
+D_BUILTINS	= ${DIR_SRC}builtins/
 
 # LIB
 LIBFT 	= -L ./libft -lft 

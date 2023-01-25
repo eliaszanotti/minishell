@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 15:04:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 11:19:13 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,17 @@ int ft_execute_child(t_args *args, char **command, int last)
 
 	if (pipe(fd))
 		return (ft_error(7));
-	pid = fork();
-	if (pid == -1) 
-		return (ft_error(4));
-	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
-		return (1);
-	close(fd[1]);
-	waitpid(pid, NULL, 0);
+	if (!ft_exec_builtins(args))
+	{
+		printf("\n\n\nOK\n\n\n");
+		pid = fork();
+		if (pid == -1) 
+			return (ft_error(4));
+		else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
+			return (1);
+		close(fd[1]);
+		waitpid(pid, NULL, 0);
+	}
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	args->fdd = fd[0];
@@ -72,7 +76,8 @@ int	ft_execute_command(t_args *args, int size)
 	if (ft_is_delimiter(args->stack[i][0]) == '|')
 		i++;
 	while (!ft_get_path(args->stack[i][0]) && \
-		ft_is_delimiter(args->stack[i][0]) != '|')
+		ft_is_delimiter(args->stack[i][0]) != '|' && \
+		!ft_is_builtins(args->stack[i][0]))
 		if (ft_redirect(args->stack[i++], args))
 			return (1);
 	if (ft_execute_child(args, args->stack[i], 1))
