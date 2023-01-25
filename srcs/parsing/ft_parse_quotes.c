@@ -6,7 +6,7 @@
 /*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/24 16:21:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/25 14:29:39 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,43 +56,43 @@ static int	ft_get_size(char *str)
 			variable = ft_substr(str, 1, i++ - 1);
 			if (!variable)
 				return (-1);
-			size += ft_strlen(getenv(variable)) - 1;
+			if (getenv(variable))
+				size += ft_strlen(getenv(variable));
 			free(variable);
 			str += i - 2;
 		}
+		else
+			size++;
 		str++;
-		size++;
 	}
 	return (size);
 }
 
 #include <string.h> // TODO remove after creating ft_strcat
 
-char	*ft_replace_variable(char *new_str, char *str, int size)
+char	*ft_replace_variable(char *new_str, char *str, int size, int i)
 {
 	char	*variable;
-	int		i;
-
-	printf(">>> %s\n", str);
 
 	while (*str)
 	{
 		if (*str == '$')
 		{
-			i = 0;
 			while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
 				i++;
 			variable = ft_substr(str, 1, i++ - 1);
 			if (!variable)
 				return (NULL);
-			strcat(new_str, getenv(variable)); //TODO changer en ft_strcat
-			size += ft_strlen(getenv(variable));
+			if (getenv(variable))
+			{
+				strcat(new_str, getenv(variable)); //TODO changer en ft_strcat
+				size += ft_strlen(getenv(variable));
+			}
 			free(variable);
-			str += i - 2;
+			str += i - 1;
 		}
-		else if (*str != '"')
-			new_str[size++] = *str;
-		str++;
+		else
+			new_str[size++] = *str++;
 	}
 	new_str[size] = '\0';
 	return (new_str);
@@ -105,14 +105,20 @@ char	*ft_replace_env(char *str)
 
 	size = ft_get_size(str);
 	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
+	{
 		size -= 2;
+		str[ft_strlen(str) - 1] = '\0';
+		str++;
+	}
+	printf("size of malloc = %d\n", size);
 	if (size < 0)
 		return (NULL);
 	new_str = malloc(sizeof(char) * (size + 1));
 	if (!new_str)
 		return (NULL);
-	new_str[0] = '\0';
-	new_str = ft_replace_variable(new_str, str, 0);
+	while (size >= 0)
+		new_str[size--] = '\0';
+	new_str = ft_replace_variable(new_str, str, 0, 0);
 	return (new_str);
 }
 
