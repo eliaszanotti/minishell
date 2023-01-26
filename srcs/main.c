@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 13:10:31 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:01:45 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
-		//command = "ls \"$EDI\"";
+		//command = "unset EDITOR OK";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
