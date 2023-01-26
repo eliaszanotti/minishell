@@ -6,23 +6,11 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 17:53:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:43:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_get_var_name(char *variable)
-{
-	int		i;
-
-	i = 0;
-	while (variable[i] && variable[i] != '=')
-		i++;
-	if (variable[i] == '=')
-		return (ft_substr(variable, 0, i));
-	return (NULL);
-}
 
 char	*ft_getenv(t_args *args, char *variable)
 {
@@ -48,6 +36,18 @@ char	*ft_getenv(t_args *args, char *variable)
 	return (NULL);
 }
 
+char	*ft_get_var_name(char *variable)
+{
+	int		i;
+
+	i = 0;
+	while (variable[i] && variable[i] != '=')
+		i++;
+	if (variable[i] == '=')
+		return (ft_substr(variable, 0, i));
+	return (NULL);
+}
+
 int	ft_get_envp_size(char **envp)
 {
 	int	size;
@@ -58,7 +58,7 @@ int	ft_get_envp_size(char **envp)
 	return (size);
 }
 
-char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable)
+static char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable)
 {
 	char	*current;
 	int		i;
@@ -77,7 +77,7 @@ char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable)
 	return (new_envp);
 }
 
-char	**ft_get_new_envp(t_args *args, char *variable)
+char	**ft_remove_var(t_args *args, char *variable)
 {
 	char	**new_envp;
 	int		i;

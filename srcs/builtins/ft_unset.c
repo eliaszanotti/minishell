@@ -6,22 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 17:19:00 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:46:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// TODO unset ne marche pas
-
-void ft_ll(char **env)
-{
-	while (*env)
-	{
-		printf(">> %s\n", *env);
-		env++;
-	}
-}
 
 int	ft_unset(char **cmd, t_args *args)
 {
@@ -31,7 +20,7 @@ int	ft_unset(char **cmd, t_args *args)
 	i = 0;
 	while (cmd[++i])
 	{
-		new_envp = ft_get_new_envp(args, cmd[i]);
+		new_envp = ft_remove_var(args, cmd[i]);
 		//ft_ll(new_envp);
 		args->envp = new_envp;
 		if (!args->envp)

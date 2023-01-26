@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 17:44:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:44:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ft_unset(char **cmd, t_args *args);
 char	*ft_get_var_name(char *variable);
 char	*ft_getenv(t_args *args, char *variable);
 int		ft_get_envp_size(char **envp);
-char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable);
-char	**ft_get_new_envp(t_args *args, char *variable);
+char	**ft_remove_var(t_args *args, char *variable);
 
 #endif
