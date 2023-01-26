@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/23 20:22:35 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 12:05:03 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	ft_sig_ignore(int sig)
 
 // char	*ft_remove_quotes(char *str)
 // {
-// 	char	*tmp;
-
+// 	char	*tmp;:
 // 	if (str[0] == '"' || str[0] == '\'')
 // 	{
 // 		tmp = ft_substr(str, 1, ft_strlen(str) - 2);

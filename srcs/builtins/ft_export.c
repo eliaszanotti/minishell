@@ -6,11 +6,14 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/25 18:13:06 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:03:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//TODO export ARG ne doit pas marcher 
+
 
 static char	**ft_rm_env_norm(t_args *args, char *cmd, char **envp)
 {

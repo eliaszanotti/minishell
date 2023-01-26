@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 23:09:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 12:01:08 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
 	close(fd[0]);
-	if (ft_is_builtins(command[0]))
-	{
-		return (-1);
-		//ft_exec_builtins(args, command);
-		//exit(0);
-	}
+	if (ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
+		exit(0);
 	else if (execve(ft_get_path(command[0]), command, args->envp) == -1)
 		return (ft_error(12));
 	return (0);
@@ -41,20 +37,16 @@ static int ft_execute_child(t_args *args, char **command, int last)
 
 	if (pipe(fd))
 		return (ft_error(11));
-	// TODO fix (seule diff)
-	//if (ft_is_builtins(command[0]))
-	//	ft_dup_and_exec(args, command, last, fd);	
-	//else
-	//{
-		pid = fork();
-		if (pid == -1) 
-			return (ft_error(4));
-		else if (pid == 0)
-			if (ft_dup_and_exec(args, command, last, fd))
-				return (1);
-		ft_add_pid(args, pid);
-	//}
+	if (last && args->size == 1 && \
+		ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
+		return (1);
+	pid = fork();
+	if (pid == -1) 
+		return (ft_error(4));
+	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
+		return (1);
 	close(fd[1]);
+	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	args->fdd = fd[0];
@@ -84,10 +76,7 @@ static int	ft_execute_command(t_args *args, int count)
 	while (ft_is_redirect(args->stack[i][0]))
 		if (ft_redirect(args->stack[i++], args))
 			return (1);
-	if (ft_execute_child(args, args->stack[i], 1))
-		return (1);
-	ft_wait_execution(args);
-	return (0);
+	return (ft_execute_child(args, args->stack[i], 1));
 }
 
 int	ft_start_execution(t_args *args)
@@ -108,5 +97,7 @@ int	ft_start_execution(t_args *args)
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;
-	return (ft_execute_command(args, 0));
+	if (ft_execute_command(args, 0))
+		return (1);
+	return (ft_wait_execution(args));
 }

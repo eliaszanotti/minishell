@@ -6,11 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/25 16:25:41 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:03:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// TODO unset ne marche pas
 
 char	*ft_get_var_name(char	*var)
 {
