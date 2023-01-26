@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 14:05:46 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:50:05 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,7 @@ int	ft_check_parsing(t_args *args)
 	return (0);
 }
 
-char	*ft_is_builtins(char *cmd)
-{
-	if (!ft_strcmp(cmd, "echo"))
-		return ("echo");
-	else if (!ft_strcmp(cmd, "cd"))
-		return ("cd");
-	else if (!ft_strcmp(cmd, "pwd"))
-		return ("pwd");
-	else if (!ft_strcmp(cmd, "export"))
-		return ("export");
-	else if (!ft_strcmp(cmd, "unset"))
-		return ("unset");
-	else if (!ft_strcmp(cmd, "env"))
-		return ("env");
-	else if (!ft_strcmp(cmd, "exit"))
-		return ("exit");
-	return (NULL);
-}
-
-int	ft_check_command(t_args *args) // TODO fix for builtins
+int	ft_check_command(t_args *args)
 {
 	int	i;
 

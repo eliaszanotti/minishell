@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 12:52:35 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:43:35 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_get_prompt(char *cwd) // TODO segfault with env -i
 		while (cwd[i] != '/')
 			i--;
 		if (!ft_strcmp(cwd, getenv("HOME")))
-			cwd = ft_strjoin(" ⚡\e[46;90m\ue0b0 ", "~"); // TODO wtf qu'est-ce que t'as fais Tibo 
+			cwd = ft_strjoin(" ⚡\e[46;90m\ue0b0 ", "~");
 		else
 			cwd = ft_strjoin(" ⚡\e[46;90m\ue0b0 ", cwd + i + 1);
 		tmp = getenv("LOGNAME");

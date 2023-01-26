@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/26 13:12:04 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/26 15:24:17 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_env.c 				\
 			${D_BUILTINS}ft_exec_builtins.c	\
 			${D_BUILTINS}ft_echo.c			\
+			${D_BUILTINS}ft_pwd.c			\
 			${D_BUILTINS}ft_exit.c			\
 			${D_BUILTINS}ft_export.c		\
 			${D_BUILTINS}ft_export_utils.c	\
-			${D_BUILTINS}ft_open_dir.c		\
+			${D_BUILTINS}ft_cd.c			\
 			${D_BUILTINS}ft_unset.c			\
 			${D_UTILS}ft_free.c 			\
 			${D_UTILS}ft_get_prompt.c		\
@@ -41,6 +42,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_check_parsing.c	\
 			${D_UTILS}ft_struct_init.c 		\
 			${D_UTILS}ft_utils.c 			\
+			${D_UTILS}ft_is_type.c 			\
 			${D_EXEC}ft_exec.c				\
 			${D_EXEC}ft_redirect.c			\
 			${D_EXEC}ft_pid_utils.c			\

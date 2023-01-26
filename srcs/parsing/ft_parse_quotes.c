@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/26 12:51:05 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:50:47 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static char	*ft_remove_quote(char *str)
 {
-    char	*new_str;
-    int		i;
-    int		size;
+	char	*new_str;
+	int		i;
+	int		size;
 
 	i = -1;
 	size = 0;
@@ -110,7 +110,6 @@ char	*ft_replace_env(char *str)
 		str[ft_strlen(str) - 1] = '\0';
 		str++;
 	}
-	printf("size of malloc = %d\n", size);
 	if (size < 0)
 		return (NULL);
 	new_str = malloc(sizeof(char) * (size + 1));

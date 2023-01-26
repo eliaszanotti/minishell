@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/25 18:13:37 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:23:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int		ft_export(char **cmd, t_args *args, int i);
 //	ft_export_utils.c
 char	*ft_get_value(char **cmd);
 char	*ft_new_env(char *env);
-//	ft_open_dir.c
-int		ft_open_dir(char **cmd);
+//	ft_pwd.c
+int		ft_pwd(void);
+//	ft_cd.c
+int		ft_cd(char **cmd);
 //	ft_unset.c
 int		ft_unset(char **cmd, t_args *args);
 char	*ft_get_var_name(char	*var);

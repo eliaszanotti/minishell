@@ -2,16 +2,7 @@
 
 ## Error code
 
-
 **[ERROR:1]** Can't open file
-**[ERROR:1]** Can't open file
-
-
-
-
-
-
-
 **[ERROR:99]** Malloc cannot be created
 
 ## Bonnes pratiques

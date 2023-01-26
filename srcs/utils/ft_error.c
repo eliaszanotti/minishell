@@ -6,16 +6,14 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/24 14:41:08 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 15:01:58 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_error(int error_code)
+int	ft_error_range_1(int error_code)
 {
-	if (error_code)
-		printf("\e[1;31m[ERROR:%d]\e[0m ", error_code);
 	if (error_code == 2)
 		printf("Command not found\n");
 	else if (error_code == 3)
@@ -26,7 +24,12 @@ int	ft_error(int error_code)
 		printf("Syntax error on redirect\n");
 	else if (error_code == 6)
 		printf("Parse error at end of command\n");
-	else if (error_code == 10)
+	return (1);
+}
+
+int	ft_error_range_2(int error_code)
+{
+	if (error_code == 10)
 		printf("Failed to create fork\n");
 	else if (error_code == 11)
 		printf("Failed to pipe fd\n");
@@ -38,7 +41,20 @@ int	ft_error(int error_code)
 		printf("Can't open file\n");
 	else if (error_code == 15)
 		printf("Can't create file\n");
+	return (1);
+}
+
+int	ft_error(int error_code)
+{
+	if (error_code)
+		printf("\e[1;31m[ERROR:%d]\e[0m ", error_code);
+	if (error_code < 10)
+		return (ft_error_range_1(error_code));
+	if (error_code < 20)
+		return (ft_error_range_2(error_code));
 	else if (error_code == 99)
 		printf("Malloc cannot be created\n");
-	return (error_code);
+	else
+		printf("Undefined\n");
+	return (1);
 }

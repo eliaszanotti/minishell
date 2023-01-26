@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 12:03:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 15:07:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 //TODO export ARG ne doit pas marcher 
 
-
-static char	**ft_rm_env_norm(t_args *args, char *cmd, char **envp)
+static char	**ft_remove_env_norm(t_args *args, char *cmd, char **envp)
 {
 	char	*tmp;
 	int		j;
@@ -23,7 +22,7 @@ static char	**ft_rm_env_norm(t_args *args, char *cmd, char **envp)
 
 	i = -1;
 	j = 0;
-	while (args->envp[++i] != NULL)
+	while (args->envp[++i])
 	{
 		tmp = ft_get_var_name(args->envp[i]);
 		if (!tmp)
@@ -40,20 +39,20 @@ static char	**ft_rm_env_norm(t_args *args, char *cmd, char **envp)
 	return (envp);
 }
 
-int	ft_rm_env(char *cmd, t_args *args)
+int	ft_remove_env(char *cmd, t_args *args)
 {
 	char	**envp_tmp;
 	int		i;
 
 	i = 0;
-	while (args->envp[i] != NULL)
+	while (args->envp[i])
 		i++;
 	envp_tmp = malloc(sizeof(char *) * (i));
 	if (!envp_tmp)
-		return (1);
-	args->envp = ft_rm_env_norm(args, cmd, envp_tmp);
+		return (ft_error(99));
+	args->envp = ft_remove_env_norm(args, cmd, envp_tmp);
 	if (!args->envp)
-		return (1);
+		return (ft_error(99));
 	return (0);
 }
 
@@ -69,11 +68,11 @@ int	ft_add_var(char **cmd, t_args *args)
 	if (!envp_tmp)
 		return (1);
 	i = -1;
-	while (args->envp[++i] != NULL)
+	while (args->envp[++i])
 	{
 		envp_tmp[i] = ft_strdup(args->envp[i]);
 		if (!envp_tmp[i])
-			return (1);
+			return (ft_error(99));
 	}
 	envp_tmp[i] = ft_new_env(cmd[1]);
 	envp_tmp[++i] = NULL;
@@ -89,7 +88,7 @@ int	ft_already_exist(char **cmd, t_args *args)
 	char	*tmp2;
 
 	i = -1;
-	while (args->envp[++i] != NULL)
+	while (args->envp[++i])
 	{
 		tmp = ft_get_var_name(args->envp[i]);
 		tmp2 = ft_get_var_name(cmd[1]);
@@ -98,7 +97,7 @@ int	ft_already_exist(char **cmd, t_args *args)
 		if (!ft_strcmp(tmp, tmp2))
 		{
 			free(tmp);
-			if (ft_rm_env(tmp2, args))
+			if (ft_remove_env(tmp2, args))
 				return (-1);
 			return (ft_add_var(cmd, args));
 		}
@@ -119,7 +118,7 @@ int	ft_export(char **cmd, t_args *args, int i)
 	if (cmd[1][i - 1] == '+')
 	{
 		i = -1;
-		while (args->envp[++i] != NULL)
+		while (args->envp[++i])
 		{
 			tmp = ft_get_var_name(args->envp[i]);
 			tmp2 = ft_get_var_name(cmd[1]);

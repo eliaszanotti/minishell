@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/25 18:15:18 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:25:19 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,16 @@ int	ft_exec_builtins(t_args *args, char **command)
 	int	i;
 
 	i = -1;
-	if (!ft_strcmp(command[0], "echo"))
-	{		
-		if (ft_echo(command))
-			return (1);
-	}	
-	else if (!ft_strcmp(command[0], "cd"))
-	{
-		if (ft_open_dir(command))
-			return (1);
-	}	
-	else if (!ft_strcmp(command[0], "pwd"))
-		return (printf("%s\n", getenv("PWD")));
+	if (!ft_strcmp(command[0], "echo") && ft_echo(command))
+		return (1);
+	else if (!ft_strcmp(command[0], "cd") && ft_cd(command))
+		return (1);
+	else if (!ft_strcmp(command[0], "pwd") && ft_pwd())
+		return (1);
+
+
+
+
 	else if (!ft_strcmp(command[0], "export"))
 	{
 		if(ft_export(command, args, 0))//TODO error malloc

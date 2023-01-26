@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 13:17:22 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 14:33:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 		return (ft_error(13));
 	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
 		return (ft_error(13));
-	if (args->outfile && == -1)
+	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
 	close(fd[0]);
 	if (ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
@@ -30,10 +30,10 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
-static int ft_execute_child(t_args *args, char **command, int last)
+static int	ft_execute_child(t_args *args, char **command, int last)
 {
-	int fd[2];
-	pid_t pid;
+	int		fd[2];
+	pid_t	pid;
 
 	if (pipe(fd))
 		return (ft_error(11));
@@ -41,7 +41,7 @@ static int ft_execute_child(t_args *args, char **command, int last)
 		ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
 		return (1);
 	pid = fork();
-	if (pid == -1) 
+	if (pid == -1)
 		return (ft_error(4));
 	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
