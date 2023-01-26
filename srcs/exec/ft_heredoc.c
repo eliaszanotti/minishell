@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 12:49:24 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:57:55 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_heredoc(char **cmd, char *delimiter, t_args *args)
+void	ft_heredoc(char *delimiter, t_args *args)
 {
 	char	*line;
 	int		fd[2];
