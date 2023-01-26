@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parse_quotes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: event04 <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/25 14:29:39 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 12:51:05 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*ft_remove_quote(char *str)
 		str++;
 	}
 	new_str[i] = '\0';
-    return (new_str);
+	return (new_str);
 }
 
 static int	ft_get_size(char *str)
@@ -85,7 +85,7 @@ char	*ft_replace_variable(char *new_str, char *str, int size, int i)
 				return (NULL);
 			if (getenv(variable))
 			{
-				strcat(new_str, getenv(variable)); //TODO changer en ft_strcat
+				strcat(new_str, getenv(variable));//TODO changer en ft_strcat
 				size += ft_strlen(getenv(variable));
 			}
 			free(variable);

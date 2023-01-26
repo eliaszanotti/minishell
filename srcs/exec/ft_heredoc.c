@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 12:14:31 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/01/26 12:49:24 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	ft_heredoc(char **cmd, char *delimiter, t_args *args)
 {
 	char	*line;
-	(void)cmd;
 	int		fd[2];
 
 	if (pipe(fd) == -1)
