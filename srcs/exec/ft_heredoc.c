@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.h                                             :+:      :+:    :+:   */
+/*   ft_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 13:27:03 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 10:41:59 by tgiraudo         ###   ########.fr       */
+/*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
+/*   Updated: 2023/01/26 12:14:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_H
-# define EXEC_H
+#include "minishell.h"
 
-# include "minishell.h"
+void	ft_heredoc(char **cmd, char *delimiter, t_args *args)
+{
+	char	*line;
+	(void)cmd;
+	int		fd[2];
 
-typedef struct s_args	t_args;
-
-//	ft_exec.c
-int		ft_start_execution(t_args *args);
-//	ft_redirect.c
-int		ft_redirect(char **str, t_args *args);
-//	ft_heredoc.c
-void	ft_heredoc(char **cmd, char *delimiter, t_args *args);
-
-#endif
+	if (pipe(fd) == -1)
+		return ;
+	while (1)
+	{
+		line = readline("heredoc> ");
+		if (!ft_strcmp(line, delimiter))
+			break ;
+		write(fd[1], line, ft_strlen(line));
+		write(fd[1], "\n", 1);
+		free(line);
+	}
+	args->infile = fd[0];
+	close(fd[1]);
+	ft_start_execution(args);
+}
