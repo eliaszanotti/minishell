@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/25 22:29:31 by elias            ###   ########.fr        #
+#    Updated: 2023/01/25 18:33:49 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,11 @@ S_MNSH_LIST	= main.c						\
 			${D_EXEC}ft_redirect.c			\
 			${D_EXEC}ft_pid_utils.c
 
-OBJS	= ${S_MNSH:.c=.o}
+OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(S_MNSH))
 S_MNSH	= ${addprefix ${DIR_SRC}, ${S_MNSH_LIST}}
 
 # DIRECTORIES
+DIR_OBJS = .objs/
 DIR_INCLUDE = includes/
 DIR_SRC = srcs/
 D_PARSE	= parsing/
@@ -77,9 +78,10 @@ SUPPR	= \r\033[2K
 # COMPILATION
 all :		${NAME}
 
-%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
+${DIR_OBJS}%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
+			@mkdir -p $(shell dirname $@)
 			@${PRINT} "${YELLOW}${SUPPR}Creating minishell's objects : $@"
-			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_INCLUDE} -c $< -o ${<:.c=.o} 
+			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_INCLUDE} -c $< -o $@ 
 
 ${NAME}:	ascii lib ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
@@ -95,7 +97,7 @@ ascii :
 
 clean :		ascii
 			@${PRINT} "${RED}Deleting objects : DONE\n"
-			@${RM} ${OBJS}
+			@${RM} ${DIR_OBJS}
 
 fclean :	clean 
 			@${PRINT} "${RED}Cleaning libft : DONE\n"
