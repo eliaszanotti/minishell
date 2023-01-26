@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 15:07:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 17:54:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO export ARG ne doit pas marcher 
 
-static char	**ft_remove_env_norm(t_args *args, char *cmd, char **envp)
+/*static char	**ft_remove_env_norm(t_args *args, char *cmd, char **envp)
 {
 	char	*tmp;
 	int		j;
@@ -106,32 +106,73 @@ int	ft_already_exist(char **cmd, t_args *args)
 	}
 	ft_add_var(cmd, args);
 	return (0);
+}*/
+
+
+
+
+
+char	**ft_add_to_envp(char **envp, char *variable)
+{
+	char	**new_envp;
+	int		i;
+
+	i = ft_get_envp_size(envp);
+	new_envp = malloc(sizeof(char *) * (i + 2));
+	if (!new_envp)
+		return (NULL);
+	i = -1;
+	while (envp[++i])
+		new_envp[i] = ft_strdup(envp[i]);
+	new_envp[i++] = variable;
+	new_envp[i] = NULL;
+	// TODO free envp
+	return (new_envp);
 }
 
-int	ft_export(char **cmd, t_args *args, int i)
+void ll(char **env)
 {
-	char	*tmp;
-	char	*tmp2;
-
-	while (cmd[1][i] != '\0' && cmd[1][i] != '=')
-		i++;
-	if (cmd[1][i - 1] == '+')
+	while (*env)
 	{
-		i = -1;
-		while (args->envp[++i])
-		{
-			tmp = ft_get_var_name(args->envp[i]);
-			tmp2 = ft_get_var_name(cmd[1]);
-			if (!tmp || !tmp2)
-				return (1);
-			if (!ft_strcmp(tmp, tmp2))
-			{
-				args->envp[i] = ft_strjoin(args->envp[i], ft_get_value(cmd));
-				return (free(tmp), free(tmp2), 0);
-			}
-			free(tmp);
-		}
-		return (ft_add_var(cmd, args));
+		printf(">> %s\n", *env);
+		env++;
 	}
-	return (ft_already_exist(cmd, args));
+}
+
+char	**ft_replace_env2(t_args *args, char *variable) // TODO change name
+{
+	char	**new_envp;
+	char	*new_var;
+	int		i;
+
+	i = 0;
+	while (variable[i] && variable[i] != '+' && variable[i] != '=')
+		i++;
+	if (!variable[i])
+		return (args->envp);
+	new_var = ft_substr(variable, 0, i);
+	printf("var = %s\n", new_var);
+	new_envp = ft_get_new_envp(args, new_var);
+	new_envp = ft_add_to_envp(new_envp, variable);
+	//free(new_var); 
+	//ll(new_envp);
+	return (new_envp);
+}
+
+int	ft_export(char **cmd, t_args *args)
+{
+	char	**new_envp;
+	int		i;
+	
+	i = 0;
+	while (cmd[++i])
+	{
+		new_envp = ft_replace_env2(args, cmd[i]);
+		//ft_ll(new_envp);
+		args->envp = new_envp;
+		if (!args->envp)
+			return (ft_error(99));
+		// TODO free new_envp
+	}
+	return (0);
 }

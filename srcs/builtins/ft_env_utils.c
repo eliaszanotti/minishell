@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 17:18:46 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 17:53:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ char	*ft_getenv(t_args *args, char *variable)
 	return (NULL);
 }
 
-int	ft_get_envp_size(t_args *args)
+int	ft_get_envp_size(char **envp)
 {
 	int	size;
 
 	size = 0;
-	while (args->envp[size])
+	while (envp[size])
 		size++;
 	return (size);
 }
@@ -84,8 +84,8 @@ char	**ft_get_new_envp(t_args *args, char *variable)
 
 	if (!ft_getenv(args, variable))
 		return (args->envp);
-	i = ft_get_envp_size(args);
-	new_envp = malloc(sizeof(char *) * i);
+	i = ft_get_envp_size(args->envp);
+	new_envp = malloc(sizeof(char *) * (i + 1));
 	if (!new_envp)
 		return (NULL);
 	new_envp = ft_remove_env_var(args, new_envp, variable);

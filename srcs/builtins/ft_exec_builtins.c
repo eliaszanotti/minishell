@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 15:25:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 17:35:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_exec_builtins(t_args *args, char **command)
 
 	else if (!ft_strcmp(command[0], "export"))
 	{
-		if(ft_export(command, args, 0))//TODO error malloc
+		if(ft_export(command, args))//TODO error malloc
 			return (ft_error(99));
 		return (1);
 	}
