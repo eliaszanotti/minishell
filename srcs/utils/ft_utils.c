@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 15:43:07 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 12:05:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/26 13:10:48 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ void	ft_sig_ignore(int sig)
 // 	}
 // 	return (str);
 // }
-
-void	*ft_exit(t_args *args) // TODO
-{
-	ft_free_args(args);
-	exit(0);
-}
 
 void	ft_free_args(t_args *args)
 {
