@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/25 18:33:49 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/01/26 10:42:19 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_utils.c 			\
 			${D_EXEC}ft_exec.c				\
 			${D_EXEC}ft_redirect.c			\
-			${D_EXEC}ft_pid_utils.c
+			${D_EXEC}ft_pid_utils.c			\
+			${D_EXEC}ft_heredoc.c
 
 OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(S_MNSH))
 S_MNSH	= ${addprefix ${DIR_SRC}, ${S_MNSH_LIST}}
