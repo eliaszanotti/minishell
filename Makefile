@@ -6,11 +6,11 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/26 17:05:43 by elias            ###   ########.fr        #
+#    Updated: 2023/01/27 12:51:04 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OS				= $(shell uname -s)
+OS	= $(shell uname -s)
 
 ifeq ($(OS), Linux)
 	PRINT = @echo -ne
@@ -90,7 +90,7 @@ ${DIR_OBJS}%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
 ${NAME}:	ascii lib ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
+			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
 
 lib :

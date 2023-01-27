@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 22:26:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 14:34:05 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 13:37:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_wait_execution(t_args *args)
 	i = 0;
 	while (i < args->size)
 		waitpid(args->pid_tab[i++], NULL, 0);
+	free(args->pid_tab);
 	return (0);
 }
 

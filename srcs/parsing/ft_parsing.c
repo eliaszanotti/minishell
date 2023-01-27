@@ -6,11 +6,21 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/24 14:49:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 13:24:15 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_free_args2(t_args *args)
+{
+	int i;
+
+	i = 0;
+	while (args->command_list[i])
+		free(args->command_list[i++]);
+	free(args->command_list);
+}	
 
 int	ft_parse_args(t_args *args, char *command)
 {
@@ -24,5 +34,8 @@ int	ft_parse_args(t_args *args, char *command)
 		return (1);
 	if (ft_check_command(args))
 		return (1);
+	printf("args = %s\n", args->command_list[0]);
+	//free(args->command_list);
+	//ft_free_args2(args);
 	return (0);
 }
