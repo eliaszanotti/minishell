@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 17:19:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 19:54:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ft_error(int error_code);
 //	ft_free.c
 void	ft_free_str(char **str);
 void	ft_free_stack(char ***stack);
+void	ft_free_args(t_args *args);
 //	ft_get_path.c
 char	*ft_get_path(char *cmd);
 //	ft_get_prompt.c
