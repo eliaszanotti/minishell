@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:00:59 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 15:16:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 20:32:39 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int	ft_cd(char **cmd) // FIX
 			if (chdir(getenv("HOME")) == -1)
 				return (ft_error(20));
 		}
-		else if (chdir(cmd[1]))
+		else if (chdir(cmd[1]) == -1)
 			return (ft_error(20));
 	}
 	else if (chdir(getenv("HOME")) == -1)
 		return (ft_error(20));
-	return (1);
+	return (0); // TODO fix
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_struct_init.c                                   :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 20:07:39 by elias            ###   ########.fr       */
+/*   Created: 2023/01/27 20:20:04 by elias             #+#    #+#             */
+/*   Updated: 2023/01/27 20:27:10 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_struct_init(t_args *args)
+int	ft_env(char **cmd, t_args *args) // TODO change  name
 {
-	args->exit_code = 0;
-	args->infile = STDIN_FILENO;
-	args->outfile = STDOUT_FILENO;
-	return (0);
-}
+	int		i;
 
-int	ft_reset_struct(t_args *args)
-{
-	args->infile = STDIN_FILENO;
-	args->outfile = STDOUT_FILENO;
-	args->size = 0;
+	i = -1;
+	while (cmd[i])
+		i++;
+	if (i > 1)
+		return (1);
+	i = -1;
+	while (args->envp[++i])
+		printf("%s\n", args->envp[i]);
 	return (0);
 }

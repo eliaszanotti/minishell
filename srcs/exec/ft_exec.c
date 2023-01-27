@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 19:56:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 20:09:48 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
 	close(fd[0]);
-	path = ft_get_path(command[0]);
 	if (ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
 		exit(0);
-	else if (execve(path, command, args->envp) == -1)
+	path = ft_get_path(command[0]);
+	if (execve(path, command, args->envp) == -1)
 		return (free(path), ft_error(12));
 	free(path);
 	return (0);
@@ -87,17 +87,15 @@ int	ft_start_execution(t_args *args)
 {
 	int	i;
 
-	args->size = 0;
 	i = -1;
 	while (args->stack[++i])
 		if (ft_is_builtins(args->stack[i][0]) || \
 			ft_is_command(args->stack[i][0]))
 			args->size++;
-	printf("size of pipe : %d\n", args->size);
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
 	if (!args->pid_tab)
-		return (ft_error(99)); // TODO a verifier
+		return (ft_error(99));
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;

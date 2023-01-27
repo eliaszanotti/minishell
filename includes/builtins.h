@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 17:21:25 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 20:27:19 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ typedef struct s_args	t_args;
 
 //	ft_echo.c
 int		ft_echo(char **cmd);
+//	ft_env.c
+int		ft_env(char **cmd, t_args *args);
+//	ft_exit.c
+void	ft_exit(t_args *args);
 //	ft_exec_builtins.c
 int		ft_exec_builtins(t_args *args, char **command);
 //	ft_export.c

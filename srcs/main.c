@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 19:57:20 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 20:11:49 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		ft_reset_struct(args);
-		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
+		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd))); // TODO move dans reset struct
 		command = readline(args->prompt);
 		free(args->prompt);
 		//command = "";
@@ -48,10 +48,9 @@ static int	ft_prompt_loop(t_args *args)
 		{
 			ft_log(args->stack);
 			add_history(command);
-			ft_start_execution(args);
+			if (ft_start_execution(args) == 99)
+				return (ft_free_args(args), 1);
 			ft_free_args(args);
-			//ft_free_str(args->command_list);
-			//ft_free_stack(args->stack);
 		}
 		free(command);
 		//return (0);
@@ -62,15 +61,11 @@ static int	ft_prompt_loop(t_args *args)
 int	main(int argc, char **argv, char **envp)
 {
 	t_args	args;
-	int		error_code;
 
+	(void)argc;
+	(void)argv;
 	if (ft_struct_init(&args))
 		return (1);
 	args.envp = envp;
-	error_code = ft_prompt_loop(&args);
-	if (error_code)
-		return (ft_error(error_code));
-	(void)argc;
-	(void)argv;
-	return (0);
+	return (ft_prompt_loop(&args));
 }

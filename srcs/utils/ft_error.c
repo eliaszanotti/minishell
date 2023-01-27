@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 15:01:58 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 20:01:52 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ int	ft_error(int error_code)
 	if (error_code < 20)
 		return (ft_error_range_2(error_code));
 	else if (error_code == 99)
+	{
 		printf("Malloc cannot be created\n");
+		return (99);
+	}
 	else
 		printf("Undefined\n");
 	return (1);
