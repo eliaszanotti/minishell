@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 14:42:39 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:03:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_check_parsing(t_args *args)
 
 int	ft_check_command(t_args *args)
 {
-	int	i;
+	int		i;
 
 	i = -1;
 	while (args->stack[++i])

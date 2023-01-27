@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 14:35:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:15:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	*ft_exit(t_args *args) // TODO
 {
 	printf("exit\n");
-	ft_free_args(args);
+	ft_free_stack(args->stack);
 	exit(0);
 }

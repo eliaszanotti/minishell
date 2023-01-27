@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 14:52:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 15:30:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	ft_execute_command(t_args *args, int count)
 		if (ft_is_redirect(args->stack[i][0]) && \
 			ft_redirect(args->stack[i], args))
 			return (1);
-		else if (ft_get_path(args->stack[i][0]) || \
+		else if (ft_is_command(args->stack[i][0]) || \
 			ft_is_builtins(args->stack[i][0]))
 		{
 			if (ft_execute_child(args, args->stack[i], 0))

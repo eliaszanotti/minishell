@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/24 14:34:46 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:17:58 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
 		i = ft_get_i(s, c);
 		tab[i_tab] = ft_substr(s, 0, i);
 		if (!tab[i_tab])
-			return (ft_freeall(tab));
+			return (ft_free_str(tab), NULL);
 		s += i;
 		while (*s == c && *s)
 			s++;
