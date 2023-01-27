@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:17:03 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 15:20:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:45:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_pwd(void)
 {
-	if (getenv("PWD"))	
+	if (getenv("PWD"))
 		printf("%s\n", getenv("PWD"));
 	return (1);
 }

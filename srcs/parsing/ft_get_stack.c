@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 14:16:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:35:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char	**ft_copy_stack(char **command_list, int j)
 int	ft_get_stack(t_args *args)
 {
 	char	**command_list;
-	int	j;
-	int	i_stack;
+	int		j;
+	int		i_stack;
 
 	command_list = args->command_list;
 	if (ft_init_stack(args))

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 18:46:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:45:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*ft_get_new_var(t_args *args, char *name, char *variable)
 	char	*new_var;
 	char	*value;
 	int		size;
-	
+
 	value = ft_getenv(args, name);
 	while (*variable != '=')
 		variable++;
@@ -66,7 +66,7 @@ static char	**ft_get_new_envp(t_args *args, char *variable) // TODO change name
 	new_var = ft_substr(variable, 0, i);
 	if (variable[i] == '+' && variable[i + 1] == '=')
 		variable = ft_get_new_var(args, new_var, variable);
-	new_envp = ft_remove_var(args, new_var); // TODO change to remove ...
+	new_envp = ft_remove_var(args, new_var);
 	new_envp = ft_add_to_envp(new_envp, variable);
 	//free(new_var); 
 	return (new_envp);
@@ -76,7 +76,7 @@ int	ft_export(char **cmd, t_args *args)
 {
 	char	**new_envp;
 	int		i;
-	
+
 	i = 0;
 	while (cmd[++i])
 	{

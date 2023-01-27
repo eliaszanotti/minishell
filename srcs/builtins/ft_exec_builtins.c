@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 17:35:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:48:15 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,17 @@ int	ft_exec_builtins(t_args *args, char **command)
 		return (1);
 	else if (!ft_strcmp(command[0], "pwd") && ft_pwd())
 		return (1);
-
-
-
-
 	else if (!ft_strcmp(command[0], "export"))
 	{
-		if(ft_export(command, args))//TODO error malloc
+		if (ft_export(command, args)) //TODO error malloc
 			return (ft_error(99));
 		return (1);
 	}
 	else if (!ft_strcmp(command[0], "unset"))
 	{
-		if(ft_unset(command, args))//TODO error malloc
+		if (ft_unset(command, args)) //TODO error malloc
 			return (ft_error(99));
-		return (1);	
+		return (1);
 	}
 	else if (!ft_strcmp(command[0], "env"))
 	{
