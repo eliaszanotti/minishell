@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 16:59:12 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 17:24:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,6 @@ static void	ft_log(char ***stack)
 			printf("[%s]", stack[i][j++]);
 		printf("\n");
 	}
-}
-
-void	ft_free_args3(t_args *args)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (args->command_list[i])
-		free(args->command_list[i++]);
-	free(args->command_list);
-	i = 0;
-	while (args->stack[i])
-	{
-		j = 0;
-		while (args->stack[i][j])
-			free(args->stack[i][j++]);
-		free(args->stack[i++]);
-	}
-	free(args->stack);
 }
 
 static int	ft_prompt_loop(t_args *args)
@@ -69,7 +49,8 @@ static int	ft_prompt_loop(t_args *args)
 			ft_log(args->stack);
 			add_history(command);
 			ft_start_execution(args);
-			ft_free_args3(args);
+			ft_free_str(args->command_list);
+			ft_free_stack(args->stack);
 		}
 		free(command);
 		//return (0);
