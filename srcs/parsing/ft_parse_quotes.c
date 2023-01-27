@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/26 14:50:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 19:48:03 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,14 @@ char	*ft_replace_env(char *str)
 	int		size;
 
 	size = ft_get_size(str);
+	if (size == -1)
+		return (NULL);
 	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
 	{
 		size -= 2;
 		str[ft_strlen(str) - 1] = '\0';
 		str++;
 	}
-	if (size < 0)
-		return (NULL);
 	new_str = malloc(sizeof(char) * (size + 1));
 	if (!new_str)
 		return (NULL);
