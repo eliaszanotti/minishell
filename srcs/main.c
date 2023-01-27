@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 13:47:57 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 14:19:44 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,16 @@ static void	ft_log(char ***stack)
 	}
 }
 
-void	ft_free_stack(t_args *args)
+void	ft_free_args3(t_args *args)
 {
 	int	i;
 	int	j;
 
+	i = 0;
+	free(args->prompt);
+	while (args->command_list[i])
+		free(args->command_list[i++]);
+	free(args->command_list);
 	i = 0;
 	while (args->stack[i])
 	{
@@ -55,7 +60,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd)));
 		command = readline(args->prompt);
-		free(args->prompt);
+		//free(args->prompt);
 		//command = "export ARG+=re";
 		if (!command)
 			ft_exit(args);
@@ -65,10 +70,8 @@ static int	ft_prompt_loop(t_args *args)
 			ft_log(args->stack);
 			add_history(command);
 			ft_start_execution(args);
-			ft_free_stack(args);
-
-
 		}
+		ft_free_args3(args);
 		free(command);
 		//return (0);
 	}

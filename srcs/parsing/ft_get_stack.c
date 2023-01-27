@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 14:09:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 14:16:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,27 +72,29 @@ char	**ft_copy_stack(char **command_list, int j)
 
 int	ft_get_stack(t_args *args)
 {
+	char	**command_list;
 	int	j;
 	int	i_stack;
 
+	command_list = args->command_list;
 	if (ft_init_stack(args))
 		return (1);
 	i_stack = 0;
-	while (*args->command_list)
+	while (*command_list)
 	{
 		j = 0;
-		if (ft_is_delimiter(*args->command_list) == '|')
+		if (ft_is_delimiter(*command_list) == '|')
 		{
-			args->stack[i_stack] = ft_copy_stack(args->command_list++, 1);
+			args->stack[i_stack] = ft_copy_stack(command_list++, 1);
 			if (!args->stack[i_stack++])
 				return (ft_error(99));
 		}
-		while (args->command_list[j] && \
-			ft_is_delimiter(args->command_list[j]) != '|')
+		while (command_list[j] && \
+			ft_is_delimiter(command_list[j]) != '|')
 			j++;
-		i_stack = ft_add_redirects(args, args->command_list, i_stack, j + 1);
-		i_stack = ft_add_command(args, args->command_list, i_stack, j + 1);
-		args->command_list += j;
+		i_stack = ft_add_redirects(args, command_list, i_stack, j + 1);
+		i_stack = ft_add_command(args, command_list, i_stack, j + 1);
+		command_list += j;
 	}
 	args->stack[i_stack] = NULL;
 	return (0);
