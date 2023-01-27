@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 20:11:49 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 21:07:49 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	ft_log(char ***stack)
 
 static int	ft_prompt_loop(t_args *args)
 {
-	char	cwd[PATH_MAX];
+	//char	cwd[PATH_MAX];
 	char	*command;
 	int		error_code;
 
@@ -37,7 +37,6 @@ static int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		ft_reset_struct(args);
-		args->prompt = ft_get_prompt(getcwd(cwd, sizeof(cwd))); // TODO move dans reset struct
 		command = readline(args->prompt);
 		free(args->prompt);
 		//command = "";

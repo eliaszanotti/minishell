@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 20:14:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/27 21:03:52 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_free_args(t_args *args);
 //	ft_get_path.c
 char	*ft_get_path(char *cmd);
 //	ft_get_prompt.c
-char	*ft_get_prompt(char *cwd);
+char	*ft_get_prompt(t_args *args, char *cwd);
 //	ft_is_type.c
 char	*ft_is_builtins(char *cmd);
 char	ft_is_delimiter(char *str);
