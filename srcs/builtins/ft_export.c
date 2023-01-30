@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 19:41:58 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:46:23 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ int	ft_export(char **cmd, t_args *args)
 		new_envp = ft_get_new_envp(args, cmd[i]);
 		if (!new_envp)
 			return (ft_error(99));
-		ft_free_str(args->envp);
-		args->envp = new_envp;
+		//ft_free_str(args->envp);
+		args->envp = ft_copy_envp(new_envp);
+		//ft_free_str(new_envp);
+
 	}
 	return (0);
 }
