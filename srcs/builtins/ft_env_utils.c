@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/26 18:43:18 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 11:57:05 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@ char	*ft_getenv(t_args *args, char *variable)
 		if (!current)
 			return (NULL);
 		if (!ft_strcmp(current, variable))
+		{
+			free(current);
 			return (ft_substr(args->envp[i], \
 				j + 1, ft_strlen(args->envp[i]) - j - 1));
+		}
 		free(current);
 	}
 	return (NULL);
