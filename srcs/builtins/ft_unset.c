@@ -6,20 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 19:31:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:38:41 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*void ll(char **s)
-{
-	int i = 0;
-
-	while (s[i])	
-		printf("var = [%s]\n", s[i++]);
-
-}*/
 
 int	ft_unset(char **cmd, t_args *args)
 {

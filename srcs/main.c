@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 19:10:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:39:50 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static int	ft_prompt_loop(t_args *args)
 	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
-		printf("envp 0 = %s\n", args->envp[0]);
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
