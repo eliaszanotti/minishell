@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pid_utils.c                                     :+:      :+:    :+:   */
+/*   ft_copy_envp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 22:26:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 18:18:00 by elias            ###   ########.fr       */
+/*   Created: 2023/01/30 18:02:36 by elias             #+#    #+#             */
+/*   Updated: 2023/01/30 18:22:34 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_wait_execution(t_args *args)
+char	**ft_copy_envp(char **envp)
 {
-	//int	size;
-	int	i;
+	char	**new_envp;
+	int		i;
 
 	i = 0;
-	//size = args->size - 1;
-	while (i < args->size)
-	{
-		waitpid(args->pid_tab[i++], NULL, 0);
-		//close(STDOUT_FILENO);
-		//close(STDIN_FILENO);
-	}
-	return (0);
-}
-
-int	ft_add_pid(t_args *args, pid_t pid)
-{
-	int	i;
-
-	i = 0;
-	while (args->pid_tab[i] != 0 && i < args->size)
+	while (envp[i])
 		i++;
-	if (i < args->size)
-		args->pid_tab[i] = pid;
-	return (0);
+	new_envp = malloc(sizeof(char *) * (i + 1));
+	if (!new_envp)
+		return (NULL);
+	i = -1;
+	while (envp[++i])
+		new_envp[i] = ft_strdup(envp[i]);
+	new_envp[i] = NULL;
+	return (new_envp);
 }

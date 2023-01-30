@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 15:36:01 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 18:34:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char	*ft_get_new_var(t_args *args, char *name, char *variable)
 	return (strcat(new_var, variable));
 }
 
-static char	**ft_get_new_envp(t_args *args, char *variable) // TODO change name
+static char	**ft_get_new_envp(t_args *args, char *variable) //TODO
 {
 	char	**new_envp;
 	char	*new_var;
@@ -61,7 +61,7 @@ static char	**ft_get_new_envp(t_args *args, char *variable) // TODO change name
 	while (variable[i] && variable[i] != '+' && variable[i] != '=')
 		i++;
 	if (!variable[i])
-		return (args->envp);
+		return (ft_copy_envp(args->envp));
 	new_var = ft_substr(variable, 0, i);
 	if (variable[i] == '+' && variable[i + 1] == '=')
 		variable = ft_get_new_var(args, new_var, variable);
@@ -82,8 +82,15 @@ int	ft_export(char **cmd, t_args *args)
 		new_envp = ft_get_new_envp(args, cmd[i]);
 		if (!new_envp)
 			return (ft_error(99));
+		//if (changed)
 		ft_free_str(args->envp);
+		//if (!changed)
+		//	args->envp = ft_copy_envp(new_envp);
+		//else 
 		args->envp = new_envp;
+			
+		//ft_free_str(new_envp);
+		//new_envp = NULL;
 	}
 	return (0);
 }

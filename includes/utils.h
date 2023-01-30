@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 15:26:08 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 18:20:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ int		ft_reset_struct(t_args *args);
 //	ft_utils.c
 void	ft_sig_ignore(int sig);
 void	ft_free_args(t_args *args);
+
+char	**ft_copy_envp(char **envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 16:18:29 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:10:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ static int	ft_prompt_loop(t_args *args)
 	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
+		printf("envp 0 = %s\n", args->envp[0]);
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
-		//command = "export ARG";
+		//command = "unset EDITOR";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
@@ -67,6 +68,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (ft_struct_init(&args, envp))
 		return (1);
-	//args.envp = envp;
-	return (ft_prompt_loop(&args));
+	if (ft_prompt_loop(&args))
+		return (1);
+	//ft_free_str(args.envp);
+	return (0);
 }

@@ -6,26 +6,39 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 20:18:35 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:31:41 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*void ll(char **s)
+{
+	int i = 0;
+
+	while (s[i])	
+		printf("var = [%s]\n", s[i++]);
+
+}*/
+
 int	ft_unset(char **cmd, t_args *args)
 {
-	//char	**new_envp;
+	char	**new_envp;
 	int		i;
 
 	i = 0;
 	while (cmd[++i])
 	{
-		//new_envp = ft_remove_var(args, cmd[i]);
-		args->envp = ft_remove_var(args, cmd[i]);
+		new_envp = ft_remove_var(args, cmd[i]);
+		//ft_free_str(args->envp);
 		//ft_free_str(new_envp);
-		if (!args->envp)
+		if (!new_envp)
 			return (ft_error(99));
+		ft_free_str(args->envp);
+		args->envp = new_envp;
+		//ft_free_str(new_envp);
 		// TODO free new_envp
 	}
+	//ll(args->envp);
 	return (0);
 }

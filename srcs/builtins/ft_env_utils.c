@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 12:00:05 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 19:32:44 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable)
 	int		i;
 	int		i_tab;
 
-	i = 0;
+	i = -1;
 	i_tab = 0;
-	while (args->envp[i])
+	while (args->envp[++i])
 	{
 		current = ft_get_var_name(args->envp[i]);
 		if (ft_strcmp(current, variable))
 			new_envp[i_tab++] = ft_strdup(args->envp[i]);
-		i++;
+		free(current);
 	}
 	new_envp[i_tab] = NULL;
 	return (new_envp);
@@ -56,10 +56,13 @@ static char	**ft_remove_env_var(t_args *args, char **new_envp, char *variable)
 char	**ft_remove_var(t_args *args, char *variable)
 {
 	char	**new_envp;
+	char	*env;
 	int		i;
 
-	if (!ft_getenv(args, variable))
-		return (args->envp);
+	env = ft_getenv(args, variable);
+	if (!env)
+		return (ft_copy_envp(args->envp));
+	free(env);
 	i = ft_get_envp_size(args->envp);
 	new_envp = malloc(sizeof(char *) * (i + 1));
 	if (!new_envp)
