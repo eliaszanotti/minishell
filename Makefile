@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/27 21:08:30 by elias            ###   ########.fr        #
+#    Updated: 2023/01/30 13:18:07 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_check_parsing.c	\
 			${D_UTILS}ft_struct_init.c 		\
 			${D_UTILS}ft_utils.c 			\
+			${D_UTILS}ft_getenv.c 			\
 			${D_UTILS}ft_is_type.c 			\
 			${D_EXEC}ft_exec.c				\
 			${D_EXEC}ft_redirect.c			\

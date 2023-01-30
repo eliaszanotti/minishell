@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 19:46:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 14:09:44 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_init_stack(t_args *args);
 char	**ft_copy_stack(char **command_list, int j);
 int		ft_get_stack(t_args *args, int i_stack, int j);
 //	ft_parse_quotes.c
-char	*ft_replace_env(char *str);
+char	*ft_replace_env(t_args *args, char *str);
 int		ft_parse_quotes(t_args *args);
 //	ft_parsing.c
 int		ft_parse_args(t_args *args, char *command);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 20:09:48 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 13:51:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
 	close(fd[0]);
-	if (ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
+	if (ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(0);
 	path = ft_get_path(command[0]);
 	if (execve(path, command, args->envp) == -1)
@@ -42,7 +42,7 @@ static int	ft_execute_child(t_args *args, char **command, int last)
 	if (pipe(fd))
 		return (ft_error(11));
 	if (last && args->size == 1 && \
-		ft_is_builtins(command[0]) && ft_exec_builtins(args, command))
+		ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
 		return (1);
 	pid = fork();
 	if (pid == -1)

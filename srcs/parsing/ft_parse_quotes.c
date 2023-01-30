@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/27 19:48:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 14:24:50 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,39 @@ static char	*ft_remove_quote(char *str)
 	return (new_str);
 }
 
-static int	ft_get_size(char *str)
+static char	*ft_get_variable_size(t_args *args, char *str, int *size)
 {
 	char	*variable;
+	char	*env;
 	int		i;
+
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
+		i++;
+	variable = ft_substr(str, 1, i++ - 1);
+	if (!variable)
+		return (NULL);
+	env = ft_getenv(args, variable);
+	if (env)
+		*size += ft_strlen(getenv(variable));
+	free(env);
+	free(variable);
+	str += i - 2;
+	return (str);
+}
+
+static int	ft_get_size(t_args *args, char *str)
+{
 	int		size;
 
 	size = 0;
 	while (*str)
 	{
 		if (*str == '$')
-		{
-			i = 0;
-			while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
-				i++;
-			variable = ft_substr(str, 1, i++ - 1);
-			if (!variable)
+		{	
+			str = ft_get_variable_size(args, str, &size);
+			if (!str)
 				return (-1);
-			if (getenv(variable))
-				size += ft_strlen(getenv(variable));
-			free(variable);
-			str += i - 2;
 		}
 		else
 			size++;
@@ -70,26 +82,55 @@ static int	ft_get_size(char *str)
 
 #include <string.h> // TODO remove after creating ft_strcat
 
-char	*ft_replace_variable(char *new_str, char *str, int size, int i)
+
+static char	*ft_current_var(t_args *args, char *new_str, char *str, int *size)
 {
 	char	*variable;
+	char	*env;
+	int		i;
 
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
+		i++;
+	variable = ft_substr(str, 1, i++ - 1);
+	if (!variable)
+		return (NULL);
+	env = ft_getenv(args, variable);
+	if (env)
+	{
+		strcat(new_str, env); //TODO changer en ft_strcat
+		*size += ft_strlen(env);
+	}
+	free(env);
+	free(variable);
+	str += i - 1;
+	return (str);
+}
+
+char	*ft_replace_variable(t_args *args, char *new_str, char *str)
+{
+	int	size;
+
+	size = 0;
 	while (*str)
 	{
 		if (*str == '$')
 		{
-			while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
+			str = ft_current_var(args, new_str, str, &size);
+			if (!str)
+				return (NULL);
+			/*while (str[i] && str[i] != ' ' && str[i] != '\'' && str[i] != '"')
 				i++;
 			variable = ft_substr(str, 1, i++ - 1);
 			if (!variable)
 				return (NULL);
 			if (getenv(variable))
 			{
-				strcat(new_str, getenv(variable));//TODO changer en ft_strcat
+				strcat(new_str, getenv(variable)); //TODO changer en ft_strcat
 				size += ft_strlen(getenv(variable));
 			}
 			free(variable);
-			str += i - 1;
+			str += i - 1;*/
 		}
 		else
 			new_str[size++] = *str++;
@@ -98,12 +139,12 @@ char	*ft_replace_variable(char *new_str, char *str, int size, int i)
 	return (new_str);
 }
 
-char	*ft_replace_env(char *str)
+char	*ft_replace_env(t_args *args, char *str)
 {
 	char	*new_str;
 	int		size;
 
-	size = ft_get_size(str);
+	size = ft_get_size(args, str);
 	if (size == -1)
 		return (NULL);
 	if (str[0] == '"' && str[ft_strlen(str) - 1] == '"')
@@ -117,7 +158,7 @@ char	*ft_replace_env(char *str)
 		return (NULL);
 	while (size >= 0)
 		new_str[size--] = '\0';
-	new_str = ft_replace_variable(new_str, str, 0, 0);
+	new_str = ft_replace_variable(args, new_str, str);
 	return (new_str);
 }
 
@@ -136,7 +177,7 @@ int	ft_parse_quotes(t_args *args)
 			current = args->stack[i][j];
 			if (current[0] != '\'' && \
 				current[ft_strlen(current)] != '\'')
-				current = ft_replace_env(current);
+				current = ft_replace_env(args, current);
 			if (!current)
 				return (ft_error(99));
 			current = ft_remove_quote(current);

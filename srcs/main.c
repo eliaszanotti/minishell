@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 21:07:49 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 13:30:04 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
-		//command = "";
+		//command = "cd srcs";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
