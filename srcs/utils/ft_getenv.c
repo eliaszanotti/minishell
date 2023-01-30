@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:58:52 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 11:59:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:46:49 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_getenv(t_args *args, char *variable)
 	int		j;
 
 	i = -1;
+	if (!variable)
+		return (NULL);
 	while (args->envp[++i])
 	{
 		j = 0;

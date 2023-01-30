@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 13:30:04 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 16:18:29 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
-		//command = "cd srcs";
+		//command = "export ARG";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
@@ -57,14 +57,16 @@ static int	ft_prompt_loop(t_args *args)
 	return (0);
 }
 
+//TODO error quand "srcs" et apres "exit"
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_args	args;
 
 	(void)argc;
 	(void)argv;
-	if (ft_struct_init(&args))
+	if (ft_struct_init(&args, envp))
 		return (1);
-	args.envp = envp;
+	//args.envp = envp;
 	return (ft_prompt_loop(&args));
 }

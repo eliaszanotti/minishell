@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 13:51:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:38:04 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static int	ft_execute_child(t_args *args, char **command, int last)
 
 	if (pipe(fd))
 		return (ft_error(11));
-	if (last && args->size == 1 && \
-		ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
-		return (1);
+	if (last && args->size == 1 && ft_is_builtins(command[0]))
+		return (ft_exec_builtins(args, command));
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(4));
@@ -95,14 +94,13 @@ int	ft_start_execution(t_args *args)
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
 	if (!args->pid_tab)
-		return (ft_error(99));
+		return (free(args->pid_tab), ft_error(99));
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;
 	if (ft_execute_command(args, 0))
-		return (1);
+		return (free(args->pid_tab), 1);
 	if (ft_wait_execution(args))
-		return (1);
-	free(args->pid_tab);
-	return (0);
+		return (free(args->pid_tab), 1);
+	return (free(args->pid_tab), 0);
 }

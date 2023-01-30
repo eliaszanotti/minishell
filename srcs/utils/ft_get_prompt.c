@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 21:11:50 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 14:35:42 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_get_prompt(t_args *args, char *cwd) // TODO segfault with env -i + leak
 	char	*tmp;
 	char	*tmp2;
 
-	if (cwd != NULL)
+	if (cwd)
 	{
 		i = ft_strlen(cwd);
 		while (cwd[i] != '/')

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/27 21:03:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/30 15:26:08 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	ft_is_delimiter(char *str);
 char	ft_is_redirect(char *str);
 int		ft_is_command(char *cmd);
 //	ft_struct_init.c
-int		ft_struct_init(t_args *args);
+int		ft_struct_init(t_args *args, char **envp);
 int		ft_reset_struct(t_args *args);
 //	ft_utils.c
 void	ft_sig_ignore(int sig);
