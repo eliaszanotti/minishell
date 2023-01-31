@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/31 18:50:47 by elias            ###   ########.fr        #
+#    Updated: 2023/01/31 18:56:23 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ S_MNSH_LIST	= main.c						\
 			${D_BUILTINS}ft_env_utils.c		\
 			${D_BUILTINS}ft_env.c			\
 			${D_UTILS}ft_free.c 			\
-			${D_UTILS}ft_envp_utils.c		\
+			${D_UTILS}ft_chained_envp.c		\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
 			${D_PARSE}ft_parse_quotes.c 	\
