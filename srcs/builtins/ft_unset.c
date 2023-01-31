@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 17:04:10 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:52:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_remove_var(t_args *args, char *var)
 	t_envp	*envp;
 	t_envp	*backup;
 
-	envp = args->envp2;
+	envp = args->envp;
 	while (envp)
 	{
 		if (!ft_strcmp(envp->name, var))

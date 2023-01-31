@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_copy_envp.c                                     :+:      :+:    :+:   */
+/*   ft_get_char_envp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:02:36 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:49:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:54:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ char	**ft_get_char_envp(t_args *args)
 	char	**new_envp;
 	int		i;
 
-	i = ft_envpsize(args->envp2);
+	i = ft_envpsize(args->envp);
 	new_envp = malloc(sizeof(char *) * (i + 1));
 	if (!new_envp)
 		return (NULL);
 	i = 0;
-	envp = args->envp2;
+	envp = args->envp;
 	while (envp)
 	{
 		new_envp[i++] = ft_get_name_and_value(envp->name, envp->value);

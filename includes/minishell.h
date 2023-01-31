@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:39:23 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:51:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ typedef struct s_envp
 typedef struct s_args
 {
 	char	***stack;
-	char	**envp;
-	t_envp	*envp2;
+	t_envp	*envp;
 	char	**command_list;
 	char	*prompt;
 	pid_t	*pid_tab;

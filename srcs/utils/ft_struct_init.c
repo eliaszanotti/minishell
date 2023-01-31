@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:46:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:53:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_create_list(t_args *args, char **char_envp)
 			return (ft_error(99));
 		ft_envpadd_back(&envp, new);
 	}
-	args->envp2 = envp;
+	args->envp = envp;
 	return (0);
 }
 
@@ -41,8 +41,6 @@ int	ft_struct_init(t_args *args, char **envp)
 {
 	if (ft_create_list(args, envp))
 		return (1);
-
-	//args->envp = ft_copy_envp(envp);
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
