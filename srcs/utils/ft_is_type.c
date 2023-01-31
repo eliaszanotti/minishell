@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:37:35 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 15:04:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:16:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ char	ft_is_redirect(char *str)
 	return (0);
 }
 
-int	ft_is_command(char *cmd)
+int	ft_is_command(t_args *args, char *cmd)
 {
 	char	*path;
 
-	path = ft_get_path(cmd);
+	path = ft_get_path(args, cmd);
 	if (path)
 	{
 		free(path);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:42:28 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 16:16:57 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:14:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_pathjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_get_path(char *cmd)
+char	*ft_get_path(t_args *args, char *cmd)
 {
 	char	**paths;
 	char	*good_path;
@@ -41,9 +41,11 @@ char	*ft_get_path(char *cmd)
 
 	if (access(cmd, F_OK) == 0)
 		return (ft_strdup(cmd));
-	paths = ft_split(getenv("PATH"), ':');
+	good_path = ft_getenv(args, "PATH");
+	paths = ft_split(good_path, ':');
 	if (!paths)
 		return (NULL);
+	free(good_path);
 	i = 0;
 	while (paths[i])
 	{

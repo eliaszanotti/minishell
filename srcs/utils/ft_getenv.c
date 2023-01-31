@@ -6,22 +6,25 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:58:52 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 19:07:17 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:12:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_getenv(t_args *args, char *variable)
+char	*ft_getenv(t_args *args, char *name)
 {
-	char	*current;
-	int		i;
-	int		j;
+	t_envp	*envp;
 
-	i = -1;
-	if (!variable)
+	if (!name)
 		return (NULL);
-	while (args->envp[++i])
+	envp = args->envp2;
+	while (envp && ft_strcmp(name, envp->name))
+		envp = envp->next;
+	if (envp)
+		return (ft_strdup(envp->value));
+	return (NULL);
+	/*while (args->envp[++i])
 	{
 		j = 0;
 		while (args->envp[i][j] && args->envp[i][j] != '=')
@@ -38,5 +41,5 @@ char	*ft_getenv(t_args *args, char *variable)
 		}
 		free(current);
 	}
-	return (NULL);
+	return (NULL);*/
 }

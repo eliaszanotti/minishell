@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 14:56:02 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:16:40 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_free_str(char **str);
 void	ft_free_stack(char ***stack);
 void	ft_free_args(t_args *args);
 //	ft_get_path.c
-char	*ft_get_path(char *cmd);
+char	*ft_get_path(t_args *args, char *cmd);
 //	ft_get_prompt.c
 char	*ft_get_prompt(t_args *args, char *cwd);
 //	ft_is_type.c
 char	*ft_is_builtins(char *cmd);
 char	ft_is_delimiter(char *str);
 char	ft_is_redirect(char *str);
-int		ft_is_command(char *cmd);
+int		ft_is_command(t_args *args, char *cmd);
 //	ft_struct_init.c
 int		ft_struct_init(t_args *args, char **envp);
 int		ft_reset_struct(t_args *args);
@@ -39,5 +39,6 @@ void	ft_free_args(t_args *args);
 
 char	**ft_copy_envp(char **envp);
 
+char	*ft_getenv(t_args *args, char *name);
 
 #endif

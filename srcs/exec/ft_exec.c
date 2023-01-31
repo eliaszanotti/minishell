@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 15:38:04 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 17:17:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	close(fd[0]);
 	if (ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(0);
-	path = ft_get_path(command[0]);
+	path = ft_get_path(args, command[0]);
 	if (execve(path, command, args->envp) == -1)
 		return (free(path), ft_error(12));
 	free(path);
@@ -66,7 +66,7 @@ static int	ft_execute_command(t_args *args, int count)
 		if (ft_is_redirect(args->stack[i][0]) && \
 			ft_redirect(args->stack[i], args))
 			return (1);
-		else if (ft_is_command(args->stack[i][0]) || \
+		else if (ft_is_command(args, args->stack[i][0]) || \
 			ft_is_builtins(args->stack[i][0]))
 		{
 			if (ft_execute_child(args, args->stack[i], 0))
@@ -89,7 +89,7 @@ int	ft_start_execution(t_args *args)
 	i = -1;
 	while (args->stack[++i])
 		if (ft_is_builtins(args->stack[i][0]) || \
-			ft_is_command(args->stack[i][0]))
+			ft_is_command(args, args->stack[i][0]))
 			args->size++;
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
