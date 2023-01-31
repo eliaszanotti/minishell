@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 11:55:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 12:18:04 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		//command = readline(args->prompt);
 		free(args->prompt);
-		command = "ls";
+		command = "unset EDITOR";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
