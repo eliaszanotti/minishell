@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 17:17:53 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:49:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 {
+	char	**char_envp;
 	char	*path;
 
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
@@ -28,8 +29,10 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(0);
 	path = ft_get_path(args, command[0]);
-	if (execve(path, command, args->envp) == -1)
-		return (free(path), ft_error(12));
+	char_envp = ft_get_char_envp(args);
+	if (execve(path, command, char_envp) == -1)
+		return (ft_free_str(char_envp), free(path), ft_error(12));
+	ft_free_str(char_envp);
 	free(path);
 	return (0);
 }

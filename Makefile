@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/31 14:58:06 by elias            ###   ########.fr        #
+#    Updated: 2023/01/31 18:50:47 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_utils.c 			\
 			${D_UTILS}ft_getenv.c 			\
 			${D_UTILS}ft_is_type.c 			\
-			${D_UTILS}ft_copy_envp.c 		\
+			${D_UTILS}ft_get_char_envp.c 	\
 			${D_EXEC}ft_exec.c				\
 			${D_EXEC}ft_redirect.c			\
 			${D_EXEC}ft_pid_utils.c			\

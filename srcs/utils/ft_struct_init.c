@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 14:57:20 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:46:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,8 @@ int	ft_struct_init(t_args *args, char **envp)
 {
 	if (ft_create_list(args, envp))
 		return (1);
-	t_envp *first = args->envp2;
-	while (first)
-	{
-		printf("%s:%s\n", first->name, first->value);
-		first = first->next;	
-	}
 
-	args->envp = ft_copy_envp(envp);
+	//args->envp = ft_copy_envp(envp);
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;

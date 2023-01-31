@@ -6,26 +6,38 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:02:36 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 18:22:34 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:49:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_copy_envp(char **envp)
+char	*ft_get_name_and_value(char *name, char *value)
 {
+	char	*str;
+
+	str = ft_strjoin(name, "=");
+	str = ft_strjoin(str, value);
+	return (str);
+}
+
+char	**ft_get_char_envp(t_args *args)
+{
+	t_envp	*envp;
 	char	**new_envp;
 	int		i;
 
-	i = 0;
-	while (envp[i])
-		i++;
+	i = ft_envpsize(args->envp2);
 	new_envp = malloc(sizeof(char *) * (i + 1));
 	if (!new_envp)
 		return (NULL);
-	i = -1;
-	while (envp[++i])
-		new_envp[i] = ft_strdup(envp[i]);
+	i = 0;
+	envp = args->envp2;
+	while (envp)
+	{
+		new_envp[i++] = ft_get_name_and_value(envp->name, envp->value);
+		envp = envp->next;
+	}
 	new_envp[i] = NULL;
 	return (new_envp);
 }

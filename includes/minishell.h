@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 14:56:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:39:23 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ typedef struct s_args
 t_envp	*ft_envpnew(char *name, char *value);
 t_envp	*ft_envplast(t_envp *envp);
 void	ft_envpadd_back(t_envp **lst, t_envp *new);
+int		ft_envpsize(t_envp *envp);
 
 #endif

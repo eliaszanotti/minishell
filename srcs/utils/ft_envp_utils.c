@@ -6,11 +6,24 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:52:40 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 14:59:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 18:39:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_envpsize(t_envp *envp)
+{
+	int	count;
+
+	count = 0;
+	while (envp)
+	{
+		envp = envp->next;
+		count++;
+	}
+	return (count);
+}
 
 t_envp	*ft_envpnew(char *name, char *value)
 {
