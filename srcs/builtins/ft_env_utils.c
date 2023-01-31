@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 19:32:44 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:53:34 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,15 @@ char	**ft_remove_var(t_args *args, char *variable)
 		return (NULL);
 	new_envp = ft_remove_env_var(args, new_envp, variable);
 	return (new_envp);
+}
+
+int	ft_is_variable(char c)
+{
+	char	*var;
+
+	var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?_";
+	while (*var)
+		if (c == *var++)
+			return (1);
+	return (0);
 }

@@ -1,38 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_envp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/27 20:20:04 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 14:38:48 by elias            ###   ########.fr       */
+/*   Created: 2023/01/31 14:52:40 by elias             #+#    #+#             */
+/*   Updated: 2023/01/31 14:59:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_args *args) // TODO change  name
+t_envp	*ft_envpnew(char *name, char *value)
 {
 	t_envp	*envp;
 
-	envp = args->envp2;
+	envp = malloc(sizeof(t_envp));
+	if (!envp)
+		return (NULL);
+	envp->name = name;
+	envp->value = value;
+	envp->next = NULL;
+	return (envp);
+}
+
+t_envp	*ft_envplast(t_envp *envp)
+{
 	while (envp)
 	{
-		printf("%s=%s\n", envp->name, envp->value);
-		envp = envp->next;	
+		if (!envp->next)
+			return (envp);
+		envp = envp->next;
 	}
-	return (0);
+	return (envp);
+}
 
-	/*int		i;
+void	ft_envpadd_back(t_envp **lst, t_envp *new)
+{
+	t_envp	*last;
 
-	i = -1;
-	while (cmd[i])
-		i++;
-	if (i > 1)
-		return (1);
-	i = -1;
-	while (args->envp[++i])
-		printf("%s\n", args->envp[i]);
-	return (0);*/
+	if (!lst)
+		return ;
+	if (*lst)
+	{
+		last = ft_envplast(*lst);
+		last->next = new;
+	}
+	else
+		*lst = new;
 }

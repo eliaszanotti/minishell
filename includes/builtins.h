@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 12:16:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 15:50:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_args	t_args;
 //	ft_echo.c
 int		ft_echo(char **cmd);
 //	ft_env.c
-int		ft_env(char **cmd, t_args *args);
+int		ft_env(t_args *args);
 //	ft_exit.c
 void	ft_exit(t_args *args);
 //	ft_exec_builtins.c
@@ -35,10 +35,11 @@ int		ft_pwd(t_args *args);
 //	ft_cd.c
 int		ft_cd(t_args *args, char **cmd);
 //	ft_unset.c
-int		ft_unset(char **cmd, t_args *args);
+int		ft_remove_var2(t_args *args, char *var);
+int		ft_unset(t_args *args, char **cmd);
 
 //	ft_env_utils.c
-char	*ft_get_var_name(char *variable);
+char	*ft_get_var_name(char *var);
 char	*ft_getenv(t_args *args, char *variable);
 int		ft_get_envp_size(char **envp);
 char	**ft_remove_var(t_args *args, char *variable);

@@ -6,62 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 12:14:18 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 14:57:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_envp	*ft_envpnew(char *name, char *value)
-{
-	t_envp	*envp;
-
-	envp = malloc(sizeof(t_envp));
-	if (!envp)
-		return (NULL);
-	envp->name = name;
-	envp->value = value;
-	envp->next = NULL;
-	return (envp);
-}
-
-t_envp	*ft_envplast(t_envp *envp)
-{
-	while (envp)
-	{
-		if (!envp->next)
-			return (envp);
-		envp = envp->next;
-	}
-	return (envp);
-}
-
-void	ft_envpadd_back(t_envp **lst, t_envp *new)
-{
-	t_envp	*last;
-
-	if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_envplast(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
-}
-
-int	ft_is_variable(char c)
-{
-	char	*var;
-
-	var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?_";
-	while (*var)
-		if (c == *var++)
-			return (1);
-	return (0);	
-}
 
 int	ft_create_list(t_args *args, char **char_envp)
 {
