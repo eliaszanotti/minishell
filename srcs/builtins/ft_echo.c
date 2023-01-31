@@ -6,25 +6,52 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:59:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/26 15:11:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 19:40:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_echo(char **cmd) // FIX 
+int	ft_is_flag(char *str)
 {
 	int	i;
 
-	i = 1;
-	if (cmd[i] && !ft_strcmp(cmd[i], "-n"))
-		while (cmd[++i])
-			printf("%s ", cmd[i]);
-	else
+	i = 0;
+	if (str[i++] == '-')
 	{
-		while (cmd[i])
-			printf("%s ", cmd[i++]);
-		printf("\n");
+		while (str[i] && str[i] == 'n')
+			i++;
+		if (!str[i])
+			return (1);
+		return (0);
 	}
+	return (0);
+}
+
+
+int	ft_echo(char **cmd)
+{
+	int	first;
+	int	n;
+	int	i;
+
+	first = 1;
+	n = 0;
+	i = 0;
+	while (cmd[++i])
+	{
+		if (ft_is_flag(cmd[i]))
+			n = 1;
+		else if (!first)
+			printf(" %s", cmd[i]);
+		else
+		{
+			printf("%s", cmd[i]);
+			first = 0;
+		}
+
+	}
+	if (!n)
+		printf("\n");
 	return (1);
 }

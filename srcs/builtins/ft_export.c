@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 19:05:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 19:08:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	*ft_get_new_value(char *value1, char *value2, int add)
 {
 	char	*new_value;
-	
+
 	if (add)
 		new_value = ft_strjoin(value1, value2);
 	else
