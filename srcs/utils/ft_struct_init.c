@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:53:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 19:44:50 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_create_list(t_args *args, char **char_envp)
 {
 	t_envp	*envp;
 	t_envp	*new;
-	int i;
-	int	j;
+	int		i;
+	int		j;
 
 	envp = NULL;
 	i = -1;
@@ -26,7 +26,7 @@ int	ft_create_list(t_args *args, char **char_envp)
 	{
 		j = 0;
 		while (char_envp[i][j] && ft_is_variable(char_envp[i][j]))
-			j++;;
+			j++;
 		new = ft_envpnew(ft_substr(char_envp[i], 0, j), \
 			ft_substr(char_envp[i], j + 1, ft_strlen(char_envp[i]) - j - 1));
 		if (!new)

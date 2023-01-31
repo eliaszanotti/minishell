@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:59:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 19:40:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 19:41:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_is_flag(char *str)
+static int	ft_is_flag(char *str)
 {
 	int	i;
 
@@ -27,7 +27,6 @@ int	ft_is_flag(char *str)
 	}
 	return (0);
 }
-
 
 int	ft_echo(char **cmd)
 {
@@ -49,7 +48,6 @@ int	ft_echo(char **cmd)
 			printf("%s", cmd[i]);
 			first = 0;
 		}
-
 	}
 	if (!n)
 		printf("\n");

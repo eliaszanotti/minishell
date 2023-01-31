@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:00:59 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 13:45:10 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 19:43:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd(t_args *args, char **cmd) // FIX
+int	ft_cd(t_args *args, char **cmd)
 {
 	char	*env;
 
@@ -29,5 +29,5 @@ int	ft_cd(t_args *args, char **cmd) // FIX
 	}
 	else if (chdir(env) == -1)
 		return (free(env), ft_error(20));
-	return (free(env), 0); // TODO fix
+	return (free(env), 0);
 }
