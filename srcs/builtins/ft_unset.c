@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/30 19:38:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:52:33 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 int	ft_unset(char **cmd, t_args *args)
 {
 	char	**new_envp;
-	int		i;
+	int		i;	
 
 	i = 0;
 	while (cmd[++i])
 	{
+		
+
 		new_envp = ft_remove_var(args, cmd[i]);
 		//ft_free_str(args->envp);
 		//ft_free_str(new_envp);

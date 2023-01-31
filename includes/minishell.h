@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 21:59:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/01/31 11:50:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,18 @@
 # include "parsing.h"
 # include "utils.h"
 
+typedef struct s_envp
+{
+	char			*name;
+	char			*value;
+	struct s_envp	*next;
+}	t_envp;
+
 typedef struct s_args
 {
 	char	***stack;
 	char	**envp;
+	t_envp	*envp2;
 	char	**command_list;
 	char	*prompt;
 	pid_t	*pid_tab;
