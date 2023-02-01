@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:51:38 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 15:10:29 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_args
 {
 	char	***stack;
 	t_envp	*envp;
+	char	**char_envp;
 	char	**command_list;
 	char	*prompt;
 	pid_t	*pid_tab;

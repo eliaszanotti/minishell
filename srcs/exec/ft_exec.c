@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 11:58:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 15:15:01 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 {
-	char	**char_envp;
+	//char	**char_envp;
 	char	*path;
 
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
@@ -29,10 +29,10 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_is_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(0);
 	path = ft_get_path(args, command[0]);
-	char_envp = ft_get_char_envp(args);
-	if (execve(path, command, char_envp) == -1)
-		return (ft_free_str(char_envp), free(path), ft_error(12));
-	ft_free_str(char_envp);
+	//char_envp = ft_get_char_envp(args);
+	if (execve(path, command, args->char_envp) == -1)
+		return (free(path), ft_error(12));
+	//ft_free_str(char_envp);
 	free(path);
 	return (0);
 }
@@ -49,8 +49,14 @@ static int	ft_execute_child(t_args *args, char **command, int last)
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(4));
-	else if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
+	args->char_envp = ft_get_char_envp(args);
+	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
+	{
+		ft_free_str(args->char_envp);
+		exit(0);
 		return (1);
+	}
+	ft_free_str(args->char_envp);
 	close(fd[1]);
 	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;
@@ -89,7 +95,7 @@ static int	ft_execute_command(t_args *args, int count)
 
 int	ft_start_execution(t_args *args)
 {
-	int	i;
+	int		i;
 
 	i = -1;
 	while (args->stack[++i])
@@ -105,7 +111,5 @@ int	ft_start_execution(t_args *args)
 	args->fdd = 0;
 	if (ft_execute_command(args, 0))
 		return (free(args->pid_tab), 1);
-	if (ft_wait_execution(args))
-		return (free(args->pid_tab), 1);
-	return (free(args->pid_tab), 0);
+	return (ft_wait_execution(args));
 }
