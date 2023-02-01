@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 19:24:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 11:41:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
-		//command = "echo -nnnn eggfbe";
+		//command = "exit";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
@@ -48,13 +48,13 @@ static int	ft_prompt_loop(t_args *args)
 			ft_log(args->stack);
 			add_history(command);
 			if (ft_start_execution(args) == 99)
-				return (ft_free_args(args), 1);
+				return (ft_free_envp(args), ft_free_args(args), 1);
 			ft_free_args(args);
 		}
 		free(command);
-		//return (0);
+		//return (ft_free_envp(args), 0);
 	}
-	return (0);
+	return (ft_free_envp(args), 0);
 }
 
 //TODO error quand command = "srcs" et apres "exit"

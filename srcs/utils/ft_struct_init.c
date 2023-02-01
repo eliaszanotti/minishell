@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 19:44:50 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 10:56:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_struct_init(t_args *args, char **envp)
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
-	printf("ok\n\n");
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:07:48 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 18:42:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 11:38:05 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ void	ft_free_stack(char ***stack)
 		free(stack[i]);
 	}
 	free(stack);
+}
+
+void	ft_free_envp(t_args *args)
+{
+	t_envp	*envp;
+	t_envp	*tmp;
+
+	envp = args->envp;
+	while (envp)
+	{
+		free(envp->name);
+		free(envp->value);
+		tmp = envp->next;
+		free(envp);
+		envp = tmp;
+	}
 }
 
 void	ft_free_args(t_args *args)
