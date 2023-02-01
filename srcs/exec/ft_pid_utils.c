@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 22:26:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 18:18:00 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 11:51:50 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int	ft_wait_execution(t_args *args)
 {
-	//int	size;
 	int	i;
 
-	i = 0;
-	//size = args->size - 1;
-	while (i < args->size)
+	i = args->size - 1;
+	while (i >= 0)
 	{
-		waitpid(args->pid_tab[i++], NULL, 0);
+		waitpid(args->pid_tab[i--], NULL, 0);
 		//close(STDOUT_FILENO);
 		//close(STDIN_FILENO);
 	}

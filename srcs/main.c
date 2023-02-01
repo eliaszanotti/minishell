@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 11:41:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/01 11:42:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	ft_log(char ***stack)
 
 static int	ft_prompt_loop(t_args *args)
 {
-	//char	cwd[PATH_MAX];
 	char	*command;
 	int		error_code;
 
