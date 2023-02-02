@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/01/31 18:56:23 by elias            ###   ########.fr        #
+#    Updated: 2023/02/02 10:35:24 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,11 +89,11 @@ all :		${NAME}
 
 ${DIR_OBJS}%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
 			@mkdir -p $(shell dirname $@)
-			@${PRINT} "${YELLOW}${SUPPR}Creating minishell's objects : $@"
+			@${PRINT} "${YELLOW}${SUPPR}Creating ${NAME}'s objects : $@"
 			@${CC} ${CFLAGS} -I ~/.brew/opt/readline/include -I ./libft -I ${DIR_INCLUDE} -c $< -o $@ 
 
 ${NAME}:	ascii lib ${OBJS}
-			@${PRINT} "${GREEN}${SUPPR}Creating minishell's objects : DONE\n"
+			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
