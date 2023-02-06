@@ -6,20 +6,10 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/01/25 18:31:02 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/02/06 15:20:51 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-OS				= $(shell uname -s)
-
-ifeq ($(OS), Linux)
-	PRINT = @echo -ne
-endif
-ifeq ($(OS), Darwin)
-	PRINT = @printf
-endif
-
-# SOURCES
 S_LIB	= ft_isalpha.c ft_isdigit.c ft_isalnum.c 			\
 		ft_isascii.c ft_isprint.c ft_strlen.c				\
 		ft_memset.c ft_bzero.c ft_memcpy.c 				\
@@ -44,6 +34,7 @@ NAME	= libft.a
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 RM		= rm -rf
+PRINT	= @printf
 
 # COMPILATION
 all :		${NAME}
