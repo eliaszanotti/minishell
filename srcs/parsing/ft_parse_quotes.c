@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/01/30 14:34:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:31:56 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,28 @@ static char	*ft_remove_quote(char *str)
 
 int	ft_parse_quotes(t_args *args)
 {
-	char	*current;
-	int		i;
-	int		j;
+	t_list	*instruction;
+	t_list	*stack;
+	char	*content;
 
-	i = -1;
-	while (args->stack[++i])
+	stack = args->stack_list;
+	while (stack)
 	{
-		j = -1;
-		while (args->stack[i][++j])
+		instruction = stack->content;
+		while (instruction)
 		{
-			current = args->stack[i][j];
-			if (current[0] != '\'' && \
-				current[ft_strlen(current)] != '\'')
-				current = ft_replace_env(args, current);
-			if (!current)
+			content = instruction->content;
+			if (content[0] != '\'' && content[ft_strlen(content)] != '\'')
+				content = ft_replace_env(args, content);
+			if (!content)
 				return (ft_error(99));
-			current = ft_remove_quote(current);
-			args->stack[i][j] = current;
-			if (!args->stack[i][j])
+			content = ft_remove_quote(content);
+			if (!content)
 				return (ft_error(99));
+			instruction->content = content;
+			instruction = instruction->next;
 		}
+		stack = stack->next;
 	}
 	return (0);
 }

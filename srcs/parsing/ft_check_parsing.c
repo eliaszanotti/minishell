@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 17:18:27 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:32:31 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,18 @@ int	ft_check_parsing(t_args *args)
 
 int	ft_check_command(t_args *args)
 {
-	int		i;
+	t_list	*stack;
+	t_list	*tmp;
 
-	i = -1;
-	while (args->stack[++i])
-		if (!ft_is_delimiter(args->stack[i][0]) && \
-			!ft_is_command(args, args->stack[i][0]) && \
-			!ft_is_builtins(args->stack[i][0]))
+	stack = args->stack_list;
+	while (stack)
+	{
+		tmp = stack->content;
+		if (tmp && (!ft_is_delimiter(tmp->content) && \
+			!ft_is_command(args, tmp->content) && 
+			!ft_is_builtins(tmp->content)))
 			return (ft_error(2));
+		stack = stack->next;
+	}
 	return (0);
 }

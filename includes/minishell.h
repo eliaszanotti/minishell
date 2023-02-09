@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 15:10:29 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:30:37 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_envp
 typedef struct s_args
 {
 	char	***stack;
+	t_list	*stack_list;
 	t_envp	*envp;
 	char	**char_envp;
 	char	**command_list;

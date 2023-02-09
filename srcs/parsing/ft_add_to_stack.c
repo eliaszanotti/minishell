@@ -6,58 +6,37 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/01/25 14:03:20 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:32:17 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_add_redirects(t_args *args, char **cmd, int i_stack, int max)
+int	ft_add_redirects(t_args *args, char **cmd, int max)
 {
+	t_list	*new;
+
 	while (--max > 0 && *cmd)
 	{
 		if (ft_is_delimiter(*cmd) && cmd[1])
 		{
-			args->stack[i_stack++] = ft_copy_stack(cmd++, 2);
+			new = ft_lstnew(ft_copy_stack(cmd, 2));
+			if (!new)
+				return (ft_error(99));
+			ft_lstadd_back(&args->stack_list, new);
 			max--;
 		}
 		cmd++;
 	}
-	return (i_stack);
+	return (0);
 }
 
-static char	**ft_init_instruction(char **cmd, int max)
+int	ft_add_command(t_args *args, char **cmd, int max)
 {
-	char	**instruction;
-	int		count;
-	int		i;
+	t_list	*instruction;
+	t_list	*new;
 
-	count = 0;
-	i = 0;
-	while (count < max - 1 && *cmd)
-	{
-		if (ft_is_delimiter(*cmd) && cmd[1])
-			cmd++;
-		else
-			i++;
-		count++;
-		cmd++;
-	}
-	instruction = malloc(sizeof(char *) * (i + 1));
-	if (!instruction)
-		return (NULL);
-	return (instruction);
-}
-
-int	ft_add_command(t_args *args, char **cmd, int i_stack, int max)
-{
-	char	**instruction;
-	int		i_tab;
-
-	instruction = ft_init_instruction(cmd, max);
-	if (!instruction)
-		return (-1);
-	i_tab = 0;
+	instruction = NULL;
 	while (--max > 0 && *cmd)
 	{
 		if (ft_is_delimiter(*cmd) && cmd[1])
@@ -66,10 +45,16 @@ int	ft_add_command(t_args *args, char **cmd, int i_stack, int max)
 			max--;
 		}
 		else
-			instruction[i_tab++] = *cmd++;
+		{
+			new = ft_lstnew(*cmd++);
+			if (!new)
+				return (ft_error(99));
+			ft_lstadd_back(&instruction, new);
+		}
 	}
-	instruction[i_tab] = NULL;
-	if (i_tab)
-		args->stack[i_stack++] = instruction;
-	return (i_stack);
+	new = ft_lstnew(instruction);
+	if (!new)
+		return (ft_error(99));
+	ft_lstadd_back(&args->stack_list, new);
+	return (0);
 }

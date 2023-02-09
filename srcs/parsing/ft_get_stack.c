@@ -6,94 +6,86 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 19:46:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 18:31:36 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_get_stack_size(char **command_list, int i, int j)
+#include <stdio.h>
+void ll(t_args *args)
 {
-	int	count;
-
-	count = 0;
-	while (*command_list)
+	t_list	*stack;
+	t_list	*instruction;
+	char	*str;
+	stack = args->stack_list;
+	while (stack)
 	{
-		if (ft_is_delimiter(*command_list) == '|')
+		instruction = stack->content;
+		while (instruction)
 		{
-			command_list++;
-			count++;
+			str = instruction->content;
+			printf("[%s]", str);
+			instruction = instruction->next;
 		}
-		while (*command_list && ft_is_delimiter(*command_list) != '|')
-		{
-			i++;
-			if (ft_is_delimiter(*command_list))
-			{
-				j++;
-				command_list++;
-				count++;
-			}
-			command_list++;
-		}
-		if (j != i)
-			count++;
+		printf("\n");
+		stack = stack->next;
 	}
-	return (count);
 }
 
-int	ft_init_stack(t_args *args)
+void	ft_log(t_list *list)
 {
-	int	size;
-
-	size = ft_get_stack_size(args->command_list, 0, 0);
-	args->stack = malloc(sizeof(char **) * (size + 1));
-	if (!args->stack)
-		return (ft_error(99));
-	args->stack[size] = NULL;
-	return (0);
+	char *str;
+	while (list)
+	{
+		str = list->content;
+		printf("log = %s\n", str);
+		list = list->next;
+	}
 }
 
-char	**ft_copy_stack(char **command_list, int j)
+t_list	*ft_copy_stack(char **command_list, int j)
 {
-	char	**instruction;
-	int		i_tab;
+	t_list	*instruction;
+	t_list	*new;
 	int		i;
 
-	instruction = malloc(sizeof(char *) * (j + 1));
-	if (!instruction)
-		return (NULL);
-	i_tab = 0;
+	instruction = NULL;
 	i = 0;
 	while (command_list[i] && i < j)
-		instruction[i_tab++] = command_list[i++];
-	instruction[i_tab] = NULL;
+	{
+		new = ft_lstnew(command_list[i++]);
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(&instruction, new);
+	}
 	return (instruction);
 }
 
-int	ft_get_stack(t_args *args, int i_stack, int j)
+int	ft_get_stack(t_args *args, int j)
 {
 	char	**command_list;
+	t_list	*new;
 
 	command_list = args->command_list;
-	if (ft_init_stack(args))
-		return (1);
+	args->stack_list = NULL; // TODO move si error nrm
 	while (*command_list)
 	{
 		if (ft_is_delimiter(*command_list) == '|')
 		{
-			args->stack[i_stack] = ft_copy_stack(command_list++, 1);
-			if (!args->stack[i_stack++])
-				return (ft_free_stack(args->stack), ft_error(99));
+			new = ft_lstnew(ft_copy_stack(command_list++, 1));
+			if (!new || !new->content)
+				return (ft_error(99)); //TODO free si error
+			ft_lstadd_back(&args->stack_list, new);
 		}
-		while (command_list[j] && \
-			ft_is_delimiter(command_list[j]) != '|')
+		while (command_list[j] && ft_is_delimiter(command_list[j]) != '|')
 			j++;
-		i_stack = ft_add_redirects(args, command_list, i_stack, j + 1);
-		i_stack = ft_add_command(args, command_list, i_stack, j + 1);
-		if (i_stack == -1)
-			return (ft_free_stack(args->stack), ft_error(99));
+		if (ft_add_redirects(args, command_list, j + 1))
+			return (ft_error(99));
+		if (ft_add_command(args, command_list, j + 1))
+			return (ft_error(99));
 		command_list += j;
 	}
-	args->stack[i_stack] = NULL;
+	ll(args);
 	return (0);
 }

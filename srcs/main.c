@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 14:53:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:51:34 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_log(char ***stack)
+void	ft_log2(char ***stack)
 {
 	int	i = -1;
 	int	j = 0;
@@ -44,11 +44,11 @@ static int	ft_prompt_loop(t_args *args)
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
-			ft_log(args->stack);
+			//ft_log(args->stack);
 			add_history(command);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), ft_free_args(args), 1);
-			ft_free_args(args);
+			//ft_free_args(args);
 		}
 		free(command);
 		//args->exit_code = 1;
@@ -69,6 +69,5 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	if (ft_prompt_loop(&args))
 		return (1);
-	//ft_free_str(args.envp);
 	return (0);
 }
