@@ -6,37 +6,24 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/01/27 19:30:32 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/09 19:05:07 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	ft_mallocsize(char const *s, char c)
+#include <stdio.h>
+void lll(t_list *test)
 {
-	size_t	count;
-	char	quote;
-
-	count = 0;
-	while (*s)
+	char *str;
+	while (test)
 	{
-		if (*s != c)
-		{
-			if (*s == '"' || *s == '\'')
-			{
-				quote = *s++;
-				while (*s && *s != quote)
-					s++;
-			}
-			while (*s && *s != c)
-				s++;
-			count++;
-		}
-		else
-			s++;
+		str = test->content;
+		printf("OK = %s\n", str);
+		test = test->next;
 	}
-	return (count);
 }
+
 
 static int	ft_get_i(char const *s, char c)
 {
@@ -57,26 +44,27 @@ static int	ft_get_i(char const *s, char c)
 	return (i);
 }
 
-static char	**ft_splitstr(char const *s, char c, char **tab, size_t mallocsize)
+t_list	*ft_splitstr(char const *s, char c)
 {
+	t_list	*instruction;
+	t_list	*new;
 	int		i;
-	size_t	i_tab;
 
+	instruction = NULL;
 	i = 0;
-	i_tab = 0;
-	while (i_tab < mallocsize)
+	while (*s)
 	{
 		i = ft_get_i(s, c);
-		tab[i_tab] = ft_substr(s, 0, i);
-		if (!tab[i_tab])
-			return (ft_free_str(tab), NULL);
+		new = ft_lstnew(ft_substr(s, 0, i));
+		if (!new)
+			return (NULL); //TODO free
+		ft_lstadd_back(&instruction, new);
 		s += i;
 		while (*s == c && *s)
 			s++;
-		i_tab++;
 		i = 0;
 	}
-	return (tab);
+	return (instruction);
 }
 
 static int	ft_check_quotes(char *s)
@@ -102,25 +90,14 @@ static int	ft_check_quotes(char *s)
 
 int	ft_split_quote(t_args *args, char *s, char c)
 {
-	size_t	mallocsize;
-
+	args->cl = NULL;
 	if (!s || !*s)
-	{
-		args->command_list = malloc(sizeof(char *));
-		if (!args->command_list)
-			return (ft_error(99));
-		args->command_list[0] = NULL;
 		return (0);
-	}
 	if (ft_check_quotes(s))
 		return (ft_error(3));
 	while (*s == c)
 		s++;
-	mallocsize = ft_mallocsize(s, c);
-	args->command_list = malloc(sizeof(char *) * (mallocsize + 1));
-	if (!args->command_list)
-		return (ft_error(99));
-	args->command_list = ft_splitstr(s, c, args->command_list, mallocsize);
-	args->command_list[mallocsize] = NULL;
+	args->cl = ft_splitstr(s, c);
+	lll(args->cl);
 	return (0);
 }

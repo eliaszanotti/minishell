@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/09 18:30:37 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/09 18:40:41 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_args
 	t_envp	*envp;
 	char	**char_envp;
 	char	**command_list;
+	t_list	*cl;
 	char	*prompt;
 	pid_t	*pid_tab;
 	int		exit_code;
