@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 16:42:54 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:05:59 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,22 @@ char	ft_is_r(t_list *instruction)
 	return (0);
 }
 
+int	ft_is_c(t_args *args, t_list *instruction)
+{
+	char	*cmd;
+	char	*path;
+
+	cmd = instruction->content;
+	path = ft_get_path(args, cmd);
+	if (path)
+	{
+		free(path);
+		return (1);
+	}
+	free(path);
+	return (0);
+}
+
 int	ft_check_parsing(t_args *args)
 {
 	t_list	*cl;
@@ -106,15 +122,12 @@ int	ft_check_parsing(t_args *args)
 int	ft_check_command(t_args *args)
 {
 	t_list	*stack;
-	t_list	*tmp;
 
 	stack = args->stack_list;
 	while (stack)
 	{
-		tmp = stack->content;
-		if (tmp && (!ft_is_delimiter(tmp->content) && \
-			!ft_is_command(args, tmp->content) && \
-			!ft_is_builtins(tmp->content)))
+		if (!ft_is_d(stack->content) && !ft_is_c(args, stack->content) && \
+			!ft_is_b(stack->content))
 			return (ft_error(2));
 		stack = stack->next;
 	}
