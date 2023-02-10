@@ -6,50 +6,52 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 12:46:53 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:34:44 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_add_redirects(t_args *args, char **cmd, int max)
+int	ft_add_redirects(t_args *args, t_list *instruction, int max)
 {
 	t_list	*new;
 
-	while (--max > 0 && *cmd)
+	while (--max > 0 && instruction)
 	{
-		if (ft_is_delimiter(*cmd) && cmd[1])
+		if (ft_is_d(instruction) && instruction->next)
 		{
-			new = ft_lstnew(ft_copy_stack(cmd, 2));
+			new = ft_lstnew(ft_cpy(instruction, 2));
 			if (!new)
 				return (ft_error(99));
 			ft_lstadd_back(&args->stack_list, new);
+			instruction = instruction->next;
 			max--;
 		}
-		cmd++;
+		instruction = instruction->next;
 	}
 	return (0);
 }
 
-int	ft_add_command(t_args *args, char **cmd, int max)
+int	ft_add_command(t_args *args, t_list *cmd, int max)
 {
 	t_list	*instruction;
 	t_list	*new;
 
 	instruction = NULL;
-	while (--max > 0 && *cmd)
+	while (--max > 0 && cmd)
 	{
-		if (ft_is_delimiter(*cmd) && cmd[1])
+		if (ft_is_d(cmd) && cmd->next)
 		{
-			cmd += 2;
+			cmd = ft_increment_list(cmd, 2);
 			max--;
 		}
 		else
 		{
-			new = ft_lstnew(*cmd++);
+			new = ft_cpy(cmd, 1);
 			if (!new)
 				return (ft_error(99));
 			ft_lstadd_back(&instruction, new);
+			cmd = cmd->next;
 		}
 	}
 	new = ft_lstnew(instruction);
