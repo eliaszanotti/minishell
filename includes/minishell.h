@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/09 18:40:41 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:12:36 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,11 @@ t_envp	*ft_envpnew(char *name, char *value);
 t_envp	*ft_envplast(t_envp *envp);
 void	ft_envpadd_back(t_envp **lst, t_envp *new);
 int		ft_envpsize(t_envp *envp);
+
+
+
+char	*ft_is_b(t_list *instruction);
+char	ft_is_d(t_list *instruction);
+char	ft_is_r(t_list *instruction);
 
 #endif

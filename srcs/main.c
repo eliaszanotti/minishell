@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/09 17:51:34 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 16:11:19 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		ft_reset_struct(args);
-		command = readline(args->prompt);
+		//command = readline(args->prompt);
 		free(args->prompt);
-		//command = "srcs";
+		command = "ls < out -l | grep RE";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
@@ -50,9 +50,9 @@ static int	ft_prompt_loop(t_args *args)
 				return (ft_free_envp(args), ft_free_args(args), 1);
 			//ft_free_args(args);
 		}
-		free(command);
+		//free(command);
 		//args->exit_code = 1;
-		//return (ft_free_envp(args), 0);
+		return (ft_free_envp(args), 0);
 	}
 	return (ft_free_envp(args), 0);
 }

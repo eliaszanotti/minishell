@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 11:52:03 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:12:11 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**ft_get_command_list(t_list *instruction)
+char	**ft_get_command_list(t_list *instruction)
 {
 	char	**command_list;
 	int		size;
@@ -31,29 +31,77 @@ static char	**ft_get_command_list(t_list *instruction)
 	return (command_list);
 }
 
+char	*ft_is_b(t_list *instruction)
+{
+	char	*cmd;
+
+	cmd = instruction->content;
+	if (!ft_strcmp(cmd, "echo"))
+		return ("echo");
+	else if (!ft_strcmp(cmd, "cd"))
+		return ("cd");
+	else if (!ft_strcmp(cmd, "pwd"))
+		return ("pwd");
+	else if (!ft_strcmp(cmd, "export"))
+		return ("export");
+	else if (!ft_strcmp(cmd, "unset"))
+		return ("unset");
+	else if (!ft_strcmp(cmd, "env"))
+		return ("env");
+	else if (!ft_strcmp(cmd, "exit"))
+		return ("exit");
+	return (NULL);
+}
+
+char	ft_is_d(t_list *instruction)
+{
+	char	*str;
+
+	str = instruction->content;
+	if (!ft_strcmp(str, "|"))
+		return ('|');
+	if (!ft_strcmp(str, "<"))
+		return ('<');
+	if (!ft_strcmp(str, ">"))
+		return ('>');
+	if (!ft_strcmp(str, "<<"))
+		return ('l');
+	if (!ft_strcmp(str, ">>"))
+		return ('r');
+	return (0);
+}
+
+char	ft_is_r(t_list *instruction)
+{
+	if (ft_is_d(instruction) && ft_is_d(instruction) != '|')
+		return (ft_is_d(instruction));
+	return (0);
+}
+
+
 int	ft_check_parsing(t_args *args)
 {
-	char	**command_list;
-	int		i;
+	t_list	*cl;
 
-	command_list = ft_get_command_list(args->cl);
-	if (!command_list && !*command_list)
+	cl = args->cl;
+	if (!cl)
 		return (1);
-	i = -1;
-	if (ft_is_delimiter(*command_list) == '|')
-		return (ft_free_str(command_list), ft_error(4));
-	while (command_list[++i])
+	if (ft_is_d(cl) == '|')
+		return (ft_error(4));
+	while (cl)
 	{
-		if (ft_is_delimiter(command_list[i]) && !command_list[i + 1])
-			return (ft_free_str(command_list), ft_error(6));
-		if (ft_is_delimiter(command_list[i]) == '|' && command_list[i + 1])
-			if (ft_is_delimiter(command_list[i + 1]) == '|')
-				return (ft_free_str(command_list), ft_error(4));
-		if (ft_is_redirect(command_list[i]) && command_list[i + 1])
-			if (ft_is_delimiter(command_list[i + 1]))
-				return (ft_free_str(command_list), ft_error(5));
+		if (ft_is_d(cl) && !cl->next)
+			return (ft_error(6));
+		if (ft_is_d(cl) == '|' && cl->next)
+			if (ft_is_d(cl->next) == '|')
+				return (ft_error(4));
+		if (ft_is_r(cl) && cl->next)
+			if (ft_is_d(cl->next))
+				return (ft_error(5));
+		cl = cl->next;
 	}
-	return (ft_free_str(command_list), 0);
+	printf("ook\n\n");
+	return (0);
 }
 
 int	ft_check_command(t_args *args)
