@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 13:12:36 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/10 17:16:04 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,7 @@ int		ft_envpsize(t_envp *envp);
 char	*ft_is_b(t_list *instruction);
 char	ft_is_d(t_list *instruction);
 char	ft_is_r(t_list *instruction);
+int		ft_is_c(t_args *args, t_list *instruction);
+
 
 #endif

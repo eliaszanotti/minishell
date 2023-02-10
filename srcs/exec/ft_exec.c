@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 15:15:01 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/10 17:52:59 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 		exit(0);
 	path = ft_get_path(args, command[0]);
 	//char_envp = ft_get_char_envp(args);
+	printf("PATH = %s\n\n", path);
 	if (execve(path, command, args->char_envp) == -1)
 		return (free(path), ft_error(12));
 	//ft_free_str(char_envp);
@@ -37,11 +38,29 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
+void	ft_looo(char **log)
+{
+	while (*log)
+		printf("l = [%s]\n", *log++);	
+}
+
+void	ft_in(t_list *list)
+{
+	char *str;
+	while (list)
+	{
+		str = list->content;
+		printf("log = %s\n", str);
+		list = list->next;
+	}
+}
+
 static int	ft_execute_child(t_args *args, char **command, int last)
 {
 	int		fd[2];
 	pid_t	pid;
 
+	ft_looo(command);
 	if (pipe(fd))
 		return (ft_error(11));
 	if (last && args->size == 1 && ft_is_builtins(command[0]))
@@ -65,43 +84,98 @@ static int	ft_execute_child(t_args *args, char **command, int last)
 	return (0);
 }
 
+int	ft_r(t_list *instruction, t_args *args)
+{
+	t_list	*next;
+
+	next = instruction->next;
+	if (ft_is_d(instruction) == '<')
+		args->infile = open(next->content, O_RDONLY);
+	else if (ft_is_d(instruction) == '>')
+		args->outfile = open(next->content, O_RDWR | O_TRUNC | O_CREAT, 0644);
+	else if (ft_is_d(instruction) == 'r')
+		args->outfile = open(next->content, O_RDWR | O_APPEND | O_CREAT, 0644);
+	else if (ft_is_d(instruction) == 'l' && ft_heredoc(args, next->content))
+		return (1);
+	if (args->infile == -1) 
+		return (ft_error(14));
+	if (args->outfile == -1)
+		return (ft_error(15));
+	return (0);
+}
+
+char	**ft_get_instruction(t_list *instruction)
+{
+	char	**char_instruction;
+	int		size;
+
+	ft_in(instruction);
+	size = ft_lstsize(instruction) + 1;
+	char_instruction = malloc(sizeof(char *) * size);
+	if (!char_instruction)
+		return (NULL);
+	size = 0;
+	while (instruction)
+	{
+		char_instruction[size++] = instruction->content;
+		instruction = instruction->next;	
+	}
+	char_instruction[size] = NULL;
+	return (char_instruction);
+}
+
 static int	ft_execute_command(t_args *args, int count)
 {
-	int	i;
+	char	**instruction;
+	t_list	*stack;
 
-	i = -1;
-	while (args->stack[++i] && count < args->size - 1)
+	stack = args->stack_list;
+	while (stack && count < args->size - 1)
 	{	
-		if (ft_is_redirect(args->stack[i][0]) && \
-			ft_redirect(args->stack[i], args))
+		if (ft_is_r(stack->content) && ft_r(stack->content, args))
 			return (1);
-		else if (ft_is_command(args, args->stack[i][0]) || \
-			ft_is_builtins(args->stack[i][0]))
+		else if (ft_is_c(args, stack->content) || ft_is_b(stack->content))
 		{
-			if (ft_execute_child(args, args->stack[i], 0))
+			instruction = ft_get_instruction(stack->content); // TODO free
+			if (!instruction)
+				return (ft_error(99));
+			if (ft_execute_child(args, instruction, 0))
 				return (1);
 			count++;
 		}
+		stack = stack->next;
 	}
-	if (ft_is_delimiter(args->stack[i][0]) == '|')
-		i++;
-	while (args->stack[i] && ft_is_redirect(args->stack[i][0]))
-		if (ft_redirect(args->stack[i++], args))
+	if (ft_is_d(stack->content) == '|')
+		stack = stack->next;
+	while (stack && ft_is_r(stack->content))
+	{
+		if (ft_r(stack->content, args))
 			return (1);
-	if (args->stack[i] && ft_execute_child(args, args->stack[i], 1))
+		stack = stack->next;
+	}
+	instruction = ft_get_instruction(stack->content); // TODO free
+	printf("febhf\n");
+	ft_looo(instruction);
+	if (!instruction)
+		return (ft_error(99));
+	if (stack && ft_execute_child(args, instruction, 1))
 		return (1);
 	return (0);
 }
 
 int	ft_start_execution(t_args *args)
 {
+	t_list	*stack;
 	int		i;
 
+	stack = args->stack_list;
 	i = -1;
-	while (args->stack[++i])
-		if (ft_is_builtins(args->stack[i][0]) || \
-			ft_is_command(args, args->stack[i][0]))
+	while (stack)
+	{
+		if (ft_is_b(stack->content) || ft_is_c(args, stack->content))
 			args->size++;
+		stack = stack->next;
+	}
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
 	if (!args->pid_tab)
