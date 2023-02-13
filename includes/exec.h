@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:27:03 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/01 10:50:12 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 11:33:12 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_heredoc(t_args *args, char *delimiter);
 int		ft_wait_execution(t_args *args);
 int		ft_add_pid(t_args *args, pid_t pid);
 //	ft_redirect.c
-int		ft_redirect(char **str, t_args *args);
+//int		ft_redirect(char **str, t_args *args);
+int		ft_redirect(t_list *instruction, t_args *args);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 17:16:04 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:54:33 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct s_envp
 
 typedef struct s_args
 {
-	char	***stack;
-	t_list	*stack_list;
+	t_list	*stack;
 	t_envp	*envp;
 	char	**char_envp;
 	char	**command_list;
@@ -58,13 +57,5 @@ t_envp	*ft_envpnew(char *name, char *value);
 t_envp	*ft_envplast(t_envp *envp);
 void	ft_envpadd_back(t_envp **lst, t_envp *new);
 int		ft_envpsize(t_envp *envp);
-
-
-
-char	*ft_is_b(t_list *instruction);
-char	ft_is_d(t_list *instruction);
-char	ft_is_r(t_list *instruction);
-int		ft_is_c(t_args *args, t_list *instruction);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/10 16:40:11 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:31:23 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,22 @@
 int		ft_error(int error_code);
 //	ft_free.c
 void	ft_free_str(char **str);
-void	ft_free_stack(char ***stack);
+void	ft_free_instruction(t_list *instruction);
+void	ft_free_stack(t_list *stack);
 void	ft_free_envp(t_args *args);
-void	ft_free_args(t_args *args);
 //	ft_get_path.c
 char	*ft_get_path(t_args *args, char *cmd);
 //	ft_get_prompt.c
 char	*ft_get_prompt(t_args *args, char *cwd);
 //	ft_is_type.c
-char	*ft_is_builtins(char *cmd);
-char	ft_is_delimiter(char *str);
-char	ft_is_redirect(char *str);
-int		ft_is_command(t_args *args, char *cmd);
+char	*ft_is_char_builtins(char *cmd);
+char	*ft_is_builtins(t_list *instruction);
+char	ft_is_delimiter(t_list *instruction);
+char	ft_is_redirect(t_list *instruction);
+int		ft_is_command(t_args *args, t_list *instruction);
 //	ft_list_utils.c
-t_list	*ft_increment_list(t_list *instruction, int i);
-t_list	*ft_cpy(t_list *new, int j);
+t_list	*ft_lstincrement(t_list *instruction, int i);
+t_list	*ft_lstcopy(t_list *new, int j);
 //	ft_struct_init.c
 int		ft_struct_init(t_args *args, char **envp);
 int		ft_reset_struct(t_args *args);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 17:41:44 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:13:03 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void ll(t_args *args)
 	t_list	*stack;
 	t_list	*instruction;
 	char	*str;
-	stack = args->stack_list;
+	stack = args->stack;
 	while (stack)
 	{
 		instruction = stack->content;
@@ -50,25 +50,24 @@ int	ft_get_stack(t_args *args, int j)
 	t_list	*new;
 
 	cl = args->cl;
-	args->stack_list = NULL; // TODO move si error nrm
 	while (cl)
 	{
-		if (ft_is_d(cl) == '|')
+		if (ft_is_delimiter(cl) == '|')
 		{
-			new = ft_lstnew(ft_cpy(cl, 1));
+			new = ft_lstnew(ft_lstcopy(cl, 1));
 			if (!new)
 				return (ft_error(99));
-			ft_lstadd_back(&args->stack_list, new);
+			ft_lstadd_back(&args->stack, new);
 			cl = cl->next;
 		}
-		while (ft_increment_list(cl, j) && \
-			ft_is_d(ft_increment_list(cl, j)) != '|')
+		while (ft_lstincrement(cl, j) && \
+			ft_is_delimiter(ft_lstincrement(cl, j)) != '|')
 			j++;
 		if (ft_add_redirects(args, cl, j + 1))
 			return (ft_error(99));
 		if (ft_add_command(args, cl, j + 1))
 			return (ft_error(99));
-		cl = ft_increment_list(cl, j);
+		cl = ft_lstincrement(cl, j);
 	}
 	ll(args);
 	return (0);

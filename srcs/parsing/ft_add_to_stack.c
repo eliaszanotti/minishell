@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 16:34:44 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:13:28 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ int	ft_add_redirects(t_args *args, t_list *instruction, int max)
 
 	while (--max > 0 && instruction)
 	{
-		if (ft_is_d(instruction) && instruction->next)
+		if (ft_is_delimiter(instruction) && instruction->next)
 		{
-			new = ft_lstnew(ft_cpy(instruction, 2));
+			new = ft_lstnew(ft_lstcopy(instruction, 2));
 			if (!new)
 				return (ft_error(99));
-			ft_lstadd_back(&args->stack_list, new);
+			ft_lstadd_back(&args->stack, new);
 			instruction = instruction->next;
 			max--;
 		}
@@ -40,14 +40,14 @@ int	ft_add_command(t_args *args, t_list *cmd, int max)
 	instruction = NULL;
 	while (--max > 0 && cmd)
 	{
-		if (ft_is_d(cmd) && cmd->next)
+		if (ft_is_delimiter(cmd) && cmd->next)
 		{
-			cmd = ft_increment_list(cmd, 2);
+			cmd = ft_lstincrement(cmd, 2);
 			max--;
 		}
 		else
 		{
-			new = ft_cpy(cmd, 1);
+			new = ft_lstcopy(cmd, 1);
 			if (!new)
 				return (ft_error(99));
 			ft_lstadd_back(&instruction, new);
@@ -57,6 +57,6 @@ int	ft_add_command(t_args *args, t_list *cmd, int max)
 	new = ft_lstnew(instruction);
 	if (!new)
 		return (ft_error(99));
-	ft_lstadd_back(&args->stack_list, new);
+	ft_lstadd_back(&args->stack, new);
 	return (0);
 }

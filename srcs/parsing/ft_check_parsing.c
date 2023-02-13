@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/10 17:05:59 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:22:36 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**ft_get_command_list(t_list *instruction)
 	return (command_list);
 }
 
-char	*ft_is_b(t_list *instruction)
+/*char	*ft_is_b(t_list *instruction)
 {
 	char	*cmd;
 
@@ -92,7 +92,7 @@ int	ft_is_c(t_args *args, t_list *instruction)
 	}
 	free(path);
 	return (0);
-}
+}*/
 
 int	ft_check_parsing(t_args *args)
 {
@@ -101,17 +101,17 @@ int	ft_check_parsing(t_args *args)
 	cl = args->cl;
 	if (!cl)
 		return (1);
-	if (ft_is_d(cl) == '|')
+	if (ft_is_delimiter(cl) == '|')
 		return (ft_error(4));
 	while (cl)
 	{
-		if (ft_is_d(cl) && !cl->next)
+		if (ft_is_delimiter(cl) && !cl->next)
 			return (ft_error(6));
-		if (ft_is_d(cl) == '|' && cl->next)
-			if (ft_is_d(cl->next) == '|')
+		if (ft_is_delimiter(cl) == '|' && cl->next)
+			if (ft_is_delimiter(cl->next) == '|')
 				return (ft_error(4));
-		if (ft_is_r(cl) && cl->next)
-			if (ft_is_d(cl->next))
+		if (ft_is_redirect(cl) && cl->next)
+			if (ft_is_delimiter(cl->next))
 				return (ft_error(5));
 		cl = cl->next;
 	}
@@ -123,11 +123,12 @@ int	ft_check_command(t_args *args)
 {
 	t_list	*stack;
 
-	stack = args->stack_list;
+	stack = args->stack;
 	while (stack)
 	{
-		if (!ft_is_d(stack->content) && !ft_is_c(args, stack->content) && \
-			!ft_is_b(stack->content))
+		if (!ft_is_delimiter(stack->content) && \
+			!ft_is_command(args, stack->content) && \
+			!ft_is_builtins(stack->content))
 			return (ft_error(2));
 		stack = stack->next;
 	}

@@ -45,7 +45,7 @@ int	ft_parse_quotes(t_args *args)
 	t_list	*stack;
 	char	*content;
 
-	stack = args->stack_list;
+	stack = args->stack;
 	while (stack)
 	{
 		instruction = stack->content;

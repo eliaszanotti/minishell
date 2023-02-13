@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 10:56:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 11:42:09 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_struct_init(t_args *args, char **envp)
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
+	args->stack = NULL;
 	return (0);
 }
 
@@ -54,6 +55,7 @@ int	ft_reset_struct(t_args *args)
 	args->prompt = ft_get_prompt(args, getcwd(cwd, sizeof(cwd)));
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
+	args->stack = NULL;
 	args->size = 0;
 	return (0);
 }

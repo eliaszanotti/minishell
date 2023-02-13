@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_increment_list.c                                :+:      :+:    :+:   */
+/*   ft_list_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:35:22 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/10 16:39:01 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:43:24 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*ft_increment_list(t_list *instruction, int i)
+t_list	*ft_lstincrement(t_list *instruction, int i)
 {
 	while (instruction && i-- > 0)
 		instruction = instruction->next;
 	return (instruction);
 }
 
-t_list	*ft_cpy(t_list *new, int j)
+t_list	*ft_lstcopy(t_list *new, int j)
 {
 	t_list	*instruction;
 	t_list	*cpy;

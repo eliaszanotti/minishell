@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:07:48 by elias             #+#    #+#             */
-/*   Updated: 2023/02/01 11:38:05 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 14:30:38 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,30 @@ void	ft_free_str(char **str)
 	free(str);
 }
 
-void	ft_free_stack(char ***stack)
+void	ft_free_instruction(t_list *instruction)
 {
-	int	i;
-	int	j;
+	t_list	*tmp;
 
-	i = -1;
-	while (stack[++i])
+	while (instruction)
 	{
-		j = -1;
-		while (stack[i][++j])
-			free(stack[i][j]);
-		free(stack[i]);
+		free(instruction->content);
+		tmp = instruction->next;
+		free(instruction);
+		instruction = tmp;
 	}
-	free(stack);
+}
+
+void	ft_free_stack(t_list *stack)
+{
+	t_list	*tmp;
+
+	while (stack)
+	{
+		ft_free_instruction(stack->content);
+		tmp = stack->next;
+		free(stack);
+		stack = tmp;
+	}
 }
 
 void	ft_free_envp(t_args *args)
@@ -52,10 +62,4 @@ void	ft_free_envp(t_args *args)
 		free(envp);
 		envp = tmp;
 	}
-}
-
-void	ft_free_args(t_args *args)
-{
-	ft_free_str(args->command_list);
-	ft_free_stack(args->stack);
 }
