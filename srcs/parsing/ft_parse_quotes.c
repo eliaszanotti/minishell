@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/02/10 16:45:35 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:56:54 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_remove_quote(char *str)
+static char	*ft_init_new_str(char *str)
 {
 	char	*new_str;
 	int		i;
@@ -24,18 +24,30 @@ static char	*ft_remove_quote(char *str)
 		if (str[i] == '\'' || str[i] == '"')
 			size++;
 	if (size == 0)
-		return (str);
+		return (ft_strdup(str));
 	new_str = malloc(sizeof(char) * (ft_strlen(str) - size + 1));
+	return (new_str);
+}
+
+static char	*ft_remove_quote(char *str)
+{
+	char	*new_str;
+	int		i;
+	int		j;
+
+	new_str = ft_init_new_str(str);
 	if (!new_str)
 		return (NULL);
 	i = 0;
-	while (*str)
+	j = 0;
+	while (str[j])
 	{
-		if (*str != '\'' && *str != '"')
-			new_str[i++] = *str;
-		str++;
+		if (str[j] != '\'' && str[j] != '"')
+			new_str[i++] = str[j];
+		j++;
 	}
 	new_str[i] = '\0';
+	free(str);
 	return (new_str);
 }
 
