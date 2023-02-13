@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 18:52:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 17:43:17 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ int	ft_remove_var(t_args *args, char *var)
 	while (envp)
 	{
 		if (!ft_strcmp(envp->name, var))
+		{
 			backup->next = envp->next;
+			free(envp->name);
+			free(envp->value);
+			free(envp);
+		}
 		backup = envp;
 		envp = envp->next;
 	}
@@ -34,7 +39,6 @@ int	ft_unset(t_args *args, char **cmd)
 
 	i = 0;
 	while (cmd[++i])
-		if (ft_remove_var(args, cmd[i]))
-			return (1);
+		ft_remove_var(args, cmd[i]);
 	return (0);
 }

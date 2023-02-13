@@ -6,43 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 13:13:03 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:33:32 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-#include <stdio.h>
-void ll(t_args *args)
-{
-	t_list	*stack;
-	t_list	*instruction;
-	char	*str;
-	stack = args->stack;
-	while (stack)
-	{
-		instruction = stack->content;
-		while (instruction)
-		{
-			str = instruction->content;
-			printf("[%s]", str);
-			instruction = instruction->next;
-		}
-		printf("\n");
-		stack = stack->next;
-	}
-}
-
-void	ft_log(t_list *list)
-{
-	char *str;
-	while (list)
-	{
-		str = list->content;
-		printf("log = %s\n", str);
-		list = list->next;
-	}
-}
 
 int	ft_get_stack(t_args *args, int j)
 {
@@ -69,6 +37,5 @@ int	ft_get_stack(t_args *args, int j)
 			return (ft_error(99));
 		cl = ft_lstincrement(cl, j);
 	}
-	ll(args);
 	return (0);
 }
