@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 13:45:03 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:22:42 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 {
-	//char	**char_envp;
+	char	**char_envp;
 	char	*path;
 
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
@@ -29,11 +29,10 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_is_char_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(0);
 	path = ft_get_path(args, command[0]);
-	//char_envp = ft_get_char_envp(args);
-	printf("PATH = %s\n\n", path);
-	if (execve(path, command, args->char_envp) == -1)
-		return (free(path), ft_error(12));
-	//ft_free_str(char_envp);
+	char_envp = ft_get_char_envp(args);
+	if (execve(path, command, char_envp) == -1)
+		return (ft_free_str(char_envp), free(path), ft_error(12));
+	ft_free_str(char_envp);
 	free(path);
 	return (0);
 }
@@ -41,12 +40,13 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 void	ft_looo(char **log)
 {
 	while (*log)
-		printf("l = [%s]\n", *log++);	
+		printf("l = [%s]\n", *log++);
 }
 
 void	ft_in(t_list *list)
 {
-	char *str;
+	char	*str;
+
 	while (list)
 	{
 		str = list->content;
@@ -68,14 +68,8 @@ static int	ft_execute_child(t_args *args, char **command, int last)
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(4));
-	args->char_envp = ft_get_char_envp(args);
 	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
-	{
-		ft_free_str(args->char_envp);
-		exit(0);
 		return (1);
-	}
-	ft_free_str(args->char_envp);
 	close(fd[1]);
 	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;
@@ -97,8 +91,8 @@ char	**ft_get_instruction(t_list *instruction)
 	size = 0;
 	while (instruction)
 	{
-		char_instruction[size++] = instruction->content;
-		instruction = instruction->next;	
+		char_instruction[size++] = ft_strdup(instruction->content);
+		instruction = instruction->next;
 	}
 	char_instruction[size] = NULL;
 	return (char_instruction);
@@ -120,17 +114,19 @@ static t_list	*ft_execute_loop(t_args *args, t_list *stack)
 		else if (ft_is_command(args, current->content) || \
 			ft_is_builtins(current->content))
 		{
-			instruction = ft_get_instruction(current->content); // TODO free
+			instruction = ft_get_instruction(current->content);
 			if (!instruction)
 				return (NULL);
 			if (ft_execute_child(args, instruction, 0))
-				return (NULL);
+				return (ft_free_str(instruction), NULL);
+			ft_free_str(instruction);
 			count++;
 		}
 		current = current->next;
 	}
 	return (current);
 }
+
 static int	ft_execute_command(t_args *args)
 {
 	char	**instruction;
@@ -147,13 +143,13 @@ static int	ft_execute_command(t_args *args)
 			return (1);
 		stack = stack->next;
 	}
-	instruction = ft_get_instruction(stack->content); // TODO free
+	instruction = ft_get_instruction(stack->content);
 	ft_looo(instruction);
 	if (!instruction)
 		return (ft_error(99));
 	if (stack && ft_execute_child(args, instruction, 1))
-		return (1);
-	return (0);
+		return (ft_free_str(instruction), 1);
+	return (ft_free_str(instruction), 0);
 }
 
 int	ft_start_execution(t_args *args)

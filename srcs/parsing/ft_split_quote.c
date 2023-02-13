@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/09 19:05:07 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 14:45:35 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	ft_split_quote(t_args *args, char *s, char c)
 	while (*s == c)
 		s++;
 	args->cl = ft_splitstr(s, c);
+	if (!args->cl)
+		return (ft_error(99));
 	lll(args->cl);
 	return (0);
 }

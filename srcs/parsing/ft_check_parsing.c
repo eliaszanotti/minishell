@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 13:22:36 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:16:24 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,69 +31,6 @@ char	**ft_get_command_list(t_list *instruction)
 	return (command_list);
 }
 
-/*char	*ft_is_b(t_list *instruction)
-{
-	char	*cmd;
-
-	cmd = instruction->content;
-	if (!ft_strcmp(cmd, "echo"))
-		return ("echo");
-	else if (!ft_strcmp(cmd, "cd"))
-		return ("cd");
-	else if (!ft_strcmp(cmd, "pwd"))
-		return ("pwd");
-	else if (!ft_strcmp(cmd, "export"))
-		return ("export");
-	else if (!ft_strcmp(cmd, "unset"))
-		return ("unset");
-	else if (!ft_strcmp(cmd, "env"))
-		return ("env");
-	else if (!ft_strcmp(cmd, "exit"))
-		return ("exit");
-	return (NULL);
-}
-
-char	ft_is_d(t_list *instruction)
-{
-	char	*str;
-
-	str = instruction->content;
-	if (!ft_strcmp(str, "|"))
-		return ('|');
-	if (!ft_strcmp(str, "<"))
-		return ('<');
-	if (!ft_strcmp(str, ">"))
-		return ('>');
-	if (!ft_strcmp(str, "<<"))
-		return ('l');
-	if (!ft_strcmp(str, ">>"))
-		return ('r');
-	return (0);
-}
-
-char	ft_is_r(t_list *instruction)
-{
-	if (ft_is_d(instruction) && ft_is_d(instruction) != '|')
-		return (ft_is_d(instruction));
-	return (0);
-}
-
-int	ft_is_c(t_args *args, t_list *instruction)
-{
-	char	*cmd;
-	char	*path;
-
-	cmd = instruction->content;
-	path = ft_get_path(args, cmd);
-	if (path)
-	{
-		free(path);
-		return (1);
-	}
-	free(path);
-	return (0);
-}*/
-
 int	ft_check_parsing(t_args *args)
 {
 	t_list	*cl;
@@ -115,7 +52,6 @@ int	ft_check_parsing(t_args *args)
 				return (ft_error(5));
 		cl = cl->next;
 	}
-	printf("ook\n\n");
 	return (0);
 }
 
