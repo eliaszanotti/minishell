@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 18:23:58 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:48:24 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	ft_log2(char ***stack)
 {
-	int	i = -1;
-	int	j = 0;
+	int	i;
+	int	j;
 
+	i = -1;
+	j = 0;
 	while (stack[++i])
 	{
 		j = 0;
