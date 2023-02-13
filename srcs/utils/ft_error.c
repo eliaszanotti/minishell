@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/01/27 20:01:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 18:19:50 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int	ft_error(int error_code)
 		printf("\e[1;31m[ERROR:%d]\e[0m ", error_code);
 	if (error_code < 10)
 		return (ft_error_range_1(error_code));
-	if (error_code < 20)
+	else if (error_code < 20)
 		return (ft_error_range_2(error_code));
+	else if (error_code == 20)
+		printf("No such file or directory\n");
 	else if (error_code == 99)
 	{
 		printf("Malloc cannot be created\n");

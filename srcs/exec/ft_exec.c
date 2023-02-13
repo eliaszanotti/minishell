@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 17:22:42 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:07:41 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,11 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
-void	ft_looo(char **log)
-{
-	while (*log)
-		printf("l = [%s]\n", *log++);
-}
-
-void	ft_in(t_list *list)
-{
-	char	*str;
-
-	while (list)
-	{
-		str = list->content;
-		printf("log = %s\n", str);
-		list = list->next;
-	}
-}
-
 static int	ft_execute_child(t_args *args, char **command, int last)
 {
 	int		fd[2];
 	pid_t	pid;
 
-	ft_looo(command);
 	if (pipe(fd))
 		return (ft_error(11));
 	if (last && args->size == 1 && ft_is_char_builtins(command[0]))
@@ -83,7 +64,6 @@ char	**ft_get_instruction(t_list *instruction)
 	char	**char_instruction;
 	int		size;
 
-	ft_in(instruction);
 	size = ft_lstsize(instruction) + 1;
 	char_instruction = malloc(sizeof(char *) * size);
 	if (!char_instruction)
@@ -144,7 +124,6 @@ static int	ft_execute_command(t_args *args)
 		stack = stack->next;
 	}
 	instruction = ft_get_instruction(stack->content);
-	ft_looo(instruction);
 	if (!instruction)
 		return (ft_error(99));
 	if (stack && ft_execute_child(args, instruction, 1))
