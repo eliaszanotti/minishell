@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/02/13 18:46:38 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/14 17:11:37 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,7 @@ ${DIR_OBJS}%.o: %.c	${DIR_INCLUDE}minishell.h Makefile
 ${NAME}:	ascii lib ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
+			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline -L ~/.brew/opt/readline/lib
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
 
 lib :

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/14 15:45:52 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:52:03 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_log(t_list *stack)
 	}
 }
 
-static int	ft_prompt_loop(t_args *args)
+static int	ft_prompt_loop(t_args *args, char *c)
 {
 	char	*command;
 	int		error_code;
@@ -58,23 +58,28 @@ static int	ft_prompt_loop(t_args *args)
 	while (!args->exit_code)
 	{
 		ft_reset_struct(args);
-		command = readline(args->prompt);
+		if (c)
+			command = c;
+		else
+			command = readline(args->prompt);
 		free(args->prompt);
-		//command = "< Makefile cat -e | grep RE | cat";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
-			ft_log(args->stack);
+			//ft_log(args->stack);
 			add_history(command);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);
 			ft_free_instruction(args->cl);
 			ft_free_stack(args->stack);
+			errno = 0; // TODO peutetre a deplacer
 		}
+		printf("errno == %d\n", errno); // TODO gerer les erreurs 
+		if (c)
+			return (ft_free_envp(args), 1);
 		free(command);
-		//return (ft_free_envp(args), 0);
 	}
 	return (ft_free_envp(args), 0);
 }
@@ -87,9 +92,20 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	// TODO temp
+	char *c;
+	if (argc == 3)
+		c = argv[2];
+	else 
+		c = NULL;
+
+
 	if (ft_struct_init(&args, envp))
 		return (1);
-	if (ft_prompt_loop(&args))
+	if (ft_prompt_loop(&args, c))
+	{
+		exit(errno);
 		return (1);
-	return (0);
+	}
+	return (errno);
 }
