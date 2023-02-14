@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 18:48:24 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:45:52 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ void	ft_log2(char ***stack)
 	}
 }
 
+#include <stdio.h> // TODO  temp
+void	ft_u(t_list *in)
+{
+	while (in)
+	{
+		printf("[%s]", (char *)in->content);
+		in = in->next;
+	}
+	printf("\n");
+}
+
+void	ft_log(t_list *stack)
+{
+	while (stack)
+	{
+		ft_u(stack->content);
+		stack = stack->next;
+	}
+}
+
 static int	ft_prompt_loop(t_args *args)
 {
 	char	*command;
@@ -40,12 +60,13 @@ static int	ft_prompt_loop(t_args *args)
 		ft_reset_struct(args);
 		command = readline(args->prompt);
 		free(args->prompt);
-		//command = "cd l";
+		//command = "< Makefile cat -e | grep RE | cat";
 		if (!command)
 			ft_exit(args);
 		error_code = ft_parse_args(args, command);
 		if (!error_code)
 		{
+			ft_log(args->stack);
 			add_history(command);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);

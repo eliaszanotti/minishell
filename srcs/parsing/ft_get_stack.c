@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 17:33:32 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/14 15:45:35 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_get_stack(t_args *args, int j)
 	cl = args->cl;
 	while (cl)
 	{
+		j = 0;
 		if (ft_is_delimiter(cl) == '|')
 		{
 			new = ft_lstnew(ft_lstcopy(cl, 1));
