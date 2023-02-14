@@ -6,11 +6,22 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 17:03:28 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/13 18:50:57 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_is_variable(char c)
+{
+	char	*var;
+
+	var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?_";
+	while (*var)
+		if (c == *var++)
+			return (1);
+	return (0);
+}
 
 char	*ft_get_var_name(char *var, int *add)
 {
@@ -41,15 +52,4 @@ char	*ft_get_var_value(char *var)
 	if (var[i] == '=')
 		return (ft_substr(var, i + 1, ft_strlen(var) - i));
 	return (NULL);
-}
-
-int	ft_is_variable(char c)
-{
-	char	*var;
-
-	var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?_";
-	while (*var)
-		if (c == *var++)
-			return (1);
-	return (0);
 }
