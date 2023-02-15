@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/15 16:34:18 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:07:30 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_lll(t_list *lst)
 int	ft_split_quote(t_args *args, char *str)
 {
 	if (!str || !*str)
-		return (0);
+		return (1);
 	if (ft_check_quotes(str))
 		return (ft_error(3));
 	args->cl = NULL;
@@ -65,6 +65,6 @@ int	ft_split_quote(t_args *args, char *str)
 			return (ft_error(99));
 		str = ft_skip_spaces(str);
 	}
-	ft_lll(args->cl);
+	//ft_lll(args->cl);
 	return (0);
 }

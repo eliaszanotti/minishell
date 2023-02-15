@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/15 15:44:58 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:06:43 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	{
 		ft_reset_struct(args);
 		if (c)
-			command = "ls | grep \"RE |cat\" ls";
+			command = c;
 		else
 			command = readline(args->prompt);
 		free(args->prompt);
@@ -76,7 +76,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 			ft_free_stack(args->stack);
 			errno = 0; // TODO peutetre a deplacer
 		}
-		printf("errno == %d\n", errno); // TODO gerer les erreurs 
+		//printf("errno == %d\n", errno); // TODO gerer les erreurs 
 		if (c)
 			return (ft_free_envp(args), 1);
 		free(command);

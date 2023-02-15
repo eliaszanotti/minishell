@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:59:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/14 17:15:29 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:43:22 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int	ft_echo(char **cmd)
 			first = 0;
 		}
 	}
-	(void)n;
-	//if (!n)
-	//	printf("\n");
+	if (!n)
+		printf("\n");
 	return (1);
 }
