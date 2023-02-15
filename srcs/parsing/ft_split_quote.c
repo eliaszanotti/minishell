@@ -6,53 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/15 15:54:56 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:14:09 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*static int	ft_get_i(char const *s, char c)
-{
-	char	quote;
-	int		i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		if (s[i] == '"' || s[i] == '\'')
-		{
-			quote = s[i++];
-			while (s[i] && s[i] != quote)
-				i++;
-		}
-		i++;
-	}
-	return (i);
-}
-
-t_list	*ft_splitstr(char const *s, char c)
-{
-	t_list	*instruction;
-	t_list	*new;
-	int		i;
-
-	instruction = NULL;
-	i = 0;
-	while (*s)
-	{
-		i = ft_get_i(s, c);
-		new = ft_lstnew(ft_substr(s, 0, i));
-		if (!new)
-			return (NULL);
-		ft_lstadd_back(&instruction, new);
-		s += i;
-		while (*s == c && *s)
-			s++;
-		i = 0;
-	}
-	return (instruction);
-}*/
 
 static int	ft_check_quotes(char *s)
 {
@@ -103,7 +61,8 @@ char	*ft_skip_alpha(t_list **splt_pipe, char *str)
 	int		i;
 
 	i = 0;
-	while (str[i] && str[i] != ' ' && str[i] != '|')
+	while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '<' && \
+		str[i] != '>')
 	{
 		if (str[i] == '"' || str[i] == '\'')
 			i = ft_skip_quote(str, i);
@@ -141,6 +100,30 @@ char	*ft_skip_spaces(char *str)
 	return (str);
 }
 
+char	*ft_skip_redirect(t_list **splt_pipe, char *str)
+{
+	t_list	*new;
+	char	redirect;
+	int		i;
+
+	i = 0;
+	if (str[i] == '<' || str[i] == '>')
+	{
+		redirect = str[i++];
+		if (str[i] == redirect)
+			i++;
+	}
+	if (i)
+	{
+		new = ft_lstnew(ft_substr(str, 0, i));
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(splt_pipe, new);
+		return (str + i);
+	}
+	return (str);
+}
+
 t_list	*ft_split_pipe(char *str)
 {
 	t_list	*splt_pipe;
@@ -148,13 +131,16 @@ t_list	*ft_split_pipe(char *str)
 	splt_pipe = NULL;
 	while (*str)
 	{
+		str = ft_skip_redirect(&splt_pipe, str);
+		if (!str)
+			return (NULL);
 		str = ft_skip_alpha(&splt_pipe, str);
 		if (!str)
 			return (NULL);
-		str = ft_skip_spaces(str);
 		str = ft_skip_pipe(&splt_pipe, str);
 		if (!str)
 			return (NULL);
+		str = ft_skip_spaces(str);
 	}
 	ft_lll(splt_pipe);
 	return (splt_pipe);
