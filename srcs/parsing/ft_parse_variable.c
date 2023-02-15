@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 14:28:37 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 14:34:34 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/15 17:58:31 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static int	ft_get_size(t_args *args, char *str)
 	return (size);
 }
 
-#include <string.h> // TODO remove after creating ft_strcat
-
 static char	*ft_current_var(t_args *args, char *new_str, char *str, int *size)
 {
 	char	*variable;
@@ -70,7 +68,7 @@ static char	*ft_current_var(t_args *args, char *new_str, char *str, int *size)
 	env = ft_getenv(args, variable);
 	if (env)
 	{
-		strcat(new_str, env); //TODO changer en ft_strcat
+		new_str = ft_strcat(new_str, env);
 		*size += ft_strlen(env);
 	}
 	free(env);
