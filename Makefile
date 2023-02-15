@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/02/14 17:11:37 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/15 16:22:47 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_parse_quotes.c 	\
 			${D_PARSE}ft_parsing.c 			\
 			${D_PARSE}ft_split_quote.c	 	\
+			${D_PARSE}ft_skip_utils.c		\
 			${D_PARSE}ft_get_stack.c	 	\
 			${D_PARSE}ft_add_to_stack.c		\
 			${D_PARSE}ft_check_parsing.c	\
