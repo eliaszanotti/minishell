@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/15 16:24:56 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 16:34:18 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,26 @@ void	ft_lll(t_list *lst)
 	printf("--end--\n\n");
 }
 
-t_list	*ft_split_pipe(char *str)
+int	ft_split_quote(t_args *args, char *str)
 {
-	t_list	*splt_pipe;
-
-	splt_pipe = NULL;
+	if (!str || !*str)
+		return (0);
+	if (ft_check_quotes(str))
+		return (ft_error(3));
+	args->cl = NULL;
 	while (*str)
 	{
-		str = ft_skip_redirect(&splt_pipe, str);
+		str = ft_skip_redirect(&args->cl, str);
 		if (!str)
-			return (NULL);
-		str = ft_skip_alpha(&splt_pipe, str);
+			return (ft_error(99));
+		str = ft_skip_alpha(&args->cl, str);
 		if (!str)
-			return (NULL);
-		str = ft_skip_pipe(&splt_pipe, str);
+			return (ft_error(99));
+		str = ft_skip_pipe(&args->cl, str);
 		if (!str)
-			return (NULL);
+			return (ft_error(99));
 		str = ft_skip_spaces(str);
 	}
-	ft_lll(splt_pipe);
-	return (splt_pipe);
-}
-
-int	ft_split_quote(t_args *args, char *s)
-{
-	if (!s || !*s)
-		return (0);
-	if (ft_check_quotes(s))
-		return (ft_error(3));
-	args->cl = ft_split_pipe(s);
-	if (!args->cl)
-		return (ft_error(99));
+	ft_lll(args->cl);
 	return (0);
 }
