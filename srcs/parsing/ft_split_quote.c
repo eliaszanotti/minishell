@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/13 17:34:09 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:54:56 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_get_i(char const *s, char c)
+/*static int	ft_get_i(char const *s, char c)
 {
 	char	quote;
 	int		i;
@@ -52,7 +52,7 @@ t_list	*ft_splitstr(char const *s, char c)
 		i = 0;
 	}
 	return (instruction);
-}
+}*/
 
 static int	ft_check_quotes(char *s)
 {
@@ -75,16 +75,98 @@ static int	ft_check_quotes(char *s)
 	return (0);
 }
 
-int	ft_split_quote(t_args *args, char *s, char c)
+#include <stdio.h>
+void	ft_lll(t_list *lst)
 {
-	args->cl = NULL;
+	printf("--log--\n");
+	while (lst)
+	{
+		printf("str = [%s]\n", (char *)lst->content);
+		lst = lst->next;
+	}
+	printf("--end--\n\n");
+}
+
+int	ft_skip_quote(char *str, int i)
+{
+	char	quote;
+
+	quote = str[i++];
+	while (str[i] && str[i] != quote)
+		i++;
+	return (i);
+}
+
+char	*ft_skip_alpha(t_list **splt_pipe, char *str)
+{
+	t_list	*new;
+	int		i;
+
+	i = 0;
+	while (str[i] && str[i] != ' ' && str[i] != '|')
+	{
+		if (str[i] == '"' || str[i] == '\'')
+			i = ft_skip_quote(str, i);
+		i++;
+	}
+	if (i)
+	{
+		new = ft_lstnew(ft_substr(str, 0, i));
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(splt_pipe, new);
+	}
+	return (str + i);
+}
+
+char	*ft_skip_pipe(t_list **splt_pipe, char *str)
+{
+	t_list	*new;
+
+	if (*str == '|')
+	{
+		new = ft_lstnew(ft_strdup("|"));
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(splt_pipe, new);
+		return (str + 1);
+	}
+	return (str);
+}
+
+char	*ft_skip_spaces(char *str)
+{
+	while (*str && *str == ' ')
+		str++;
+	return (str);
+}
+
+t_list	*ft_split_pipe(char *str)
+{
+	t_list	*splt_pipe;
+
+	splt_pipe = NULL;
+	while (*str)
+	{
+		str = ft_skip_alpha(&splt_pipe, str);
+		if (!str)
+			return (NULL);
+		str = ft_skip_spaces(str);
+		str = ft_skip_pipe(&splt_pipe, str);
+		if (!str)
+			return (NULL);
+	}
+	ft_lll(splt_pipe);
+	return (splt_pipe);
+}
+
+int	ft_split_quote(t_args *args, char *s)
+{
 	if (!s || !*s)
 		return (0);
 	if (ft_check_quotes(s))
 		return (ft_error(3));
-	while (*s == c)
-		s++;
-	args->cl = ft_splitstr(s, c);
+	args->cl = ft_split_pipe(s);
 	if (!args->cl)
 		return (ft_error(99));
 	return (0);

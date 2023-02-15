@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/13 17:15:16 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:51:50 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_parse_args(t_args *args, char *command)
 {
-	if (ft_split_quote(args, command, ' '))
+	if (ft_split_quote(args, command))
 		return (1);
 	if (ft_check_parsing(args))
 		return (ft_free_instruction(args->cl), 1);

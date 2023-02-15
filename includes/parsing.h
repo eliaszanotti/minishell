@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/10 16:41:41 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:52:06 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		ft_parse_quotes(t_args *args);
 //	ft_parsing.c
 int		ft_parse_args(t_args *args, char *command);
 //	ft_split_quote.c
-int		ft_split_quote(t_args *args, char *s, char c);
+int		ft_split_quote(t_args *args, char *s);
 
 #endif
