@@ -6,30 +6,11 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 17:16:24 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/15 18:07:57 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**ft_get_command_list(t_list *instruction)
-{
-	char	**command_list;
-	int		size;
-
-	size = ft_lstsize(instruction) + 1;
-	command_list = malloc(sizeof(char *) * size);
-	if (!command_list)
-		return (NULL);
-	size = 0;
-	while (instruction)
-	{
-		command_list[size++] = instruction->content;
-		instruction = instruction->next;
-	}
-	command_list[size] = NULL;
-	return (command_list);
-}
 
 int	ft_check_parsing(t_args *args)
 {
