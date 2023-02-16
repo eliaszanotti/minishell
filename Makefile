@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/02/16 15:20:45 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/16 18:19:26 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,16 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_chained_envp.c		\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
+			${D_PARSE}ft_add_to_ilst.c		\
+			${D_PARSE}ft_add_to_str.c	 	\
 			${D_PARSE}ft_parse_quotes.c 	\
 			${D_PARSE}ft_parsing.c 			\
 			${D_PARSE}ft_split_quote.c	 	\
 			${D_PARSE}ft_skip_utils.c		\
 			${D_PARSE}ft_get_stack.c	 	\
+			${D_PARSE}ft_ilst_to_char.c	 	\
 			${D_PARSE}ft_add_to_stack.c		\
 			${D_PARSE}ft_check_parsing.c	\
-			${D_PARSE}ft_parse_variable.c	\
 			${D_UTILS}ft_struct_init.c 		\
 			${D_UTILS}ft_utils.c 			\
 			${D_UTILS}ft_getenv.c 			\

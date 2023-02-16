@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/01/31 19:08:25 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/16 18:11:10 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*ft_get_new_value(char *value1, char *value2, int add)
 	return (new_value);
 }
 
-static int	ft_add_variable(t_args *args, char *name, char *value, int add)
+static int	ft_add_var_to_envp(t_args *args, char *name, char *value, int add)
 {
 	t_envp	*envp;
 	t_envp	*new;
@@ -62,7 +62,7 @@ int	ft_export(char **cmd, t_args *args)
 		var_value = ft_get_var_value(cmd[i]);
 		if (!var_name || !var_value)
 			return (1);
-		if (*var_name && ft_add_variable(args, var_name, var_value, add))
+		if (*var_name && ft_add_var_to_envp(args, var_name, var_value, add))
 			return (1);
 	}
 	return (0);

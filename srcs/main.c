@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/16 17:44:05 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:20:53 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	{
 		ft_reset_struct(args);
 		if (c)
-			command = "echo \"ejnf' $EDITOR rb'gbrb\"";
+			command = "echo $?\"hhe''ls'dede'\"";
 		else
 			command = readline(args->prompt);
 		free(args->prompt);
