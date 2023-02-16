@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/02/16 12:14:59 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/16 12:20:06 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ S_LIB		= ${D_CHAR}ft_atoi.c			\
 			${D_PUT}ft_putnbr_fd.c			\
 			${D_PUT}ft_putstr_fd.c			\
 			${D_STR}ft_split.c				\
+			${D_STR}ft_strcat.c				\
 			${D_STR}ft_strchr.c				\
 			${D_STR}ft_strcmp.c				\
 			${D_STR}ft_strdup.c				\
