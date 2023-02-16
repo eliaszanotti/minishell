@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/02/15 18:15:36 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/16 15:20:45 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ endif
 
 # SOURCES TODO a trier
 S_MNSH_LIST	= main.c						\
-			${D_UTILS}ft_error.c 			\
+			${D_UTILS}ft_error.c			\
 			${D_BUILTINS}ft_exec_builtins.c	\
 			${D_BUILTINS}ft_echo.c			\
 			${D_BUILTINS}ft_pwd.c			\

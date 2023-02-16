@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:37:49 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/15 17:56:44 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 15:10:39 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_ilst
+{
+	int				content;
+	struct s_ilst	*next;
+}	t_ilst;
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -70,5 +76,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+t_ilst	*ft_ilstnew(int content);
+void	ft_ilstadd_front(t_ilst **lst, t_ilst *new);
+int		ft_ilstsize(t_ilst *lst);
+t_ilst	*ft_ilstlast(t_ilst *lst);
+void	ft_ilstadd_back(t_ilst **lst, t_ilst *new);
 
 #endif

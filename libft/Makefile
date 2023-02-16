@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/02/16 12:20:06 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/16 15:12:29 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,11 @@ S_LIB		= ${D_CHAR}ft_atoi.c			\
 			${D_CHAR}ft_itoa.c				\
 			${D_CHAR}ft_tolower.c			\
 			${D_CHAR}ft_toupper.c			\
+			${D_ILST}ft_ilstadd_back.c		\
+			${D_ILST}ft_ilstadd_front.c		\
+			${D_ILST}ft_ilstlast.c			\
+			${D_ILST}ft_ilstnew.c			\
+			${D_ILST}ft_ilstsize.c			\
 			${D_LST}ft_lstadd_back.c		\
 			${D_LST}ft_lstadd_front.c		\
 			${D_LST}ft_lstclear.c			\
