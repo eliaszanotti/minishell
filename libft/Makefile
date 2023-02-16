@@ -6,43 +6,91 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/02/15 17:55:54 by ezanotti         ###   ########.fr        #
+#    Updated: 2023/02/16 12:14:59 by ezanotti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-S_LIB	= ft_isalpha.c ft_isdigit.c ft_isalnum.c 			\
-		ft_isascii.c ft_isprint.c ft_strlen.c				\
-		ft_memset.c ft_bzero.c ft_memcpy.c					\
-		ft_memmove.c ft_strcmp.c ft_strlcpy.c				\
-		ft_toupper.c ft_tolower.c ft_strchr.c				\
-		ft_strrchr.c ft_strncmp.c ft_memchr.c				\
-		ft_memcmp.c ft_strnstr.c ft_atoi.c					\
-		ft_calloc.c ft_strdup.c ft_substr.c 				\
-		ft_strjoin.c ft_strtrim.c ft_split.c 				\
-		ft_itoa.c ft_strmapi.c ft_striteri.c 				\
-		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c		\
-		ft_putnbr_fd.c ft_lstnew.c ft_lstadd_front.c 		\
-		ft_lstsize.c ft_lstlast.c ft_lstadd_back.c			\
-		ft_lstdelone.c ft_lstclear.c ft_lstiter.c			\
-		ft_lstmap.c ft_strcat.c ft_strlcat.c				\
+S_LIB		= ${D_CHAR}ft_atoi.c			\
+			${D_CHAR}ft_isalnum.c			\
+			${D_CHAR}ft_isalpha.c			\
+			${D_CHAR}ft_isascii.c			\
+			${D_CHAR}ft_isdigit.c			\
+			${D_CHAR}ft_isprint.c			\
+			${D_CHAR}ft_itoa.c				\
+			${D_CHAR}ft_tolower.c			\
+			${D_CHAR}ft_toupper.c			\
+			${D_LST}ft_lstadd_back.c		\
+			${D_LST}ft_lstadd_front.c		\
+			${D_LST}ft_lstclear.c			\
+			${D_LST}ft_lstdelone.c			\
+			${D_LST}ft_lstiter.c			\
+			${D_LST}ft_lstlast.c			\
+			${D_LST}ft_lstmap.c				\
+			${D_LST}ft_lstnew.c				\
+			${D_LST}ft_lstsize.c			\
+			${D_MEM}ft_bzero.c				\
+			${D_MEM}ft_calloc.c				\
+			${D_MEM}ft_memchr.c				\
+			${D_MEM}ft_memcmp.c				\
+			${D_MEM}ft_memcpy.c				\
+			${D_MEM}ft_memmove.c			\
+			${D_MEM}ft_memset.c				\
+			${D_PUT}ft_putchar_fd.c			\
+			${D_PUT}ft_putendl_fd.c			\
+			${D_PUT}ft_putnbr_fd.c			\
+			${D_PUT}ft_putstr_fd.c			\
+			${D_STR}ft_split.c				\
+			${D_STR}ft_strchr.c				\
+			${D_STR}ft_strcmp.c				\
+			${D_STR}ft_strdup.c				\
+			${D_STR}ft_striteri.c			\
+			${D_STR}ft_strjoin.c			\
+			${D_STR}ft_strlcat.c			\
+			${D_STR}ft_strlcpy.c			\
+			${D_STR}ft_strlen.c				\
+			${D_STR}ft_strmapi.c			\
+			${D_STR}ft_strncmp.c			\
+			${D_STR}ft_strnstr.c			\
+			${D_STR}ft_strrchr.c			\
+			${D_STR}ft_strtrim.c			\
+			${D_STR}ft_substr.c				\
 
-DIR_OBJS = .objs/
-OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(S_LIB))
+OBJS		= $(patsubst %.c, $(D_OBJS)%.o, $(S_LIB))
 
 # VARIABLES
-NAME	= libft.a
-CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
-RM		= rm -rf
-PRINT	= @printf
+NAME		= libft.a
+CC			= cc
 
-# COMPILATION
-all :		${NAME}
+# FLAGS
+MAKEFLAGS	+= --no-print-directory
+CFLAGS		= -Wall -Wextra -Werror -I . -g3
 
-${DIR_OBJS}%.o :  %.c	libft.h Makefile
-				@mkdir -p $(shell dirname $@)
-				@${PRINT} "${YELLOW}${SUPPR}Creating libft's objects : $@"
-				@${CC} ${CFLAGS} -c $< -o $@
+# COMMANDS
+RM			= rm -rf
+PRINT		= @printf
+
+# DIRECTORIES
+D_OBJS		= .objs/
+D_CHAR		= char/
+D_ILST		= ilst/
+D_LST		= lst/
+D_MEM		= mem/
+D_PUT		= put/
+D_STR		= str/
+
+# COLORS
+RED			= \033[1;31m
+GREEN		= \033[1;32m
+YELLOW		= \033[1;33m
+DEFAULT		= \033[0m
+SUPPR		= \r\033[2K
+
+all:		${NAME}
+
+${D_OBJS}%.o:%.c	libft.h Makefile
+			@mkdir -p $(shell dirname $@)
+			@${PRINT} "${YELLOW}${SUPPR}Creating libft's objects : $@"
+			@${CC} ${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating libft's objects : DONE\n"
@@ -50,19 +98,12 @@ ${NAME}:	${OBJS}
 			@ar rc ${NAME} ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Compiling libft : DONE ${DEFAULT}\n"
 
-clean :
-			@${RM} ${DIR_OBJS}
+clean:
+			@${RM} ${D_OBJS}
 
-fclean :	clean
+fclean:		clean
 			@${RM} ${NAME} 
 
-re :		fclean all
+re:			fclean all
 
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-DEFAULT = \033[0m
-SUPPR = \r\033[2K
-MAKEFLAGS += --no-print-directory
-
-.PHONY : all re clean fclean
+.PHONY:		all re clean fclean
