@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 18:23:29 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:31:27 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char	*ft_add_double(t_args *args, t_ilst **str, char *content)
 				content++;
 			}
 		}
+		if (*content == '"')
+			return (content + 1);
 	}
 	return (content);
 }
