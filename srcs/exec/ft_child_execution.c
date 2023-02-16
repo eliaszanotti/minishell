@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/14 18:27:44 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:43:02 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ int	ft_execute_child(t_args *args, char **command, int last)
 	args->fdd = fd[0];
 	return (0);
 }
-

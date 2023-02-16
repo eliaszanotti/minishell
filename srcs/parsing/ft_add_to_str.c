@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 18:31:27 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:40:44 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 			if (!name)
 				return (NULL);
 			if (ft_add_var_to_ilst(args, str, name))
-				return (NULL);
+				return (free(name), NULL);
+			free(name);
 			return (content + i);
 		}
 	}

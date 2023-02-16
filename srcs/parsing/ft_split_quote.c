@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/15 17:07:30 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:43:24 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,6 @@ static int	ft_check_quotes(char *s)
 	return (0);
 }
 
-#include <stdio.h>
-void	ft_lll(t_list *lst)
-{
-	printf("--log--\n");
-	while (lst)
-	{
-		printf("str = [%s]\n", (char *)lst->content);
-		lst = lst->next;
-	}
-	printf("--end--\n\n");
-}
-
 int	ft_split_quote(t_args *args, char *str)
 {
 	if (!str || !*str)
@@ -65,6 +53,5 @@ int	ft_split_quote(t_args *args, char *str)
 			return (ft_error(99));
 		str = ft_skip_spaces(str);
 	}
-	//ft_lll(args->cl);
 	return (0);
 }

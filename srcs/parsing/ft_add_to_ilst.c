@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:52:31 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 17:52:45 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:42:22 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_add_var_to_ilst(t_args *args, t_ilst **str, char *name)
 
 	value = ft_getenv(args, name);
 	if (!value)
-		return (free(name), 0);
+		return (0);
 	i = -1;
 	while (value[++i])
 	{
@@ -29,6 +29,7 @@ int	ft_add_var_to_ilst(t_args *args, t_ilst **str, char *name)
 			return (ft_error(99));
 		ft_ilstadd_back(str, new);
 	}
+	free(value);
 	return (0);
 }
 

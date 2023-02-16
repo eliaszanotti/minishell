@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/16 18:28:08 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 18:38:55 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	{
 		ft_reset_struct(args);
 		if (c)
-			command = "echo \"fejfjnen\"'$EDITOR'\"ntjh\"";
+			command = "ls | grep RE > out";
 		else
 			command = readline(args->prompt);
 		free(args->prompt);
@@ -72,7 +72,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 			add_history(command);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);
-			//ft_free_instruction(args->cl);
+			ft_free_instruction(args->cl);
 			ft_free_stack(args->stack);
 			errno = 0; // TODO peutetre a deplacer
 		}
