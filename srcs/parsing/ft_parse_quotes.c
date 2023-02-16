@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/02/16 16:40:15 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/16 17:46:45 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_new_content(t_ilst *str)
+char	*ft_ilst_to_char(t_ilst *str)
 {
 	t_ilst	*tmp;
 	char	*new_str;
@@ -106,7 +106,11 @@ char	*ft_skip_variable(t_args *args, t_ilst **str, char *content)
 char	*ft_skip_char(t_ilst **str, char *content)
 {
 	t_ilst	*new;
-
+	
+	if (*content == '\'')
+		return (content);
+	if (*content == '"')
+		return (content + 1);
 	if (*content != '$')
 	{
 		new = ft_ilstnew(*content);
@@ -114,6 +118,51 @@ char	*ft_skip_char(t_ilst **str, char *content)
 			return (NULL);
 		ft_ilstadd_back(str, new);
 		return (content + 1);
+	}
+	return (content);
+}
+
+char	*ft_skip_single(t_ilst **str, char *content)
+{
+	t_ilst	*new;
+
+	if (*content == '\'')
+	{
+		content++;
+		while (*content && *content != '\'')
+		{
+			new = ft_ilstnew(*content);
+			if (!new)
+				return (NULL);
+			ft_ilstadd_back(str, new);
+			content++;
+		}
+		if (*content == '\'')
+			content++;
+	}
+	return (content);
+}
+
+char	*ft_skip_double(t_args *args, t_ilst **str, char *content)
+{
+	t_ilst	*new;
+
+	if (*content == '"')
+	{
+		content++;
+		while (*content && *content != '"')
+		{
+			content = ft_skip_variable(args, str, content);
+			if (!content)
+				return (NULL);
+			new = ft_ilstnew(*content);
+			if (!new)
+				return (NULL);
+			ft_ilstadd_back(str, new);
+			content++;
+		}
+		if (*content == '"')
+			content++;
 	}
 	return (content);
 }
@@ -127,14 +176,20 @@ char	*ft_replace_env2(t_args *args, t_list *instruction)
 	content = instruction->content;
 	while (*content)
 	{
-		content = ft_skip_char(&str, content);
+		content = ft_skip_single(&str, content);
+		if (!content)
+			return (NULL);
+		content = ft_skip_double(args, &str, content);
 		if (!content)
 			return (NULL);
 		content = ft_skip_variable(args, &str, content);
 		if (!content)
 			return (NULL);
+		content = ft_skip_char(&str, content);
+		if (!content)
+			return (NULL);
 	}
-	return (ft_get_new_content(str));
+	return (ft_ilst_to_char(str));
 }
 
 int	ft_parse_quotes(t_args *args)
