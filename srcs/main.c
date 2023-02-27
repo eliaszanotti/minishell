@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/16 18:38:55 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/27 17:11:16 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,26 +59,28 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	{
 		ft_reset_struct(args);
 		if (c)
-			command = "ls | grep RE > out";
+			command = c;
 		else
 			command = readline(args->prompt);
 		free(args->prompt);
 		if (!command)
 			ft_exit(args);
+		add_history(command);
 		error_code = ft_parse_args(args, command);
+		//printf("errno == %d\n", errno); // TODO gerer les erreurs 
 		if (!error_code)
 		{
 			//ft_log(args->stack);
-			add_history(command);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);
 			ft_free_instruction(args->cl);
 			ft_free_stack(args->stack);
-			errno = 0; // TODO peutetre a deplacer
+			errno = 0; // TODO add condition
 		}
 		//printf("errno == %d\n", errno); // TODO gerer les erreurs 
+		args->last_err = errno;
 		if (c)
-			return (ft_free_envp(args), 1);
+			return (ft_free_envp(args), 0);
 		free(command);
 	}
 	return (ft_free_envp(args), 0);
@@ -91,7 +93,6 @@ int	main(int argc, char **argv, char **envp)
 	t_args	args;
 
 	(void)argc;
-	(void)argv;
 	// TODO temp
 	char *c;
 	if (argc == 3)
@@ -105,7 +106,8 @@ int	main(int argc, char **argv, char **envp)
 	if (ft_prompt_loop(&args, c))
 	{
 		exit(errno);
-		return (1);
+		return (errno);
 	}
+	exit(errno);
 	return (errno);
 }

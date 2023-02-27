@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 18:40:44 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:39:24 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 	{
 		content++;
 		if (*content == '?')
-			return (ft_add_errno_to_ilst(str, content));
+			return (ft_add_errno_to_ilst(args, str, content));
 		while (content[i] && ft_is_variable(content[i]))
 			i++;
 		if (i)

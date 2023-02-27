@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/16 18:05:46 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:40:12 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_args	t_args;
 
 //	ft_add_to_ilst.c
 int		ft_add_var_to_ilst(t_args *args, t_ilst **str, char *name);
-char	*ft_add_errno_to_ilst(t_ilst **str, char *content);
+char	*ft_add_errno_to_ilst(t_args *args, t_ilst **str, char *content);
 //	ft_add_to_stack.c
 int		ft_add_redirects(t_args *args, t_list *instruction, int max);
 int		ft_add_command(t_args *args, t_list *cmd, int max);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 13:54:33 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/27 15:36:22 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_args
 	int		outfile;
 	int		fdd;
 	int		size;
+	int		last_err;
 }	t_args;
 
 t_envp	*ft_envpnew(char *name, char *value);

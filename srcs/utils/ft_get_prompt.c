@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/01 12:20:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/02/27 13:20:39 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ char	*ft_get_prompt(t_args *args, char *cwd)
 	{
 		cwd = ft_get_dir(args, cwd);
 		logname = ft_get_logname(args);
-		start = ft_strjoin("\001\e[100;36m ", logname);
+		start = ft_strjoin("\001\e[100;36m\002 ", logname);
 		free(logname);
 		tmp = ft_strjoin(start, cwd);
 		free(start);
 		free(cwd);
-		cwd = ft_strjoin(tmp, " \001\e[36;49m\ue0b0\e[0m\002 ");
+		cwd = ft_strjoin(tmp, " \001\e[36;49m\002\001\ue0b0\002\001\e[0m\002 ");
 		free(tmp);
 		return (cwd);
 	}
