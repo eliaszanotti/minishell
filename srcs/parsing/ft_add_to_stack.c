@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:29:17 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 13:13:28 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/28 11:20:39 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ int	ft_add_redirects(t_args *args, t_list *instruction, int max)
 			max--;
 		}
 		instruction = instruction->next;
+	}
+	return (0);
+}
+
+static int	ft_add_instruction_to_stack(t_args *args, t_list *instruction)
+{
+	t_list	*new;
+
+	if (instruction)
+	{
+		new = ft_lstnew(instruction);
+		if (!new)
+			return (ft_error(99));
+		ft_lstadd_back(&args->stack, new);
 	}
 	return (0);
 }
@@ -54,9 +68,5 @@ int	ft_add_command(t_args *args, t_list *cmd, int max)
 			cmd = cmd->next;
 		}
 	}
-	new = ft_lstnew(instruction);
-	if (!new)
-		return (ft_error(99));
-	ft_lstadd_back(&args->stack, new);
-	return (0);
+	return (ft_add_instruction_to_stack(args, instruction));
 }

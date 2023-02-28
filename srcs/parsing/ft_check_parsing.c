@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/02/15 18:07:57 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/28 11:21:15 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_check_command(t_args *args)
 	t_list	*stack;
 
 	stack = args->stack;
-	while (stack)
+	while (stack && stack->content)
 	{
 		if (!ft_is_delimiter(stack->content) && \
 			!ft_is_command(args, stack->content) && \
