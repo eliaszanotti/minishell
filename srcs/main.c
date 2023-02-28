@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/28 10:33:19 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:03:49 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	{
 		ft_reset_struct(args);
 		if (c)
-			command = "> out";
+			command = c;
 		else
 			command = readline(args->prompt);
 		free(args->prompt);
@@ -71,7 +71,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 		//printf("errno == %d\n", errno); // TODO gerer les erreurs 
 		if (!error_code)
 		{
-			ft_log(args->stack);
+			//ft_log(args->stack);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);
 			ft_free_instruction(args->cl);

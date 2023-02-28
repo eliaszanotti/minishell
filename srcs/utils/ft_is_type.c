@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:37:35 by elias             #+#    #+#             */
-/*   Updated: 2023/02/27 15:48:10 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/28 13:02:27 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,9 @@ int	ft_is_command(t_args *args, t_list *instruction)
 	char	*path;
 
 	cmd = instruction->content;
-	//printf("er = %d\n", errno);
 	path = ft_get_path(args, cmd);
 	if (path)
 		errno = 0;
-	//printf("er = %d\n", errno);
-
 	if (path)
 	{
 		free(path);
