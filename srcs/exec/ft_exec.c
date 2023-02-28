@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 19:18:37 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/02/28 12:58:13 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static int	ft_execute_command(t_args *args)
 			return (1);
 		stack = stack->next;
 	}
+	if (!stack)
+		return (0);
 	instruction = ft_get_instruction(stack->content);
 	if (!instruction)
 		return (ft_error(99));
