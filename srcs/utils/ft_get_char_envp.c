@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:02:36 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:54:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/01 13:46:06 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 char	*ft_get_name_and_value(char *name, char *value)
 {
 	char	*str;
+	char	*tmp;
 
-	str = ft_strjoin(name, "=");
-	str = ft_strjoin(str, value);
+	tmp = ft_strjoin(name, "=");
+	str = ft_strjoin(tmp, value);
+	free(tmp);
 	return (str);
 }
 
