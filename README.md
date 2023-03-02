@@ -1,4 +1,4 @@
-#MINISHELL
+# MINISHELL
 
 ## Error code
 
@@ -12,8 +12,6 @@
 
 **[ERROR:6]** Parse error at end of command
 
-
-
 **[ERROR:10]** Failed to create fork
 
 **[ERROR:11]** Failed to pipe fd
@@ -26,11 +24,21 @@
 
 **[ERROR:15]** Can't create file
 
-
-
 **[ERROR:20]** No such file or directory
 
 **[ERROR:99]** Malloc cannot be created
+
+## Installation 
+
+```bash
+git clone https://github.com/eliaszanotti/minishell.git
+```
+
+To install minishell you just have to clone the project and run the following command:
+
+```c
+make
+```
 
 ## Bonnes pratiques
 
