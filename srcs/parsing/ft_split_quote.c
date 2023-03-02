@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 15:30:39 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 17:20:26 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 	int		i;
 
 	i = 0;
-	if (*str == '$')
+	if (*str == '$' && str[1] != '?')
 	{
 		str++;
 		while (str[i] && ft_is_variable(str[i]))
