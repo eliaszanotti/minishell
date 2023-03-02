@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 18:43:24 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:20:11 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,53 @@ static int	ft_check_quotes(char *s)
 	return (0);
 }
 
+static int	ft_add_each_variable(t_list **splt_pipe, char *value)
+{
+	char	**values;
+	t_list	*new;
+	int		i;
+
+	values = ft_split(value, ' ');
+	if (!values)
+		return (ft_error(99));
+	i = 0;
+	while (values[i])
+	{
+		new = ft_lstnew(ft_strdup(values[i]));
+		if (!new)
+			return (ft_free_str(values), ft_error(99));
+		ft_lstadd_back(splt_pipe, new);
+		i++;
+	}
+	return (ft_free_str(values), 0);
+}
+
+static char	*ft_skip_variable(t_args *args, t_list **splt_pipe, char *str)
+{
+	char	*name;
+	char	*value;
+	int		i;
+
+	i = 0;
+	if (*str == '$')
+	{
+		str++;
+		while (str[i] && ft_is_variable(str[i]))
+			i++;
+		name = ft_substr(str, 0, i);
+		if (!name)
+			return (NULL);
+		value = ft_getenv(args, name);
+		free(name);
+		if (!value)
+			return (str + i);
+		if (ft_add_each_variable(splt_pipe, value))
+			return (free(value), NULL);
+		return (free(value), str + i);
+	}
+	return (str);
+}
+
 int	ft_split_quote(t_args *args, char *str)
 {
 	if (!str || !*str)
@@ -46,6 +93,9 @@ int	ft_split_quote(t_args *args, char *str)
 		if (!str)
 			return (ft_error(99));
 		str = ft_skip_alpha(&args->cl, str);
+		if (!str)
+			return (ft_error(99));
+		str = ft_skip_variable(args, &args->cl, str);
 		if (!str)
 			return (ft_error(99));
 		str = ft_skip_pipe(&args->cl, str);

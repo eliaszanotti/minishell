@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:19:51 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 15:51:52 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:00:35 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_skip_quote(char *str, int i)
 	return (i);
 }
 
-char	*ft_skip_redirect(t_list **splt_pipe, char *str)
+char	*ft_skip_redirect(t_list **splt_pipe, char *str) // TODO change splt_pipe to instruction
 {
 	t_list	*new;
 	char	redirect;
@@ -41,9 +41,8 @@ char	*ft_skip_redirect(t_list **splt_pipe, char *str)
 		if (!new)
 			return (NULL);
 		ft_lstadd_back(splt_pipe, new);
-		return (str + i);
 	}
-	return (str);
+	return (str + i);
 }
 
 char	*ft_skip_alpha(t_list **splt_pipe, char *str)
@@ -53,7 +52,7 @@ char	*ft_skip_alpha(t_list **splt_pipe, char *str)
 
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '<' && \
-		str[i] != '>')
+		str[i] != '>' && str[i] != '$')
 	{
 		if (str[i] == '"' || str[i] == '\'')
 			i = ft_skip_quote(str, i);
