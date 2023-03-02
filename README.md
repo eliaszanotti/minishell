@@ -1,6 +1,23 @@
 # MINISHELL
 
-## Error code
+## Table of Contents
+
+1. [Instalation](#instalation)
+2. [Errors](#errors)
+
+## Instalation 
+
+```bash
+git clone https://github.com/eliaszanotti/minishell.git
+```
+
+To install minishell you just have to clone the project and run the following command:
+
+```c
+make
+```
+
+## Errors
 
 **[ERROR:2]** Command not found
 
@@ -27,18 +44,6 @@
 **[ERROR:20]** No such file or directory
 
 **[ERROR:99]** Malloc cannot be created
-
-## Installation 
-
-```bash
-git clone https://github.com/eliaszanotti/minishell.git
-```
-
-To install minishell you just have to clone the project and run the following command:
-
-```c
-make
-```
 
 ## Bonnes pratiques
 
