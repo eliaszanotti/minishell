@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/03/02 15:21:18 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:29:05 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	ft_prompt_loop(t_args *args, char *c)
 			//ft_log(args->stack);
 			if (ft_start_execution(args) == 99)
 				return (ft_free_envp(args), 1);
-			ft_free_instruction(args->cl);
+			ft_free_instruction(args->command_list);
 			ft_free_stack(args->stack);
 			errno = 0; // TODO add condition
 		}

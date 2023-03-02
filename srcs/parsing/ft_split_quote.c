@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 15:20:11 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:30:39 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_check_quotes(char *s)
 	return (0);
 }
 
-static int	ft_add_each_variable(t_list **splt_pipe, char *value)
+static int	ft_add_each_variable(t_list **instruction, char *value)
 {
 	char	**values;
 	t_list	*new;
@@ -48,13 +48,13 @@ static int	ft_add_each_variable(t_list **splt_pipe, char *value)
 		new = ft_lstnew(ft_strdup(values[i]));
 		if (!new)
 			return (ft_free_str(values), ft_error(99));
-		ft_lstadd_back(splt_pipe, new);
+		ft_lstadd_back(instruction, new);
 		i++;
 	}
 	return (ft_free_str(values), 0);
 }
 
-static char	*ft_skip_variable(t_args *args, t_list **splt_pipe, char *str)
+static char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 {
 	char	*name;
 	char	*value;
@@ -73,7 +73,7 @@ static char	*ft_skip_variable(t_args *args, t_list **splt_pipe, char *str)
 		free(name);
 		if (!value)
 			return (str + i);
-		if (ft_add_each_variable(splt_pipe, value))
+		if (ft_add_each_variable(instruction, value))
 			return (free(value), NULL);
 		return (free(value), str + i);
 	}
@@ -86,19 +86,19 @@ int	ft_split_quote(t_args *args, char *str)
 		return (1);
 	if (ft_check_quotes(str))
 		return (ft_error(3));
-	args->cl = NULL;
+	args->command_list = NULL;
 	while (*str)
 	{
-		str = ft_skip_redirect(&args->cl, str);
+		str = ft_skip_redirect(&args->command_list, str);
 		if (!str)
 			return (ft_error(99));
-		str = ft_skip_alpha(&args->cl, str);
+		str = ft_skip_alpha(&args->command_list, str);
 		if (!str)
 			return (ft_error(99));
-		str = ft_skip_variable(args, &args->cl, str);
+		str = ft_skip_variable(args, &args->command_list, str);
 		if (!str)
 			return (ft_error(99));
-		str = ft_skip_pipe(&args->cl, str);
+		str = ft_skip_pipe(&args->command_list, str);
 		if (!str)
 			return (ft_error(99));
 		str = ft_skip_spaces(str);

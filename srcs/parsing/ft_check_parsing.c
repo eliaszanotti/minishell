@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/03/02 14:47:37 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:30:17 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 int	ft_check_parsing(t_args *args)
 {
-	t_list	*cl;
+	t_list	*command_list;
 
-	cl = args->cl;
-	if (!cl)
+	command_list = args->command_list;
+	if (!command_list)
 		return (1);
-	if (ft_is_delimiter(cl) == '|')
+	if (ft_is_delimiter(command_list) == '|')
 		return (ft_error(4));
-	while (cl)
+	while (command_list)
 	{
-		if (ft_is_delimiter(cl) && !cl->next)
+		if (ft_is_delimiter(command_list) && !command_list->next)
 			return (ft_error(6));
-		if (ft_is_delimiter(cl) == '|' && cl->next)
-			if (ft_is_delimiter(cl->next) == '|')
+		if (ft_is_delimiter(command_list) == '|' && command_list->next)
+			if (ft_is_delimiter(command_list->next) == '|')
 				return (ft_error(4));
-		if (ft_is_redirect(cl) && cl->next)
-			if (ft_is_delimiter(cl->next))
+		if (ft_is_redirect(command_list) && command_list->next)
+			if (ft_is_delimiter(command_list->next))
 				return (ft_error(5));
-		cl = cl->next;
+		command_list = command_list->next;
 	}
 	return (0);
 }

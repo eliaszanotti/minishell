@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:19:51 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 15:00:35 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:23:53 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_skip_quote(char *str, int i)
 	return (i);
 }
 
-char	*ft_skip_redirect(t_list **splt_pipe, char *str) // TODO change splt_pipe to instruction
+char	*ft_skip_redirect(t_list **instruction, char *str) // TODO change splt_pipe to instruction
 {
 	t_list	*new;
 	char	redirect;
@@ -40,12 +40,12 @@ char	*ft_skip_redirect(t_list **splt_pipe, char *str) // TODO change splt_pipe t
 		new = ft_lstnew(ft_substr(str, 0, i));
 		if (!new)
 			return (NULL);
-		ft_lstadd_back(splt_pipe, new);
+		ft_lstadd_back(instruction, new);
 	}
 	return (str + i);
 }
 
-char	*ft_skip_alpha(t_list **splt_pipe, char *str)
+char	*ft_skip_alpha(t_list **instruction, char *str)
 {
 	t_list	*new;
 	int		i;
@@ -63,12 +63,12 @@ char	*ft_skip_alpha(t_list **splt_pipe, char *str)
 		new = ft_lstnew(ft_substr(str, 0, i));
 		if (!new)
 			return (NULL);
-		ft_lstadd_back(splt_pipe, new);
+		ft_lstadd_back(instruction, new);
 	}
 	return (str + i);
 }
 
-char	*ft_skip_pipe(t_list **splt_pipe, char *str)
+char	*ft_skip_pipe(t_list **instruction, char *str)
 {
 	t_list	*new;
 
@@ -77,7 +77,7 @@ char	*ft_skip_pipe(t_list **splt_pipe, char *str)
 		new = ft_lstnew(ft_strdup("|"));
 		if (!new)
 			return (NULL);
-		ft_lstadd_back(splt_pipe, new);
+		ft_lstadd_back(instruction, new);
 		return (str + 1);
 	}
 	return (str);

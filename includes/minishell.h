@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/02/27 15:36:22 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:26:14 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ typedef struct s_args
 	t_list	*stack;
 	t_envp	*envp;
 	char	**char_envp;
-	char	**command_list;
-	t_list	*cl;
+	t_list	*command_list;
 	char	*prompt;
 	pid_t	*pid_tab;
 	int		exit_code;
