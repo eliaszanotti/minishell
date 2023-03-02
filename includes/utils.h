@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/13 14:31:23 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:15:27 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		ft_struct_init(t_args *args, char **envp);
 int		ft_reset_struct(t_args *args);
 //	ft_utils.c
 void	ft_sig_ignore(int sig);
+void	ft_sign(int sig);
 void	ft_free_args(t_args *args);
 
 char	**ft_get_char_envp(t_args *args);

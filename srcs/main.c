@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/02/28 13:51:21 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:09:03 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	char	*command;
 	int		error_code;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, ft_sig_ignore);
 		ft_reset_struct(args);
 		if (c)
 			command = c;
