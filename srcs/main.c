@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/03/02 15:29:05 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:57:09 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	char	*command;
 	int		error_code;
 
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sig_ignore);
 	while (!args->exit_code)
 	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, ft_sig_ignore);
 		ft_reset_struct(args);
 		if (c)
 			command = c;
@@ -86,8 +86,6 @@ static int	ft_prompt_loop(t_args *args, char *c)
 	}
 	return (ft_free_envp(args), 0);
 }
-
-//TODO error quand command = "srcs" et apres "exit"
 
 int	main(int argc, char **argv, char **envp)
 {
