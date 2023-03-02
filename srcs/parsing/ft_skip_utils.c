@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:19:51 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 15:23:53 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:34:23 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	ft_skip_quote(char *str, int i)
 	return (i);
 }
 
-char	*ft_skip_redirect(t_list **instruction, char *str) // TODO change splt_pipe to instruction
+char	*ft_skip_redirect(t_list **instruction, char *str)
 {
 	t_list	*new;
 	char	redirect;
