@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/02/13 11:42:09 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/08 17:23:57 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int	ft_reset_struct(t_args *args)
 	args->outfile = STDOUT_FILENO;
 	args->stack = NULL;
 	args->size = 0;
+	args->fdd = 0;
 	return (0);
 }
