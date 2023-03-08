@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/03/03 11:16:31 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/08 15:28:03 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static int	ft_prompt_loop(t_args *args, char *c)
 			command = readline(args->prompt);
 		free(args->prompt);
 		if (!command)
-			ft_exit(args);
+		{
+			printf("exit\n");
+			return (1);
+		}
 		if (*command)
 			add_history(command);
 		error_code = ft_parse_args(args, command);
