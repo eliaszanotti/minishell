@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/03/08 17:47:45 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:50:47 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ int	ft_start_execution(t_args *args)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;
 	if (ft_execute_command(args))
-		return (free(args->pid_tab), 1);
+		return (free(args->close_tab), free(args->pid_tab), 1);
 	return (ft_wait_execution(args));
 }
