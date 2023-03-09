@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/03/09 16:50:47 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:53:01 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ int	ft_start_execution(t_args *args)
 	}
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
+	if (!args->pid_tab)
+		return (ft_error(99));
 	args->close_tab = malloc(sizeof(int) * args->size);
-	if (!args->pid_tab || !args->close_tab)
+	if (!args->close_tab)
 		return (ft_error(99));
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
