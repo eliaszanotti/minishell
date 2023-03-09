@@ -44,3 +44,29 @@ make
 **[ERROR:20]** No such file or directory
 
 **[ERROR:99]** Malloc cannot be created
+
+## Utils
+
+**ft_log**
+
+```c
+void	ft_u(t_list *in)
+{
+	while (in)
+	{
+		printf("[%s]", (char *)in->content);
+		in = in->next;
+	}
+	printf("\n");
+}
+
+void	ft_log(t_list *stack)
+{
+	while (stack)
+	{
+		ft_u(stack->content);
+		stack = stack->next;
+	}
+	printf("%p\n", stack);
+}
+```
