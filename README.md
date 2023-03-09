@@ -4,6 +4,7 @@
 
 1. [Instalation](#instalation)
 2. [Errors](#errors)
+3. [Utils](#utils)
 
 ## Instalation 
 
@@ -50,7 +51,7 @@ make
 **ft_log**
 
 ```c
-void	ft_u(t_list *in)
+static void	ft_u(t_list *in)
 {
 	while (in)
 	{
