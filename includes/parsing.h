@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/02 15:24:17 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:43:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_add_single(t_ilst **str, char *content);
 char	*ft_add_double(t_args *args, t_ilst **str, char *content);
 //	ft_check_parsing.c
 int		ft_check_parsing(t_args *args);
-int		ft_check_command(t_args *args);
 //	ft_get_stack.c
 int		ft_get_stack(t_args *args, int j);
 //	ft_ilst_to_char.c

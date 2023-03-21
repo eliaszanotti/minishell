@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 11:37:49 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/02/16 15:10:39 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:47:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdint.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -62,10 +63,10 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-void	ft_putchar_fd(char c, int fd);
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
+int		ft_putchar_fd(char c, int fd);
+int		ft_putstr_fd(char *s, int fd);
+int		ft_putendl_fd(char *s, int fd);
+int		ft_putnbr_fd(int n, int fd);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
@@ -82,5 +83,10 @@ void	ft_ilstadd_front(t_ilst **lst, t_ilst *new);
 int		ft_ilstsize(t_ilst *lst);
 t_ilst	*ft_ilstlast(t_ilst *lst);
 void	ft_ilstadd_back(t_ilst **lst, t_ilst *new);
+
+int		ft_printf_fd(const char *s, int fd, ...);
+int		ft_putnbr_unsigned_fd(unsigned int n, int fd);
+int		ft_printaddress_fd(void *address, int fd);
+int		ft_base_fd(char *base, long int nbr, int fd);
 
 #endif

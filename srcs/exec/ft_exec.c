@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/03/09 16:53:01 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:18:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ static t_list	*ft_execute_loop(t_args *args, t_list *stack)
 	current = stack;
 	count = 0;
 	while (current && count < args->size - 1)
-	{	
+	{
 		if (ft_is_redirect(current->content) && \
 			ft_redirect(current->content, args))
 			return (NULL);
-		else if (ft_is_command(args, current->content) || \
-			ft_is_builtins(current->content))
+		else if (!ft_is_delimiter(current->content))
 		{
 			instruction = ft_get_instruction(current->content);
 			if (!instruction)
@@ -95,8 +94,7 @@ int	ft_start_execution(t_args *args)
 	i = -1;
 	while (stack)
 	{
-		if (ft_is_builtins(stack->content) || \
-			ft_is_command(args, stack->content))
+		if (!ft_is_delimiter(stack->content))
 			args->size++;
 		stack = stack->next;
 	}
