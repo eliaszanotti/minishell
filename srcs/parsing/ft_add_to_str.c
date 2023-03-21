@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 15:34:37 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:05:13 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ft_add_double(t_args *args, t_ilst **str, char *content)
 			content = ft_add_variable(args, str, content);
 			if (!content)
 				return (NULL);
-			if (*content != '"')
+			if (*content != '"' && *content != '$')
 			{
 				new = ft_ilstnew(*content);
 				if (!new)
