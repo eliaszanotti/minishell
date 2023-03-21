@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:20:04 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 19:41:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/21 12:08:00 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_env(t_args *args)
 	envp = args->envp;
 	while (envp)
 	{
-		printf("%s=%s\n", envp->name, envp->value);
+		if (envp->value[0] != '\0')
+			printf("%s=%s\n", envp->name, envp->value);
 		envp = envp->next;
 	}
 	return (0);
