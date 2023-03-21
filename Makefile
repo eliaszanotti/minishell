@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/03/21 13:43:43 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/03/21 16:33:21 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,15 +57,15 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_struct_init.c 		\
 			${D_UTILS}ft_utils.c 			\
 
-HEADERS_LIST	= minishell.h	\
-			  	  exec.h		\
-				  builtins.h	\
-				  parsing.h		\
-				  utils.h		\
+HDRS_LIST =	minishell.h	\
+			exec.h		\
+			builtins.h	\
+			parsing.h	\
+			utils.h		\
 
 OBJS		= $(patsubst %.c, $(DIR_OBJS)%.o, $(S_MNSH))
 S_MNSH		= ${addprefix ${DIR_SRC}, ${S_MNSH_LIST}}
-HEADERS		= ${addprefix ${DIR_INCLUDE}, ${HEADERS_LIST}}
+HDRS		= ${addprefix ${DIR_INCLUDE}, ${HDRS_LIST}}
 
 # DIRECTORIES
 DIR_OBJS	= .objs/
@@ -98,7 +98,7 @@ SUPPR		= \r\033[2K
 # COMPILATION
 all :		${NAME}
 
-${DIR_OBJS}%.o: %.c	${HEADERS} Makefile
+${DIR_OBJS}%.o: %.c	${HDRS} Makefile
 			@mkdir -p $(shell dirname $@)
 			@${PRINT} "${YELLOW}${SUPPR}Creating ${NAME}'s objects : $@"
 			@${CC} ${CFLAGS} -I ./libft -I ${DIR_INCLUDE} -c $< -o $@ 

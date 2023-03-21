@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_envp_utils.c                                    :+:      :+:    :+:   */
+/*   ft_chained_envp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 14:52:40 by elias             #+#    #+#             */
-/*   Updated: 2023/01/31 18:39:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/21 17:21:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_envpsize(t_envp *envp)
 	return (count);
 }
 
-t_envp	*ft_envpnew(char *name, char *value)
+t_envp	*ft_envpnew(char *name, char *value, int equal)
 {
 	t_envp	*envp;
 
@@ -34,6 +34,7 @@ t_envp	*ft_envpnew(char *name, char *value)
 		return (NULL);
 	envp->name = name;
 	envp->value = value;
+	envp->equal = equal;
 	envp->next = NULL;
 	return (envp);
 }

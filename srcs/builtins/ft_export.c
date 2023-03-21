@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/21 12:12:42 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:35:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ static int	ft_add_var_to_envp(t_args *args, char *name, char *value, int add)
 		envp = envp->next;
 	if (!envp)
 	{
-		new = ft_envpnew(name, value);
+		if (args->equal)
+			new = ft_envpnew(name, value, 1);
+		else
+			new = ft_envpnew(name, value, 0);
 		if (!new)
 			return (ft_error(99));
 		ft_envpadd_back(&args->envp, new);
@@ -56,10 +59,10 @@ static void	ft_print_export(t_args *args)
 	envp = args->envp;
 	while (envp)
 	{
-		if (envp->value[0] == '\0')
+		if (!envp->equal)
 			printf("declare -x %s\n", envp->name);
 		else
-			printf("declare -x %s=%s\n", envp->name, envp->value);
+			printf("declare -x %s=\"%s\"\n", envp->name, envp->value);
 		envp = envp->next;
 	}
 }
@@ -78,7 +81,7 @@ int	ft_export(char **cmd, t_args *args)
 	while (cmd[++i])
 	{
 		var_name = ft_get_var_name(cmd[i], &add);
-		var_value = ft_get_var_value(cmd[i]);
+		var_value = ft_get_var_value(args, cmd[i]);
 		if (!var_name || !var_value)
 			return (1);
 		if (*var_name && ft_add_var_to_envp(args, var_name, var_value, add))

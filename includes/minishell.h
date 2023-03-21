@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/03/08 17:59:14 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:31:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_envp
 {
 	char			*name;
 	char			*value;
+	int				equal;
 	struct s_envp	*next;
 }	t_envp;
 
@@ -52,9 +53,10 @@ typedef struct s_args
 	int		fdd;
 	int		size;
 	int		last_err;
+	int		equal;
 }	t_args;
 
-t_envp	*ft_envpnew(char *name, char *value);
+t_envp	*ft_envpnew(char *name, char *value, int equal);
 t_envp	*ft_envplast(t_envp *envp);
 void	ft_envpadd_back(t_envp **lst, t_envp *new);
 int		ft_envpsize(t_envp *envp);

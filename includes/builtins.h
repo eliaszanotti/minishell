@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/16 18:10:54 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:32:27 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ int		ft_unset(t_args *args, char **cmd);
 //	ft_env_utils.c
 int		ft_is_variable(char c);
 char	*ft_get_var_name(char *var, int *add);
-char	*ft_get_var_value(char *var);
+char	*ft_get_var_value(t_args *args, char *var);
 
 #endif
