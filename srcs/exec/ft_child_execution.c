@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/21 19:17:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/03/21 19:40:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	char	*path;
 
 	close(fd[0]);
+	if (args->infile == -1)
+		exit(1);
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
 		return (ft_error(13));
 	else if (dup2(args->fdd, STDIN_FILENO) == -1)
