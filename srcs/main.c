@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/03/21 18:21:10 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/26 16:29:18 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	ft_prompt_loop(t_args *args)
 		if (!command)
 		{
 			printf("exit\n");
-			return (0);
+			return (ft_free_envp(args), 0);
 		}
 		if (*command)
 			add_history(command);
