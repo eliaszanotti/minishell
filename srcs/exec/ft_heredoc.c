@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/26 16:31:13 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:21:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_heredoc(t_args *args, char *delimiter)
 			write(fd[1], "\n", 1);
 			free(line);
 		}
-		else 
+		else
 			printf("\r\033[2K");
 	}
 	args->infile = fd[0];
