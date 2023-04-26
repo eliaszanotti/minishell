@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:24:09 by elias             #+#    #+#             */
-/*   Updated: 2023/03/02 15:30:17 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:43:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ int	ft_check_parsing(t_args *args)
 			if (ft_is_delimiter(command_list->next))
 				return (ft_error(5));
 		command_list = command_list->next;
-	}
-	return (0);
-}
-
-int	ft_check_command(t_args *args)
-{
-	t_list	*stack;
-
-	stack = args->stack;
-	while (stack && stack->content)
-	{
-		if (!ft_is_delimiter(stack->content) && \
-			!ft_is_command(args, stack->content) && \
-			!ft_is_builtins(stack->content))
-			return (ft_error(2));
-		stack = stack->next;
 	}
 	return (0);
 }

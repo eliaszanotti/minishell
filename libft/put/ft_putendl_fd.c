@@ -6,16 +6,19 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 10:18:50 by ezanotti          #+#    #+#             */
-/*   Updated: 2022/11/14 09:56:48 by ezanotti         ###   ########lyon.fr   */
+/*   Updated: 2023/03/21 12:49:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+int	ft_putendl_fd(char *s, int fd)
 {
+	int	total;
+
 	if (!s)
-		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+		return (0);
+	total = ft_putstr_fd(s, fd);
+	total += ft_putchar_fd('\n', fd);
+	return (total);
 }

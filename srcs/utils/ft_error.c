@@ -6,21 +6,23 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/02/27 15:32:03 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:37:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_error_range_1(int error_code)
+int	ft_error_command(char *command)
+{
+	ft_printf_fd("\e[1;31m[ERROR]\e[0m ", STDERR_FILENO);
+	ft_printf_fd("%s : Command not found\n", STDERR_FILENO, command);
+	return (errno);
+}
+
+static int	ft_error_range_1(int error_code)
 {
 	errno = 2;
-	if (error_code == 2)
-	{
-		errno = 127;
-		printf("Command not found\n");
-	}
-	else if (error_code == 3)
+	if (error_code == 3)
 		printf("Parse error (quote not closed)\n");
 	else if (error_code == 4)
 		printf("Parse error on pipe\n");
@@ -31,7 +33,7 @@ int	ft_error_range_1(int error_code)
 	return (1);
 }
 
-int	ft_error_range_2(int error_code)
+static int	ft_error_range_2(int error_code)
 {
 	if (error_code == 10)
 		printf("Failed to create fork\n");

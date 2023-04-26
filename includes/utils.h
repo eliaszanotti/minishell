@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/02 13:15:27 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/21 18:49:43 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 //	ft_error.c
+int		ft_error_command(char *command);
 int		ft_error(int error_code);
 //	ft_free.c
 void	ft_free_str(char **str);

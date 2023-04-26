@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
+#    By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/14 16:29:50 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/02/16 15:12:29 by ezanotti         ###   ########.fr        #
+#    Created: 2023/03/10 14:00:04 by ezanotti          #+#    #+#              #
+#    Updated: 2023/03/21 12:41:47 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ S_LIB		= ${D_CHAR}ft_atoi.c			\
 			${D_MEM}ft_memcpy.c				\
 			${D_MEM}ft_memmove.c			\
 			${D_MEM}ft_memset.c				\
+			${D_PRINTF}printf_fd.c			\
+			${D_PRINTF}printf_fd_utils.c	\
 			${D_PUT}ft_putchar_fd.c			\
 			${D_PUT}ft_putendl_fd.c			\
 			${D_PUT}ft_putnbr_fd.c			\
@@ -69,7 +71,7 @@ CC			= cc
 
 # FLAGS
 MAKEFLAGS	+= --no-print-directory
-CFLAGS		= -Wall -Wextra -Werror -I . -g3
+CFLAGS		= -Wall -Wextra -Werror -I .
 
 # COMMANDS
 RM			= rm -rf
@@ -81,6 +83,7 @@ D_CHAR		= char/
 D_ILST		= ilst/
 D_LST		= lst/
 D_MEM		= mem/
+D_PRINTF	= printf/
 D_PUT		= put/
 D_STR		= str/
 
@@ -94,21 +97,21 @@ SUPPR		= \r\033[2K
 all:		${NAME}
 
 ${D_OBJS}%.o:%.c	libft.h Makefile
-			@mkdir -p $(shell dirname $@)
-			@${PRINT} "${YELLOW}${SUPPR}Creating libft's objects : $@"
-			@${CC} ${CFLAGS} -c $< -o $@
+			@mkdir -p	$(shell dirname $@)
+			@${PRINT}	"${YELLOW}${SUPPR}Creating libft's objects : $@"
+			@${CC}		${CFLAGS} -c $< -o $@
 
 ${NAME}:	${OBJS}
-			@${PRINT} "${GREEN}${SUPPR}Creating libft's objects : DONE\n"
-			@${PRINT} "${YELLOW}Compiling libft... ${DEFAULT}"
-			@ar rc ${NAME} ${OBJS}
-			@${PRINT} "${GREEN}${SUPPR}Compiling libft : DONE ${DEFAULT}\n"
+			@${PRINT}	"${GREEN}${SUPPR}Creating libft's objects : DONE\n"
+			@${PRINT}	"${YELLOW}Compiling libft... ${DEFAULT}"
+			@ar rc		${NAME} ${OBJS}
+			@${PRINT}	"${GREEN}${SUPPR}Compiling libft : DONE ${DEFAULT}\n"
 
 clean:
-			@${RM} ${D_OBJS}
+			@${RM}		${D_OBJS}
 
 fclean:		clean
-			@${RM} ${NAME} 
+			@${RM}		${NAME} 
 
 re:			fclean all
 
