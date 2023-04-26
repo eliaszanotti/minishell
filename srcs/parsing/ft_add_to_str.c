@@ -6,7 +6,7 @@
 /*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/21 18:05:13 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/26 17:14:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 	int		i;
 
 	i = 0;
+	if (*content == '~')
+	{
+		if (*(content + 1) != '/' && *(content + 1) != ' ' && *(content + 1))
+			return (content);
+		if (ft_add_var_to_ilst(args, str, "HOME"))
+			return (NULL);
+		return (content + 1);
+	}
 	if (*content == '$')
 	{
 		content++;
