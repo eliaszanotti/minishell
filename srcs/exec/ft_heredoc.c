@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/01 10:49:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/26 16:31:13 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ int	ft_heredoc(t_args *args, char *delimiter)
 	while (1)
 	{
 		line = readline("heredoc> ");
-		if (!ft_strcmp(line, delimiter))
-			break ;
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
-		free(line);
+		if (line)
+		{
+			if (!ft_strcmp(line, delimiter))
+				break ;
+			write(fd[1], line, ft_strlen(line));
+			write(fd[1], "\n", 1);
+			free(line);
+		}
+		else 
+			printf("\r\033[2K");
 	}
 	args->infile = fd[0];
 	close(fd[1]);
