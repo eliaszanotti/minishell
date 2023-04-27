@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 15:23:55 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 17:11:03 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_exec_builtins(t_args *args, char **command)
 		return (1);
 	else if (!ft_strcmp(command[0], "unset") && ft_unset(args, command))
 		return (1);
-	else if (!ft_strcmp(command[0], "exit"))
-		ft_exit(args);
+	else if (!ft_strcmp(command[0], "exit") && ft_exit(args, command))
+		return (1);
 	return (0);
 }

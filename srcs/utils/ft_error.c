@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/03/21 19:37:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 17:14:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_error_command(char *command)
 {
 	ft_printf_fd("\e[1;31m[ERROR]\e[0m ", STDERR_FILENO);
 	ft_printf_fd("%s : Command not found\n", STDERR_FILENO, command);
-	return (errno);
+	return (0);
 }
 
 static int	ft_error_range_1(int error_code)
@@ -60,6 +60,10 @@ int	ft_error(int error_code)
 		return (ft_error_range_2(error_code));
 	else if (error_code == 20)
 		printf("No such file or directory\n");
+	else if (error_code == 21)
+		printf("exit: numeric argument required\n");
+	else if (error_code == 22)
+		printf("exit: too many arguments\n");
 	else if (error_code == 99)
 	{
 		printf("Malloc cannot be created\n");

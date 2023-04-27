@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 15:24:27 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 17:10:17 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_echo(t_args *args, char **cmd);
 //	ft_env.c
 int		ft_env(t_args *args);
 //	ft_exit.c
-void	ft_exit(t_args *args);
+int		ft_exit(t_args *args, char **command);
 //	ft_exec_builtins.c
 int		ft_exec_builtins(t_args *args, char **command);
 //	ft_export.c

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/04/27 15:19:37 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 17:15:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 
 int	ft_execute_child(t_args *args, char **command, int last)
 {
+	char	*path;
 	int		fd[2];
 	pid_t	pid;
 
@@ -64,10 +65,14 @@ int	ft_execute_child(t_args *args, char **command, int last)
 		return (ft_error(4));
 	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
+	path = ft_get_path(args, command[0]);
+	errno = 0;
+	if (!path)
+		errno = 127;
 	close(fd[1]);
 	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	args->fdd = fd[0];
-	return (0);
+	return (free(path), 0);
 }
