@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 20:20:04 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 15:04:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 15:20:52 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_env(t_args *args)
 	while (envp)
 	{
 		if (envp->equal)
-			printf("%s=%s\n", envp->name, envp->value);
+			ft_printf_fd("%s=%s\n", args->outfile, envp->name, envp->value);
 		envp = envp->next;
 	}
 	return (0);
