@@ -6,18 +6,17 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:17:03 by elias             #+#    #+#             */
-/*   Updated: 2023/01/30 15:15:51 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 13:30:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(t_args *args)
+int	ft_pwd(void)
 {
-	char	*env;
+	char	cwd[PATH_MAX];
 
-	env = ft_getenv(args, "PWD");
-	if (env)
-		printf("%s\n", env);
-	return (free(env), 0);
+	getcwd(cwd, sizeof(cwd));
+	printf("%s\n", cwd);
+	return (0);
 }

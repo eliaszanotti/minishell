@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/21 18:49:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 13:29:11 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		ft_reset_struct(t_args *args);
 void	ft_sig_ignore(int sig);
 void	ft_sign(int sig);
 void	ft_free_args(t_args *args);
-
 char	**ft_get_char_envp(t_args *args);
 char	*ft_getenv(t_args *args, char *name);
 
