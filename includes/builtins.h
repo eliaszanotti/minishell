@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:32:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 13:29:32 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 13:46:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_exit(t_args *args);
 //	ft_exec_builtins.c
 int		ft_exec_builtins(t_args *args, char **command);
 //	ft_export.c
-int		ft_export(char **cmd, t_args *args);
+int		ft_add_var_to_envp(t_args *args, char *name, char *value, int add);
+int		ft_export(t_args *args, char **cmd);
 //	ft_export_utils.c
 char	*ft_get_value(char **cmd);
 char	*ft_new_env(char *env);
