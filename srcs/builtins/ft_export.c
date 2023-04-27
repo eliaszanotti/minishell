@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 13:45:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 14:14:08 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,8 @@ int	ft_add_var_to_envp(t_args *args, char *name, char *value, int add)
 	while (envp && ft_strcmp(name, envp->name))
 		envp = envp->next;
 	if (!envp)
-	{
-		if (args->equal)
-			new = ft_envpnew(name, value, 1);
-		else
-			new = ft_envpnew(name, value, 0);
+	{	
+		new = ft_envpnew(name, value, args->equal);
 		if (!new)
 			return (ft_error(99));
 		ft_envpadd_back(&args->envp, new);
@@ -49,6 +46,7 @@ int	ft_add_var_to_envp(t_args *args, char *name, char *value, int add)
 		return (ft_error(99));
 	free(envp->value);
 	envp->value = value;
+	envp->equal = args->equal;
 	return (0);
 }
 

@@ -71,3 +71,21 @@ void	ft_log(t_list *stack)
 	printf("%p\n", stack);
 }
 ```
+
+**ft_logg (envp log)**
+
+```c
+int	ft_logg(t_args *args)
+{
+	t_envp	*envp;
+
+	envp = args->envp;
+	while (envp)
+	{
+		printf("%d ", envp->equal);
+		printf("%s=%s\n", envp->name, envp->value);
+		envp = envp->next;
+	}
+	return (0);
+}
+```
