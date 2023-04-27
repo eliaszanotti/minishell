@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/03/21 17:22:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 15:18:17 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int	ft_reset_struct(t_args *args)
 	args->stack = NULL;
 	args->size = 0;
 	args->fdd = 0;
+	args->last = 1;
 	return (0);
 }

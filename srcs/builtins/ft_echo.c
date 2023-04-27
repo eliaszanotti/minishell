@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:59:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/15 16:43:22 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/04/27 15:18:48 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_is_flag(char *str)
 	return (0);
 }
 
-int	ft_echo(char **cmd)
+int	ft_echo(t_args *args, char **cmd)
 {
 	int	first;
 	int	n;
@@ -42,14 +42,16 @@ int	ft_echo(char **cmd)
 		if (ft_is_flag(cmd[i]))
 			n = 1;
 		else if (!first)
-			printf(" %s", cmd[i]);
+			ft_printf_fd(" %s", args->outfile, cmd[i]);
 		else
 		{
-			printf("%s", cmd[i]);
+			ft_printf_fd("%s", args->outfile, cmd[i]);
 			first = 0;
 		}
 	}
 	if (!n)
-		printf("\n");
+		ft_printf_fd("\n", args->outfile);
+	if (!args->last)
+		exit(0);
 	return (1);
 }

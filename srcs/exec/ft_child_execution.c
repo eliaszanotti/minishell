@@ -6,17 +6,14 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/21 19:40:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 15:19:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
+static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 {
-	char	**char_envp;
-	char	*path;
-
 	close(fd[0]);
 	if (args->infile == -1)
 		exit(1);
@@ -28,6 +25,17 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 		return (ft_error(13));
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(13));
+	return (0);
+}
+
+static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
+{
+	char	**char_envp;
+	char	*path;
+
+	if (ft_duplicate_all_fd(args, last, fd))
+		return (1);
+	args->last = last;
 	if (ft_is_char_builtins(command[0]) && !ft_exec_builtins(args, command))
 		exit(errno);
 	path = ft_get_path(args, command[0]);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 13:41:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/04/27 15:18:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exec_builtins(t_args *args, char **command)
 {
-	if (!ft_strcmp(command[0], "echo") && ft_echo(command))
+	if (!ft_strcmp(command[0], "echo") && ft_echo(args, command))
 		return (1);
 	else if (!ft_strcmp(command[0], "cd") && ft_cd(args, command))
 		return (1);
