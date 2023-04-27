@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/03/21 16:33:21 by elias            ###   ########.fr        #
+#    Updated: 2023/04/27 13:18:24 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,13 @@ S_MNSH_LIST	= main.c						\
 			${D_BUILTINS}ft_export_utils.c	\
 			${D_BUILTINS}ft_pwd.c			\
 			${D_BUILTINS}ft_unset.c			\
+											\
 			${D_EXEC}ft_child_execution.c	\
 			${D_EXEC}ft_exec.c				\
 			${D_EXEC}ft_heredoc.c			\
 			${D_EXEC}ft_pid_utils.c			\
 			${D_EXEC}ft_redirect.c			\
+											\
 			${D_PARSE}ft_add_to_ilst.c		\
 			${D_PARSE}ft_add_to_stack.c		\
 			${D_PARSE}ft_add_to_str.c	 	\
@@ -46,6 +48,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_split_quote.c	 	\
 			${D_PARSE}ft_skip_utils.c		\
 			${D_UTILS}ft_chained_envp.c		\
+											\
 			${D_UTILS}ft_error.c			\
 			${D_UTILS}ft_free.c 			\
 			${D_UTILS}ft_get_prompt.c		\
@@ -55,7 +58,7 @@ S_MNSH_LIST	= main.c						\
 			${D_UTILS}ft_is_type.c 			\
 			${D_UTILS}ft_list_utils.c		\
 			${D_UTILS}ft_struct_init.c 		\
-			${D_UTILS}ft_utils.c 			\
+			${D_UTILS}ft_signals.c 			\
 
 HDRS_LIST =	minishell.h	\
 			exec.h		\
