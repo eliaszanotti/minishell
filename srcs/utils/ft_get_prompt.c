@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:35:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/27 13:20:39 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/04/27 13:20:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static char	*ft_get_dir(t_args *args, char *cwd)
 	if (!var)
 	{
 		free(var);
-		return (ft_strdup(" ⚡\001\e[46;90m\ue0b0\002 ?"));
+		return (ft_strdup(" ⚡\001\e[46;90m\002 ?"));
 	}
 	if (!ft_strcmp(cwd, var))
-		dir = ft_strjoin(" ⚡\001\e[46;90m\ue0b0\002 ", "~");
+		dir = ft_strjoin(" ⚡\001\e[46;90m\002 ", "~");
 	else
-		dir = ft_strjoin(" ⚡\001\e[46;90m\ue0b0\002 ", cwd + size + 1);
+		dir = ft_strjoin(" ⚡\001\e[46;90m\002 ", cwd + size + 1);
 	free(var);
 	return (dir);
 }
@@ -60,7 +60,7 @@ char	*ft_get_prompt(t_args *args, char *cwd)
 		tmp = ft_strjoin(start, cwd);
 		free(start);
 		free(cwd);
-		cwd = ft_strjoin(tmp, " \001\e[36;49m\002\001\ue0b0\002\001\e[0m\002 ");
+		cwd = ft_strjoin(tmp, " \001\e[36;49m\002>\001\e[0m\002 ");
 		free(tmp);
 		return (cwd);
 	}
