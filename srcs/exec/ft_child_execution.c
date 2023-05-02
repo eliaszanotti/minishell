@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/04/27 17:15:53 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 12:22:47 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void ft_quit(int sig)
+{
+	(void)sig;
+	write(1, "Quit : 3\n", 10);
+}
 
 static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 {
@@ -55,6 +61,7 @@ int	ft_execute_child(t_args *args, char **command, int last)
 	int		fd[2];
 	pid_t	pid;
 
+	signal(SIGQUIT, ft_quit);
 	signal(SIGINT, ft_sign);
 	if (pipe(fd))
 		return (ft_error(11));
