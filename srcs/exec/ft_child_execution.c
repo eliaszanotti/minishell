@@ -6,12 +6,11 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/02 12:35:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 12:46:12 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 {

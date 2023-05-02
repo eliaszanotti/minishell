@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 16:21:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 12:45:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_create_list(t_args *args, char **char_envp)
+static int	ft_create_list(t_args *args, char **char_envp)
 {
 	t_envp	*envp;
 	t_envp	*new;
@@ -37,9 +37,29 @@ int	ft_create_list(t_args *args, char **char_envp)
 	return (0);
 }
 
+static int	ft_increment_shlvl(t_args *args)
+{
+	t_envp	*envp;
+	int		shlvl;
+
+	envp = args->envp;
+	while (envp && ft_strcmp(envp->name, "SHLVL"))
+		envp = envp->next;
+	if (envp && !ft_strcmp(envp->name, "SHLVL"))
+	{
+		shlvl = ft_atoi(envp->value);
+		shlvl++;
+		free(envp->value);
+		envp->value = ft_itoa(shlvl);
+	}
+	return (0);
+}
+
 int	ft_struct_init(t_args *args, char **envp)
 {
 	if (ft_create_list(args, envp))
+		return (1);
+	if (ft_increment_shlvl(args))
 		return (1);
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
