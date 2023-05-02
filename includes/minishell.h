@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 13:47:50 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/02 15:13:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_args
 	int		last;
 }	t_args;
 
-int	last_errno;
+extern int	last_errno;
 
 t_envp	*ft_envpnew(char *name, char *value, int equal);
 t_envp	*ft_envplast(t_envp *envp);

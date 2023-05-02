@@ -6,11 +6,13 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 13:48:10 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/02 15:13:55 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	last_errno;
 
 static int	ft_launch_execution(t_args *args, int error_code)
 {
@@ -55,6 +57,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_args	args;
 
+	last_errno = 0;
 	if (ft_struct_init(&args, envp))
 		return (1);
 	ft_prompt_loop(&args);
