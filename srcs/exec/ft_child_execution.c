@@ -6,17 +6,12 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/02 12:22:47 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/02 12:35:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void ft_quit(int sig)
-{
-	(void)sig;
-	write(1, "Quit : 3\n", 10);
-}
 
 static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 {
