@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:52:31 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/02 13:33:48 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/02 15:53:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_add_errno_to_ilst(t_args *args, t_ilst **str, char *content)
 	int		i;
 
 	(void)args;
-	error = ft_itoa(last_errno);
+	error = ft_itoa(g_last_errno);
 	if (!error)
 		return (NULL);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 15:13:20 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 15:52:09 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,11 @@ typedef struct s_args
 	int		outfile;
 	int		fdd;
 	int		size;
-	// int		last_err;
 	int		equal;
 	int		last;
 }	t_args;
 
-extern int	last_errno;
+extern int	g_last_errno;
 
 t_envp	*ft_envpnew(char *name, char *value, int equal);
 t_envp	*ft_envplast(t_envp *envp);

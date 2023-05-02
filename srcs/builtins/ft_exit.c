@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/02 14:12:12 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/02 15:52:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	ft_exit(t_args *args, char **command)
 		if (ft_is_valid_num(command[1]))
 		{
 			printf("exit\n");
-			last_errno = ft_atoi(command[1]) % 256;
+			g_last_errno = ft_atoi(command[1]) % 256;
 		}
 		else
 		{
 			printf("exit\n");
-			last_errno = 2;
+			g_last_errno = 2;
 			return (ft_error(21));
 		}
 		if (command[2])
