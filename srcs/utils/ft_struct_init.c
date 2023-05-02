@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 12:45:59 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 13:17:03 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	ft_increment_shlvl(t_args *args)
 	envp = args->envp;
 	while (envp && ft_strcmp(envp->name, "SHLVL"))
 		envp = envp->next;
-	if (envp && !ft_strcmp(envp->name, "SHLVL"))
+	if (envp) 
 	{
 		shlvl = ft_atoi(envp->value);
 		shlvl++;
