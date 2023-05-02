@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_to_ilst.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:52:31 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/04/27 16:30:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 13:33:48 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*ft_add_errno_to_ilst(t_args *args, t_ilst **str, char *content)
 	char	*error;
 	int		i;
 
-	error = ft_itoa(args->last_err);
+	(void)args;
+	error = ft_itoa(last_errno);
 	if (!error)
 		return (NULL);
 	i = -1;

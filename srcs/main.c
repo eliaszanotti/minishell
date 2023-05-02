@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 17:17:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 13:48:10 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	ft_prompt_loop(t_args *args)
 		if (ft_launch_execution(args, error_code))
 			return (1);
 		free(command);
-		args->last_err = errno;
 	}
 	return (ft_free_envp(args), 0);
 }
@@ -58,9 +57,8 @@ int	main(int argc, char **argv, char **envp)
 
 	if (ft_struct_init(&args, envp))
 		return (1);
-	args.last_err = 0;
 	ft_prompt_loop(&args);
-	return (args.last_err);
+	return (last_errno);
 	(void)argc;
 	(void)argv;
 }

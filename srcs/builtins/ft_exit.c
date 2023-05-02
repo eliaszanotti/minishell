@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/04/27 17:17:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 14:12:12 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	ft_exit(t_args *args, char **command)
 		if (ft_is_valid_num(command[1]))
 		{
 			printf("exit\n");
-			errno = ft_atoi(command[1]) % 256;
+			last_errno = ft_atoi(command[1]) % 256;
 		}
 		else
 		{
 			printf("exit\n");
-			errno = 2;
+			last_errno = 2;
 			return (ft_error(21));
 		}
 		if (command[2])

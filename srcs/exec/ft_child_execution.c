@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/02 12:46:12 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 13:52:51 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (!path)
 		exit(ft_error_command(command[0]));
 	char_envp = ft_get_char_envp(args);
+	// last_errno = 0;
 	execve(path, command, char_envp);
+	// last_errno = 127;
 	ft_free_str(char_envp);
 	free(path);
 	exit(ft_error(12));
@@ -57,6 +59,7 @@ int	ft_execute_child(t_args *args, char **command, int last)
 
 	signal(SIGQUIT, ft_quit);
 	signal(SIGINT, ft_sign);
+	last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(11));
 	if (last && args->size == 1 && ft_is_char_builtins(command[0]))
@@ -67,9 +70,8 @@ int	ft_execute_child(t_args *args, char **command, int last)
 	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
 	path = ft_get_path(args, command[0]);
-	errno = 0;
 	if (!path)
-		errno = 127;
+		last_errno = 127;
 	close(fd[1]);
 	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;

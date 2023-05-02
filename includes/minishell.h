@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 15:19:45 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/02 13:47:50 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,12 @@ typedef struct s_args
 	int		outfile;
 	int		fdd;
 	int		size;
-	int		last_err;
+	// int		last_err;
 	int		equal;
 	int		last;
 }	t_args;
+
+int	last_errno;
 
 t_envp	*ft_envpnew(char *name, char *value, int equal);
 t_envp	*ft_envplast(t_envp *envp);
