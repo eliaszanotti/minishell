@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/02 15:52:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 18:51:13 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,19 @@
 static int	ft_is_valid_num(char *command)
 {
 	int	i;
+	unsigned long long int res;
 
 	i = -1;
+	res = 0;
 	while (command[++i])
 	{
-		if (!ft_isalpha(command[i]))
-			return (1);
+		if (!ft_isdigit(command[i]))
+			return (0);
+		res = (res * 10) + command[i] - '0';
+		if (res > 9223372036854775807)
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_exit(t_args *args, char **command)
