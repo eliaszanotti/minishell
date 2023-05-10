@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 17:14:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 19:08:15 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	ft_error(int error_code)
 		printf("exit: numeric argument required\n");
 	else if (error_code == 22)
 		printf("exit: too many arguments\n");
+	else if (error_code == 23)
+		printf("export : invalid identifier\n");
 	else if (error_code == 99)
 	{
 		printf("Malloc cannot be created\n");

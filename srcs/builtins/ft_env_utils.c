@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/03/21 17:32:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 19:10:03 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ char	*ft_get_var_name(char *var, int *add)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
+	while (var[++i])
+		if (ft_strchr("#%?!@/-+={}.,:", var[i]))
+			return (ft_error(23), NULL);
+	if (ft_isdigit(var[0]))
+		return (ft_error(23), NULL);
 	while (var[i] && ft_is_variable(var[i]))
 		i++;
 	if (var[i] == '+' && var[i + 1] == '=')
