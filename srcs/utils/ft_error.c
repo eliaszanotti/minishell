@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/04/27 17:14:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 18:53:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_error_command(char *command)
 
 static int	ft_error_range_1(int error_code)
 {
-	errno = 2;
+	g_last_errno = 2;
 	if (error_code == 3)
 		printf("Parse error (quote not closed)\n");
 	else if (error_code == 4)
