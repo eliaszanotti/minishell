@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/02 12:34:27 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 19:13:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "minishell.h"
 
+//	ft_add_first_vars.c
+int		ft_add_first_vars(t_args *args);
 //	ft_error.c
 int		ft_error_command(char *command);
 int		ft_error(int error_code);

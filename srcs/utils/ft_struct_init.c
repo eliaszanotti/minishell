@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 15:54:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 19:12:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	ft_struct_init(t_args *args, char **envp)
 	if (ft_create_list(args, envp))
 		return (1);
 	if (ft_increment_shlvl(args))
+		return (1);
+	if (ft_add_first_vars(args))
 		return (1);
 	args->exit_code = 0;
 	args->infile = STDIN_FILENO;
