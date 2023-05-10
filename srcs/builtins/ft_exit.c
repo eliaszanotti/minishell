@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/10 18:51:13 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/10 18:53:59 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_exit(t_args *args, char **command)
 		if (command[2])
 		{
 			args->exit_code = 0;
+			g_last_errno = 1;
 			return (ft_error(22));
 		}
 	}
