@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 18:53:37 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/10 19:01:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	ft_error(int error_code)
 	else if (error_code < 20)
 		return (ft_error_range_2(error_code));
 	else if (error_code == 20)
+	{
 		printf("No such file or directory\n");
+		g_last_errno = 1;
+	}
 	else if (error_code == 21)
 		printf("exit: numeric argument required\n");
 	else if (error_code == 22)
