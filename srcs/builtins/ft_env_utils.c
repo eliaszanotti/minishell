@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/05/16 14:38:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:47:45 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ char	*ft_get_var_value(t_args *args, char *var)
 	if (var[i] == '=')
 		return (ft_substr(var, i + 1, ft_strlen(var) - i));
 	args->equal = 0;
-	return (NULL);
+	return (ft_strdup("\0"));
 }

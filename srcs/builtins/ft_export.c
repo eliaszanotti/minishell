@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:01:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/16 14:41:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:48:02 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ static void	ft_print_export(t_args *args)
 	}
 }
 
+static void	ft_free_name_value(char *name, char *value)
+{
+	free(name);
+	free(value);
+}
+
 int	ft_export(t_args *args, char **cmd)
 {
 	char	*var_name;
@@ -87,10 +93,7 @@ int	ft_export(t_args *args, char **cmd)
 		if (*var_name && ft_add_var_to_envp(args, var_name, var_value, add))
 			return (1);
 		else if (!*var_name)
-		{
-			free(var_name);
-			free(var_value);
-		}
+			ft_free_name_value(var_name, var_value);
 	}
 	return (0);
 }
