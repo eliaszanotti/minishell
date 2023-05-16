@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/05/10 19:11:03 by elias            ###   ########.fr        #
+#    Updated: 2023/05/16 14:24:09 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ LIBFT		= -L ./libft -lft
 # VARIABLES
 NAME		= minishell
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g3
 RM			= rm -rf
 MAKEFLAGS	+= --no-print-directory
 
@@ -110,7 +110,7 @@ ${DIR_OBJS}%.o: %.c	${HDRS} Makefile
 ${NAME}:	ascii lib ${OBJS}
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
 
 lib :

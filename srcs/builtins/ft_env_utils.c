@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 19:10:03 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/16 14:19:33 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ char	*ft_get_var_name(char *var, int *add)
 {
 	int	i;
 
-	i = -1;
-	while (var[++i])
-		if (ft_strchr("#%?!@/-+={}.,:", var[i]))
-			return (ft_error(23), NULL);
+	i = 0;
 	if (ft_isdigit(var[0]))
 		return (ft_error(23), NULL);
 	while (var[i] && ft_is_variable(var[i]))
