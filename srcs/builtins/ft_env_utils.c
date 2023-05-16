@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 17:05:06 by elias             #+#    #+#             */
-/*   Updated: 2023/05/16 14:19:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:38:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	*ft_get_var_name(char *var, int *add)
 		return (ft_error(23), NULL);
 	while (var[i] && ft_is_variable(var[i]))
 		i++;
+	if (var[i] && var[i] != '=' && var[i] != '+' && !ft_is_variable(var[i]))
+		return (ft_error(23), ft_strdup("\0"));
 	if (var[i] == '+' && var[i + 1] == '=')
 	{
 		*add = 1;
@@ -53,5 +55,5 @@ char	*ft_get_var_value(t_args *args, char *var)
 	if (var[i] == '=')
 		return (ft_substr(var, i + 1, ft_strlen(var) - i));
 	args->equal = 0;
-	return (ft_strdup("\0"));
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:12:16 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 19:24:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:44:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ int	ft_add_first_vars(t_args *args)
 		envp = envp->next;
 	if (!envp)
 		ft_add_to_envp(args, ft_strdup("_"), ft_strdup("/usr/bin/env"));
+	free(cwd);
 	return (0);
 }
