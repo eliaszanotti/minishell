@@ -6,7 +6,7 @@
 #    By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/10 14:00:04 by ezanotti          #+#    #+#              #
-#    Updated: 2023/03/21 12:41:47 by elias            ###   ########.fr        #
+#    Updated: 2023/05/17 13:22:12 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ NAME		= libft.a
 CC			= cc
 
 # FLAGS
-MAKEFLAGS	+= --no-print-directory
+MAKEFLAGS	+= --no-print-directory -s
 CFLAGS		= -Wall -Wextra -Werror -I .
 
 # COMMANDS

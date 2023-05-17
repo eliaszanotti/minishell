@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/05/16 14:24:09 by elias            ###   ########.fr        #
+#    Updated: 2023/05/17 13:21:46 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,32 +107,32 @@ ${DIR_OBJS}%.o: %.c	${HDRS} Makefile
 			@${PRINT} "${YELLOW}${SUPPR}Creating ${NAME}'s objects : $@"
 			@${CC} ${CFLAGS} -I ./libft -I ${DIR_INCLUDE} -c $< -o $@ 
 
-${NAME}:	ascii lib ${OBJS}
+${NAME}:	${OBJS}
+			@make lib
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline
-			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n\n"
+			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}"
+			@${PRINT} "$$ASCII"
 
 lib :
 			@make -C ./libft
 
-ascii :
-			@${PRINT} "$$ASCII"
-
-clean :		ascii
+clean :	
 			@${PRINT} "${RED}Deleting objects : DONE\n"
 			@${RM} ${DIR_OBJS}
 
 fclean :	clean 
 			@${PRINT} "${RED}Cleaning libft : DONE\n"
 			@${MAKE} fclean -C ./libft
-			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n\n"
+			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n"
 			@${RM} ${NAME} 
 
 re :		fclean all
 
 define ASCII
 ${CYAN}
+
 ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗
 ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
 ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
@@ -144,4 +144,4 @@ ${DEFAULT}
 endef
 export ASCII
 
-.PHONY :	all re clean fclean lib ascii
+.PHONY :	all re clean fclean lib
