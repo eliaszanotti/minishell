@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:59:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/10 18:51:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:33:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,30 @@ static int	ft_is_flag(char *str)
 	return (0);
 }
 
-static int	ft_print_loop(t_args *args, char **cmd, int n, int first)
+static int	ft_print_loop(t_args *args, char **cmd)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	while (cmd[++i])
 	{
-		if (first)
-		{
-			if (ft_is_flag(cmd[i]) && i == 1)
-				n = 1;
-			else
-			{
-				ft_printf_fd("%s", args->outfile, cmd[i]);
-				first = 0;
-			}
-		}
+		if (i == 0)
+			ft_printf_fd("%s", args->outfile, cmd[i]);
 		else
 			ft_printf_fd(" %s", args->outfile, cmd[i]);
 	}
-	return (n);
+	return (0);
 }
 
 int	ft_echo(t_args *args, char **cmd)
 {
-	int	first;
 	int	n;
 
-	first = 1;
 	n = 0;
-	n = ft_print_loop(args, cmd, n, first);
+	while (ft_is_flag(*++cmd))
+		n = 1;
+	if (ft_print_loop(args, cmd))
+		return (1);
 	if (!n)
 		ft_printf_fd("\n", args->outfile);
 	if (!args->last)
