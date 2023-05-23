@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/10 19:23:52 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:16:54 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ static int	ft_is_valid_num(char *command)
 	while (command[++i])
 	{
 		if (!ft_isdigit(command[i]))
-			return (0);
+		{
+			if (command[i] != '-')
+				return (0);
+			else
+				i++;
+		} 
 		res = (res * 10) + command[i] - '0';
 		if (res > 9223372036854775807)
 			return (0);
