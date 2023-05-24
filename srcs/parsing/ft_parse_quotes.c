@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/02/16 18:18:48 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:39:38 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_replace_quotes(t_args *args, t_list *instruction)
 		if (!content)
 			return (NULL);
 		content = ft_add_double(args, &str, content);
+		if (!*content)
+			break ;
 		if (!content)
 			return (NULL);
 		content = ft_add_variable(args, &str, content);
