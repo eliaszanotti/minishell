@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/10 18:27:22 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/24 15:42:47 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_heredoc(t_args *args, char *delimiter)
 			free(line);
 		}
 		else
-			printf("\n");
+			break ;	
 	}
 	args->infile = fd[0];
 	close(fd[1]);
