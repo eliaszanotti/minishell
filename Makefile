@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
+#    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/05/17 13:21:46 by elias            ###   ########.fr        #
+#    Updated: 2023/05/24 12:22:09 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,7 @@ LIBFT		= -L ./libft -lft
 # VARIABLES
 NAME		= minishell
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g3
+CFLAGS		= -Wall -Wextra -Werror
 RM			= rm -rf
 MAKEFLAGS	+= --no-print-directory
 
@@ -100,7 +100,7 @@ DEFAULT		= \033[0m
 SUPPR		= \r\033[2K
 
 # COMPILATION
-all :		${NAME}
+all :		ascii ${NAME}
 
 ${DIR_OBJS}%.o: %.c	${HDRS} Makefile
 			@mkdir -p $(shell dirname $@)
@@ -111,28 +111,29 @@ ${NAME}:	${OBJS}
 			@make lib
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline
-			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}"
-			@${PRINT} "$$ASCII"
+			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
-lib :
+lib:
 			@make -C ./libft
 
-clean :	
+clean:	
 			@${PRINT} "${RED}Deleting objects : DONE\n"
 			@${RM} ${DIR_OBJS}
 
-fclean :	clean 
+fclean:		clean 
 			@${PRINT} "${RED}Cleaning libft : DONE\n"
 			@${MAKE} fclean -C ./libft
 			@${PRINT} "${RED}Deleting executable : DONE${DEFAULT}\n"
 			@${RM} ${NAME} 
 
-re :		fclean all
+re:			fclean all
+
+ascii:
+			@${PRINT} "$$ASCII\n"
 
 define ASCII
 ${CYAN}
-
 ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗
 ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     
 ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     
@@ -140,7 +141,6 @@ ${CYAN}
 ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗
 ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝
 ${DEFAULT}
-
 endef
 export ASCII
 

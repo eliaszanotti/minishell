@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/23 13:16:54 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/05/24 12:17:28 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_is_valid_num(char *command)
 				return (0);
 			else
 				i++;
-		} 
+		}
 		res = (res * 10) + command[i] - '0';
 		if (res > 9223372036854775807)
 			return (0);
