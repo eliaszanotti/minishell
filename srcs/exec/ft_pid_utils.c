@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 22:26:22 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 18:58:23 by elias            ###   ########.fr       */
+/*   Updated: 2023/05/24 16:02:55 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_wait_execution(t_args *args)
 	i = args->size - 1;
 	while (i >= 0)
 	{
+		ret = 0;
 		waitpid(args->pid_tab[i], &ret, 0);
 		if (ret % 256 == 0 && g_last_errno != 127 && i == args->size - 1)
 			g_last_errno = WEXITSTATUS(ret);

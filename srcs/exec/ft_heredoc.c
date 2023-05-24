@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/24 15:42:47 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:45:36 by ezanotti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,14 @@ int	ft_heredoc(t_args *args, char *delimiter)
 			if (!ft_strcmp(line, delimiter))
 				break ;
 			write(fd[1], line, ft_strlen(line));
-			write(fd[1], "\n", 1);
+			write(fd[1], "\n", 2);
 			free(line);
 		}
 		else
-			break ;	
+		{
+			write(1, "\n", 2);
+			break ;
+		}
 	}
 	args->infile = fd[0];
 	close(fd[1]);
