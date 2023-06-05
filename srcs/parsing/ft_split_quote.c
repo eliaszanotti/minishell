@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/05 18:56:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:12:37 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static int	ft_add_single_char(t_list **instruction, char *content)
 	str = ft_strdup(content);
 	if (!str)
 		return (ft_error(99));
-	printf("str = %s\n", str);
 	new = ft_lstnew(str);
 	if (!new)
 		return (free(str), ft_error(99));
@@ -79,8 +78,6 @@ static char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 	i = 0;
 	if (*str == '$' && !str[1] && ft_add_single_char(instruction, "$"))
 		return (NULL);
-
-
 	if (*str == '$' && str[1] != '?')
 	{
 		str++;
