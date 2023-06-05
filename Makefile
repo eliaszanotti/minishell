@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/05/24 12:22:09 by elias            ###   ########.fr        #
+#    Updated: 2023/06/05 19:10:25 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_add_to_ilst.c		\
 			${D_PARSE}ft_add_to_stack.c		\
 			${D_PARSE}ft_add_to_str.c	 	\
+			${D_PARSE}ft_add_variable.c	 	\
 			${D_PARSE}ft_check_parsing.c	\
 			${D_PARSE}ft_get_stack.c	 	\
 			${D_PARSE}ft_ilst_to_char.c	 	\

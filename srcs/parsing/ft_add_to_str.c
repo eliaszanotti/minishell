@@ -3,55 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_to_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/24 16:39:02 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:08:33 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*ft_add_tilde(t_args *args, t_ilst **str, char *content)
-{
-	if (*content == '~')
-	{
-		if (*(content + 1) != '/' && *(content + 1) != ' ' && *(content + 1))
-			return (content);
-		if (ft_add_var_to_ilst(args, str, "HOME"))
-			return (NULL);
-		return (content + 1);
-	}
-	return (content);
-}
-
-char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
-{
-	char	*name;
-	int		i;
-
-	i = 0;
-	content = ft_add_tilde(args, str, content);
-	if (!content)
-		return (NULL);
-	if (*content == '$')
-	{
-		content++;
-		if (*content == '?')
-			return (ft_add_errno_to_ilst(args, str, content));
-		while (content[i] && ft_is_variable(content[i]))
-			i++;
-		if (!i)
-			return (content);
-		name = ft_substr(content, 0, i);
-		if (!name)
-			return (NULL);
-		if (ft_add_var_to_ilst(args, str, name))
-			return (free(name), NULL);
-		free(name);
-	}
-	return (content + i);
-}
 
 char	*ft_add_char(t_ilst **str, char *content)
 {

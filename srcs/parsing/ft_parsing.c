@@ -3,15 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/21 18:42:40 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/05 18:56:57 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+static void	ft_u(t_list *in)
+{
+	while (in)
+	{
+		printf("[%s]", (char *)in->content);
+		in = in->next;
+	}
+	printf("\n");
+}
 
+void	ft_log(t_list *stack)
+{
+	while (stack)
+	{
+		ft_u(stack->content);
+		stack = stack->next;
+	}
+	printf("%p\n", stack);
+}
 int	ft_parse_args(t_args *args, char *command)
 {
 	if (ft_split_quote(args, command))
@@ -20,6 +38,7 @@ int	ft_parse_args(t_args *args, char *command)
 		return (ft_free_instruction(args->command_list), 1);
 	if (ft_get_stack(args, 0))
 		return (ft_free_instruction(args->command_list), 1);
+	ft_log(args->stack);
 	if (ft_parse_quotes(args))
 	{
 		ft_free_instruction(args->command_list);
