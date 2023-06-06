@@ -50,7 +50,6 @@ static int	ft_add_new_list(t_list **instruction, t_list *new_list)
 		size += ft_strlen(list->content);
 		list = list->next;
 	}
-
 		list = new_list;new_str = malloc(sizeof(char) * (size + 1));
 	if (!new_str)
 		return (ft_error(99));
@@ -83,11 +82,23 @@ static int	ft_add_new_list(t_list **instruction, t_list *new_list)
 	return (0);
 }
 
+static int  ft_add_current_value(t_list **new_list, char **values, int i)
+{
+    t_list  *new;
+
+    new = ft_lstnew(ft_strdup(values[i]));
+    if (!new)
+        return (ft_error(99));
+    ft_lstadd_back(new_list, new);
+    if (values[i + 1] && ft_add_single_str(new_list, " "))
+        return (ft_error(99));
+    return (0);
+}
+
 static int	ft_add_each_variable(t_list **instruction, t_list *list)
 {
 	char	**values;
 	t_list	*new_list;
-	t_list	*new;
 	int		i;
 
 	new_list = NULL;
@@ -99,21 +110,22 @@ static int	ft_add_each_variable(t_list **instruction, t_list *list)
 		i = 0;
 		while (values[i])
 		{
-			new = ft_lstnew(ft_strdup(values[i]));
-			if (!new)
-				return (ft_free_str(values), ft_error(99));
-			ft_lstadd_back(&new_list, new);
-			if (values[i + 1] && ft_add_single_str(&new_list, " "))
-				return (ft_free_str(values), ft_error(99));
-			i++;
+
+            if (ft_add_current_value(&new_list, values, i))
+                return (ft_free_str(values), ft_error(99));
+            i++;
+			// new = ft_lstnew(ft_strdup(values[i]));
+			// if (!new)
+			// 	return (ft_free_str(values), ft_error(99));
+			// ft_lstadd_back(&new_list, new);
+			// if (values[i + 1] && ft_add_single_str(&new_list, " "))
+			// 	return (ft_free_str(values), ft_error(99));
+			// i++;
 		}
 		list = list->next;
 	}
-    ft_u(new_list);
 	if (ft_add_new_list(instruction, new_list))
 		return (ft_free_str(values), ft_error(99));
-
-	
 	return (ft_free_str(values), 0);
 }
 
