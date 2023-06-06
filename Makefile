@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/06 15:29:28 by elias            ###   ########.fr        #
+#    Updated: 2023/06/06 16:24:36 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,7 +114,7 @@ ${NAME}:	${OBJS}
 			@make lib
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
-			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
+			@${CC} -fsanitize=address ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
 lib:

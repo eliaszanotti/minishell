@@ -33,6 +33,7 @@ static int	ft_add_new_list(t_list **instruction, t_list *new_list)
 			new_str[size++] = content[i++];
 		list = list->next;
 	}
+	new_str[size] = '\0';
 	list = ft_lstnew(new_str);
 	if (!list)
 		return (free(new_str), ft_error(99));
