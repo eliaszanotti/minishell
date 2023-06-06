@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/06 15:27:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/06 16:45:47 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ static char	*ft_add_tilde(t_args *args, t_ilst **str, char *content)
 	return (content);
 }
 
+static int	ft_add_single_ilst(t_ilst **str, char content)
+{
+	t_ilst	*new;
+
+	new = ft_ilstnew(content);
+	if (!new)
+		return  (ft_error(99));
+	ft_ilstadd_back(str, new);
+	return (0);
+}
+
 char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 {
 	char	*name;
@@ -37,6 +48,8 @@ char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 	if (*content == '$')
 	{
 		content++;
+		if (!*content && ft_add_single_ilst(str, '$'))
+			return (content);
 		if (*content == '?')
 			return (ft_add_errno_to_ilst(args, str, content));
 		while (content[i] && ft_is_variable(content[i]))

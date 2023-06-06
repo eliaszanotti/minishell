@@ -117,6 +117,8 @@ char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 	list = NULL;
 	if (*str == '$' && !str[1] && ft_add_single_str(instruction, "$"))
 		return (NULL);
+	if (*str == '$' && !str[1])
+		return (str + 1);
 	if (*str == '$' && str[1] != '?')
 	{
 		str = ft_skip_current_var(args, &list, str);

@@ -6,11 +6,13 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 16:48:29 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/06 16:16:48 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/06 16:38:39 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
 static void	ft_u(t_list *in)
 {
 	while (in)
@@ -20,6 +22,17 @@ static void	ft_u(t_list *in)
 	}
 	printf("\n");
 }
+
+void	ft_log(t_list *stack)
+{
+	while (stack)
+	{
+		ft_u(stack->content);
+		stack = stack->next;
+	}
+	printf("%p\n", stack);
+}
+
 int	ft_parse_args(t_args *args, char *command)
 {
 	if (ft_split_quote(args, command))
@@ -35,5 +48,6 @@ int	ft_parse_args(t_args *args, char *command)
 		ft_free_stack(args->stack);
 		return (1);
 	}
+	ft_log(args->stack);
 	return (0);
 }
