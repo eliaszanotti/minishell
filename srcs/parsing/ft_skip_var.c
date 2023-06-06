@@ -74,8 +74,8 @@ static int	ft_add_each_variable(t_list **instruction, t_list *list)
 		list = list->next;
 	}
 	if (ft_add_new_list(instruction, new_list))
-		return (ft_free_str(values), ft_error(99));
-	return (ft_free_str(values), 0);
+		return (ft_error(99));
+	return (0);
 }
 
 static char	*ft_skip_current_var(t_args *args, t_list **list, char *str)
@@ -91,6 +91,8 @@ static char	*ft_skip_current_var(t_args *args, t_list **list, char *str)
 		str++;
 		while (str[i] && ft_is_variable(str[i]))
 			i++;
+		if (!i)
+			return (str);
 		name = ft_substr(str, 0, i);
 		if (!name)
 			return (NULL);
