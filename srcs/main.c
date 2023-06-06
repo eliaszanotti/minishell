@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/05/02 15:51:30 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:07:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static int	ft_prompt_loop(t_args *args)
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, ft_sig_ignore);
 		ft_reset_struct(args);
-		command = readline(args->prompt);
+		// command = readline(args->prompt);
+		command = ft_strdup("echo $USER$USER");
 		free(args->prompt);
 		if (!command)
 		{
@@ -49,6 +50,7 @@ static int	ft_prompt_loop(t_args *args)
 		if (ft_launch_execution(args, error_code))
 			return (1);
 		free(command);
+		return (ft_free_envp(args), 0);
 	}
 	return (ft_free_envp(args), 0);
 }

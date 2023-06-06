@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/05 19:12:37 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/06 14:03:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,70 +31,6 @@ static int	ft_check_quotes(char *s)
 		i++;
 	}
 	return (0);
-}
-
-static int	ft_add_each_variable(t_list **instruction, char *value)
-{
-	char	**values;
-	t_list	*new;
-	int		i;
-
-	values = ft_split(value, ' ');
-	if (!values)
-		return (ft_error(99));
-	i = 0;
-	while (values[i])
-	{
-		new = ft_lstnew(ft_strdup(values[i]));
-		if (!new)
-			return (ft_free_str(values), ft_error(99));
-		ft_lstadd_back(instruction, new);
-		i++;
-	}
-	return (ft_free_str(values), 0);
-}
-
-static int	ft_add_single_char(t_list **instruction, char *content)
-{
-	t_list	*new;
-	char	*str;
-
-	str = ft_strdup(content);
-	if (!str)
-		return (ft_error(99));
-	new = ft_lstnew(str);
-	if (!new)
-		return (free(str), ft_error(99));
-	ft_lstadd_back(instruction, new);
-	return (0);
-}
-
-static char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
-{
-	char	*name;
-	char	*value;
-	int		i;
-
-	i = 0;
-	if (*str == '$' && !str[1] && ft_add_single_char(instruction, "$"))
-		return (NULL);
-	if (*str == '$' && str[1] != '?')
-	{
-		str++;
-		while (str[i] && ft_is_variable(str[i]))
-			i++;
-		name = ft_substr(str, 0, i);
-		if (!name)
-			return (NULL);
-		value = ft_getenv(args, name);
-		free(name);
-		if (!value)
-			return (str + i);
-		if (ft_add_each_variable(instruction, value))
-			return (free(value), NULL);
-		return (free(value), str + i);
-	}
-	return (str);
 }
 
 int	ft_split_quote(t_args *args, char *str)

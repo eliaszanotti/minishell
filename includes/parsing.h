@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/21 18:43:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/06 13:58:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_parse_args(t_args *args, char *command);
 //	ft_skip_utils.c
 char	*ft_skip_redirect(t_list **instruction, char *str);
 char	*ft_skip_alpha(t_list **instruction, char *str);
+char	*ft_skip_variable(t_args *args, t_list **instruction, char *str);
 char	*ft_skip_pipe(t_list **instruction, char *str);
 char	*ft_skip_spaces(char *str);
 //	ft_split_quote.c
