@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
+#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/07 13:02:12 by elias            ###   ########.fr        #
+#    Updated: 2023/06/07 16:36:21 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,14 +104,17 @@ DEFAULT		= \033[0m
 SUPPR		= \r\033[2K
 
 # COMPILATION
-all :		ascii ${NAME}
+all :		ascii \
+			lib \
+			${NAME}
+			
 
 ${DIR_OBJS}%.o: %.c	${HDRS} Makefile
 			@mkdir -p $(shell dirname $@)
 			@${PRINT} "${YELLOW}${SUPPR}Creating ${NAME}'s objects : $@"
 			@${CC} ${CFLAGS} -I ./libft -I ${DIR_INCLUDE} -c $< -o $@ 
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJS} 
 			@make lib
 			@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\n"
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
