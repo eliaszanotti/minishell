@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/06 16:15:15 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 10:50:33 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_skip_redirect(t_list **instruction, char *str);
 char	*ft_skip_alpha(t_list **instruction, char *str);
 char	*ft_skip_variable(t_args *args, t_list **instruction, char *str);
 char	*ft_skip_pipe(t_list **instruction, char *str);
-char	*ft_skip_spaces(char *str);
+char	*ft_skip_spaces(t_list **instruction, char *str);
 //	ft_split_quote.c
 int		ft_split_quote(t_args *args, char *s);
 

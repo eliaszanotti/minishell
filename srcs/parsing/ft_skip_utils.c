@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_skip_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ezanotti <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:19:51 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/03/02 17:21:08 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:07:39 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ char	*ft_skip_alpha(t_list **instruction, char *str)
 			i = ft_skip_quote(str, i);
 		i++;
 	}
-	if (str[i] == '$' && str[i + 1] == '?')
-		i += 2;
 	if (i)
 	{
 		new = ft_lstnew(ft_substr(str, 0, i));
@@ -85,9 +83,17 @@ char	*ft_skip_pipe(t_list **instruction, char *str)
 	return (str);
 }
 
-char	*ft_skip_spaces(char *str)
+char	*ft_skip_spaces(t_list **instruction, char *str)
 {
+	int	i;
+
+	i = 0;
 	while (*str && *str == ' ')
+	{
+		i = 1;
 		str++;
+	}
+	if (i && *str && ft_add_single_str(instruction, NULL))
+		return (NULL);
 	return (str);
 }

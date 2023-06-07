@@ -12,88 +12,39 @@
 
 #include "minishell.h"
 
-static int	ft_add_new_list(t_list **instruction, t_list *new_list)
-{
-	char	*content;
-	char	*new_str;
-	t_list	*list;
-	int		size;
-	int		i;
-
-	new_str = malloc(sizeof(char) * (ft_get_list_size(new_list) + 1));
-	if (!new_str)
-		return (ft_error(99));
-	size = 0;
-	list = new_list;
-	while (list)
-	{
-		i = 0;
-		content = list->content;
-		while (content[i])
-			new_str[size++] = content[i++];
-		list = list->next;
-	}
-	new_str[size] = '\0';
-	list = ft_lstnew(new_str);
-	if (!list)
-		return (free(new_str), ft_error(99));
-	ft_lstadd_back(instruction, list);
-	return (0);
-}
-
-static int	ft_add_current_value(t_list **new_list, char **values, int i)
-{
-	t_list	*new;
-
-	new = ft_lstnew(ft_strdup(values[i]));
-	if (!new)
-		return (ft_error(99));
-	ft_lstadd_back(new_list, new);
-	if (values[i + 1] && ft_add_single_str(new_list, " "))
-		return (ft_error(99));
-	return (0);
-}
-
-static int	ft_add_each_variable(t_list **instruction, t_list *list)
+static int	ft_add_each_variable(t_list **instruction, char *value)
 {
 	char	**values;
-	t_list	*new_list;
+	t_list	*new;
 	int		i;
 
-	new_list = NULL;
-	while (list)
-	{
-		values = ft_split(list->content, ' ');
-		if (!values)
-			return (ft_error(99));
-		i = 0;
-		while (values[i])
-		{
-			if (ft_add_current_value(&new_list, values, i++))
-				return (ft_free_str(values), ft_error(99));
-		}
-		list = list->next;
-	}
-	if (ft_add_new_list(instruction, new_list))
+	values = ft_split(value, ' ');
+	if (!values)
 		return (ft_error(99));
-	return (0);
+	i = 0;
+	while (values[i])
+	{
+		new = ft_lstnew(ft_strdup(values[i]));
+		if (!new)
+			return (ft_free_str(values), ft_error(99));
+		ft_lstadd_back(instruction, new);
+		i++;
+	}
+	return (ft_free_str(values), 0);
 }
 
-static char	*ft_skip_current_var(t_args *args, t_list **list, char *str)
+static char	*ft_skip_current_var(t_args *args, t_list **instruction, char *str)
 {
 	char	*name;
 	char	*value;
-	t_list	*new;
 	int		i;
 
 	i = 0;
-	while (str[i] && (ft_is_variable(str[i]) || str[i] == '$'))
+	if (*str == '$' && str[1] && str[1] != '$')
 	{
 		str++;
 		while (str[i] && ft_is_variable(str[i]))
 			i++;
-		if (!i)
-			return (str);
 		name = ft_substr(str, 0, i);
 		if (!name)
 			return (NULL);
@@ -101,30 +52,60 @@ static char	*ft_skip_current_var(t_args *args, t_list **list, char *str)
 		free(name);
 		if (!value)
 			return (str + i);
-		new = ft_lstnew(value);
-		if (!new)
+		if (ft_add_each_variable(instruction, value))
+			return (free(value), NULL);
+		return (free(value), str + i);
+	}
+	return (str);
+}
+
+
+char	*ft_skip_single_dollar(t_list **instruction, char *str)
+{
+	if (*str == '$' && (!str[1] || str[1] == '$'))
+	{
+		if (ft_add_single_str(instruction, "$"))
 			return (NULL);
-		ft_lstadd_back(list, new);
-		str += i;
+		return (str + 1);
+	}
+	return (str);
+}
+
+char	*ft_skip_error(t_list **instruction, char *str)
+{
+	char	*error;
+
+	if (*str == '$' && str[1] && str[1] == '?')
+	{
+		error = ft_itoa(g_last_errno);
+		if (!error)
+			return (NULL);
+		if (ft_add_single_str(instruction, error))
+			return (NULL);
+		free(error);
+		return (str + 2);
 	}
 	return (str);
 }
 
 char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 {
-	t_list	*list;
-
-	list = NULL;
-	if (*str == '$' && !str[1] && ft_add_single_str(instruction, "$"))
+	str = ft_skip_single_dollar(instruction, str);
+	if (!str)
 		return (NULL);
-	if (*str == '$' && !str[1])
-		return (str + 1);
-	if (*str == '$' && str[1] != '?')
-	{
-		str = ft_skip_current_var(args, &list, str);
-		if (ft_add_each_variable(instruction, list))
-			return (NULL);
-		return (str);
-	}
+	str	= ft_skip_error(instruction, str);	
+	if (!str)
+		return (NULL);
+	str = ft_skip_current_var(args, instruction, str);
+	if (!str)
+		return (NULL);
+
+
+	// {
+	//  str = ft_skip_current_var(args, &list, str);
+	// 	if (ft_add_each_variable(instruction, list))
+	// 		return (NULL);
+	// 	return (str);
+	// }
 	return (str);
 }
