@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:19:51 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/07 11:07:39 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:55:20 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@ char	*ft_skip_redirect(t_list **instruction, char *str)
 	}
 	if (i)
 	{
+		if (ft_add_single_str(instruction, NULL))
+			return (NULL);
 		new = ft_lstnew(ft_substr(str, 0, i));
 		if (!new)
 			return (NULL);
 		ft_lstadd_back(instruction, new);
+		if (ft_add_single_str(instruction, NULL))
+			return (NULL);
 	}
 	return (str + i);
 }
@@ -74,10 +78,14 @@ char	*ft_skip_pipe(t_list **instruction, char *str)
 
 	if (*str == '|')
 	{
+		if (ft_add_single_str(instruction, NULL))
+			return (NULL);
 		new = ft_lstnew(ft_strdup("|"));
 		if (!new)
 			return (NULL);
 		ft_lstadd_back(instruction, new);
+		if (ft_add_single_str(instruction, NULL))
+			return (NULL);
 		return (str + 1);
 	}
 	return (str);
