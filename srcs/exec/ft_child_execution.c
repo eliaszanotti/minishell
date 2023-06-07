@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/05/02 15:52:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 16:06:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
+static int	ft_exec_child_builtins(t_args *args, char **command, int last)
+{
+	if (ft_is_char_builtins(command[0]))
+	{
+		if (args->size > 1)
+		{
+			if (last && ft_strcmp(command[0], "cd") && ft_strcmp(command[0], "exit") && ft_strcmp(command[0], "unset"))
+				return (ft_exec_builtins(args, command));
+			return (0);
+		}
+		return (ft_exec_builtins(args, command));
+	}
+	return (0);
+}
+
 int	ft_execute_child(t_args *args, char **command, int last)
 {
 	char	*path;
@@ -60,8 +75,8 @@ int	ft_execute_child(t_args *args, char **command, int last)
 	g_last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(11));
-	if (last && args->size == 1 && ft_is_char_builtins(command[0]))
-		return (ft_exec_builtins(args, command));
+	if (ft_exec_child_builtins(args, command, last))
+		return (1);
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(4));
