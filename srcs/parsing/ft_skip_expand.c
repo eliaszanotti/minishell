@@ -92,7 +92,7 @@ char	*ft_skip_expand(t_args *args, t_list **instruction, char *str)
 	str = ft_skip_single_dollar(instruction, str);
 	if (!str)
 		return (NULL);
-	str	= ft_skip_error(instruction, str);	
+	str = ft_skip_error(instruction, str);
 	if (!str)
 		return (NULL);
 	str = ft_skip_variable(args, instruction, str);

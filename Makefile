@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/07 11:32:02 by elias            ###   ########.fr        #
+#    Updated: 2023/06/07 11:48:40 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}ft_ilst_to_char.c	 	\
 			${D_PARSE}ft_parse_quotes.c 	\
 			${D_PARSE}ft_parsing.c 			\
+			${D_PARSE}ft_remove_null.c 		\
 			${D_PARSE}ft_skip_expand.c		\
 			${D_PARSE}ft_skip_expand_utils.c\
 			${D_PARSE}ft_skip_utils.c		\

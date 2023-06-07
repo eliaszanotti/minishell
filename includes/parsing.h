@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/07 11:38:38 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:41:22 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*ft_ilst_to_char(t_ilst *str);
 int		ft_parse_quotes(t_args *args);
 //	ft_parsing.c
 int		ft_parse_args(t_args *args, char *command);
+//  ft_remove_null.c
+int		ft_remove_null(t_args *args);
 //  ft_skip_expand_utils.c
 int		ft_add_single_str(t_list **instruction, char *content);
 //	ft_skip_utils.c
