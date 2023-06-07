@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:48:45 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 13:01:24 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:33:19 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
 	list = ft_lstnew(str);
 	if (!list)
 		return (ft_error(99));
-	printf("list->content = %s\n", (char *)list->content);
 	ft_lstadd_back(new_list, list);
 	return (0);
 }
