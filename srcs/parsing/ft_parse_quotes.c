@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/06/05 18:59:44 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:49:08 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ char	*ft_replace_quotes(t_args *args, t_list *instruction)
 			break ;
 		if (!content)
 			return (NULL);
-		content = ft_add_variable(args, &str, content);
-		if (!content)
-			return (NULL);
+		// content = ft_add_variable(args, &str, content);
+		// if (!content)
+		// 	return (NULL);
 		content = ft_add_char(&str, content);
 		if (!content)
 			return (NULL);

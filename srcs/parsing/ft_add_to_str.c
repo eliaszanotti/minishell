@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:02:02 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/05 19:08:33 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:48:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_add_char(t_ilst **str, char *content)
 
 	if (*content == '\'' || *content == '"')
 		return (content);
-	if (*content != '$')
+	if (*content)
 	{
 		new = ft_ilstnew(*content);
 		if (!new)
