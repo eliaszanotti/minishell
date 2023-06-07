@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 12:42:28 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 13:09:12 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ static int	ft_add_single_ilst(t_ilst **str, char content)
 	return (0);
 }
 
+static char	*ft_check_special_case(t_args *args, t_ilst **str, char *content)
+{
+	if (!*content && ft_add_single_ilst(str, '$'))
+		return (content);
+	if (*content == '?')
+		return (ft_add_errno_to_ilst(args, str, content));
+	return (content);
+}
+
 char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 {
 	char	*name;
@@ -47,11 +56,7 @@ char	*ft_add_variable(t_args *args, t_ilst **str, char *content)
 		return (NULL);
 	if (*content == '$')
 	{
-		content++;
-		if (!*content && ft_add_single_ilst(str, '$'))
-			return (content);
-		if (*content == '?')
-			return (ft_add_errno_to_ilst(args, str, content));
+		content = ft_check_special_case(args, str, content + 1);
 		while (content[i] && ft_is_variable(content[i]))
 			i++;
 		if (!i)

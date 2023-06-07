@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:48:45 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 12:43:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 13:01:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_remove_null(t_args *args)
 		if (ft_remove_current_chain(&command_list, &new_list))
 			return (ft_error(99));
 	}
-	// TODO free
+	ft_free_instruction(args->command_list);
 	args->command_list = new_list;
 	return (0);
 }

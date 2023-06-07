@@ -56,7 +56,7 @@ static int	ft_add_each_variable(t_list **instruction, char *value)
 		if (!new)
 			return (ft_free_str(values), ft_error(99));
 		ft_lstadd_back(instruction, new);
-		if (values[i + 1] && ft_add_single_str(instruction, NULL))	
+		if (values[i + 1] && ft_add_single_str(instruction, NULL))
 			return (ft_error(99));
 		i++;
 	}
