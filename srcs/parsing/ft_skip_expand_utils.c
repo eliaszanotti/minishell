@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_skip_var_utils.c                                :+:      :+:    :+:   */
+/*   ft_skip_expand_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:45:43 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 11:00:54 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:30:47 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,4 @@ int	ft_add_single_str(t_list **instruction, char *content)
 		return (free(str), ft_error(99));
 	ft_lstadd_back(instruction, new);
 	return (0);
-}
-
-int	ft_get_list_size(t_list *list)
-{
-	int	size;
-
-	size = 0;
-	while (list)
-	{
-		size += ft_strlen(list->content);
-		list = list->next;
-	}
-	return (size);
 }

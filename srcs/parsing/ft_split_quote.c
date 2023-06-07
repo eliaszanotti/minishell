@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:03:41 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/07 10:50:04 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:28:06 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_split_quote(t_args *args, char *str)
 		str = ft_skip_alpha(&args->command_list, str);
 		if (!str)
 			return (ft_error(99));
-		str = ft_skip_variable(args, &args->command_list, str);
+		str = ft_skip_expand(args, &args->command_list, str);
 		if (!str)
 			return (ft_error(99));
 		str = ft_skip_pipe(&args->command_list, str);

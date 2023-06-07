@@ -12,54 +12,6 @@
 
 #include "minishell.h"
 
-static int	ft_add_each_variable(t_list **instruction, char *value)
-{
-	char	**values;
-	t_list	*new;
-	int		i;
-
-	values = ft_split(value, ' ');
-	if (!values)
-		return (ft_error(99));
-	i = 0;
-	while (values[i])
-	{
-		new = ft_lstnew(ft_strdup(values[i]));
-		if (!new)
-			return (ft_free_str(values), ft_error(99));
-		ft_lstadd_back(instruction, new);
-		i++;
-	}
-	return (ft_free_str(values), 0);
-}
-
-static char	*ft_skip_current_var(t_args *args, t_list **instruction, char *str)
-{
-	char	*name;
-	char	*value;
-	int		i;
-
-	i = 0;
-	if (*str == '$' && str[1] && str[1] != '$')
-	{
-		str++;
-		while (str[i] && ft_is_variable(str[i]))
-			i++;
-		name = ft_substr(str, 0, i);
-		if (!name)
-			return (NULL);
-		value = ft_getenv(args, name);
-		free(name);
-		if (!value)
-			return (str + i);
-		if (ft_add_each_variable(instruction, value))
-			return (free(value), NULL);
-		return (free(value), str + i);
-	}
-	return (str);
-}
-
-
 char	*ft_skip_single_dollar(t_list **instruction, char *str)
 {
 	if (*str == '$' && (!str[1] || str[1] == '$'))
@@ -88,7 +40,54 @@ char	*ft_skip_error(t_list **instruction, char *str)
 	return (str);
 }
 
-char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
+static int	ft_add_each_variable(t_list **instruction, char *value)
+{
+	char	**values;
+	t_list	*new;
+	int		i;
+
+	values = ft_split(value, ' ');
+	if (!values)
+		return (ft_error(99));
+	i = 0;
+	while (values[i])
+	{
+		new = ft_lstnew(ft_strdup(values[i]));
+		if (!new)
+			return (ft_free_str(values), ft_error(99));
+		ft_lstadd_back(instruction, new);
+		i++;
+	}
+	return (ft_free_str(values), 0);
+}
+
+static char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
+{
+	char	*name;
+	char	*value;
+	int		i;
+
+	i = 0;
+	if (*str == '$' && str[1] && str[1] != '$')
+	{
+		str++;
+		while (str[i] && ft_is_variable(str[i]))
+			i++;
+		name = ft_substr(str, 0, i);
+		if (!name)
+			return (NULL);
+		value = ft_getenv(args, name);
+		free(name);
+		if (!value)
+			return (str + i);
+		if (ft_add_each_variable(instruction, value))
+			return (free(value), NULL);
+		return (free(value), str + i);
+	}
+	return (str);
+}
+
+char	*ft_skip_expand(t_args *args, t_list **instruction, char *str)
 {
 	str = ft_skip_single_dollar(instruction, str);
 	if (!str)
@@ -96,16 +95,8 @@ char	*ft_skip_variable(t_args *args, t_list **instruction, char *str)
 	str	= ft_skip_error(instruction, str);	
 	if (!str)
 		return (NULL);
-	str = ft_skip_current_var(args, instruction, str);
+	str = ft_skip_variable(args, instruction, str);
 	if (!str)
 		return (NULL);
-
-
-	// {
-	//  str = ft_skip_current_var(args, &list, str);
-	// 	if (ft_add_each_variable(instruction, list))
-	// 		return (NULL);
-	// 	return (str);
-	// }
 	return (str);
 }
