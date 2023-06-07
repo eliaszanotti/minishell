@@ -6,13 +6,13 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 13:09:12 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 17:34:00 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_add_tilde(t_args *args, t_ilst **str, char *content)
+char	*ft_add_tilde(t_args *args, t_ilst **str, char *content)
 {
 	if (*content == '~')
 	{
