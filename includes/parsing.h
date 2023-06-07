@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/07 11:31:15 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:38:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_add_double(t_args *args, t_ilst **str, char *content);
 //	ft_check_parsing.c
 int		ft_check_parsing(t_args *args);
 //	ft_get_stack.c
-int		ft_get_stack(t_args *args, int j);
+int		ft_get_stack(t_args *args);
 //	ft_ilst_to_char.c
 char	*ft_ilst_to_char(t_ilst *str);
 //	ft_parse_quotes.c

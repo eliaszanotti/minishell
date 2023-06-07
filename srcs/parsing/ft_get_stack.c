@@ -3,32 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_stack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/03/02 15:28:05 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:46:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_get_stack(t_args *args, int j)
+static t_list	*ft_add_pipe(t_args *args, t_list *command_list)
+{
+	t_list	*new;
+
+	if (ft_is_delimiter(command_list) == '|')
+	{
+		new = ft_lstnew(ft_lstcopy(command_list, 1));
+		if (!new)
+			return (NULL);
+		ft_lstadd_back(&args->stack, new);
+		command_list = command_list->next;
+	}
+	return (command_list);
+}
+
+int	ft_get_stack(t_args *args)
 {
 	t_list	*command_list;
-	t_list	*new;
+	int		j;
 
 	command_list = args->command_list;
 	while (command_list)
 	{
 		j = 0;
-		if (ft_is_delimiter(command_list) == '|')
-		{
-			new = ft_lstnew(ft_lstcopy(command_list, 1));
-			if (!new)
-				return (ft_error(99));
-			ft_lstadd_back(&args->stack, new);
-			command_list = command_list->next;
-		}
+		command_list = ft_add_pipe(args, command_list);
+		if (!command_list)
+			return (ft_error(99));
 		while (ft_lstincrement(command_list, j) && \
 			ft_is_delimiter(ft_lstincrement(command_list, j)) != '|')
 			j++;

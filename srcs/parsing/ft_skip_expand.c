@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*ft_skip_single_dollar(t_list **instruction, char *str)
+static char	*ft_skip_single_dollar(t_list **instruction, char *str)
 {
 	if (*str == '$' && (!str[1] || str[1] == '$'))
 	{
@@ -23,7 +23,7 @@ char	*ft_skip_single_dollar(t_list **instruction, char *str)
 	return (str);
 }
 
-char	*ft_skip_error(t_list **instruction, char *str)
+static char	*ft_skip_error(t_list **instruction, char *str)
 {
 	char	*error;
 
