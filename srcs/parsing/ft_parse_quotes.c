@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:50:26 by event04           #+#    #+#             */
-/*   Updated: 2023/06/07 12:52:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 17:33:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ char	*ft_replace_quotes(t_args *args, t_list *instruction)
 		content = ft_add_double(args, &str, content);
 		if (!*content)
 			break ;
+		if (!content)
+			return (NULL);
+		content = ft_add_tilde(args, &str, content);
 		if (!content)
 			return (NULL);
 		content = ft_add_char(&str, content);

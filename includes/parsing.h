@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:35:58 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/07 12:41:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/07 17:34:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int		ft_get_stack(t_args *args);
 //	ft_ilst_to_char.c
 char	*ft_ilst_to_char(t_ilst *str);
 //	ft_parse_quotes.c
+char	*ft_add_tilde(t_args *args, t_ilst **str, char *content);
 int		ft_parse_quotes(t_args *args);
 //	ft_parsing.c
 int		ft_parse_args(t_args *args, char *command);
