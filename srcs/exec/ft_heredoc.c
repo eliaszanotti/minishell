@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/09 12:52:45 by elias            ###   ########.fr       */
+/*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
+/*   Updated: 2023/06/09 13:49:14 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ int	ft_heredoc(t_args *args, char *delimiter)
 	args->infile = fd[0];
 	waitpid(pid, &ret, 0);
 	g_last_errno = WEXITSTATUS(ret);
+	if (g_last_errno == 130)
+		args->heredoc_stop = 1;
 	return (0);
 }
