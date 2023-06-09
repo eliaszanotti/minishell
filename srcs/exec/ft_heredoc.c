@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/09 11:50:24 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/09 12:52:45 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ static int	ft_heredoc_loop(char *delimiter, int fd[2])
 		if (line)
 		{
 			if (!ft_strcmp(line, delimiter))
-				break;
+				break ;
 			write(fd[1], line, ft_strlen(line));
 			write(fd[1], "\n", 2);
 			free(line);
 		}
 		else
 		{
-			write(1, "minishell: warning: here-document delimited by end-of-file\n", 60);
-			break;
+			write(1, "minishell: warning: here-document"\
+				" delimited by end-of-file\n", 60);
+			break ;
 		}
 	}
 	return (0);
