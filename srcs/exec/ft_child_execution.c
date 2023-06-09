@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/07 16:43:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/09 14:20:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	char	**char_envp;
 	char	*path;
 
+	signal(SIGQUIT, ft_quit);
+	signal(SIGINT, ft_sign);
 	if (ft_duplicate_all_fd(args, last, fd))
 		return (1);
 	args->last = last;
@@ -71,8 +73,8 @@ int	ft_execute_child(t_args *args, char **command, int last)
 	int		fd[2];
 	pid_t	pid;
 
-	signal(SIGQUIT, ft_quit);
-	signal(SIGINT, ft_sign);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 	g_last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(11));
