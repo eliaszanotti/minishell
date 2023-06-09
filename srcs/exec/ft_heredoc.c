@@ -6,13 +6,13 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/09 11:33:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/09 11:50:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit2(int sig)
+static void	ft_exit_heredoc(int sig)
 {
 	(void)sig;
 	write(1, "\n", 2);
@@ -20,13 +20,37 @@ void	ft_exit2(int sig)
 	exit(130);
 }
 
-int	ft_heredoc(t_args *args, char *delimiter)
+static int	ft_heredoc_loop(char *delimiter, int fd[2])
 {
 	char	*line;
+
+	signal(SIGINT, ft_exit_heredoc);
+	while (1)
+	{
+		line = readline("heredoc> ");
+		if (line)
+		{
+			if (!ft_strcmp(line, delimiter))
+				break;
+			write(fd[1], line, ft_strlen(line));
+			write(fd[1], "\n", 2);
+			free(line);
+		}
+		else
+		{
+			write(1, "minishell: warning: here-document delimited by end-of-file\n", 60);
+			break;
+		}
+	}
+	return (0);
+}
+
+int	ft_heredoc(t_args *args, char *delimiter)
+{
 	int		fd[2];
+	int		ret;
 	pid_t	pid;
 
-	args->heredoc = 0;
 	signal(SIGINT, SIG_IGN);
 	if (pipe(fd) == -1)
 		return (ft_error(11));
@@ -35,32 +59,13 @@ int	ft_heredoc(t_args *args, char *delimiter)
 		return (ft_error(10));
 	if (pid == 0)
 	{
-		signal(SIGINT, ft_exit2);
-		while (1)
-		{
-			line = readline("heredoc> ");
-			if (line)
-			{
-				if (!ft_strcmp(line, delimiter))
-				{
-					args->heredoc = 1;
-					break;
-				}
-				write(fd[1], line, ft_strlen(line));
-				write(fd[1], "\n", 2);
-				free(line);
-			}
-			else
-			{
-				write(1, "minishell: warning: here-document delimited by end-of-file\n", 60);
-				args->heredoc = 1;
-				break;
-			}
-		}
+		if (ft_heredoc_loop(delimiter, fd))
+			return (1);
 		exit(0);
 	}
 	close(fd[1]);
 	args->infile = fd[0];
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &ret, 0);
+	g_last_errno = WEXITSTATUS(ret);
 	return (0);
 }
