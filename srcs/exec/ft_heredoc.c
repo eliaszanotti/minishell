@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 10:18:30 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/09 10:39:11 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/09 11:33:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	ft_exit2(int sig)
 {
 	(void)sig;
 	write(1, "\n", 2);
-	exit(0);
+	g_last_errno = 130;
+	exit(130);
 }
 
 int	ft_heredoc(t_args *args, char *delimiter)
@@ -43,7 +44,7 @@ int	ft_heredoc(t_args *args, char *delimiter)
 				if (!ft_strcmp(line, delimiter))
 				{
 					args->heredoc = 1;
-					break ;
+					break;
 				}
 				write(fd[1], line, ft_strlen(line));
 				write(fd[1], "\n", 2);
@@ -51,14 +52,15 @@ int	ft_heredoc(t_args *args, char *delimiter)
 			}
 			else
 			{
-				write(1, "\nminishell: warning: here-document delimited by end-of-file\n", 60);
+				write(1, "minishell: warning: here-document delimited by end-of-file\n", 60);
 				args->heredoc = 1;
-				break ;
+				break;
 			}
 		}
+		exit(0);
 	}
 	close(fd[1]);
-	waitpid(pid, NULL, 0);
 	args->infile = fd[0];
+	waitpid(pid, NULL, 0);
 	return (0);
 }
