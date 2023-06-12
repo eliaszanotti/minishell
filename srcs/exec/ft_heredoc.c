@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
-/*   Updated: 2023/06/09 13:49:14 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/12 10:57:29 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static int	ft_heredoc_loop(char *delimiter, int fd[2])
 		if (line)
 		{
 			if (!ft_strcmp(line, delimiter))
+			{	
+				free(line);
 				break ;
+			}
 			write(fd[1], line, ft_strlen(line));
 			write(fd[1], "\n", 2);
 			free(line);
