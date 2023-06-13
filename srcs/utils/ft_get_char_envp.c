@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_char_envp.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 18:02:36 by elias             #+#    #+#             */
-/*   Updated: 2023/03/01 13:46:06 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:03:15 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_get_name_and_value(char *name, char *value)
+static char	*ft_get_name_and_value(char *name, char *value)
 {
 	char	*str;
 	char	*tmp;

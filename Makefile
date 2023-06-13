@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:59:26 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 15:10:04 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,14 +79,20 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_FREE}ft_free_stack.c			\
 			${D_UTILS}${D_FREE}ft_free_str.c			\
 			\
+			${D_UTILS}${D_LIST}ft_lstcopy.c				\
+			${D_UTILS}${D_LIST}ft_lstincrement.c		\
+			\
+			${D_UTILS}${D_TYPE}ft_is_builtins.c			\
+			${D_UTILS}${D_TYPE}ft_is_char_builtins.c	\
+			${D_UTILS}${D_TYPE}ft_is_delimiter.c		\
+			${D_UTILS}${D_TYPE}ft_is_redirect.c			\
+			\
 			${D_UTILS}ft_add_first_vars.c		\
 			${D_UTILS}ft_error.c			\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
 			${D_UTILS}ft_getenv.c 			\
 			${D_UTILS}ft_get_char_envp.c 	\
-			${D_UTILS}ft_is_type.c 			\
-			${D_UTILS}ft_list_utils.c		\
 			${D_UTILS}ft_struct_init.c 		\
 			${D_UTILS}ft_signals.c 			\
 
@@ -115,6 +121,8 @@ D_STACK		= stack/
 D_UTILS		= utils/
 D_CHAIN		= chain/
 D_FREE		= free/
+D_LIST		= list/
+D_TYPE		= type/
 
 # LIB
 LIBFT		= -L ./libft -lft 
