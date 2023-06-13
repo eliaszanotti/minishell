@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:30:40 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:43:36 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,22 +20,25 @@ ifeq ($(OS), Darwin)
 endif
 
 S_MNSH_LIST	= main.c									\
+			${D_BUILTINS}${D_ENVP}ft_add_var_to_envp.c\
+			${D_BUILTINS}${D_ENVP}ft_export.c\
+			${D_BUILTINS}${D_ENVP}ft_get_value.c\
+			${D_BUILTINS}${D_ENVP}ft_get_var_name.c\
+			${D_BUILTINS}${D_ENVP}ft_get_var_value.c\
+			${D_BUILTINS}${D_ENVP}ft_is_variable.c\
+			${D_BUILTINS}${D_ENVP}ft_unset.c\
+			\
 			${D_BUILTINS}ft_cd.c						\
 			${D_BUILTINS}ft_echo.c						\
 			${D_BUILTINS}ft_env.c						\
-			${D_BUILTINS}ft_env_utils.c					\
 			${D_BUILTINS}ft_exec_builtins.c				\
 			${D_BUILTINS}ft_exit.c						\
-			${D_BUILTINS}ft_export.c					\
-			${D_BUILTINS}ft_export_utils.c				\
 			${D_BUILTINS}ft_pwd.c						\
-			${D_BUILTINS}ft_unset.c						\
 			\
 			${D_EXEC}ft_add_pid.c						\
 			${D_EXEC}ft_child_execution.c				\
 			${D_EXEC}ft_exec.c							\
 			${D_EXEC}ft_heredoc.c						\
-			${D_EXEC}ft_pid_utils.c						\
 			${D_EXEC}ft_redirect.c						\
 			${D_EXEC}ft_wait_execution.c				\
 			\
@@ -94,6 +97,7 @@ DIR_OBJS	= .objs/
 DIR_INCLUDE = includes/
 DIR_SRC		= srcs/
 D_BUILTINS	= builtins/
+D_ENVP		= envp/
 D_EXEC		= exec/
 D_PARSE		= parsing/
 D_ILST		= ilst/

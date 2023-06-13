@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/13 17:43:17 by ezanotti         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:31:26 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_remove_var(t_args *args, char *var)
+static int	ft_remove_var(t_args *args, char *var)
 {
 	t_envp	*envp;
 	t_envp	*backup;
