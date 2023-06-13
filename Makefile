@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:20:35 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:30:40 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,29 @@ ifeq ($(OS), Darwin)
 	PRINT	= @printf
 endif
 
-S_MNSH_LIST	= main.c						\
-			${D_BUILTINS}ft_cd.c			\
-			${D_BUILTINS}ft_echo.c			\
-			${D_BUILTINS}ft_env.c			\
-			${D_BUILTINS}ft_env_utils.c		\
-			${D_BUILTINS}ft_exec_builtins.c	\
-			${D_BUILTINS}ft_exit.c			\
-			${D_BUILTINS}ft_export.c		\
-			${D_BUILTINS}ft_export_utils.c	\
-			${D_BUILTINS}ft_pwd.c			\
-			${D_BUILTINS}ft_unset.c			\
-											\
-			${D_EXEC}ft_child_execution.c	\
-			${D_EXEC}ft_exec.c				\
-			${D_EXEC}ft_heredoc.c			\
-			${D_EXEC}ft_pid_utils.c			\
-			${D_EXEC}ft_redirect.c			\
+S_MNSH_LIST	= main.c									\
+			${D_BUILTINS}ft_cd.c						\
+			${D_BUILTINS}ft_echo.c						\
+			${D_BUILTINS}ft_env.c						\
+			${D_BUILTINS}ft_env_utils.c					\
+			${D_BUILTINS}ft_exec_builtins.c				\
+			${D_BUILTINS}ft_exit.c						\
+			${D_BUILTINS}ft_export.c					\
+			${D_BUILTINS}ft_export_utils.c				\
+			${D_BUILTINS}ft_pwd.c						\
+			${D_BUILTINS}ft_unset.c						\
 			\
-			${D_PARSE}${D_ILST}ft_add_char.c			\
+			${D_EXEC}ft_add_pid.c						\
+			${D_EXEC}ft_child_execution.c				\
+			${D_EXEC}ft_exec.c							\
+			${D_EXEC}ft_heredoc.c						\
+			${D_EXEC}ft_pid_utils.c						\
+			${D_EXEC}ft_redirect.c						\
+			${D_EXEC}ft_wait_execution.c				\
+			\
+			${D_PARSE}${D_ILST}ft_add_errno_to_ilst.c	\
+			${D_PARSE}${D_ILST}ft_add_var_to_ilst.c		\
+			${D_PARSE}${D_ILST}ft_ilst_to_char.c		\
 			\
 			${D_PARSE}${D_QUOTES}ft_add_char.c			\
 			${D_PARSE}${D_QUOTES}ft_add_double.c		\
@@ -60,9 +64,7 @@ S_MNSH_LIST	= main.c						\
 			${D_PARSE}${D_STACK}ft_add_redirects.c		\
 			${D_PARSE}${D_STACK}ft_get_stack.c			\
 			\
-			${D_PARSE}ft_ilst_to_char.c	 	\
-			${D_PARSE}ft_add_to_ilst.c	 	\
-			${D_PARSE}ft_parsing.c 			\
+			${D_PARSE}ft_parsing.c 						\
 											\
 			${D_UTILS}ft_add_first_vars.c	\
 			${D_UTILS}ft_chained_envp.c		\

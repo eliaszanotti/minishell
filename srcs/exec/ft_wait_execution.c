@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pid_utils.c                                     :+:      :+:    :+:   */
+/*   ft_wait_execution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/25 22:26:22 by elias             #+#    #+#             */
-/*   Updated: 2023/05/24 16:02:55 by ezanotti         ###   ########.fr       */
+/*   Created: 2023/06/13 14:29:00 by elias             #+#    #+#             */
+/*   Updated: 2023/06/13 14:29:17 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,4 @@ int	ft_wait_execution(t_args *args)
 		i--;
 	}
 	return (free(args->pid_tab), free(args->close_tab), 0);
-}
-
-int	ft_add_pid(t_args *args, pid_t pid)
-{
-	int	i;
-
-	i = 0;
-	while (args->pid_tab[i] != 0 && i < args->size)
-		i++;
-	if (i < args->size)
-	{
-		args->pid_tab[i] = pid;
-		args->close_tab[i] = args->fdd;
-	}
-	return (0);
 }
