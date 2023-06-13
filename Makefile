@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:43:36 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:51:46 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,13 @@ ifeq ($(OS), Darwin)
 endif
 
 S_MNSH_LIST	= main.c									\
-			${D_BUILTINS}${D_ENVP}ft_add_var_to_envp.c\
-			${D_BUILTINS}${D_ENVP}ft_export.c\
-			${D_BUILTINS}${D_ENVP}ft_get_value.c\
-			${D_BUILTINS}${D_ENVP}ft_get_var_name.c\
-			${D_BUILTINS}${D_ENVP}ft_get_var_value.c\
-			${D_BUILTINS}${D_ENVP}ft_is_variable.c\
-			${D_BUILTINS}${D_ENVP}ft_unset.c\
+			${D_BUILTINS}${D_ENVP}ft_add_var_to_envp.c	\
+			${D_BUILTINS}${D_ENVP}ft_export.c			\
+			${D_BUILTINS}${D_ENVP}ft_get_value.c		\
+			${D_BUILTINS}${D_ENVP}ft_get_var_name.c		\
+			${D_BUILTINS}${D_ENVP}ft_get_var_value.c	\
+			${D_BUILTINS}${D_ENVP}ft_is_variable.c		\
+			${D_BUILTINS}${D_ENVP}ft_unset.c			\
 			\
 			${D_BUILTINS}ft_cd.c						\
 			${D_BUILTINS}ft_echo.c						\
@@ -68,8 +68,13 @@ S_MNSH_LIST	= main.c									\
 			${D_PARSE}${D_STACK}ft_get_stack.c			\
 			\
 			${D_PARSE}ft_parsing.c 						\
-											\
-			${D_UTILS}ft_add_first_vars.c	\
+			\
+			${D_UTILS}${D_FREE}ft_free_envp.c			\
+			${D_UTILS}${D_FREE}ft_free_instruction.c	\
+			${D_UTILS}${D_FREE}ft_free_stack.c			\
+			${D_UTILS}${D_FREE}ft_free_str.c			\
+			\
+			${D_UTILS}ft_add_first_vars.c		\
 			${D_UTILS}ft_chained_envp.c		\
 			${D_UTILS}ft_error.c			\
 			${D_UTILS}ft_free.c 			\
@@ -105,6 +110,7 @@ D_QUOTES	= quotes/
 D_SPLIT		= split/
 D_STACK		= stack/
 D_UTILS		= utils/
+D_FREE		= free/
 
 # LIB
 LIBFT		= -L ./libft -lft 
