@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 13:56:21 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:18:57 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,26 +36,31 @@ S_MNSH_LIST	= main.c						\
 			${D_EXEC}ft_heredoc.c			\
 			${D_EXEC}ft_pid_utils.c			\
 			${D_EXEC}ft_redirect.c			\
-											\
-			${D_PARSE}${D_SPLIT}ft_skip_alpha.c\
-			${D_PARSE}${D_SPLIT}ft_skip_expand.c\
-			${D_PARSE}${D_SPLIT}ft_skip_expand_utils.c\
-			${D_PARSE}${D_SPLIT}ft_skip_pipe.c\
-			${D_PARSE}${D_SPLIT}ft_skip_redirect.c\
-			${D_PARSE}${D_SPLIT}ft_skip_spaces.c\
-			${D_PARSE}${D_SPLIT}ft_split_quote.c\
 			\
+			${D_PARSE}${D_QUOTES}ft_add_char.c			\
+			${D_PARSE}${D_QUOTES}ft_add_double.c		\
+			${D_PARSE}${D_QUOTES}ft_add_single.c		\
+			${D_PARSE}${D_QUOTES}ft_add_tilde.c			\
+			${D_PARSE}${D_QUOTES}ft_add_variable.c 		\
+			${D_PARSE}${D_QUOTES}ft_parse_quotes.c 		\
 			\
-			${D_PARSE}ft_add_to_ilst.c		\
-			${D_PARSE}ft_add_to_stack.c		\
-			${D_PARSE}ft_add_to_str.c	 	\
-			${D_PARSE}ft_add_variable.c	 	\
-			${D_PARSE}ft_check_parsing.c	\
-			${D_PARSE}ft_get_stack.c	 	\
+			${D_PARSE}${D_SPLIT}ft_check_parsing.c		\
+			${D_PARSE}${D_SPLIT}ft_remove_null.c		\
+			${D_PARSE}${D_SPLIT}ft_skip_alpha.c			\
+			${D_PARSE}${D_SPLIT}ft_skip_expand.c		\
+			${D_PARSE}${D_SPLIT}ft_skip_expand_utils.c	\
+			${D_PARSE}${D_SPLIT}ft_skip_pipe.c			\
+			${D_PARSE}${D_SPLIT}ft_skip_redirect.c		\
+			${D_PARSE}${D_SPLIT}ft_skip_spaces.c		\
+			${D_PARSE}${D_SPLIT}ft_split_quote.c		\
+			\
+			${D_PARSE}${D_STACK}ft_add_command.c		\
+			${D_PARSE}${D_STACK}ft_add_redirects.c		\
+			${D_PARSE}${D_STACK}ft_get_stack.c			\
+			\
 			${D_PARSE}ft_ilst_to_char.c	 	\
-			${D_PARSE}ft_parse_quotes.c 	\
+			${D_PARSE}ft_add_to_ilst.c	 	\
 			${D_PARSE}ft_parsing.c 			\
-			${D_PARSE}ft_remove_null.c 		\
 											\
 			${D_UTILS}ft_add_first_vars.c	\
 			${D_UTILS}ft_chained_envp.c		\
@@ -87,7 +92,9 @@ DIR_SRC		= srcs/
 D_BUILTINS	= builtins/
 D_EXEC		= exec/
 D_PARSE		= parsing/
+D_QUOTES	= quotes/
 D_SPLIT		= split/
+D_STACK		= stack/
 D_UTILS		= utils/
 
 # LIB

@@ -6,13 +6,13 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:48:45 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 14:33:19 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:57:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
+static int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
 {
 	char	*str;
 	char	*content;
@@ -36,7 +36,7 @@ int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
 	return (0);
 }
 
-int	ft_remove_current_chain(t_list **list, t_list **new_list)
+static int	ft_remove_current_chain(t_list **list, t_list **new_list)
 {
 	t_list	*list_copy;
 	t_list	*temp;

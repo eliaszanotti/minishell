@@ -6,24 +6,11 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 17:34:00 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 14:11:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*ft_add_tilde(t_args *args, t_ilst **str, char *content)
-{
-	if (*content == '~')
-	{
-		if (*(content + 1) != '/' && *(content + 1) != ' ' && *(content + 1))
-			return (content);
-		if (ft_add_var_to_ilst(args, str, "HOME"))
-			return (NULL);
-		return (content + 1);
-	}
-	return (content);
-}
 
 static int	ft_add_single_ilst(t_ilst **str, char content)
 {
