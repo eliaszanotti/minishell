@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:52:09 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:59:26 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,13 +69,17 @@ S_MNSH_LIST	= main.c									\
 			\
 			${D_PARSE}ft_parsing.c 						\
 			\
+			${D_UTILS}${D_CHAIN}ft_envpadd_back.c		\
+			${D_UTILS}${D_CHAIN}ft_envplast.c			\
+			${D_UTILS}${D_CHAIN}ft_envpnew.c			\
+			${D_UTILS}${D_CHAIN}ft_envpsize.c			\
+			\
 			${D_UTILS}${D_FREE}ft_free_envp.c			\
 			${D_UTILS}${D_FREE}ft_free_instruction.c	\
 			${D_UTILS}${D_FREE}ft_free_stack.c			\
 			${D_UTILS}${D_FREE}ft_free_str.c			\
 			\
 			${D_UTILS}ft_add_first_vars.c		\
-			${D_UTILS}ft_chained_envp.c		\
 			${D_UTILS}ft_error.c			\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
@@ -109,6 +113,7 @@ D_QUOTES	= quotes/
 D_SPLIT		= split/
 D_STACK		= stack/
 D_UTILS		= utils/
+D_CHAIN		= chain/
 D_FREE		= free/
 
 # LIB
