@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 15:13:59 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 15:21:16 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,9 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_CHAIN}ft_envpnew.c			\
 			${D_UTILS}${D_CHAIN}ft_envpsize.c			\
 			\
+			${D_UTILS}${D_ERRORS}ft_error_command.c		\
+			${D_UTILS}${D_ERRORS}ft_error.c				\
+			\
 			${D_UTILS}${D_FREE}ft_free_envp.c			\
 			${D_UTILS}${D_FREE}ft_free_instruction.c	\
 			${D_UTILS}${D_FREE}ft_free_stack.c			\
@@ -86,18 +89,19 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_SIGNALS}ft_sig_ignore.c		\
 			${D_UTILS}${D_SIGNALS}ft_sign.c				\
 			\
+			${D_UTILS}${D_STRUCT}ft_struct_init.c		\
+			${D_UTILS}${D_STRUCT}ft_struct_reset.c		\
+			\
 			${D_UTILS}${D_TYPE}ft_is_builtins.c			\
 			${D_UTILS}${D_TYPE}ft_is_char_builtins.c	\
 			${D_UTILS}${D_TYPE}ft_is_delimiter.c		\
 			${D_UTILS}${D_TYPE}ft_is_redirect.c			\
 			\
 			${D_UTILS}ft_add_first_vars.c	\
-			${D_UTILS}ft_error.c			\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
 			${D_UTILS}ft_getenv.c 			\
 			${D_UTILS}ft_get_char_envp.c 	\
-			${D_UTILS}ft_struct_init.c 		\
 
 HDRS_LIST =	minishell.h	\
 			exec.h		\
@@ -123,9 +127,11 @@ D_SPLIT		= split/
 D_STACK		= stack/
 D_UTILS		= utils/
 D_CHAIN		= chain/
+D_ERRORS	= errors/
 D_FREE		= free/
 D_LIST		= list/
 D_SIGNALS	= signals/
+D_STRUCT	= struct/
 D_TYPE		= type/
 
 # LIB

@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/06/09 13:43:55 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:17:34 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,6 @@ int	ft_struct_init(t_args *args, char **envp)
 	args->infile = STDIN_FILENO;
 	args->outfile = STDOUT_FILENO;
 	args->stack = NULL;
-	args->heredoc_stop = 0;
-	return (0);
-}
-
-int	ft_reset_struct(t_args *args)
-{
-	char	cwd[PATH_MAX];
-
-	args->prompt = ft_get_prompt(args, getcwd(cwd, sizeof(cwd)));
-	args->infile = STDIN_FILENO;
-	args->outfile = STDOUT_FILENO;
-	args->stack = NULL;
-	args->size = 0;
-	args->fdd = 0;
-	args->last = 1;
 	args->heredoc_stop = 0;
 	return (0);
 }

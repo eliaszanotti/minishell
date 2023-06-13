@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 12:44:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:18:56 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_prompt_loop(t_args *args)
 	{
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, ft_sig_ignore);
-		ft_reset_struct(args);
+		ft_struct_reset(args);
 		command = readline(args->prompt);
 		free(args->prompt);
 		if (!command)

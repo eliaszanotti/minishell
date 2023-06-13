@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/10 19:13:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:18:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_list	*ft_lstincrement(t_list *instruction, int i);
 t_list	*ft_lstcopy(t_list *new, int j);
 //	ft_struct_init.c
 int		ft_struct_init(t_args *args, char **envp);
-int		ft_reset_struct(t_args *args);
+int		ft_struct_reset(t_args *args);
 //	ft_utils.c
 void	ft_sig_ignore(int sig);
 void	ft_sign(int sig);

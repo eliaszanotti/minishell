@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 19:01:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:15:44 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_error_command(char *command)
-{
-	ft_printf_fd("\e[1;31m[ERROR]\e[0m ", STDERR_FILENO);
-	ft_printf_fd("%s : Command not found\n", STDERR_FILENO, command);
-	return (0);
-}
 
 static int	ft_error_range_1(int error_code)
 {
