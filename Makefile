@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:51:46 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:52:09 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,6 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}ft_add_first_vars.c		\
 			${D_UTILS}ft_chained_envp.c		\
 			${D_UTILS}ft_error.c			\
-			${D_UTILS}ft_free.c 			\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
 			${D_UTILS}ft_getenv.c 			\
