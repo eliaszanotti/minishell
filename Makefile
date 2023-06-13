@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 14:18:57 by elias            ###   ########.fr        #
+#    Updated: 2023/06/13 14:20:35 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ S_MNSH_LIST	= main.c						\
 			${D_EXEC}ft_heredoc.c			\
 			${D_EXEC}ft_pid_utils.c			\
 			${D_EXEC}ft_redirect.c			\
+			\
+			${D_PARSE}${D_ILST}ft_add_char.c			\
 			\
 			${D_PARSE}${D_QUOTES}ft_add_char.c			\
 			${D_PARSE}${D_QUOTES}ft_add_double.c		\
@@ -92,6 +94,7 @@ DIR_SRC		= srcs/
 D_BUILTINS	= builtins/
 D_EXEC		= exec/
 D_PARSE		= parsing/
+D_ILST		= ilst/
 D_QUOTES	= quotes/
 D_SPLIT		= split/
 D_STACK		= stack/
