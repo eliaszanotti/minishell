@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/14 14:25:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:49:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	ft_is_delimiter(t_list *instruction);
 char	ft_is_redirect(t_list *instruction);
 
 int		ft_add_first_vars(t_args *args);
+int		ft_check_stat(char *path);
 char	**ft_get_char_envp(t_args *args);
 char	*ft_get_path(t_args *args, char *cmd);
 char	*ft_get_prompt(t_args *args, char *cwd);

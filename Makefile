@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/14 14:22:55 by elias            ###   ########.fr        #
+#    Updated: 2023/06/14 14:55:08 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_TYPE}ft_is_redirect.c			\
 			\
 			${D_UTILS}ft_add_first_vars.c	\
+			${D_UTILS}ft_check_stat.c		\
 			${D_UTILS}ft_get_prompt.c		\
 			${D_UTILS}ft_get_path.c 		\
 			${D_UTILS}ft_getenv.c 			\

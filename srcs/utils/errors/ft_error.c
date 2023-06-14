@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 14:26:46 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 15:08:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	ft_error_126(int error_code)
 	return (1);
 }
 
-static int	ft_error_command(char *command)
+static int	ft_error_command(int error_code, char *command)
 {
 	char	*new_str;
 	char	*tmp;
@@ -66,23 +66,26 @@ static int	ft_error_command(char *command)
 	tmp = ft_strjoin("\e[1;31m[ERROR]\e[0m ", command);
 	if (!tmp)
 		return (1);
-	new_str = ft_strjoin(tmp, " : Command not found\n");
+	if (error_code == 1270)
+		new_str = ft_strjoin(tmp, ": Command not found\n");
+	else if (error_code == 1264)
+		new_str = ft_strjoin(tmp, ": Is a directory\n");
 	if (!new_str)
 		return (1);
 	write(STDERR_FILENO, new_str, ft_strlen(new_str));
-	return (1);
+	return (error_code / 10);
 }
 
 int	ft_error(int error_code, char *command)
 {
+	if (error_code && command)
+		return (ft_error_command(error_code, command));
 	if (error_code / 10 == 1)
 		return (ft_error_1(error_code));
 	if (error_code / 10 == 2)
 		return (ft_error_2(error_code));
 	if (error_code / 10 == 126)
 		return (ft_error_126(error_code));
-	if (error_code / 10 == 127)
-		return (ft_error_command(command));
 	else if (error_code == 99)
 	{
 		ft_print_error("Malloc cannot be created\n");

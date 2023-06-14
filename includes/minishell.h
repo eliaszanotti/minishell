@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 11:51:24 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:44:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <dirent.h>
 # include <limits.h>
 # include <signal.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
