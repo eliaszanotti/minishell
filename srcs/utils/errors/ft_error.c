@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 14:22:22 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:26:46 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ int	ft_error(int error_code, char *command)
 		return (ft_error_command(command));
 	else if (error_code == 99)
 	{
-		printf("Malloc cannot be created\n");
+		ft_print_error("Malloc cannot be created\n");
 		return (99);
 	}
 	else
-		printf("Undefined\n");
+		ft_print_error("Undefined\n");
 	return (1);
 }
