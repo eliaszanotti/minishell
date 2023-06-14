@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/13 15:21:16 by elias            ###   ########.fr        #
+#    Updated: 2023/06/14 11:33:08 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,11 @@ S_MNSH_LIST	= main.c									\
 			${D_PARSE}${D_QUOTES}ft_add_variable.c 		\
 			${D_PARSE}${D_QUOTES}ft_parse_quotes.c 		\
 			\
+			${D_PARSE}${D_SPLIT}ft_add_single_str.c		\
 			${D_PARSE}${D_SPLIT}ft_check_parsing.c		\
 			${D_PARSE}${D_SPLIT}ft_remove_null.c		\
 			${D_PARSE}${D_SPLIT}ft_skip_alpha.c			\
 			${D_PARSE}${D_SPLIT}ft_skip_expand.c		\
-			${D_PARSE}${D_SPLIT}ft_skip_expand_utils.c	\
 			${D_PARSE}${D_SPLIT}ft_skip_pipe.c			\
 			${D_PARSE}${D_SPLIT}ft_skip_redirect.c		\
 			${D_PARSE}${D_SPLIT}ft_skip_spaces.c		\

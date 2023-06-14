@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:11:58 by elias             #+#    #+#             */
-/*   Updated: 2023/06/09 13:02:28 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 11:51:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,5 @@ typedef struct s_args
 }	t_args;
 
 extern int	g_last_errno;
-
-t_envp	*ft_envpnew(char *name, char *value, int equal);
-t_envp	*ft_envplast(t_envp *envp);
-void	ft_envpadd_back(t_envp **lst, t_envp *new);
-int		ft_envpsize(t_envp *envp);
 
 #endif

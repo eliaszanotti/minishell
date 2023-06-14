@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/09 14:20:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 11:22:47 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	ft_exec_child_builtins(t_args *args, char **command, int last)
 	return (0);
 }
 
-int	ft_execute_child(t_args *args, char **command, int last)
+int	ft_child_execution(t_args *args, char **command, int last)
 {
 	char	*path;
 	int		fd[2];

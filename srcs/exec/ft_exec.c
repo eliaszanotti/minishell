@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/04/29 12:25:00 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/06/14 11:24:16 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_list	*ft_execute_loop(t_args *args, t_list *stack)
 			instruction = ft_get_instruction(current->content);
 			if (!instruction)
 				return (NULL);
-			if (ft_execute_child(args, instruction, 0))
+			if (ft_child_execution(args, instruction, 0))
 				return (ft_free_str(instruction), NULL);
 			ft_free_str(instruction);
 			count++;
@@ -80,12 +80,12 @@ static int	ft_execute_command(t_args *args)
 	instruction = ft_get_instruction(stack->content);
 	if (!instruction)
 		return (ft_error(99));
-	if (stack && ft_execute_child(args, instruction, 1))
+	if (stack && ft_child_execution(args, instruction, 1))
 		return (ft_free_str(instruction), 1);
 	return (ft_free_str(instruction), 0);
 }
 
-int	ft_start_execution(t_args *args)
+int	ft_exec(t_args *args)
 {
 	t_list	*stack;
 	int		i;

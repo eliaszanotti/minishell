@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:18:56 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 11:37:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_launch_execution(t_args *args, int error_code)
 {
 	if (!error_code)
 	{
-		if (ft_start_execution(args) == 99)
+		if (ft_exec(args) == 99)
 			return (ft_free_envp(args), 1);
 		ft_free_instruction(args->command_list);
 		ft_free_stack(args->stack);
@@ -45,7 +45,7 @@ static int	ft_prompt_loop(t_args *args)
 		}
 		if (*command)
 			add_history(command);
-		error_code = ft_parse_args(args, command);
+		error_code = ft_parsing(args, command);
 		if (ft_launch_execution(args, error_code))
 			return (1);
 		free(command);
