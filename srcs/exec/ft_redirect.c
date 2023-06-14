@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:27:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/09 13:47:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 13:45:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	ft_redirect(t_list *instruction, t_args *args)
 		(ft_heredoc(args, next->content) || args->heredoc_stop))
 		return (1);
 	if (args->infile == -1)
-		ft_error(14);
+		ft_error(10, NULL);
 	if (args->outfile == -1)
-		return (ft_error(15));
+		return (ft_error(11, NULL));
 	return (0);
 }

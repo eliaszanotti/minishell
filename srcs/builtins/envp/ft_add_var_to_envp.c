@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:36:28 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:24:32 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:42:28 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ int	ft_add_var_to_envp(t_args *args, char *name, char *value, int add)
 	{	
 		new = ft_envpnew(name, value, args->equal);
 		if (!new)
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		ft_envpadd_back(&args->envp, new);
 		return (0);
 	}
 	free(name);
 	value = ft_get_new_value(envp->value, value, add);
 	if (!value)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	free(envp->value);
 	envp->value = value;
 	envp->equal = args->equal;

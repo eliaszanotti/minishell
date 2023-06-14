@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:03:44 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:22:43 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:46:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_add_redirects(t_args *args, t_list *instruction, int max)
 		{
 			new = ft_lstnew(ft_lstcopy(instruction, 2));
 			if (!new)
-				return (ft_error(99));
+				return (ft_error(99, NULL));
 			ft_lstadd_back(&args->stack, new);
 			instruction = instruction->next;
 			max--;

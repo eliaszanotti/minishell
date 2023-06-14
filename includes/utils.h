@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/14 11:51:06 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:25:21 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_envp	*ft_envpnew(char *name, char *value, int equal);
 int		ft_envpsize(t_envp *envp);
 
 //	ERRORS
-int		ft_error_command(char *command);
-int		ft_error(int error_code);
+int		ft_error(int error_code, char *command);
+int		ft_print_error(char *str);
 
 //	FREE
 void	ft_free_envp(t_args *args);

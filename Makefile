@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/14 11:33:08 by elias            ###   ########.fr        #
+#    Updated: 2023/06/14 14:22:55 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,8 +74,8 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_CHAIN}ft_envpnew.c			\
 			${D_UTILS}${D_CHAIN}ft_envpsize.c			\
 			\
-			${D_UTILS}${D_ERRORS}ft_error_command.c		\
 			${D_UTILS}${D_ERRORS}ft_error.c				\
+			${D_UTILS}${D_ERRORS}ft_print_error.c		\
 			\
 			${D_UTILS}${D_FREE}ft_free_envp.c			\
 			${D_UTILS}${D_FREE}ft_free_instruction.c	\

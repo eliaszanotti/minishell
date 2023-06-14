@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:30:39 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 11:24:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:44:30 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	ft_execute_command(t_args *args)
 		return (0);
 	instruction = ft_get_instruction(stack->content);
 	if (!instruction)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	if (stack && ft_child_execution(args, instruction, 1))
 		return (ft_free_str(instruction), 1);
 	return (ft_free_str(instruction), 0);
@@ -101,10 +101,10 @@ int	ft_exec(t_args *args)
 	i = 0;
 	args->pid_tab = malloc(sizeof(pid_t) * args->size);
 	if (!args->pid_tab)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	args->close_tab = malloc(sizeof(int) * args->size);
 	if (!args->close_tab)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	while (i < args->size)
 		args->pid_tab[i++] = 0;
 	args->fdd = 0;

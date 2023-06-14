@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:21:53 by elias             #+#    #+#             */
-/*   Updated: 2023/06/07 11:46:16 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:46:32 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ int	ft_get_stack(t_args *args)
 		j = 0;
 		command_list = ft_add_pipe(args, command_list);
 		if (!command_list)
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		while (ft_lstincrement(command_list, j) && \
 			ft_is_delimiter(ft_lstincrement(command_list, j)) != '|')
 			j++;
 		if (ft_add_redirects(args, command_list, j + 1))
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		if (ft_add_command(args, command_list, j + 1))
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		command_list = ft_lstincrement(command_list, j);
 	}
 	return (0);

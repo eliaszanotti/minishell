@@ -6,62 +6,83 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:15:44 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:22:22 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	ft_error_range_1(int error_code)
+static int	ft_error_1(int error_code)
+{
+	g_last_errno = 1;
+	if (error_code == 10)
+		ft_print_error("Can't open file\n");
+	else if (error_code == 11)
+		ft_print_error("Can't create file\n");
+	else if (error_code == 12)
+		ft_print_error("No such file or directory\n");
+	else if (error_code == 13)
+		ft_print_error("exit: too many arguments\n");
+	else if (error_code == 14)
+		ft_print_error("export : invalid identifier\n");
+	return (1);
+}
+
+static int	ft_error_2(int error_code)
 {
 	g_last_errno = 2;
-	if (error_code == 3)
-		printf("Parse error (quote not closed)\n");
-	else if (error_code == 4)
-		printf("Parse error on pipe\n");
-	else if (error_code == 5)
-		printf("Syntax error on redirect\n");
-	else if (error_code == 6)
-		printf("Parse error at end of command\n");
-	return (1);
-}
-
-static int	ft_error_range_2(int error_code)
-{
-	if (error_code == 10)
-		printf("Failed to create fork\n");
-	else if (error_code == 11)
-		printf("Failed to pipe fd\n");
-	else if (error_code == 12)
-		printf("Failed to execute command\n");
-	else if (error_code == 13)
-		printf("Failed to duplicate fd (dup2 error)\n");
-	else if (error_code == 14)
-		printf("Can't open file\n");
-	else if (error_code == 15)
-		printf("Can't create file\n");
-	return (1);
-}
-
-int	ft_error(int error_code)
-{
-	if (error_code)
-		printf("\e[1;31m[ERROR:%d]\e[0m ", error_code);
-	if (error_code < 10)
-		return (ft_error_range_1(error_code));
-	else if (error_code < 20)
-		return (ft_error_range_2(error_code));
-	else if (error_code == 20)
-	{
-		printf("No such file or directory\n");
-		g_last_errno = 1;
-	}
+	if (error_code == 20)
+		ft_print_error("Parse error (quote not closed)\n");
 	else if (error_code == 21)
-		printf("exit: numeric argument required\n");
+		ft_print_error("Parse error on pipe\n");
 	else if (error_code == 22)
-		printf("exit: too many arguments\n");
+		ft_print_error("Syntax error on redirect\n");
 	else if (error_code == 23)
-		printf("export : invalid identifier\n");
+		ft_print_error("Parse error at end of command\n");
+	else if (error_code == 24)
+		ft_print_error("exit: numeric argument required\n");
+	return (1);
+}
+
+static int	ft_error_126(int error_code)
+{
+	g_last_errno = 126;
+	if (error_code == 1260)
+		ft_print_error("Failed to create fork\n");
+	else if (error_code == 1261)
+		ft_print_error("Failed to pipe fd\n");
+	else if (error_code == 1262)
+		ft_print_error("Failed to execute command\n");
+	else if (error_code == 1263)
+		ft_print_error("Failed to duplicate fd (dup2 error)\n");
+	return (1);
+}
+
+static int	ft_error_command(char *command)
+{
+	char	*new_str;
+	char	*tmp;
+
+	tmp = ft_strjoin("\e[1;31m[ERROR]\e[0m ", command);
+	if (!tmp)
+		return (1);
+	new_str = ft_strjoin(tmp, " : Command not found\n");
+	if (!new_str)
+		return (1);
+	write(STDERR_FILENO, new_str, ft_strlen(new_str));
+	return (1);
+}
+
+int	ft_error(int error_code, char *command)
+{
+	if (error_code / 10 == 1)
+		return (ft_error_1(error_code));
+	if (error_code / 10 == 2)
+		return (ft_error_2(error_code));
+	if (error_code / 10 == 126)
+		return (ft_error_126(error_code));
+	if (error_code / 10 == 127)
+		return (ft_error_command(command));
 	else if (error_code == 99)
 	{
 		printf("Malloc cannot be created\n");

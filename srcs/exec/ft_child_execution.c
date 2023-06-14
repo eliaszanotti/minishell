@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/14 11:22:47 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 14:11:58 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 	if (args->infile == -1)
 		exit(1);
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
-		return (ft_error(13));
+		return (ft_error(1263, NULL));
 	else if (dup2(args->fdd, STDIN_FILENO) == -1)
-		return (ft_error(13));
+		return (ft_error(1263, NULL));
 	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
-		return (ft_error(13));
+		return (ft_error(1263, NULL));
 	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
-		return (ft_error(13));
+		return (ft_error(1263, NULL));
 	return (0);
 }
 
@@ -42,12 +42,12 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 		exit(errno);
 	path = ft_get_path(args, command[0]);
 	if (!path)
-		exit(ft_error_command(command[0]));
+		exit(ft_error(1270, command[0]));
 	char_envp = ft_get_char_envp(args);
 	execve(path, command, char_envp);
 	ft_free_str(char_envp);
 	free(path);
-	exit(ft_error(12));
+	exit(ft_error(1262, NULL));
 	return (0);
 }
 
@@ -77,12 +77,12 @@ int	ft_child_execution(t_args *args, char **command, int last)
 	signal(SIGINT, SIG_IGN);
 	g_last_errno = 0;
 	if (pipe(fd))
-		return (ft_error(11));
+		return (ft_error(1261, NULL));
 	if (ft_exec_child_builtins(args, command, last))
 		return (1);
 	pid = fork();
 	if (pid == -1)
-		return (ft_error(4));
+		return (ft_error(1260, NULL));
 	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
 	path = ft_get_path(args, command[0]);

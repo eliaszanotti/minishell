@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
-/*   Updated: 2023/06/12 10:57:29 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 13:52:36 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	ft_heredoc(t_args *args, char *delimiter)
 
 	signal(SIGINT, SIG_IGN);
 	if (pipe(fd) == -1)
-		return (ft_error(11));
+		return (ft_error(11, NULL));
 	pid = fork();
 	if (pid == -1)
-		return (ft_error(10));
+		return (ft_error(1260, NULL));
 	if (pid == 0)
 	{
 		if (ft_heredoc_loop(delimiter, fd))

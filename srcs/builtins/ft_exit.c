@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/24 12:17:28 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 13:59:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int	ft_exit(t_args *args, char **command)
 		{
 			printf("exit\n");
 			g_last_errno = 2;
-			return (ft_error(21));
+			return (ft_error(240, NULL));
 		}
 		if (command[2])
 		{
 			args->exit_code = 0;
 			g_last_errno = 1;
-			return (ft_error(22));
+			return (ft_error(13, NULL));
 		}
 	}
 	else

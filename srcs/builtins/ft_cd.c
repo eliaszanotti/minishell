@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:00:59 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/05/02 13:16:03 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 13:45:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_cd(t_args *args, char **cmd)
 	if (cmd[1])
 	{
 		if (chdir(cmd[1]) == -1)
-			return (free(env), ft_error(20));
+			return (free(env), ft_error(12, NULL));
 		getcwd(cwd, sizeof(cwd));
 		if (ft_change_oldpwd(args))
 			return (1);
@@ -46,7 +46,7 @@ int	ft_cd(t_args *args, char **cmd)
 			return (free(env), 1);
 	}
 	else if (chdir(env) == -1)
-		return (free(env), ft_error(20));
+		return (free(env), ft_error(12, NULL));
 	else
 	{
 		getcwd(cwd, sizeof(cwd));

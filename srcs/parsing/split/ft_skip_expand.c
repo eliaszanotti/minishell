@@ -48,16 +48,16 @@ static int	ft_add_each_variable(t_list **instruction, char *value)
 
 	values = ft_split(value, ' ');
 	if (!values)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	i = 0;
 	while (values[i])
 	{
 		new = ft_lstnew(ft_strdup(values[i]));
 		if (!new)
-			return (ft_free_str(values), ft_error(99));
+			return (ft_free_str(values), ft_error(99, NULL));
 		ft_lstadd_back(instruction, new);
 		if (values[i + 1] && ft_add_single_str(instruction, NULL))
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		i++;
 	}
 	return (ft_free_str(values), 0);

@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:51:23 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:17:34 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:46:51 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	ft_create_list(t_args *args, char **char_envp)
 		new = ft_envpnew(ft_substr(char_envp[i], 0, j), \
 			ft_substr(char_envp[i], j + 1, ft_strlen(char_envp[i]) - j - 1), 1);
 		if (!new)
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		ft_envpadd_back(&envp, new);
 	}
 	args->envp = envp;

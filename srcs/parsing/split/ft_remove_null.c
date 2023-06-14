@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:48:45 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 13:57:36 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:45:31 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
 
 	str = malloc(sizeof(char) * size);
 	if (!str)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	size = 0;
 	while (list && list->content)
 	{
@@ -31,7 +31,7 @@ static int	ft_add_str_to_new_list(t_list *list, t_list **new_list, int size)
 	str[size] = '\0';
 	list = ft_lstnew(str);
 	if (!list)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	ft_lstadd_back(new_list, list);
 	return (0);
 }
@@ -58,7 +58,7 @@ static int	ft_remove_current_chain(t_list **list, t_list **new_list)
 	*list = list_copy;
 	list_copy = temp;
 	if (size > 1 && ft_add_str_to_new_list(list_copy, new_list, size))
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	return (0);
 }
 
@@ -72,7 +72,7 @@ int	ft_remove_null(t_args *args)
 	while (command_list)
 	{
 		if (ft_remove_current_chain(&command_list, &new_list))
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 	}
 	ft_free_instruction(args->command_list);
 	args->command_list = new_list;

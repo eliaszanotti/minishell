@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 14:11:59 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:44:59 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_add_single_ilst(t_ilst **str, char content)
 
 	new = ft_ilstnew(content);
 	if (!new)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	ft_ilstadd_back(str, new);
 	return (0);
 }

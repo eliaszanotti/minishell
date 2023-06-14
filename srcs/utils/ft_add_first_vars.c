@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_first_vars.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <zanotti.elias@gmail.com>            +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 19:12:16 by elias             #+#    #+#             */
-/*   Updated: 2023/05/16 14:44:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:46:38 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	ft_add_to_envp(t_args *args, char *name, char *value)
 
 	new = ft_envpnew(name, value, 1);
 	if (!new)
-		return (ft_error(99));
+		return (ft_error(99, NULL));
 	ft_envpadd_back(&args->envp, new);
 	return (0);
 }

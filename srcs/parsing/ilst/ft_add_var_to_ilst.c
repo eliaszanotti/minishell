@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:20:54 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:24:09 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/14 12:44:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_add_var_to_ilst(t_args *args, t_ilst **str, char *name)
 	{
 		new = ft_ilstnew(value[i]);
 		if (!new)
-			return (ft_error(99));
+			return (ft_error(99, NULL));
 		ft_ilstadd_back(str, new);
 	}
 	free(value);
