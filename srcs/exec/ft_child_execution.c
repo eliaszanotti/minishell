@@ -6,11 +6,22 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/14 15:09:02 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:37:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_exec_child_builtins(t_args *args, char **command, int last)
+{
+	if (!ft_strcmp(command[0], "exit") || \
+		!ft_strcmp(command[0], "cd") || \
+		!ft_strcmp(command[0], "unset"))
+		return (0);
+	if (last)
+		return (ft_exec_builtins(args, command), 0);
+	return (ft_exec_builtins(args, command), 1);
+}
 
 static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 {
@@ -38,7 +49,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_duplicate_all_fd(args, last, fd))
 		return (1);
 	args->last = last;
-	if (ft_is_char_builtins(command[0]) && !ft_exec_builtins(args, command))
+	if (ft_is_char_builtins(command[0]) && !ft_exec_child_builtins(args, command, last))
 		exit(errno);
 	path = ft_get_path(args, command[0]);
 	if (!path)
@@ -53,21 +64,6 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
-static int	ft_exec_child_builtins(t_args *args, char **command, int last)
-{
-	if (ft_is_char_builtins(command[0]))
-	{
-		if (args->size > 1)
-		{
-			if (last && ft_strcmp(command[0], "cd") && \
-				ft_strcmp(command[0], "exit") && ft_strcmp(command[0], "unset"))
-				return (ft_exec_builtins(args, command), 1);
-			return (1);
-		}
-		return (ft_exec_builtins(args, command), 1);
-	}
-	return (0);
-}
 
 int	ft_child_execution(t_args *args, char **command, int last)
 {
@@ -80,8 +76,8 @@ int	ft_child_execution(t_args *args, char **command, int last)
 	g_last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(1261, NULL));
-	if (ft_exec_child_builtins(args, command, last))
-		return (1);
+	if (args->size == 1 && ft_is_char_builtins(command[0])) 
+		return (ft_exec_builtins(args, command));
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(1260, NULL));
