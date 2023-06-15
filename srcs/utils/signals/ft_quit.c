@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:11:28 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:26:15 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:28:15 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 void	ft_quit(int sig)
 {
-	(void)sig;
-	write(1, "Quit : 3\n", 10);
-	g_last_errno = 131;
+	if (sig == SIGINT)
+	{
+		g_last_errno = 130;
+		write(STDERR_FILENO, "\n", 1);
+	}
+	else if (sig == SIGQUIT)
+	{
+		g_last_errno = 131;
+		write(STDERR_FILENO, "Quit : 3\n", 10);
+	}
 }
