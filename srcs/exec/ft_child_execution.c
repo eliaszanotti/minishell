@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/15 10:37:18 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:41:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_duplicate_all_fd(args, last, fd))
 		return (1);
 	args->last = last;
-	if (ft_is_char_builtins(command[0]) && !ft_exec_child_builtins(args, command, last))
+	if (ft_is_char_builtins(command[0]) && \
+		!ft_exec_child_builtins(args, command, last))
 		exit(errno);
 	path = ft_get_path(args, command[0]);
 	if (!path)
@@ -64,7 +65,6 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	return (0);
 }
 
-
 int	ft_child_execution(t_args *args, char **command, int last)
 {
 	char	*path;
@@ -76,7 +76,7 @@ int	ft_child_execution(t_args *args, char **command, int last)
 	g_last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(1261, NULL));
-	if (args->size == 1 && ft_is_char_builtins(command[0])) 
+	if (args->size == 1 && ft_is_char_builtins(command[0]))
 		return (ft_exec_builtins(args, command));
 	pid = fork();
 	if (pid == -1)

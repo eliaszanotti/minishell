@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 15:10:05 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:39:10 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	ft_error_command(int error_code, char *command)
 	char	*new_str;
 	char	*tmp;
 
+	new_str = NULL;
 	tmp = ft_strjoin("\e[1;31m[ERROR]\e[0m ", command);
 	if (!tmp)
 		return (1);
