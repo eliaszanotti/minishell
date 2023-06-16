@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/16 16:06:42 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:54:25 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int	ft_exec_child_builtins(t_args *args, char **command, int last)
 		!ft_strcmp(command[0], "cd") || \
 		!ft_strcmp(command[0], "unset"))
 		return (0);
-	if (!last && !ft_strcmp(command[0], "env"))
+	if (!last && (!ft_strcmp(command[0], "env") || \
+		!ft_strcmp(command[0], "pwd")))
 		return (ft_exec_builtins(args, command), 0);
 	if (last)
 		return (ft_exec_builtins(args, command), 0);
