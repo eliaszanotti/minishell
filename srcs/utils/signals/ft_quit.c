@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 15:11:28 by elias             #+#    #+#             */
-/*   Updated: 2023/06/15 11:28:15 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:41:07 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	ft_quit(int sig)
 	else if (sig == SIGQUIT)
 	{
 		g_last_errno = 131;
-		write(STDERR_FILENO, "Quit : 3\n", 10);
+		write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 	}
 }

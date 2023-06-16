@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/14 14:55:08 by elias            ###   ########.fr        #
+#    Updated: 2023/06/16 14:38:50 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,6 @@ S_MNSH_LIST	= main.c									\
 			\
 			${D_UTILS}${D_SIGNALS}ft_quit.c				\
 			${D_UTILS}${D_SIGNALS}ft_sig_ignore.c		\
-			${D_UTILS}${D_SIGNALS}ft_sign.c				\
 			\
 			${D_UTILS}${D_STRUCT}ft_struct_init.c		\
 			${D_UTILS}${D_STRUCT}ft_struct_reset.c		\
