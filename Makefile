@@ -6,7 +6,7 @@
 #    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/16 14:38:50 by elias            ###   ########.fr        #
+#    Updated: 2023/06/16 14:43:03 by elias            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_LIST}ft_lstcopy.c				\
 			${D_UTILS}${D_LIST}ft_lstincrement.c		\
 			\
-			${D_UTILS}${D_SIGNALS}ft_quit.c				\
+			${D_UTILS}${D_SIGNALS}ft_signals.c			\
 			${D_UTILS}${D_SIGNALS}ft_sig_ignore.c		\
 			\
 			${D_UTILS}${D_STRUCT}ft_struct_init.c		\
@@ -96,12 +96,12 @@ S_MNSH_LIST	= main.c									\
 			${D_UTILS}${D_TYPE}ft_is_delimiter.c		\
 			${D_UTILS}${D_TYPE}ft_is_redirect.c			\
 			\
-			${D_UTILS}ft_add_first_vars.c	\
-			${D_UTILS}ft_check_stat.c		\
-			${D_UTILS}ft_get_prompt.c		\
-			${D_UTILS}ft_get_path.c 		\
-			${D_UTILS}ft_getenv.c 			\
-			${D_UTILS}ft_get_char_envp.c 	\
+			${D_UTILS}ft_add_first_vars.c				\
+			${D_UTILS}ft_check_stat.c					\
+			${D_UTILS}ft_get_prompt.c					\
+			${D_UTILS}ft_get_path.c 					\
+			${D_UTILS}ft_getenv.c 						\
+			${D_UTILS}ft_get_char_envp.c 				\
 
 HDRS_LIST =	minishell.h	\
 			exec.h		\

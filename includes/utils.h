@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:56:29 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/16 14:38:41 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:42:18 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_list	*ft_lstcopy(t_list *new, int j);
 t_list	*ft_lstincrement(t_list *instruction, int i);
 
 //	SIGNALS
-void	ft_quit(int sig);
+void	ft_signals(int sig);
 void	ft_sig_ignore(int sig);
 
 //	STRUCT
