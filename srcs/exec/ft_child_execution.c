@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/16 14:42:20 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:06:42 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int	ft_child_execution(t_args *args, char **command, int last)
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
-	g_last_errno = 0;
 	if (pipe(fd))
 		return (ft_error(1261, NULL));
 	if (args->size == 1 && ft_is_char_builtins(command[0]))
 		return (ft_exec_builtins(args, command));
+	g_last_errno = 0;
 	pid = fork();
 	if (pid == -1)
 		return (ft_error(1260, NULL));

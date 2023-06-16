@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 11:37:31 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:01:02 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	main(int argc, char **argv, char **envp)
 	g_last_errno = 0;
 	if (ft_struct_init(&args, envp))
 		return (1);
-	ft_prompt_loop(&args);
+	if (ft_prompt_loop(&args))
+		return (g_last_errno);
 	return (g_last_errno);
 	(void)argc;
 	(void)argv;
