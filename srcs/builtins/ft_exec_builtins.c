@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:31:16 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/07 15:09:38 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:22:48 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	ft_exec_builtins(t_args *args, char **command)
 		return (1);
 	else if (!ft_strcmp(command[0], "exit") && ft_exit(args, command))
 		return (1);
-	return (0);
+	return (1);
 }
