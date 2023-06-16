@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/06/16 16:01:02 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:11:24 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int	ft_prompt_loop(t_args *args)
 		free(args->prompt);
 		if (!command)
 		{
+			g_last_errno = 0;
 			printf("exit\n");
 			return (ft_free_envp(args), 0);
 		}
