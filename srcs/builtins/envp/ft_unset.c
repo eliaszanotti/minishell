@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/13 14:31:26 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:51:53 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	ft_remove_var(t_args *args, char *var)
 			free(envp->name);
 			free(envp->value);
 			free(envp);
+			break;
 		}
 		backup = envp;
 		envp = envp->next;
