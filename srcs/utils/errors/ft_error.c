@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/15 10:39:10 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 14:13:14 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	ft_error_1(int error_code)
 		ft_print_error("exit: too many arguments\n");
 	else if (error_code == 14)
 		ft_print_error("export : invalid identifier\n");
+	else if (error_code == 15)
+		ft_print_error("cd: too many arguments\n");
 	return (1);
 }
 
