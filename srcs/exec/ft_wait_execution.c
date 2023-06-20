@@ -6,7 +6,7 @@
 /*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:29:00 by elias             #+#    #+#             */
-/*   Updated: 2023/06/16 14:42:21 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 16:26:09 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_wait_execution(t_args *args)
 	{
 		ret = 0;
 		waitpid(args->pid_tab[i], &ret, 0);
-		if (WIFEXITED(ret))
+		if (WIFEXITED(ret) && i == args->size - 1)
 			g_last_errno = WEXITSTATUS(ret);
 		else if (WIFSIGNALED(ret))
 			ft_signals(WTERMSIG(ret));
