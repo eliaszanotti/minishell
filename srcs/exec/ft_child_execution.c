@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/20 17:22:03 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:29:23 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 	close(fd[0]);
 	if (args->infile == -1)
 		exit(1);
-	printf("%d    %d\n", args->infile, args->outfile);
 	if (args->infile && dup2(args->infile, STDIN_FILENO) == -1)
 		return (ft_error(1263, NULL));
 	if (!args->infile && dup2(args->fdd, STDIN_FILENO) == -1)
@@ -52,6 +51,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	signal(SIGQUIT, ft_signals);
 	signal(SIGINT, ft_signals);
 	args->last = last;
+	if (ft_duplicate_all_fd(args, last, fd))
+		return (1);
 	if (ft_is_char_builtins(command[0]) && \
 		!ft_exec_child_builtins(args, command, last))
 		exit(errno);
@@ -61,8 +62,6 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	if (ft_check_stat(path))
 		exit(ft_error(1264, command[0]));
 	char_envp = ft_get_char_envp(args);
-	if (ft_duplicate_all_fd(args, last, fd))
-		return (1);
 	execve(path, command, char_envp);
 	ft_free_str(char_envp);
 	free(path);
