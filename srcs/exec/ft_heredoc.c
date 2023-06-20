@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
-/*   Updated: 2023/06/20 18:03:28 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:09:41 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int	ft_heredoc_loop(t_args *args, char *delimiter, int fd[2])
 		{
 			if (g_last_errno == 130)
 			{
+				close(fd[0]);
+				close(fd[1]);
 				free(args->pid_tab);
 				free(args->close_tab);
 				while (envp && ft_strcmp(envp->name, "SHLVL"))
