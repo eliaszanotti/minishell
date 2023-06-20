@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/20 14:13:14 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:11:52 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	ft_error_1(int error_code)
 		ft_print_error("export : invalid identifier\n");
 	else if (error_code == 15)
 		ft_print_error("cd: too many arguments\n");
+	else if (error_code == 16)
+		ft_print_error("export: invalid option\n");
 	return (1);
 }
 
