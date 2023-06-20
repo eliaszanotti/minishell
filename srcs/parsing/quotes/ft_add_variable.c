@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_add_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 12:44:59 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 19:49:22 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_add_single_ilst(t_ilst **str, char content)
 
 static char	*ft_check_special_case(t_args *args, t_ilst **str, char *content)
 {
-	if (!*content && ft_add_single_ilst(str, '$'))
+	if ((!*content || *content == '\"') && ft_add_single_ilst(str, '$'))
 		return (content);
 	if (*content == '?')
 		return (ft_add_errno_to_ilst(args, str, content));
