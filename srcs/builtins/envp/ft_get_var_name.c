@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_var_name.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:39:13 by elias             #+#    #+#             */
-/*   Updated: 2023/06/14 14:01:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 13:20:44 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_get_var_name(char *var, int *add)
 	int	i;
 
 	i = 0;
+	if (!ft_strcmp(var, "="))
+		return (ft_error(14, NULL), NULL);
 	if (ft_isdigit(var[0]))
 		return (ft_error(14, NULL), NULL);
 	while (var[i] && ft_is_variable(var[i]))
