@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/16 16:54:25 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 16:27:26 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	ft_exec_child_builtins(t_args *args, char **command, int last)
 		!ft_strcmp(command[0], "unset"))
 		return (0);
 	if (!last && (!ft_strcmp(command[0], "env") || \
-		!ft_strcmp(command[0], "pwd")))
+		!ft_strcmp(command[0], "pwd") || !ft_strcmp(command[0], "export") || \
+		!ft_strcmp(command[0], "echo")))
 		return (ft_exec_builtins(args, command), 0);
 	if (last)
 		return (ft_exec_builtins(args, command), 0);
@@ -37,7 +38,7 @@ static int	ft_duplicate_all_fd(t_args *args, int last, int fd[2])
 		return (ft_error(1263, NULL));
 	if (!last && dup2(fd[1], STDOUT_FILENO) == -1)
 		return (ft_error(1263, NULL));
-	if (args->outfile && dup2(args->outfile, STDOUT_FILENO) == -1)
+	if (args->outfile > 0 && dup2(args->outfile, STDOUT_FILENO) == -1)
 		return (ft_error(1263, NULL));
 	return (0);
 }
