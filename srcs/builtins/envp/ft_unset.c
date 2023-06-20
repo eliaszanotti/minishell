@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/16 14:53:58 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/20 19:33:33 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_check_var(char *var)
+{
+	int	i;
+
+	i = -1;
+	if (var[0] && var[0] == '-')
+		return (ft_error(16, NULL));
+	while (var[++i])
+	{
+		if (!ft_isalnum(var[i]) && var[i] != '_')
+			return (ft_error(14, NULL));
+	}
+	return (0);
+}
 
 static int	ft_remove_var(t_args *args, char *var)
 {
@@ -18,6 +33,7 @@ static int	ft_remove_var(t_args *args, char *var)
 	t_envp	*backup;
 
 	envp = args->envp;
+	ft_check_var(var);
 	while (envp)
 	{
 		if (!ft_strcmp(envp->name, var))
@@ -40,6 +56,7 @@ int	ft_unset(t_args *args, char **cmd)
 
 	i = 0;
 	while (cmd[++i])
-		ft_remove_var(args, cmd[i]);
+		if (ft_remove_var(args, cmd[i]))
+			return (1);
 	return (0);
 }
