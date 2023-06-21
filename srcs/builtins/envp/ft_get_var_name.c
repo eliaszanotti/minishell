@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:39:13 by elias             #+#    #+#             */
-/*   Updated: 2023/06/20 19:11:16 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:17:38 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_get_var_name(char *var, int *add)
 
 	i = 0;
 	if (var[0] == '-')
-		return (ft_error(16, NULL), NULL);
+		return (ft_error(25, NULL), NULL);
 	if (!var[0] || var[0] == '=')
 		return (ft_error(14, NULL), NULL);
 	if (ft_isdigit(var[0]))

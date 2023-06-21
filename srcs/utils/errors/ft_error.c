@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/20 19:11:52 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:20:12 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ static int	ft_error_1(int error_code)
 	else if (error_code == 13)
 		ft_print_error("exit: too many arguments\n");
 	else if (error_code == 14)
-		ft_print_error("export : invalid identifier\n");
+		ft_print_error("export : not a valid identifier\n");
 	else if (error_code == 15)
 		ft_print_error("cd: too many arguments\n");
-	else if (error_code == 16)
-		ft_print_error("export: invalid option\n");
 	return (1);
 }
 
@@ -45,6 +43,8 @@ static int	ft_error_2(int error_code)
 		ft_print_error("Parse error at end of command\n");
 	else if (error_code == 24)
 		ft_print_error("exit: numeric argument required\n");
+	else if (error_code == 25)
+		ft_print_error("export: invalid option\n");
 	return (1);
 }
 
