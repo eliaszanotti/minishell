@@ -4,3 +4,4 @@ minishell
 libft.a
 minishell-tester/
 minishell_test*
+ignore_rl_reachable.txt
