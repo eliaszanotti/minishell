@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 13:11:11 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/21 17:19:14 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:56:36 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	ft_is_valid_num(char *command)
 	{
 		if (!ft_isdigit(command[i]))
 		{
-			if (((command[i] == '-' || command[i] == '+') && i != 0) && command[i] != ' ')
+			if (((command[i] == '-' || command[i] == '+') && i != 0) && \
+			command[i] != ' ')
 				return (0);
 			if (command[i] != '+' && command[i] != '-' && command[i] != ' ')
 				return (0);
