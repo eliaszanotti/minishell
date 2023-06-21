@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: elias <elias@student.42.fr>                +#+  +:+       +#+         #
+#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/16 14:43:03 by elias            ###   ########.fr        #
+#    Updated: 2023/06/21 15:57:34 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,6 +171,9 @@ ${NAME}:	${OBJS}
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
+leaks:
+			${MAKE} && valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+
 lib:
 			@make -C ./libft
 
@@ -201,4 +204,4 @@ ${DEFAULT}
 endef
 export ASCII
 
-.PHONY :	all re clean fclean lib
+.PHONY :	all re clean fclean lib ascii

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_skip_alpha.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 13:45:54 by elias             #+#    #+#             */
-/*   Updated: 2023/06/13 15:23:07 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/21 16:17:32 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_skip_alpha(t_list **instruction, char *str)
 
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '|' && str[i] != '<' && \
-		str[i] != '>' && str[i] != '$')
+		str[i] != '>' && str[i] != '$' && str[i] != '\t')
 	{
 		if (str[i] == '"' || str[i] == '\'')
 			i = ft_skip_quote(str, i);
