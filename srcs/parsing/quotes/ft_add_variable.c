@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 19:08:14 by elias             #+#    #+#             */
-/*   Updated: 2023/06/21 10:21:02 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:02:06 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_add_single_ilst(t_ilst **str, char content)
 
 static char	*ft_check_special_case(t_args *args, t_ilst **str, char *content)
 {
-	if ((!*content || ft_strchr("$=+ \"", *content)) && \
+	if ((!*content || ft_strchr("$=:+ \"", *content)) && \
 	ft_add_single_ilst(str, '$'))
 		return (content);
 	if (*content == '?')

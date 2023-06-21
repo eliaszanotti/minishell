@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:42:28 by elias             #+#    #+#             */
-/*   Updated: 2023/06/21 17:55:54 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:23:24 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*ft_get_path(t_args *args, char *cmd)
 	char	*good_path;
 	int		i;
 
+	if (access(cmd, X_OK) == 0)
+		return (ft_strdup(cmd));
 	if (!cmd[0])
 		return (ft_error(1270, cmd), NULL);
 	good_path = ft_getenv(args, "PATH");

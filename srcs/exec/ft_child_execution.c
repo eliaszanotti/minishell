@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/21 17:14:15 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:58:15 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ int	ft_child_execution(t_args *args, char **command, int last)
 		return (ft_error(1260, NULL));
 	if (pid == 0 && ft_dup_and_exec(args, command, last, fd))
 		return (1);
-	// path = ft_get_path(args, command[0]);
-	// if (!path)
-	// 	g_last_errno = 127;
 	close(fd[1]);
 	ft_add_pid(args, pid);
 	args->infile = STDIN_FILENO;

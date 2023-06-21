@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 14:46:50 by elias             #+#    #+#             */
-/*   Updated: 2023/06/21 17:56:23 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:24:37 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_check_stat(char *path)
 	else if (path[0] == '.' && path[1] == '/')
 	{
 		if (stat(path, &file_stat) != 0)
-			return (1);
+			return (ft_error(1270, path), 1);
 		if (S_ISREG(file_stat.st_mode))
 			return (1);
 	}

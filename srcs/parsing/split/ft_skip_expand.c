@@ -14,7 +14,7 @@
 
 static char	*ft_skip_single_dollar(t_list **instruction, char *str)
 {
-	if (*str == '$' && (!str[1] || ft_strchr("$=+ ", str[1])))
+	if (*str == '$' && (!str[1] || ft_strchr("$:=+ ", str[1])))
 	{
 		if (ft_add_single_str(instruction, "$"))
 			return (NULL);
