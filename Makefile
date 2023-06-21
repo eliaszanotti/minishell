@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/21 15:57:34 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/06/21 19:15:51 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,6 +143,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g3
 RM			= rm -rf
 MAKEFLAGS	+= --no-print-directory
+TEST_VAR	?= roadmap
 
 # COLORS
 RED			= \033[1;31m
@@ -171,8 +172,14 @@ ${NAME}:	${OBJS}
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
 
+test:	
+			cd ./minishell_tester; ./tester ${TEST_VAR}
+
+leaks_fd:
+			${MAKE} && valgrind --suppressions=ignore_rl_reachable.txt --track-fds=yes ./minishell
+
 leaks:
-			${MAKE} && valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
+			${MAKE} && valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --show-leak-kinds=all ./minishell
 
 lib:
 			@make -C ./libft
