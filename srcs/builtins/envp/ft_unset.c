@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:03:48 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/20 19:40:12 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:21:39 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_check_var(char *var)
 	if (var[0] && var[0] == '-')
 		return (ft_error(16, NULL));
 	if (!var[0] || ft_isdigit(var[0]))
-			return (ft_error(14, NULL));
+		return (ft_error(14, NULL));
 	while (var[++i])
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_')

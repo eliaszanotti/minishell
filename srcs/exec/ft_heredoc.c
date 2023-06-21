@@ -6,11 +6,30 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
-/*   Updated: 2023/06/20 18:09:41 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:53:26 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_free_heredoc(t_args *args, int fd[2])
+{
+	t_envp	*envp;
+
+	envp = args->envp;
+	if (g_last_errno == 130)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		free(args->pid_tab);
+		free(args->close_tab);
+		while (envp && ft_strcmp(envp->name, "SHLVL"))
+			envp = envp->next;
+		if (envp)
+			free(envp->value);
+		exit(130);
+	}
+}
 
 static void	ft_exit_heredoc(int sig)
 {
@@ -18,15 +37,12 @@ static void	ft_exit_heredoc(int sig)
 	write(1, "\n", 2);
 	close(0);
 	g_last_errno = 130;
-	// exit(130);
 }
 
 static int	ft_heredoc_loop(t_args *args, char *delimiter, int fd[2])
 {
-	t_envp	*envp = args->envp;
 	char	*line;
 
-	signal(SIGINT, ft_exit_heredoc);
 	while (1)
 	{
 		line = readline("heredoc> ");
@@ -43,18 +59,7 @@ static int	ft_heredoc_loop(t_args *args, char *delimiter, int fd[2])
 		}
 		else
 		{
-			if (g_last_errno == 130)
-			{
-				close(fd[0]);
-				close(fd[1]);
-				free(args->pid_tab);
-				free(args->close_tab);
-				while (envp && ft_strcmp(envp->name, "SHLVL"))
-					envp = envp->next;
-				if (envp)
-					free(envp->value);
-				exit(130);
-			}
+			ft_free_heredoc(args, fd);
 			write(1, "minishell: warning: here-document"\
 				" delimited by end-of-file\n", 60);
 			break ;
@@ -77,6 +82,8 @@ int	ft_heredoc(t_args *args, char *delimiter)
 		return (ft_error(1260, NULL));
 	if (pid == 0)
 	{
+		g_last_errno = 0;
+		signal(SIGINT, ft_exit_heredoc);
 		if (ft_heredoc_loop(args, delimiter, fd))
 			return (1);
 		exit(0);

@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/21 09:51:33 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:47:29 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 		return (1);
 	if (ft_is_char_builtins(command[0]) && \
 		!ft_exec_child_builtins(args, command, last))
-			exit(g_last_errno);
+		exit(g_last_errno);
 	path = ft_get_path(args, command[0]);
 	if (!path)
 		exit(ft_error(1270, command[0]));

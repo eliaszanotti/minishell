@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 14:15:59 by elias             #+#    #+#             */
-/*   Updated: 2023/06/16 16:11:24 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/21 10:13:49 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	ft_prompt_loop(t_args *args)
 		free(args->prompt);
 		if (!command)
 		{
-			g_last_errno = 0;
 			printf("exit\n");
 			return (ft_free_envp(args), 0);
 		}
