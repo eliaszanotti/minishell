@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:00:59 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/20 14:13:22 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:41:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	ft_cd(t_args *args, char **cmd)
 		return (free(env), ft_error(15, NULL));
 	if (cmd[1])
 	{
+		if (cmd[1][0] == '-')
+			return (free(env), ft_error(25, NULL));
 		if (chdir(cmd[1]) == -1)
 			return (free(env), ft_error(12, NULL));
 		if (ft_update_pwds(args))
