@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 13:49:08 by elias             #+#    #+#             */
-/*   Updated: 2023/06/21 10:53:26 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:11:07 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@ static void	ft_free_heredoc(t_args *args, int fd[2])
 	t_envp	*envp;
 
 	envp = args->envp;
+	close(fd[0]);
+	close(fd[1]);
+	free(args->pid_tab);
+	free(args->close_tab);
+	while (envp && ft_strcmp(envp->name, "SHLVL"))
+		envp = envp->next;
+	if (envp)
+		free(envp->value);
+	// ft_free_envp(args);
+	ft_free_stack(args->stack);
+	// ft_free_stack(args->command_list);
 	if (g_last_errno == 130)
-	{
-		close(fd[0]);
-		close(fd[1]);
-		free(args->pid_tab);
-		free(args->close_tab);
-		while (envp && ft_strcmp(envp->name, "SHLVL"))
-			envp = envp->next;
-		if (envp)
-			free(envp->value);
 		exit(130);
-	}
 }
 
 static void	ft_exit_heredoc(int sig)
@@ -51,6 +52,7 @@ static int	ft_heredoc_loop(t_args *args, char *delimiter, int fd[2])
 			if (!ft_strcmp(line, delimiter))
 			{	
 				free(line);
+				ft_free_heredoc(args, fd);
 				break ;
 			}
 			write(fd[1], line, ft_strlen(line));
@@ -86,10 +88,13 @@ int	ft_heredoc(t_args *args, char *delimiter)
 		signal(SIGINT, ft_exit_heredoc);
 		if (ft_heredoc_loop(args, delimiter, fd))
 			return (1);
+		close(fd[1]);
+		// close(fd[0]);
 		exit(0);
 	}
+	// printf("closing fd[%d]\n", fd[1]);
 	close(fd[1]);
-	args->infile = fd[0];
+	args->fdd = fd[0];
 	waitpid(pid, &ret, 0);
 	g_last_errno = WEXITSTATUS(ret);
 	if (g_last_errno == 130)

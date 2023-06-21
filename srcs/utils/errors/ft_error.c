@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:14:22 by elias             #+#    #+#             */
-/*   Updated: 2023/06/21 11:20:12 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:13:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ static int	ft_error_command(int error_code, char *command)
 		new_str = ft_strjoin(tmp, ": Command not found\n");
 	else if (error_code == 1264)
 		new_str = ft_strjoin(tmp, ": Is a directory\n");
+	else if (error_code == 1265)
+		new_str = ft_strjoin(tmp, ": Not a directory\n");
 	if (!new_str)
 		return (1);
 	write(STDERR_FILENO, new_str, ft_strlen(new_str));
 	free(new_str);
 	free(tmp);
+	g_last_errno = error_code / 10;
 	return (error_code / 10);
 }
 
