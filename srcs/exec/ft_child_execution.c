@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_child_execution.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:44:24 by ezanotti          #+#    #+#             */
-/*   Updated: 2023/06/21 10:47:29 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/22 09:54:54 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	ft_check_path(char *path)
+{
+	if (path[ft_strlen(path) - 1] == '/')
+	{
+		if (ft_check_stat(path))
+			exit(ft_error(1264, path));
+		else
+			exit(ft_error(1265, path));
+	}
+	if (ft_check_stat(path))
+		exit(ft_error(1264, path));
+	return (0);
+}
 
 static int	ft_exec_child_builtins(t_args *args, char **command, int last)
 {
@@ -59,8 +73,8 @@ static int	ft_dup_and_exec(t_args *args, char **command, int last, int fd[2])
 	path = ft_get_path(args, command[0]);
 	if (!path)
 		exit(ft_error(1270, command[0]));
-	if (ft_check_stat(path))
-		exit(ft_error(1264, command[0]));
+	if (ft_check_path(path))
+		return (1);
 	char_envp = ft_get_char_envp(args);
 	execve(path, command, char_envp);
 	ft_free_str(char_envp);
