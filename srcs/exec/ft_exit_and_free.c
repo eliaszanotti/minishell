@@ -6,13 +6,14 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 10:12:43 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/06/22 10:41:18 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/06/22 11:04:16 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exit_and_free(t_args *args, int error_code, char *path, char **command)
+void	ft_exit_and_free(
+	t_args *args, int error_code, char *path, char **command)
 {	
 	ft_free_stack(args->stack);
 	ft_free_envp(args);
@@ -21,5 +22,5 @@ void	ft_exit_and_free(t_args *args, int error_code, char *path, char **command)
 	ft_free_instruction(args->command_list);
 	ft_error(error_code, path);
 	ft_free_str(command);
-	exit(g_last_errno);
+	exit(error_code / 10);
 }
