@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: elias <elias@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:42:28 by elias             #+#    #+#             */
-/*   Updated: 2023/05/10 17:08:49 by elias            ###   ########.fr       */
+/*   Updated: 2023/06/22 09:46:48 by elias            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ char	*ft_get_path(t_args *args, char *cmd)
 	char	*good_path;
 	int		i;
 
+	if (!*cmd)
+		return (NULL);
+	if (cmd[ft_strlen(cmd) - 1] == '/')
+		return (ft_strdup(cmd));
 	if (access(cmd, F_OK) == 0 && \
 		((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/'))
 		return (ft_strdup(cmd));
