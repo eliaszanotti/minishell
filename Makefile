@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/22 10:19:47 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/06/22 11:06:41 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -171,9 +171,6 @@ ${NAME}:	${OBJS}
 			@${PRINT} "${YELLOW}Compiling ${NAME}...${DEFAULT}"
 			@${CC} ${OBJS} -o ${NAME} ${LIBFT} -lreadline
 			@${PRINT} "${GREEN}${SUPPR}Compiling ${NAME} : DONE ${DEFAULT}\n"
-
-leaks:
-			${MAKE} && valgrind --suppressions=ignore_rl_reachable.txt --leak-check=full --show-leak-kinds=all --track-fds=yes ./minishell
 
 lib:
 			@make -C ./libft
