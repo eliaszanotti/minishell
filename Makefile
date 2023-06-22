@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/27 14:08:57 by elias             #+#    #+#              #
-#    Updated: 2023/06/21 15:57:34 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/06/22 10:19:47 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ S_MNSH_LIST	= main.c									\
 			${D_EXEC}ft_add_pid.c						\
 			${D_EXEC}ft_child_execution.c				\
 			${D_EXEC}ft_exec.c							\
+			${D_EXEC}ft_exit_and_free.c					\
 			${D_EXEC}ft_heredoc.c						\
 			${D_EXEC}ft_redirect.c						\
 			${D_EXEC}ft_wait_execution.c				\
